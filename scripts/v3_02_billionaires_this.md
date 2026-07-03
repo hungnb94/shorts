@@ -18,6 +18,8 @@ They read instead of watch.
 They bet on boring industries while everyone chases shiny trends.
 They protect their first hour like their life depends on it.
 Because it does.
+Studies show that ninety percent of Fortune five hundred CEOs wake before six AM.
+While the rest of the world hits snooze, they are already winning the day.
 Rich is what you earn.
 Wealthy is what you keep.
 Billionaires keep their mornings.

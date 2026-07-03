@@ -14,7 +14,9 @@ max_clip_duration: 45.0
 
 HOOK: Companies do not die from competition. They die from the CEO's ego.
 BODY: The pattern is identical across every industry. Founders win by listening to customers. Then they scale. They build a moat of yes-men. They stop hearing the truth. They optimize for the next quarter instead of the next decade.
-BODY2: And that is when the decay starts. Not with a bang, but with a meeting where nobody disagrees. Blockbuster asked Netflix for a partnership in the year two thousand. The CEO said no.
+BODY2: And that is when the decay starts. Not with a bang, but with a meeting where nobody disagrees. The CEO asks for feedback and everyone nods. The data is ignored. The warning signs are dismissed.
+BODY3: Blockbuster asked Netflix for a partnership in the year two thousand. The CEO said no. He said no to the company that would eventually destroy his entire business. That is what ego does.
+BODY4: Nokia owned the phone market. Then the CEO mocked the iPhone. Within ten years, Nokia was irrelevant. Kodak invented the digital camera. Then buried it to protect film sales.
 CLOSING: Great CEOs die poor. Great companies die rich. The only question that matters is which one you want to be.
 
 # Cuts (Transformative Gate rule 3: each <15s, total ≤45s)

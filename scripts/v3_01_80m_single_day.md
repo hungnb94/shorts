@@ -21,3 +21,4 @@ And when you own the customer, you do not need to win the race.
 You just collect the toll.
 That is leverage.
 That is what eighty million in a day looks like.
+And the lesson is simple. Stop chasing products. Start building toll roads.

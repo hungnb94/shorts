@@ -15,7 +15,9 @@ max_clip_duration: 49.0
 HOOK: $80 million. One day. That is not luck, that is leverage.
 BODY: Watch this. Bob Parsons did not build a product. He built the domain between every business and the internet. When you own the toll road, you do not need to win the race. You just collect the toll.
 BODY2: GoDaddy was sold to private equity in two thousand eleven. The deal valued the company at two point two five billion dollars. Parsons walked away with a fortune most people cannot even imagine.
-CLOSING: So the real question is not how to make eighty million in a day. The real question is what toll road are you building.
+BODY3: Now here is the part nobody tells you. The real money was not in building the product. It was in owning the infrastructure. Every website that wanted a name had to pay GoDaddy. Every single one.
+BODY4: Think about that the next time you chase a shiny new idea. The richest people do not sell the product. They sell the road that everyone else has to walk on.
+CLOSING: So the real question is not how to make eighty million in a day. The real question is what toll road are you building right now.
 
 # Cuts (Transformative Gate rule 3: each <15s, total ≤49s = 50% of source)
 cut_1: 0-14

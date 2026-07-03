@@ -73,7 +73,7 @@ def parse_clip_script(path):
             if m:
                 value_adds.append(m.group(1).strip())
                 continue
-            m = re.match(r'(?:HOOK|BODY|CLOSING):\s*(.+)', line)
+            m = re.match(r'(?:HOOK|BODY\d*|CLOSING):\s*(.+)', line)
             if m:
                 commentary_lines.append(m.group(1).strip())
                 continue
@@ -440,11 +440,32 @@ async def render_clip_edit(script_path, output_dir):
         boundaries, tts_dur = await generate_tts(commentary_text, spec['voice'], str(spec['speed']), commentary_path)
         print(f"    TTS: {tts_dur:.1f}s, {len(boundaries)} boundaries")
 
-        # Use shorter of footage/TTS as final duration, pad commentary if shorter
-        total_duration = min(footage_dur, tts_dur)
-        if tts_dur < footage_dur:
-            # Loop/pad commentary audio
-            total_duration = footage_dur
+        # Use TTS as final duration (commentary is backbone). Trim/loop footage to match.
+        total_duration = tts_dur
+        if footage_dur < tts_dur:
+            # Loop footage to fill — concat footage with itself then trim
+            looped = temp_dir / "footage_looped.mp4"
+            loop_count = math.ceil(tts_dur / footage_dur)
+            loop_list = temp_dir / "loop.txt"
+            with open(loop_list, 'w') as f:
+                for _ in range(loop_count):
+                    f.write(f"file '{footage_path.resolve()}'\n")
+            subprocess.run([
+                "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(loop_list),
+                "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
+                "-t", str(total_duration), str(looped)
+            ], capture_output=True, check=True)
+            footage_path = looped
+        else:
+            # Trim footage to TTS duration
+            trimmed = temp_dir / "footage_trimmed.mp4"
+            subprocess.run([
+                "ffmpeg", "-y", "-i", str(footage_path),
+                "-t", str(total_duration),
+                "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
+                str(trimmed)
+            ], capture_output=True, check=True)
+            footage_path = trimmed
         print(f"  final duration: {total_duration:.1f}s")
 
         # 3. Render value-add overlays

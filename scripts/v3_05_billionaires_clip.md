@@ -15,6 +15,8 @@ max_clip_duration: 44.5
 HOOK: What do billionaires actually have in common? It is not what you think.
 BODY: Forget the hype. The data is clear across decades of research. It is not IQ. It is not luck. It is not even starting capital. It is one habit. Billionaires protect their first hour of the day like their life depends on it.
 BODY2: Most people wake up and immediately surrender their attention to a phone. Billionaires wake up and own the first sixty minutes. They read. They think. They decide before the world starts shouting.
+BODY3: Howard Schultz runs five miles before dawn. Tim Cook sends emails at four thirty. Elan Musk reads engineering papers instead of scrolling feeds. The pattern is not a coincidence. It is a system.
+BODY4: And here is the uncomfortable truth. You do not need to wake up at five to be successful. But if you cannot protect one hour of your own morning, you will never protect your time at all.
 CLOSING: Rich is what you earn. Wealthy is what you keep. Billionaires keep their mornings. Which one are you?
 
 # Cuts (Transformative Gate rule 3: each <15s, total ≤44.5s)
