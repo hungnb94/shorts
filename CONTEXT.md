@@ -34,7 +34,7 @@ Phần trăm video trung bình người xem xem trước khi scroll. Metric #1 c
 _Avoid_: "watch time", "retention" (use specific term)
 
 **Video Type**:
-Một trong 6 visual rendering styles: Stock Footage, Kinetic Typography, Data Viz, HTML/CSS Motion, Whiteboard Sketch, Meme/Notification. Là AB variable chính.
+Một trong 7 visual rendering styles: Stock Footage, Kinetic Typography, Data Viz, HTML/CSS Motion, Whiteboard Sketch, Meme/Notification, Clip Curation Edit. Là AB variable chính.
 _Avoid_: "format", "template" (use specific term)
 
 **Source Channel**:
@@ -53,6 +53,18 @@ _Avoid_: "remix", "edit", "cut"
 Một dimension được thay đổi giữa A và B trong experiment. Chỉ 1 biến đổi mỗi experiment.
 VD: video type, hook type, title pattern, video length, voice, CTA, thumbnail.
 _Avoid_: "parameter", "factor"
+
+**Clip Curation Edit**:
+Video Type #7. Download footage từ Source Channel + cut + transform (commentary + value-adds). Khác Repackage (zero-footage animation gốc).
+_Avoid_: "remix", "edit", "cut" (use specific term)
+
+**Transformative Edit**:
+Synonym cho Clip Curation Edit — editing approach (cut + commentary + value-adds) đủ khác để qualify Fair Use.
+_Avoid_: "highlight edit", "re-edit"
+
+**Transformative Gate**:
+3 pipeline rules ALL required trước khi upload Clip Curation Edit: (1) commentary track, (2) min 2 value-adds, (3) cut ≤50% source + mỗi clip <15s. Auto-checkable.
+_Avoid_: "Fair Use check"
 
 ## Project Name
 
