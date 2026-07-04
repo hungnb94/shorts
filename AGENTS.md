@@ -251,23 +251,26 @@ The value-add overlay layer (ADR 0008) must be a separate compositing step AFTER
 ### Always
 - Follow HEIT structure (Hook → Explain → Illustrate → Teach)
 - Copy proven viral formats, repackage with variations
-- Keep 1 variable per AB experiment
-- Place affiliate/CTA at end, after value delivery
-- Verify video specs before upload (9:16, ≤60s, MP4 H.264)
+- Wait 48h before fetching YouTube Analytics (stable data)
 - Apply Retention Techniques (sound design, zoom, pattern interrupt) to EVERY video — it's base quality, not optional
+- Let MAB select variants autonomously — don't override its choices manually
+- Verify video specs before upload (9:16, ≤60s, MP4 H.264)
+- Log every decision (variant selected, epsilon, cycle number) for post-hoc review
 
 ### Ask First
 - Adding a new animation format (requires research + ADR)
 - Changing niche away from finance/money-making
-- Multi-variate testing (breaks the 1-variable rule)
+- Changing epsilon schedule (affects exploration strategy)
 - Spending money on paid tools/APIs
+- Adding a new platform (TikTok, Instagram)
 
 ### Never
 - Post videos >60s to YouTube Shorts
 - Paste raw affiliate links in descriptions
 - Invent "original" formats from scratch (copy what works)
-- Skip AB test tracking (every video must be tagged with experiment + variant)
-- Upload to both platforms simultaneously (space 10+ min apart)
+- Reset MAB state mid-cycle (lose learned rewards)
+- Fetch metrics before 48h (noisy data → bad decisions)
+- Skip logging autonomous decisions (no audit trail = can't debug bad strategy)
 
 ## Testing
 
@@ -281,7 +284,9 @@ Integration tests mock TTS and animation APIs but validate real video output spe
 
 ## Architectural Policies
 
-- **Experiment isolation**: each experiment writes to its own data directory. Never share state between experiments.
+- **Autonomous loop is stateful**: MAB state (`data/mab_state.json`) persists across cycles. Deleting = restart from scratch.
 - **Video spec enforcement**: `video-assembly.ts` is the single source of truth for output specs. No other layer may set video specs.
-- **Metrics collection is async**: metrics are fetched 24h+ after upload (platforms lag). Never analyze experiments with <24h old data.
-- **AB data is append-only**: experiment results are never mutated. Winner declaration writes a new record, doesn't update old ones.
+- **Metrics collection is async**: metrics fetched 48h+ after upload (YouTube Analytics lag). Never fetch before 48h or data is noisy.
+- **Metrics data is append-only**: `video_metrics` table never mutates. Each fetch writes new row with timestamp.
+- **Chrome profile is single source of auth**: No OAuth flow, no API keys for upload. User logs in once, system reuses profile.
+- **MAB rewards are cumulative**: Each variant's reward = running average of AVD across all samples. More samples = more confident reward estimate.
