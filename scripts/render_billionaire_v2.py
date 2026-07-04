@@ -289,7 +289,7 @@ def render_clip(clip):
         "-filter_complex_script", str(filter_path),
         "-map", "[out]",
         "-map", "0:a",
-        "-c:v", "libx264", "-preset", "medium", "-crf", "18",
+        "-c:v", "libx264", "-preset", "medium", "-crf", "15",
         "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "128k",
         "-shortest", "-movflags", "+faststart",

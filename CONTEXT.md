@@ -13,6 +13,14 @@ Automation: Phased — Phase 1 semi-auto (AI generate, human review) → Phase 2
 Một video 9:16, 30-60 giây, MP4 H.264. Đơn vị sản xuất và AB test cơ bản.
 _Avoid_: "video", "clip", "content" (quá chung)
 
+**CRF (Constant Rate Factor)**:
+Tham số chất lượng libx264. Giá trị thấp = chất lượng cao + file lớn. CRF=15 (near-lossless, dùng cho mọi encoding step), CRF=18 (visually lossless, trước đây dùng cho final render), CRF=23 (ffmpeg default, medium quality — tránh). Mọi encoding step trong pipeline phải chỉ định CRF rõ ràng, không để ffmpeg tự chọn default.
+_Avoid_: "quality setting", "compression level"
+
+**Lanczos Filter**:
+Scaling algorithm cao cấp cho ffmpeg (`flags=lanczos`). Bắt buộc dùng khi downscale source 2160p → 1080p hoặc upscale source 640x360 → 1080x1920. Mặc định ffmpeg dùng bilinear (chất lượng thấp hơn rõ rệt). Mọi `scale=` filter trong pipeline phải có `:flags=lanczos`.
+_Avoid_: "bilinear", "bicubic" (chất lượng thấp hơn)
+
 **Batch**:
 Nhóm 3 videos dùng chung 1 variant (A hoặc B) trong AB test. Mỗi ngày = 1 experiment = 2 batches (A vs B).
 _Avoid_: "group", "set"

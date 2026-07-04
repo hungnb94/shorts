@@ -253,7 +253,7 @@ def render(clip_id, start, end, hook, speaker="", punchlines=None,
     cmd.extend([
         "-filter_complex_script", str(filter_file),
         "-map", "[out]",
-        "-c:v", "libx264", "-preset", "medium", "-crf", "18",
+        "-c:v", "libx264", "-preset", "medium", "-crf", "15",
         "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "128k",
         "-movflags", "+faststart",

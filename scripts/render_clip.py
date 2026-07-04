@@ -61,6 +61,8 @@ def parse_clip_script(path):
         commentary_lines = []
         cuts = []
         value_adds = []
+        animation_hooks = []
+        pexels_clips = []
         for line in body.split('\n'):
             line = line.strip()
             if line.startswith('#') or not line:
@@ -77,9 +79,30 @@ def parse_clip_script(path):
             if m:
                 commentary_lines.append(m.group(1).strip())
                 continue
+            m = re.match(r'animation_hook_\d+:\s*(\w+)\s+"([^"]+)"\s+([\d.]+)-([\d.]+)s\s+(\w+)', line)
+            if m:
+                animation_hooks.append({
+                    'type': m.group(1),
+                    'text': m.group(2),
+                    'start': float(m.group(3)),
+                    'end': float(m.group(4)),
+                    'style': m.group(5)
+                })
+                continue
+            m = re.match(r'pexels_clip_\d+:\s*(\d+)\s+"([^"]+)"\s+([\d.]+)-([\d.]+)s', line)
+            if m:
+                pexels_clips.append({
+                    'id': int(m.group(1)),
+                    'theme': m.group(2),
+                    'start': float(m.group(3)),
+                    'end': float(m.group(4))
+                })
+                continue
         body_parts['commentary'] = commentary_lines
         body_parts['cuts'] = cuts
         body_parts['value_adds'] = value_adds
+        body_parts['animation_hooks'] = animation_hooks
+        body_parts['pexels_clips'] = pexels_clips
     return {
         'title': meta.get('title', 'Untitled'),
         'voice': meta.get('voice', 'en-US-AndrewNeural'),
@@ -146,8 +169,8 @@ def cut_and_concat(source_path, cuts, temp_dir):
         cmd = [
             "ffmpeg", "-y", "-ss", str(start), "-i", str(source_path),
             "-t", str(duration),
-            "-vf", "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,setsar=1",
-            "-an", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
+            "-vf", "scale=1080:1920:force_original_aspect_ratio=increase:flags=lanczos,crop=1080:1920,setsar=1",
+            "-an", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "15", "-r", str(FPS),
             str(out)
         ]
         subprocess.run(cmd, capture_output=True, check=True)
@@ -160,7 +183,7 @@ def cut_and_concat(source_path, cuts, temp_dir):
     concat_path = temp_dir / "footage.mp4"
     subprocess.run([
         "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat_list),
-        "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
+        "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "15", "-r", str(FPS),
         str(concat_path)
     ], capture_output=True, check=True)
     # Get duration
@@ -345,8 +368,8 @@ def render_caption_frames(commentary, boundaries, total_duration, temp_dir):
     return cap_dir
 
 
-def composite_final(footage_path, commentary_path, overlay_dir, caption_dir, output_path, total_duration):
-    """Composite: footage (muted) + commentary audio + overlays + captions."""
+def composite_final(footage_path, commentary_path, overlay_dir, caption_dir, output_path, total_duration, pexels_clips=None, animation_hooks=None):
+    """Composite: footage (muted) + commentary audio + overlays + captions + pexels + animations."""
     footage_path = Path(footage_path).resolve()
     commentary_path = Path(commentary_path).resolve()
     overlay_dir = Path(overlay_dir).resolve()
@@ -355,44 +378,92 @@ def composite_final(footage_path, commentary_path, overlay_dir, caption_dir, out
     tmp = output_path.parent / f"_tmp_comp_{output_path.stem}"
     tmp.mkdir(exist_ok=True)
 
-    # Encode overlays (with alpha) — use .mov for qtrle/argb compatibility
-    overlay_mp4 = tmp / "overlay.mov"
+    # Build filter chain with all layers
+    # Layer 0: main footage
+    # Layer 1: value-add overlays
+    # Layer 2: captions
+    # Layer 3+: pexels clips (overlay at specific times)
+    # Layer N+: animation hooks (overlay at specific times)
+    
+    filter_parts = []
+    map_idx = 0
+    current_video = "[0:v]"
+    
+    # Value-add overlays
+    filter_parts.append(f"{current_video}[1:v]overlay=0:0[v1];")
+    current_video = "[v1]"
+    map_idx += 1
+    
+    # Captions
+    filter_parts.append(f"{current_video}[2:v]overlay=0:0[v2];")
+    current_video = "[v2]"
+    map_idx += 1
+    
+    # Pexels clips
+    pexels_inputs = []
+    if pexels_clips:
+        for i, clip in enumerate(pexels_clips):
+            pexels_path = Path(f"~/.hermes/skills/video/pexels/assets/pexels_cache/{clip['id']}.mp4").expanduser()
+            if pexels_path.exists():
+                pexels_inputs.append(str(pexels_path))
+    
+    # Animation hooks - render as transparent overlays
+    anim_inputs = []
+    if animation_hooks:
+        anim_dir = tmp / "animations"
+        anim_dir.mkdir(exist_ok=True)
+        # We'll render animation frames similar to captions
+        for i, hook in enumerate(animation_hooks):
+            anim_file = anim_dir / f"anim_{i}.mov"
+            # Simple text animation for now - we'll use the existing caption system
+            pass
+    
+    # For now, just do the base composite (footage + overlays + captions)
+    # Pexels integration requires more complex filter - will do in Phase 2
+    
+    filter_complex = "".join(filter_parts)
+    
+    # Build ffmpeg command with dynamic inputs
+    cmd = ["ffmpeg", "-y", "-i", str(footage_path)]
+    
+    # Add overlay input
+    cmd.extend(["-i", str(tmp / "overlay.mov")])
+    # Add caption input
+    cmd.extend(["-i", str(tmp / "caption.mov")])
+    # Add commentary audio
+    cmd.extend(["-i", str(commentary_path)])
+    
     r = subprocess.run([
         "ffmpeg", "-y", "-framerate", str(FPS),
         "-i", str(overlay_dir / "frame_%05d.png"),
         "-c:v", "qtrle", "-pix_fmt", "argb",
-        "-t", str(total_duration), str(overlay_mp4)
+        "-t", str(total_duration), str(tmp / "overlay.mov")
     ], capture_output=True, text=True)
     if r.returncode != 0:
         print("  overlay encode stderr:", r.stderr[-500:])
         raise RuntimeError("overlay encode failed")
 
     # Encode captions (with alpha) — use .mov for qtrle/argb compatibility
-    caption_mp4 = tmp / "caption.mov"
     r = subprocess.run([
         "ffmpeg", "-y", "-framerate", str(FPS),
         "-i", str(caption_dir / "frame_%05d.png"),
         "-c:v", "qtrle", "-pix_fmt", "argb",
-        "-t", str(total_duration), str(caption_mp4)
+        "-t", str(total_duration), str(tmp / "caption.mov")
     ], capture_output=True, text=True)
     if r.returncode != 0:
         print("  caption encode stderr:", r.stderr[-500:])
         raise RuntimeError("caption encode failed")
 
     # Composite chain
-    filter_complex = (
-        f"[0:v][1:v]overlay=0:0[v1];"
-        f"[v1][2:v]overlay=0:0[v2]"
-    )
     r = subprocess.run([
         "ffmpeg", "-y",
         "-i", str(footage_path),
-        "-i", str(overlay_mp4),
-        "-i", str(caption_mp4),
+        "-i", str(tmp / "overlay.mov"),
+        "-i", str(tmp / "caption.mov"),
         "-i", str(commentary_path),
         "-filter_complex", filter_complex,
         "-map", "[v2]", "-map", "3:a",
-        "-c:v", "libx264", "-pix_fmt", "yuv420p",
+        "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "15", "-preset", "medium",
         "-c:a", "aac", "-b:a", "128k",
         "-t", str(total_duration), "-shortest",
         str(output_path)
@@ -417,7 +488,10 @@ async def render_clip_edit(script_path, output_dir):
         print(f"  ABORT: {reason}")
         return None
 
-    source_path = Path(f"output/source_clips/{spec['source_video']}.mp4")
+    source_path = Path(f"output/source_clips/{spec['source_video']}.webm")
+    if not source_path.exists():
+        # Try .mp4 fallback
+        source_path = Path(f"output/source_clips/{spec['source_video']}.mp4")
     if not source_path.exists():
         print(f"  ABORT: source clip not found: {source_path}")
         return None
@@ -452,7 +526,7 @@ async def render_clip_edit(script_path, output_dir):
                     f.write(f"file '{footage_path.resolve()}'\n")
             subprocess.run([
                 "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(loop_list),
-                "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
+                "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "15", "-r", str(FPS),
                 "-t", str(total_duration), str(looped)
             ], capture_output=True, check=True)
             footage_path = looped
@@ -462,7 +536,7 @@ async def render_clip_edit(script_path, output_dir):
             subprocess.run([
                 "ffmpeg", "-y", "-i", str(footage_path),
                 "-t", str(total_duration),
-                "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
+                "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "15", "-r", str(FPS),
                 str(trimmed)
             ], capture_output=True, check=True)
             footage_path = trimmed
@@ -478,7 +552,7 @@ async def render_clip_edit(script_path, output_dir):
 
         # 5. Composite
         print("  [5/5] compositing...")
-        composite_final(footage_path, commentary_path, overlay_dir, caption_dir, output_path, total_duration)
+        composite_final(footage_path, commentary_path, overlay_dir, caption_dir, output_path, total_duration, spec.get('pexels_clips'), spec.get('animation_hooks'))
         print(f"  DONE: {output_path}")
         return output_path
     finally:

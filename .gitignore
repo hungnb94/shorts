@@ -11,3 +11,4 @@ output/**/*.webm
 output/**/*.json
 output/**/*.md
 output/**/*.wav
+output/**/*.mov

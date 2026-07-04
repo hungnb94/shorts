@@ -85,7 +85,7 @@ def encode_frames(frames_dir, audio_path, output_path, duration):
         "-framerate", str(FPS),
         "-i", str(frames_dir / "frame_%05d.png"),
         "-i", audio_path,
-        "-c:v", "libx264", "-pix_fmt", "yuv420p",
+        "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "15",
         "-c:a", "aac", "-b:a", "128k",
         "-shortest",
         "-t", str(duration),

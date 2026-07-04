@@ -260,7 +260,7 @@ def render_clip(
         "-f", "lavfi", "-t", str(duration), "-i", "color=black@0.4:s=1080x1920",
         "-filter_complex", filter_complex,
         "-map", "[out]",
-        "-c:v", "libx264", "-preset", "medium", "-crf", "18",
+        "-c:v", "libx264", "-preset", "medium", "-crf", "15",
         "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "128k",
         "-shortest",

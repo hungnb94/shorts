@@ -122,6 +122,8 @@ src/optimization/analyzer.ts         (key moments, rank variants, update MAB)
 - **English only** — all content in English. See ADR 0004.
 - **Affiliate at end** — value first, pitch last. Never front-load affiliate mentions.
 - **Chrome profile auth** — user logs into YouTube once, system reuses profile. No OAuth flow. See ADR 0009.
+- **Download max quality** — always download source videos at highest available resolution (2160p/4K) using `yt-dlp -f "bestvideo[height>=2160]+bestaudio"`. Never accept default 720p.
+- **3-source combo for engagement** — every video combines: (1) original source footage, (2) animated overlays (kinetic text, data viz, whiteboard), (3) Pexels b-roll for visual variety. This maximizes retention by avoiding visual monotony.
 
 ## How to Setup Autonomous System
 
