@@ -8,17 +8,23 @@ Niche: Finance/money-making. Language: English. Format: Kitty Explain (animated 
 
 ```
                     ┌──────────────────────────────────────────────┐
-                    │                CRON SCHEDULER                  │
-                    │         (runs daily, 6 videos/day)             │
+                    │         AUTONOMOUS OPTIMIZATION LOOP          │
+                    │            (3-day cycle, no human)            │
                     └───────────────────────┬──────────────────────┘
                                             │
+                    ┌───────────────────────▼──────────────────────┐
+                    │              MAB STRATEGY ENGINE              │
+                    │   Epsilon-greedy: 50-50 → 20-80 after 54 vids │
+                    │   Action: 7 types × 3 hooks × 9 value-adds   │
+                    └───────────────────────┬──────────────────────┘
+                                            │ (select 18 variants)
                     ┌───────────────────────▼──────────────────────┐
                     │           CONTENT PIPELINE                    │
                     │                                               │
                     │  ┌─────────┐  ┌──────────┐  ┌─────────────┐ │
                     │  │ SCRIPT  │→ │ VOICE    │→ │ ANIMATION   │ │
                     │  │ GEN     │  │ TTS      │  │ RENDER      │ │
-                    │  │ (HEIT)  │  │          │  │ (Kitty)     │ │
+                    │  │ (HEIT)  │  │          │  │ (7 types)   │ │
                     │  └─────────┘  └──────────┘  └──────┬──────┘ │
                     │                                     │        │
                     │  ┌──────────────────────────────────▼──────┐ │
@@ -27,51 +33,66 @@ Niche: Finance/money-making. Language: English. Format: Kitty Explain (animated 
                     │  │  → 9:16 MP4 H.264, 30-60s                │ │
                     │  └──────────────────────┬──────────────────┘ │
                     └─────────────────────────┼────────────────────┘
+                                              │ (18 MP4 ready)
+                    ┌─────────────────────────▼────────────────────┐
+                    │         CHROME UPLOADER (Playwright)          │
+                    │   Logged-in profile, 6 videos/day × 3 days    │
+                    │   Auto title/description/tags                 │
+                    └─────────────────────────┬────────────────────┘
+                                              │ (videoId × 18)
+                    ┌─────────────────────────▼────────────────────┐
+                    │              48H METRICS WAIT                 │
+                    │   (YouTube Analytics lag, stable after 48h)   │
+                    └─────────────────────────┬────────────────────┘
                                               │
                     ┌─────────────────────────▼────────────────────┐
-                    │           DISTRIBUTION                        │
-                    │  ┌──────────┐  ┌────────┐  ┌──────────────┐ │
-                    │  │ YOUTUBE  │  │ TIKTOK │  │ METRICS COL  │ │
-                    │  │ SHORTS   │  │        │  │ (AVD, views, │ │
-                    │  │ API      │  │ API    │  │  affiliate)  │ │
-                    │  └──────────┘  └────────┘  └──────┬───────┘ │
-                    └────────────────────────────────────┼────────┘
-                                                         │
-                    ┌────────────────────────────────────▼────────┐
-                    │           AB TEST ENGINE                     │
-                    │  A (control, 3 videos) vs B (test, 3 videos) │
-                    │  1 variable/experiment, metric: AVD          │
-                    │  → winner declared after 7 same-variable     │
-                    │    experiments                               │
-                    └──────────────────────────────────────────────┘
+                    │         METRICS FETCHER (Analytics API)       │
+                    │   AVD %, CTR, views, retention graph          │
+                    │   Store: SQLite video_metrics table           │
+                    └─────────────────────────┬────────────────────┘
+                                              │
+                    ┌─────────────────────────▼────────────────────┐
+                    │              ANALYZER & OPTIMIZER             │
+                    │   Key moments (dips/peaks), rank variants     │
+                    │   Update MAB rewards, adjust epsilon          │
+                    │   Extract patterns → inform next cycle        │
+                    └─────────────────────────┬────────────────────┘
+                                              │
+                                              └───► Loop to MAB (Cycle N+1)
 ```
 
 | Layer | Path | Responsibility |
 |-------|------|----------------|
+| MAB Strategy | `src/optimization/` | Multi-Armed Bandit variant selection, epsilon decay, reward tracking |
 | Content Pipeline | `src/pipeline/` | Script gen → TTS → animation render → video assembly |
-| Distribution | `src/platforms/` | YouTube/TikTok upload + metrics collection |
-| AB Test Engine | `src/ab-test/` | Experiment config, variant assignment, winner declaration |
-| Data / Storage | `src/data/` | Experiment results, video metadata, affiliate tracking |
-| CLI / Cron | `src/cli/` | Daily run command, experiment runner |
+| Chrome Uploader | `src/platforms/chrome-uploader.ts` | Playwright automation, logged-in profile upload |
+| Metrics Fetcher | `src/platforms/youtube-analytics.ts` | Fetch AVD, CTR, retention graph after 48h |
+| Analyzer | `src/optimization/analyzer.ts` | Key moments detection, variant ranking, pattern extraction |
+| Data / Storage | `src/data/` | SQLite: video_metrics, mab_state, variant_performance |
+| CLI / Cron | `src/cli/` | Autonomous cycle runner, 3-day loop orchestration |
 
 ## File Dependency Chain
 
 ```
-src/ab-test/experiment.ts        (experiment config — no deps)
+src/optimization/mab-strategy.ts     (variant selection — no deps)
        ↑
-src/pipeline/script-gen.ts       (generates HEIT-structured scripts)
+src/pipeline/script-gen.ts           (generates HEIT-structured scripts)
        ↑
-src/pipeline/voice-tts.ts        (TTS audio from script)
+src/pipeline/voice-tts.ts            (TTS audio from script)
        ↑
-src/pipeline/animation-render.ts (Kitty Explain animation from script + audio)
+src/pipeline/animation-render.ts     (7 video types from script + audio)
        ↑
-src/pipeline/video-assembly.ts   (compose: animation + overlays + music + CTA)
+src/pipeline/video-assembly.ts       (compose: animation + overlays + music + CTA)
        ↑
-src/cli/daily-run.ts             (orchestrates full pipeline for 1 day)
+src/platforms/chrome-uploader.ts     (Playwright upload, 6 videos/day × 3 days)
        ↑
-src/platforms/youtube.ts, tiktok.ts  (upload + collect metrics)
+       [48h wait]
        ↑
-src/ab-test/analyzer.ts          (compare A vs B, declare winner)
+src/platforms/youtube-analytics.ts   (fetch AVD, CTR, retention graph)
+       ↑
+src/optimization/analyzer.ts         (key moments, rank variants, update MAB)
+       ↑
+       [loop back to mab-strategy.ts for next cycle]
 ```
 
 ## Commands
@@ -79,9 +100,12 @@ src/ab-test/analyzer.ts          (compare A vs B, declare winner)
 | Action | Command | Location |
 |--------|---------|----------|
 | Install deps | `npm install` | Root |
-| Run dev (1 experiment) | `npm run dev -- --experiment <name>` | Root |
-| Run daily (6 videos) | `npm run daily` | Root |
-| Run AB test analysis | `npm run analyze` | Root |
+| Setup Chrome profile | `npm run setup:chrome` | Root |
+| Run autonomous cycle | `npm run autonomous` | Root |
+| Run single cycle (dev) | `npm run cycle -- --dry-run` | Root |
+| Check MAB state | `npm run mab:status` | Root |
+| Fetch metrics manually | `npm run metrics:fetch` | Root |
+| Analyze retention graphs | `npm run analyze:retention` | Root |
 | Type check | `npx tsc --noEmit` | Root |
 | Test | `npm test` | Root |
 | Lint | `npm run lint` | Root |
@@ -92,47 +116,94 @@ src/ab-test/analyzer.ts          (compare A vs B, declare winner)
 - **TypeScript everywhere** — no Python. User default for new projects.
 - **HEIT structure mandatory** — every script follows Hook(0-2s) → Explain → Illustrate → Teach. See CONTEXT.md.
 - **Copy, don't invent** — find proven viral formats → repackage. Never invent new formats from scratch. See ADR 0002.
-- **1 variable per experiment** — AB tests change exactly 1 dimension between A and B. See ADR 0003.
+- **Autonomous optimization** — MAB selects variants, no human chooses experiments. System learns from AVD data. See ADR 0009.
+- **3-day cycle** — upload 18 videos (6/day × 3), wait 48h for metrics, analyze + adjust, repeat. No daily manual intervention.
 - **Video specs fixed** — 9:16 (1080x1920), 30-60s, MP4 H.264. No exceptions.
 - **English only** — all content in English. See ADR 0004.
 - **Affiliate at end** — value first, pitch last. Never front-load affiliate mentions.
+- **Chrome profile auth** — user logs into YouTube once, system reuses profile. No OAuth flow. See ADR 0009.
 
-## How to Add a New Experiment
+## How to Setup Autonomous System
 
-1. Create experiment config in `src/ab-test/experiments/<name>.ts`:
-   ```typescript
-   export const experiment = {
-     name: "hook-type-contrarian-vs-context",
-     variable: "hookType",
-     variantA: { hookType: "context" },
-     variantB: { hookType: "contrarian" },
-     duration: 7, // days to run
-     metric: "avd",
-   };
+1. **Chrome profile setup**:
+   ```bash
+   npm run setup:chrome
+   # Opens Chrome → user logs into YouTube manually → save profile
+   # Profile path: ~/Library/Application Support/Google/Chrome/Profile Shorts
    ```
-2. Register in `src/ab-test/registry.ts`
-3. Run: `npm run dev -- --experiment hook-type-contrarian-vs-context`
-4. After 7 days: `npm run analyze -- --experiment hook-type-contrarian-vs-context`
 
-**Common gotcha**: experiment name must be unique across all experiments. Duplicate names overwrite results silently.
+2. **Verify profile works**:
+   ```bash
+   npm run cycle -- --dry-run
+   # Should open YouTube upload page with logged-in state
+   ```
 
-## How to Add a New Animation Format
+3. **Start autonomous loop**:
+   ```bash
+   npm run autonomous
+   # Runs forever: 3-day cycle → 48h wait → analyze → repeat
+   # Check status: npm run mab:status
+   ```
+
+4. **Monitor progress**:
+   - Logs: `logs/autonomous-YYYY-MM-DD.log`
+   - MAB state: `data/mab_state.json`
+   - Metrics: `data/video_metrics.db` (SQLite)
+
+**Common gotcha**: Chrome profile expires after 30 days. Re-login with `npm run setup:chrome` if uploads fail with "not logged in" error.
+
+## How to Add a New Video Type
 
 1. Study proven viral format (manual TikTok/YouTube research, or use tools like wron.ai)
 2. Create renderer in `src/pipeline/renderers/<format>.ts` implementing the `VideoRenderer` interface
 3. Document format in `src/pipeline/renderers/README.md` with example output
 4. Register in `src/pipeline/renderers/index.ts`
-5. Can be used as AB variable: `{ renderer: "<format>" }`
+5. Add to MAB action space in `src/optimization/mab-strategy.ts`
 
 **Common gotcha**: new format must produce 9:16 output. Renderers that output wrong aspect ratio will fail at upload step silently (YouTube accepts but algorithm deprioritizes).
 
+## How to Adjust MAB Strategy
+
+1. **Change epsilon decay**:
+   ```typescript
+   // src/optimization/mab-strategy.ts
+   const EPSILON_START = 0.5;      // Initial explore rate
+   const EPSILON_END = 0.2;        // Final explore rate
+   const DECAY_AFTER_VIDEOS = 54;  // 3 cycles × 18 videos
+   ```
+
+2. **Change cycle length**:
+   ```typescript
+   // src/cli/autonomous.ts
+   const VIDEOS_PER_DAY = 6;
+   const CYCLE_DAYS = 3;           // Upload phase
+   const METRICS_WAIT_HOURS = 48;  // Wait phase
+   ```
+
+3. **Add new action dimension**:
+   ```typescript
+   // src/optimization/action-space.ts
+   type Variant = {
+     videoType: VideoType;   // existing
+     hookType: HookType;     // existing
+     valueAddType: ValueAddType; // existing
+     voiceGender?: "male" | "female"; // NEW dimension
+   };
+   ```
+
+**Common gotcha**: changing epsilon after system started = need to reset MAB state (`rm data/mab_state.json`) or old epsilon persists.
+
 ## How to Add a New Platform
 
-1. Implement `PlatformPublisher` interface in `src/platforms/<platform>.ts`
-2. Required methods: `upload(video)`, `getMetrics(videoId)`, `getRetentionGraph(videoId)`
-3. Register in `src/platforms/index.ts`
-4. Add platform credentials to `.env` (see `.env.example`)
-5. Metrics auto-collected by `src/data/metrics-collector.ts`
+1. Implement upload automation in `src/platforms/<platform>-uploader.ts` (e.g., TikTok, Instagram)
+2. Implement metrics fetcher in `src/platforms/<platform>-analytics.ts`
+3. Required methods:
+   - Uploader: `upload(video, metadata)` → videoId
+   - Analytics: `fetchMetrics(videoId, waitHours)` → { avd, ctr, views, retentionGraph }
+4. Register in `src/platforms/index.ts`
+5. Add platform credentials to `.env` (if using API) or Chrome profile (if using automation)
+
+**Common gotcha**: TikTok rate limits harsh (~6 uploads/hour unofficial). When adding TikTok, space uploads 10+ min apart or risk shadowban.
 
 ## Known Pitfalls
 
@@ -157,6 +228,12 @@ Video Type #7 (Clip Curation Edit) uses real footage from Source Channel — unl
 ### "Original" content underperforms
 Per wiki research (1.2B views case study): "Put your ego down and stop trying to be original." Every video should follow a proven format with variations. Inventing new formats from scratch is the #1 reason channels fail.
 
+### Don't conflate Value-Add Layer with Retention Techniques
+Value-Add Layer (fact-check, data viz, this_or_that — 9 types, see ADR 0008) is an AB variable: "có value-add vs không" is a valid experiment. Retention Techniques (sound design, zoom punch, pattern interrupt) is BASE QUALITY applied to every video automatically. NEVER AB test "có sound design vs không sound design" — the no-sound variant is low quality, unfair test.
+
+### Value-Add Layer must be post-render compositing, not embedded in renderer
+The value-add overlay layer (ADR 0008) must be a separate compositing step AFTER the base video renders. Do NOT couple it into the main renderer (current render_clip.py couples overlay rendering into clip rendering at line 175-481). To support all 7 video types, extract overlay compositing into a shared step: base video → composite value-add overlay → output. This keeps value-adds reusable across all types.
+
 ## Boundaries
 
 ### Always
@@ -165,6 +242,7 @@ Per wiki research (1.2B views case study): "Put your ego down and stop trying to
 - Keep 1 variable per AB experiment
 - Place affiliate/CTA at end, after value delivery
 - Verify video specs before upload (9:16, ≤60s, MP4 H.264)
+- Apply Retention Techniques (sound design, zoom, pattern interrupt) to EVERY video — it's base quality, not optional
 
 ### Ask First
 - Adding a new animation format (requires research + ADR)

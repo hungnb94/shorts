@@ -66,6 +66,62 @@ _Avoid_: "highlight edit", "re-edit"
 3 pipeline rules ALL required trước khi upload Clip Curation Edit: (1) commentary track, (2) min 2 value-adds, (3) cut ≤50% source + mỗi clip <15s. Auto-checkable.
 _Avoid_: "Fair Use check"
 
+**Value-Added Editing (VAE)**:
+Umbrella term cho việc thêm layers giá trị mới (thông tin + retention) mà bản gốc không có. Apply cho TẤT CẢ 7 video types, không chỉ Clip Curation Edit. Bao gồm 2 nhóm: Value-Add Layer (AB testable) + Retention Techniques (base quality).
+_Avoid_: "editing style", "format enhancement"
+
+**Value-Add Layer**:
+Post-render compositing step — render base video trước, rồi composite value-add overlay on top. Là AB variable: "có value-add vs không" hoặc "type A vs B" trên cùng 1 video type. 9 types tổng (xem Value-Add Type). Independence: tách khỏi renderer chính → dùng cho mọi video type.
+_Avoid_: "overlay", "effect" (quá chung)
+
+**Value-Add Type**:
+1 trong 9 information overlays: (hiện có) fact_check_callout, data_viz_overlay, counter_argument, source_citation, animated_annotation, multi_source_mashup + (mới) this_or_that_overlay, split_screen_comparison, timeline_overlay. multi_source_mashup = clip-only (cần footage). Max 8 apply cho animation.
+_Avoid_: "annotation", "widget"
+
+**Retention Techniques**:
+Base quality layer áp dụng TỰ ĐỘNG cho mọi video, KHÔNG phải AB variable: sound design (whoosh/riser/impact), zoom punch, pattern interrupt (visual change mỗi 2-4s), cut rhythm. Thiếu = kém chất lượng, không công bằng khi test.
+_Avoid_: "effects", "polish"
+
+**this_or_that_overlay**:
+Value-Add Type mới. Binary choice overlay "A vs B" (VD: "Rent vs Buy", "Index vs Stock pick"). Phù hợp niche finance, MONEY+TIMEFRAME hook pattern.
+_Avoid_: "comparison widget"
+
+**split_screen_comparison**:
+Value-Add Type mới. 2 panels side-by-side so sánh (VD: "5AM vs 8AM"). Dùng cho comparison hooks.
+_Avoid_: "dual screen"
+
+**timeline_overlay**:
+Value-Add Type mới. Timeline/milestone bar (VD: "Day 1 → Day 30 → $1M"). Phù hợp "He made $X in Y time" hooks.
+_Avoid_: "progress bar" (đã có trong render), "timeline video"
+
+**Autonomous Optimization System**:
+Hệ thống tự động upload + measure + improve videos. 3-day cycle: upload 18 videos → wait 48h metrics → MAB adjust strategy → repeat. Không cần human input sau setup.
+_Avoid_: "AI optimizer", "auto-improve"
+
+**Optimization Cycle**:
+1 iteration của autonomous system: 3 days upload (18 videos) + 48h metrics wait = 5 days total. Sau đó analyze + adjust strategy cho cycle tiếp.
+_Avoid_: "training loop", "iteration"
+
+**Multi-Armed Bandit (MAB)**:
+Optimization algorithm chọn variant nào upload tiếp. Balance explore (test mới) vs exploit (dùng top performers). Epsilon-greedy: 50-50 lúc đầu → 20-80 sau 3 cycles.
+_Avoid_: "reinforcement learning", "AI model"
+
+**Epsilon (ε)**:
+Tỉ lệ explore trong MAB. ε=0.5 = 50% explore (random variants), 50% exploit (top-3). Decay về 0.2 sau 54 videos.
+_Avoid_: "exploration rate"
+
+**Chrome Profile Auth**:
+Upload method: user đăng nhập YouTube vào Chrome profile cố định, system dùng profile đó để upload (không dùng OAuth API). Playwright automation.
+_Avoid_: "browser automation", "headless Chrome"
+
+**Retention Graph**:
+Per-second audience retention curve từ YouTube Analytics API. Dùng để detect key moments (dips = boring, peaks = viral). 48h lag.
+_Avoid_: "watch time graph"
+
+**Key Moment**:
+Điểm đặc biệt trong retention graph: dip (viewers skip), peak (rewatch), flat (engaged). Inform hook/pacing decisions cho videos tiếp.
+_Avoid_: "highlight", "retention spike"
+
 ## Project Name
 
 Package name (from package.json khi init): `shorts`
