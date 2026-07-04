@@ -30,11 +30,6 @@ value_add_1: data_viz_counter "$80M single day revenue"
 value_add_2: fact_check_callout "Frisella's 1st Pharma sales = $0. First 3 years = no profit."
 value_add_3: this_or_that "Hustle 24/7" vs "Find 5 mentors who've done it"
 
-# Value-adds (Transformative Gate rule 2: min 2 required)
-value_add_1: data_viz_counter "$80M single day revenue"
-value_add_2: fact_check_callout "Frisella's 1st Pharma sales = $0. First 3 years = no profit."
-value_add_3: this_or_that "Hustle 24/7" vs "Find 5 mentors who've done it"
-
 # Animation hooks (for 3-source combo)
 animation_hook_1: kinetic_text "I DON'T WANT TO SAY" 0-3s bold_punch
 animation_hook_2: data_viz "$80M IN ONE DAY" 5-10s counter

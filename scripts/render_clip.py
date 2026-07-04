@@ -283,23 +283,29 @@ def ease_out_cubic(t):
 
 
 def render_caption_frames(commentary, boundaries, total_duration, temp_dir):
-    """Render animated word-by-word caption frames (bottom-third, kinetic style)."""
+    """Render animated word-by-word caption frames (bottom-third, kinetic style).
+
+    Uses TTS SentenceBoundary timestamps for accurate subtitle sync.
+    Falls back to proportional distribution if boundaries unavailable.
+    """
     cap_dir = temp_dir / "captions"
     cap_dir.mkdir(exist_ok=True)
     total_frames = int(total_duration * FPS)
-    # Flatten all commentary into timeline of (start, end, text)
+    # Build timeline: (start, end, text) — prefer TTS boundaries (actual timings)
     timeline = []
     if boundaries:
-        cum = 0
-        for li, line in enumerate(commentary):
-            # Map proportionally to TTS boundaries
-            pass
-    # Simpler: distribute each commentary line evenly across TTS duration
-    n = len(commentary)
-    for i, line in enumerate(commentary):
-        start = (i / n) * total_duration
-        end = ((i + 1) / n) * total_duration
-        timeline.append((start, end, line))
+        # Use boundary text + timing directly — TTS splits by sentence naturally
+        for b in boundaries:
+            text = b['text'].strip()
+            if text:
+                timeline.append((b['offset'], b['offset'] + b['duration'], text))
+    else:
+        # Fallback: distribute commentary lines evenly across TTS duration
+        n = len(commentary)
+        for i, line in enumerate(commentary):
+            start = (i / n) * total_duration
+            end = ((i + 1) / n) * total_duration
+            timeline.append((start, end, line))
 
     for fi in range(total_frames):
         t = fi / FPS
