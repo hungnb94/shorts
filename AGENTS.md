@@ -210,8 +210,17 @@ src/optimization/analyzer.ts         (key moments, rank variants, update MAB)
 ### DO NOT hardcode video specs
 Every video MUST be 9:16 (1080x1920), 30-60s, MP4 H.264. Hardcoding different specs "just this once" breaks platform algorithm performance. Source specs from `src/data/constants.ts`.
 
-### TikTok API rate limits
-TikTok's upload API has strict rate limits (unofficial ~6/hour). When posting 6 videos/day, space uploads 10+ minutes apart. The `tiktok.ts` publisher has built-in delay, but if you bypass it, TikTok shadowbans the account.
+### Chrome profile expires after 30 days
+YouTube session expires. If autonomous loop fails with "not logged in", run `npm run setup:chrome` to re-login. Check logs for "CHROME_AUTH_EXPIRED" error.
+
+### Metrics lag is real — wait 48h minimum
+YouTube Analytics data unstable <48h. Fetching at 24h = noisy AVD numbers → bad MAB decisions. System enforces 48h wait, don't override.
+
+### MAB epsilon must decay gradually
+Starting at ε=0.2 (20% explore) too early = stuck in local maxima. Starting at ε=0.8 too long = waste quota on bad variants. Follow 50→20 after 54 videos.
+
+### Don't reset MAB state mid-cycle
+Deleting `data/mab_state.json` while system running = lose all learned rewards → restart from scratch. Only reset when intentionally changing strategy.
 
 ### YouTube Shorts must be ≤60s
 YouTube treats videos >60s as regular videos, not Shorts. This kills reach (regular videos don't appear in Shorts feed). The video-assembly layer enforces this, but TTS + animation timing can overrun — always verify final duration before upload.
@@ -233,6 +242,9 @@ Value-Add Layer (fact-check, data viz, this_or_that — 9 types, see ADR 0008) i
 
 ### Value-Add Layer must be post-render compositing, not embedded in renderer
 The value-add overlay layer (ADR 0008) must be a separate compositing step AFTER the base video renders. Do NOT couple it into the main renderer (current render_clip.py couples overlay rendering into clip rendering at line 175-481). To support all 7 video types, extract overlay compositing into a shared step: base video → composite value-add overlay → output. This keeps value-adds reusable across all types.
+
+### Action space explosion
+7 video types × 3 hook types × 9 value-adds = 189 possible variants. MAB needs ~5-10 samples per variant for statistical significance = 945-1890 videos minimum. At 18 videos/cycle, that's 52-105 cycles (8-17 months) to fully explore. Epsilon-greedy helps but system will take months to converge. Don't expect optimal strategy in first 10 cycles.
 
 ## Boundaries
 
