@@ -205,13 +205,24 @@ def render_value_add_overlays(value_adds, commentary_duration, total_duration, t
     has_data_viz = any('data_viz' in va for va in value_adds)
     has_fact_check = any('fact_check' in va for va in value_adds)
 
-    # Extract money amount for data_viz counter
+    # Extract money amount AND caption for data_viz counter
     money_target = "$80M"
+    viz_caption = "SINGLE DAY REVENUE"  # default fallback
     for va in value_adds:
-        m = re.search(r'\$[\d,.]+[KMB]?', va)
-        if m:
-            money_target = m.group(0)
-            break
+        if 'data_viz' not in va:
+            continue
+        # Extract caption: first quoted string after data_viz label
+        # Format: data_viz_counter "$7 FIRST DAY then $1B EMPIRE"
+        m_caption = re.search(r'data_viz\w*\s+"([^"]+)"', va)
+        if m_caption:
+            full_caption = m_caption.group(1)
+            # Extract money amount from the caption
+            m_money = re.search(r'\$[\d,.]+[KMB]?', full_caption)
+            if m_money:
+                money_target = m_money.group(0)
+            # Use the caption as-is, but remove the money amount for display below the counter
+            viz_caption = full_caption
+        break
 
     # Fact-check text (last ~4s)
     fact_text = next((va.replace('fact_check_callout', '').replace('"', '').strip() for va in value_adds if 'fact_check' in va), "")
@@ -242,9 +253,16 @@ def render_value_add_overlays(value_adds, commentary_duration, total_duration, t
             tw = bbox[2] - bbox[0]
             draw.text(((WIDTH - tw) // 2, 40), display, font=fnt, fill=C_GOLD)
             label_fnt = font(28)
-            lbbox = draw.textbbox((0, 0), "SINGLE DAY REVENUE", font=label_fnt)
-            ltw = lbbox[2] - lbbox[0]
-            draw.text(((WIDTH - ltw) // 2, 130), "SINGLE DAY REVENUE", font=label_fnt, fill=C_WHITE)
+            # Auto-size label to fit width
+            label_text = viz_caption
+            # Truncate if too long
+            while True:
+                lbbox = draw.textbbox((0, 0), label_text, font=label_fnt)
+                ltw = lbbox[2] - lbbox[0]
+                if ltw <= WIDTH - 80 or len(label_text) <= 10:
+                    break
+                label_fnt = font(max(16, label_fnt.size - 2))
+            draw.text(((WIDTH - ltw) // 2, 130), label_text, font=label_fnt, fill=C_WHITE)
 
         # Fact-check callout (last 30% of video) — bottom area
         if has_fact_check and fact_text and t > total_duration * 0.65:
