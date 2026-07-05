@@ -241,7 +241,7 @@ async def render_variant_a(narr, hook_text, idx, out_dir):
     full_hook_new = False
     if hook_dur + sum(s["end"]-s["start"] for s in narr["segments"]) + cta_dur < 30:
         extra_audio = TMPDIR / f"{vid_id}_extra.wav"
-        extra_text = "That's the reality. Let that sink in."
+        extra_text = "That's the reality. Let that sink in. Think about what that means for you."
         extra_dur = await gen_tts(extra_text, str(extra_audio))
         # Append to CTA audio
         merged_cta = TMPDIR / f"{vid_id}_cta_merged.wav"
