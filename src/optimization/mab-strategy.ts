@@ -117,7 +117,7 @@ export function selectVariant(
   return parseVariantKey(sorted[0][0]);
 }
 
-/** Generate N variants for one cycle */
+/** Generate N variants for one cycle (pure — does not save state) */
 export function selectCycleVariants(state: MABState, count: number): Variant[] {
   const exploreSpace = {
     videoTypes: ALL_VIDEO_TYPES,
@@ -129,10 +129,14 @@ export function selectCycleVariants(state: MABState, count: number): Variant[] {
   for (let i = 0; i < count; i++) {
     variants.push(selectVariant(state, exploreSpace));
   }
+  return variants;
+}
+
+/** Commit selected variants: update state counters + persist */
+export function commitVariants(state: MABState, count: number): void {
   state.totalVideosProduced += count;
   state.epsilon = currentEpsilon(state);
   saveState(state);
-  return variants;
 }
 
 /** Record AVD reward for a variant after metrics fetch */

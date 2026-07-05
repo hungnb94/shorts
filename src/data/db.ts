@@ -5,7 +5,7 @@ import {
   VariantPerformance, Variant, Cycle, MabOverride,
   Target, CohortEval, CycleStatus
 } from '../types/index.js';
-import { variantKey } from './mab-strategy.js';
+import { variantKey } from '../optimization/mab-strategy.js';
 
 const DATA_DIR = path.resolve(process.cwd(), 'data');
 const DB_PATH = path.join(DATA_DIR, 'video_metrics.db');
@@ -102,7 +102,17 @@ export function updateCycleStatus(id: number, status: CycleStatus): void {
 
 export function getLatestCycle(): Cycle | null {
   const d = getDb();
-  return d.prepare(`SELECT * FROM cycles ORDER BY id DESC LIMIT 1`).get() as Cycle | null;
+  const row = d.prepare(`SELECT * FROM cycles ORDER BY id DESC LIMIT 1`).get() as Record<string, any> | undefined;
+  if (!row) return null;
+  return {
+    id: row.id,
+    cycleNumber: row.cycleNumber ?? row.cycle_number,
+    cohortId: row.cohortId || row.cohort_id,
+    status: row.status,
+    epsilon: row.epsilon,
+    startedAt: row.startedAt || row.started_at,
+    completedAt: row.completedAt || row.completed_at,
+  };
 }
 
 // ── Variant Performance Operations ──
@@ -134,7 +144,22 @@ export function updateVariantMetrics(
 
 export function getCycleVariants(cycleId: number): VariantPerformance[] {
   const d = getDb();
-  return d.prepare(`SELECT * FROM variant_performance WHERE cycle_id = ?`).all(cycleId) as VariantPerformance[];
+  const rows = d.prepare(`SELECT * FROM variant_performance WHERE cycle_id = ?`).all(cycleId) as Record<string, any>[];
+  return rows.map(row => ({
+    id: row.id,
+    cycleId: row.cycleId ?? row.cycle_id,
+    variantKey: row.variantKey || row.variant_key,
+    videoType: row.videoType || row.video_type,
+    hookType: row.hookType || row.hook_type,
+    valueAddType: row.valueAddType ?? row.value_add_type,
+    videoId: row.videoId ?? row.video_id,
+    status: row.status,
+    avdPct: row.avdPct ?? row.avd_pct,
+    ctr: row.ctr,
+    views: row.views,
+    uploadedAt: row.uploadedAt || row.uploaded_at,
+    metricsFetchedAt: row.metricsFetchedAt || row.metrics_fetched_at,
+  }));
 }
 
 // ── Target & Cohort Operations ──
@@ -159,7 +184,23 @@ export function saveTarget(target: Target): void {
 
 export function getTarget(cohortId: string): Target | null {
   const d = getDb();
-  return d.prepare(`SELECT * FROM targets WHERE cohort_id = ?`).get(cohortId) as Target | null;
+  const row = d.prepare(`SELECT * FROM targets WHERE cohort_id = ?`).get(cohortId) as Record<string, any> | undefined;
+  if (!row) return null;
+  // Map snake_case DB columns → camelCase interface
+  return {
+    cohortId: row.cohortId || row.cohort_id,
+    createdAt: row.createdAt || row.created_at,
+    targetStatement: row.targetStatement || row.target_statement,
+    measurableOutcome: row.measurableOutcome || row.measurable_outcome,
+    whyItMatters: row.whyItMatters || row.why_it_matters,
+    thresholdAvd: row.thresholdAvd ?? row.threshold_avd,
+    totalVideos: row.totalVideos ?? row.total_videos,
+    cycleCount: row.cycleCount ?? row.cycle_count,
+    status: row.status,
+    startedAt: row.startedAt || row.started_at,
+    evaluatedAt: row.evaluatedAt || row.evaluated_at,
+    achievedAvd: row.achievedAvd ?? row.achieved_avd,
+  };
 }
 
 export function evaluateCohort(cohortId: string): CohortEval {

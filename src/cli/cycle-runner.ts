@@ -14,7 +14,7 @@
  *   [--override] // read MAB override from DB
  */
 
-import { loadState, selectCycleVariants, recordReward, saveState } from '../optimization/mab-strategy.js';
+import { loadState, selectCycleVariants, commitVariants, recordReward, saveState } from '../optimization/mab-strategy.js';
 import {
   createCycle, createVariantRecord, updateCycleStatus,
   getMabOverride, saveTarget as saveTargetToDb, getTarget
@@ -79,8 +79,9 @@ async function main(): Promise<void> {
     console.log(`  ${variantKey(v)}`);
   }
 
-  // Step 4: Save to DB
+  // Step 4: Save to DB + commit state
   if (!cli.dryRun) {
+    commitVariants(state, videoCount);
     const cycleId = createCycle(state.totalVideosProduced / videoCount, cohortId, state.epsilon);
     updateCycleStatus(cycleId, 'pending');
     

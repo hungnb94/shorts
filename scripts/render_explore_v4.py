@@ -12,9 +12,9 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import edge_tts
 
 PROJECT = Path("/Users/hung/code/ai/shorts")
-OUTDIR = PROJECT / "output" / "explore_v2"
+OUTDIR = PROJECT / "output" / "explore_v4"
 OUTDIR.mkdir(parents=True, exist_ok=True)
-TMPDIR = PROJECT / "output" / "tmp_explore2"
+TMPDIR = PROJECT / "output" / "tmp_explore4"
 TMPDIR.mkdir(parents=True, exist_ok=True)
 OVERLAYS = PROJECT / "output" / "overlays"
 
@@ -388,24 +388,32 @@ def render_meme(narrative, hook_text, audio_path, dur, boundaries, vas, out):
 
 
 def render_stock(narrative, hook_text, audio_path, dur, boundaries, vas, out):
-    """Type 1: Source video as darkened background + text."""
+    """Type 1: Source video as darkened background + Ken Burns zoom/pan."""
     fd = TMPDIR / f"{narrative['id']}_stock"; fd.mkdir(exist_ok=True)
     tf = int(dur * FPS)
     src = PROJECT / "output/source/2eicF3iPf1s.webm"
     src_fd = TMPDIR / f"{narrative['id']}_src"; src_fd.mkdir(exist_ok=True)
-    subprocess.run(["ffmpeg", "-y", "-i", str(src), "-vf", f"fps=1,scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920", "-q:v", "2", str(src_fd / "src_%03d.jpg")], capture_output=True)
+    # Extract at 5fps for smoother motion (was 1fps)
+    subprocess.run(["ffmpeg", "-y", "-i", str(src), "-vf", f"fps=5,scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920", "-q:v", "2", str(src_fd / "src_%05d.jpg")], capture_output=True)
     sf = sorted(src_fd.glob("src_*.jpg"))
+    src_count = len(sf)
 
     for i in range(tf):
         t = i / FPS
         if sf:
-            fi = min(int(t), len(sf) - 1)
-            bg = Image.open(sf[fi]).resize((WIDTH, HEIGHT))
+            # Smooth scrubbing: cycle through source frames proportional to video duration
+            fi = int((t / dur) * src_count) % src_count
+            bg = Image.open(sf[fi]).resize((WIDTH, HEIGHT), Image.Resampling.LANCZOS)
         else:
             bg = Image.new("RGB", (WIDTH, HEIGHT), C_BLACK)
         overlay = Image.new("RGB", (WIDTH, HEIGHT), (0, 0, 0))
         bg = Image.blend(bg, overlay, 0.4)
-        draw = ImageDraw.Draw(bg)
+        # Ken Burns zoom: 1.0 → 1.1 across full duration
+        zoom = 1.0 + 0.1 * (t / dur)
+        bw, bh = int(WIDTH / zoom), int(HEIGHT / zoom)
+        bx, by = (WIDTH - bw) // 2, int(HEIGHT * 0.2 * (t / dur))  # pan down
+        cropped = bg.crop((bx, by, bx + bw, by + bh)).resize((WIDTH, HEIGHT), Image.Resampling.LANCZOS)
+        draw = ImageDraw.Draw(cropped)
 
         if t < 3.0:
             scale = min(1.0, t / 0.3)
@@ -429,52 +437,64 @@ def render_stock(narrative, hook_text, audio_path, dur, boundaries, vas, out):
                 break
         for va in vas:
             r = VA_RENDERERS.get(va)
-            if r: r(bg, t, 3.0, dur, draw)
+            if r: r(cropped, t, 3.0, dur, draw)
         bar_w = int(WIDTH * t / dur)
         draw.rectangle([0, HEIGHT - 10, bar_w, HEIGHT], fill=C_CYAN)
-        bg.save(fd / f"frame_{i+1:05d}.png")
+        cropped.save(fd / f"frame_{i+1:05d}.png")
     encode_frames(fd, audio_path, out, dur)
     shutil.rmtree(src_fd, ignore_errors=True)
 
 
 def render_clip(narrative, hook_text, audio_path, dur, boundaries, vas, out):
-    """Type 7: Source footage cut + TTS overlay."""
+    """Type 7: Source footage cut + TTS overlay + Ken Burns."""
     fd = TMPDIR / f"{narrative['id']}_clip"; fd.mkdir(exist_ok=True)
     tf = int(dur * FPS)
     src = PROJECT / "output/source/2eicF3iPf1s.webm"
-    seg_dur = dur / 3
+    src_fd = TMPDIR / f"{narrative['id']}_src"; src_fd.mkdir(exist_ok=True)
+    src_total = 1152.0
 
-    # Extract source frames at segment boundaries (use random positions in source)
+    # Extract 6 segments from different parts of source (was 3)
+    num_segs = 6
+    seg_dur = dur / num_segs
     src_segments = []
-    src_total = 1205.5  # source duration
-    for si in range(3):
-        t_pos = (si + 1) * (src_total / (3 + 1))
+    for si in range(num_segs):
+        t_pos = (si + 1) * (src_total / (num_segs + 1))
         subprocess.run([
             "ffmpeg", "-y", "-ss", str(t_pos), "-i", str(src),
-            "-t", "2", "-vf", f"fps={FPS},scale=405:720",
-            "-q:v", "2", str(fd / f"src_{si:02d}_%05d.png")
+            "-t", "3", "-vf", f"fps={FPS},scale=608:1080",
+            "-q:v", "2", str(src_fd / f"src_{si:02d}_%05d.png")
         ], capture_output=True)
-        src_segments.append(sorted(fd.glob(f"src_{si:02d}_*.png")))
+        seg_frames = sorted(src_fd.glob(f"src_{si:02d}_*.png"))
+        src_segments.append(seg_frames)
 
     for i in range(tf):
         t = i / FPS
-        seg_idx = min(int(t / seg_dur), 3 - 1)
+        seg_idx = min(int(t / seg_dur), num_segs - 1)
         local_t = t - seg_idx * seg_dur
 
         # Get source frame
         seg_frames = src_segments[seg_idx]
-        fi = int(local_t * FPS) if local_t * FPS < len(seg_frames) else 0
-        if fi < len(seg_frames):
+        if seg_frames:
+            fi = min(int(local_t * FPS), len(seg_frames) - 1)
             fg = Image.open(seg_frames[fi])
         else:
-            fg = Image.new("RGB", (405, 720), C_BLACK)
+            fg = Image.new("RGB", (608, 1080), C_BLACK)
 
-        bg = fg.resize((WIDTH, HEIGHT), Image.LANCZOS)
+        bg = fg.resize((WIDTH, HEIGHT), Image.Resampling.LANCZOS)
         bg = bg.filter(ImageFilter.GaussianBlur(radius=30))
         darken = Image.new("RGB", (WIDTH, HEIGHT), (0, 0, 0))
         bg = Image.blend(bg, darken, 0.35)
-        fg_916 = fg.resize((int(HEIGHT * 405 / 720), HEIGHT), Image.LANCZOS)
-        bg.paste(fg_916, ((WIDTH - fg_916.width) // 2, 0))
+        # Ken Burns zoom on foreground
+        zoom = 1.0 + 0.08 * (local_t / seg_dur)
+        fw = int(HEIGHT * 608 / 1080 * zoom)
+        fh = int(HEIGHT * zoom)
+        fg_zoomed = fg.resize((fw, fh), Image.Resampling.LANCZOS)
+        bg.paste(fg_zoomed, ((WIDTH - fw) // 2, (HEIGHT - fh) // 2))
+        # Crossfade between segments (last 0.3s of each segment)
+        seg_progress = local_t / seg_dur
+        if seg_progress > 0.85 and seg_idx < num_segs - 1:
+            fade_alpha = (seg_progress - 0.85) / 0.15
+            bg = Image.blend(bg, Image.new("RGB", (WIDTH, HEIGHT), C_BLACK), fade_alpha * 0.3)
         draw = ImageDraw.Draw(bg)
 
         if t < 3.0:
@@ -493,6 +513,7 @@ def render_clip(narrative, hook_text, audio_path, dur, boundaries, vas, out):
         bg.save(fd / f"frame_{i+1:05d}.png")
 
     encode_frames(fd, audio_path, out, dur)
+    shutil.rmtree(src_fd, ignore_errors=True)
 
 
 def render_html(narrative, hook_text, audio_path, dur, boundaries, vas, out):
@@ -600,10 +621,10 @@ def render_variant(variant, narrative, idx):
 
 # ── Main ──
 if __name__ == "__main__":
-    vp = PROJECT / "output" / "random_variants_v1.json"
+    vp = PROJECT / "output" / "random_variants_v3.json"
     variants = json.loads(vp.read_text())
 
-    print(f"🎮 Multi-Segment Exploration v2 — {len(variants)} variants")
+    print(f"🎮 Multi-Segment Exploration v4 — {len(variants)} variants")
     print(f"   Target: 30-60s each | Output: {OUTDIR}")
 
     results = []

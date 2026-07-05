@@ -12,9 +12,9 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import edge_tts
 
 PROJECT = Path("/Users/hung/code/ai/shorts")
-OUTDIR = PROJECT / "output" / "explore_v2"
+OUTDIR = PROJECT / "output" / "explore_v3"
 OUTDIR.mkdir(parents=True, exist_ok=True)
-TMPDIR = PROJECT / "output" / "tmp_explore2"
+TMPDIR = PROJECT / "output" / "tmp_explore3"
 TMPDIR.mkdir(parents=True, exist_ok=True)
 OVERLAYS = PROJECT / "output" / "overlays"
 
@@ -600,10 +600,10 @@ def render_variant(variant, narrative, idx):
 
 # ── Main ──
 if __name__ == "__main__":
-    vp = PROJECT / "output" / "random_variants_v1.json"
+    vp = PROJECT / "output" / "random_variants_v2.json"
     variants = json.loads(vp.read_text())
 
-    print(f"🎮 Multi-Segment Exploration v2 — {len(variants)} variants")
+    print(f"🎮 Multi-Segment Exploration v3 — {len(variants)} variants")
     print(f"   Target: 30-60s each | Output: {OUTDIR}")
 
     results = []

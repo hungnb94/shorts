@@ -6,9 +6,10 @@
   "scripts": {
     "build": "tsc",
     "cycle": "tsx src/cli/cycle-runner.ts",
-    "autonomous": "tsx src/cli/autonomous.ts",
+    "cycle:dry": "tsx src/cli/cycle-runner.ts --dry-run",
+    "cohort:init": "tsx src/cli/init-cohort.ts",
     "mab:status": "tsx src/cli/mab-status.ts",
-    "analyze:retention": "tsx src/platforms/youtube-analytics.ts"
+    "simulate:metrics": "tsx src/cli/simulate-metrics.ts"
   },
   "dependencies": {
     "better-sqlite3": "^11.7.0"
