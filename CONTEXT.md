@@ -162,6 +162,18 @@ _Avoid_: "scraping", "research bot"
 Tính toán mean AVD của 18 videos (3 cycles) sau khi metrics fetched. So sánh với Target threshold. Trigger Success Formula Step 9 loop (success → raise target / failure → auto-crawl).
 _Avoid_: "cohort review", "post-mortem"
 
+**Source Channel Pattern**:
+Format hook được trích xuất từ phân tích top videos của kênh viral reference (vd: @theschoolofhardknocks — 31M views/top short). 3 pattern types đã identify: (1) Money+Number ($58,380, $2.5M car), (2) Curiosity Gap ("THIS is the real secret"), (3) Contrarian Reveal ("Good culture isn't made in the game"). Khác AB Variable (đơn lẻ) — Source Channel Pattern là combo hook+structure hoàn chỉnh copy từ proven viral.
+_Avoid_: "hook template", "title formula"
+
+**Verbatim Segment**:
+Đoạn audio gốc từ source video (Andy Frisella etc.) được extract nguyên bản, không TTS override. Là cốt lõi của Mode A. TTS chỉ dùng cho hook và CTA — phần giá trị giữa luôn là giọng thật. Xác nhận perform tốt hơn pure TTS (19.5% AVD cho pure TTS vs winner Mode A).
+_Avoid_: "source clip", "raw audio", "original quote"
+
+**Mode A**:
+Render format: TTS Hook → Verbatim Segments (×4) → TTS CTA → Optional padding. Chỉ giữ 1 mode — Mode B (hybrid TTS+source quote) đã bị loại sau khi test. Audio: hook 5-7s + segments 16-20s + CTA 9-11s = 33-39s total. Khác Mode B đã deprecated.
+_Avoid_: "verbatim mode", "source audio mode", "Mode B"
+
 ## Project Name
 
 Package name (from package.json khi init): `shorts`
