@@ -3,6 +3,7 @@
 output/**/*.mp4
 output/**/*.mp3
 output/**/*.png
+output/**/*.jpg
 output/**/*.log
 output/**/*.txt
 output/**/*.srt
