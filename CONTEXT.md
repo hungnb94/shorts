@@ -130,6 +130,38 @@ _Avoid_: "watch time graph"
 Điểm đặc biệt trong retention graph: dip (viewers skip), peak (rewatch), flat (engaged). Inform hook/pacing decisions cho videos tiếp.
 _Avoid_: "highlight", "retention spike"
 
+**Target**:
+Mục tiêu dạng outcome-measurable đặt cho 2 tuần (Target Cohort horizon), KHÔNG phải per-video hay per-cycle. Đo = AVD trung bình cohort ≥ ngưỡng X%. Khác Optimization Cycle (3 ngày execute unit). Đây là layer strategic phía trên MAB.
+_Avoid_: "goal", "objective", "target" (khi dùng cho video/cycle)
+
+**Target Cohort**:
+Tập 18 videos × ~3 cycles ≈ 2 tuần mà 1 Target áp dụng. Khi đặt Target mới = bắt đầu cohort mới. Cohort collects outcomes từ các cycle bên trong để chốt đạt/không đạt Target.
+_Avoid_: "batch" (đã dùng cho AB), "period"
+
+**Success Formula**:
+Khung goal-planning 9 bước áp dụng ở đầu mỗi Target Cohort: (1) mục tiêu (Target statement), (2) kết quả đo được, (3) tại sao quan trọng, (4) mức tự tin 1-100%, (5) điều kiện tự tin 100%, (6) việc cần làm, (7) sắp xếp ưu tiên, (8) chọn 3 việc đầu → mổ xẻ hành động, (9) thực thi. Loop feedback: thành công → nâng Target; thất bại → research + nâng cấp → quay bước (6). Khác Optimization Cycle (vòng learning, không có steps 1-3).
+_Avoid_: "goal framework", "OKR"
+
+**Hypothesis**:
+Một dự đoán có cấu trúc từ Analyzer output: "Variant dimension A + Variant dimension B → AVD +X% trên Video Type C". Có 3 thành phần: predicted_impact (%), confidence (0-1), effort (1-5). Khác với AB Variable (đơn lẻ) — Hypothesis là combo multi-dimension.
+_Avoid_: "guess", "theory", "variant combo"
+
+**ICE Score**:
+Heuristic prioritization cho Hypotheses: Impact × Confidence / Effort. Impact = predicted AVD lift (%), Confidence = analyzer evidence strength, Effort = 1 (MAB config only) đến 5 (new value-add development). Rank hypotheses để chọn Top 3.
+_Avoid_: "priority score", "ranking"
+
+**MAB Override**:
+File config ghi đè hành vi MAB cho 1 cycle cụ thể: `variant_priority_boost` (ưu tiên hook/value-add/video-type), `epsilon_override`, `value_add_config`, `duration_override`. Được tạo ở Step 8, MAB đọc tự động ở cycle sau. Khác MAB State (learned rewards).
+_Avoid_: "MAB config", "manual override"
+
+**Auto-Crawl**:
+Tự động tìm + tải + phân tích top N finance channels (YouTube search → yt-dlp transcript → pattern extract) khi cohort fail. Output = hypotheses mới cho cohort sau. Human gate: system trình bày findings, user approve trước khi inject.
+_Avoid_: "scraping", "research bot"
+
+**Cohort Evaluation**:
+Tính toán mean AVD của 18 videos (3 cycles) sau khi metrics fetched. So sánh với Target threshold. Trigger Success Formula Step 9 loop (success → raise target / failure → auto-crawl).
+_Avoid_: "cohort review", "post-mortem"
+
 ## Project Name
 
 Package name (from package.json khi init): `shorts`

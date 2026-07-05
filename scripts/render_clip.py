@@ -232,20 +232,26 @@ def render_value_add_overlays(value_adds, commentary_duration, total_duration, t
         img = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
         draw = ImageDraw.Draw(img)
 
-        # Data viz counter (first 25% of video) — top area, semi-transparent
+        # Data viz counter (first 50% of video) — top area, semi-transparent
         if has_data_viz and t < total_duration * 0.5:
-            progress = ease_out_cubic(min(1.0, t / max(0.1, total_duration * 0.4)))
-            # Parse numeric target
+            # Show full value from frame 1 — no counter animation (no $0K)
             num_match = re.search(r'[\d,.]+', money_target)
-            base = float(num_match.group().replace(',', '')) if num_match else 80
-            mult = 1e6 if 'M' in money_target.upper() else (1e3 if 'K' in money_target.upper() else (1e9 if 'B' in money_target.upper() else 1))
-            current = base * progress
-            if current >= 1e9:
-                display = f"${current/1e9:.1f}B"
-            elif current >= 1e6:
-                display = f"${current/1e6:.1f}M"
+            if num_match:
+                base = float(num_match.group().replace(',', '')) if num_match else 80
+                mult = 1e6 if 'M' in money_target.upper() else (1e3 if 'K' in money_target.upper() else (1e9 if 'B' in money_target.upper() else 1))
+                full = base * mult
+                if full >= 1e9:
+                    display = f"${full/1e9:.1f}B"
+                elif full >= 1e6:
+                    display = f"${full/1e6:.1f}M"
+                elif full >= 1e3:
+                    display = f"${full/1e3:.0f}K"
+                else:
+                    display = f"${full:.0f}"
             else:
-                display = f"${current/1e3:.0f}K"
+                # Non-monetary data viz (percentages, counts, years) — show caption as headline
+                display = viz_caption.split(" ")[0]  # first word: "82%", "20", "70%"
+
             # Top banner
             draw.rectangle([0, 0, WIDTH, 180], fill=(0, 0, 0, 160))
             fnt = font(72)
@@ -332,14 +338,24 @@ def render_caption_frames(commentary, boundaries, total_duration, temp_dir):
         # Find active line
         active = None
         local_t = 0
+        sentence_dur = 0
         for (s, e, txt) in timeline:
             if s <= t < e:
                 active = txt
                 local_t = t - s
+                sentence_dur = e - s
                 break
         if active:
             # Word-by-word pop-in
             words = active.split()
+            # Dynamic words_per_sec: last word finishes with time to spare for display
+            n_words = len(words)
+            if n_words > 0 and sentence_dur > 0:
+                # Last word pops in at 85% through sentence, leaving the last 15% for full display
+                end_word_t = sentence_dur * 0.85
+                words_per_sec = (n_words - 1) / end_word_t if n_words > 1 else 4.0
+            else:
+                words_per_sec = 2.5
             y_base = HEIGHT - 500
             # Background box
             fnt = font(52)
@@ -365,7 +381,6 @@ def render_caption_frames(commentary, boundaries, total_duration, temp_dir):
             box_y = y_base
             draw.rounded_rectangle([60, box_y - 20, WIDTH - 60, box_y + total_h + 20], radius=16, fill=(0, 0, 0, 200))
             # Render words with pop-in based on local_t
-            words_per_sec = 2.5
             for li, line_words in enumerate(wrapped):
                 for wi, word in enumerate(line_words):
                     word_idx = sum(len(w) for w in wrapped[:li]) + wi
