@@ -1,400 +1,553 @@
 #!/usr/bin/env python3
 """
-Hybrid Audio Renderer v7 — SoHK Patterns Applied.
-Mode A only: TTS hook + source verbatim audio segments + TTS CTA/padding.
-6 new narratives using School of Hard Knocks title patterns (MONEY+NUMBER, THIS, Contrarian, Authority).
+Hybrid Renderer v7.3 — SoHK Patterns + Footage + Pexels + Text + Emoji.
+Kết hợp:
+  - v6: footage extraction (Andy nói chuyện, Ken Burns zoom)
+  - v4: Pexels stock clips + emoji overlays
+  - v7: SoHK narrative patterns (Money+Number, Curiosity, Contrarian)
+
+Visual layering per frame:
+  Hook phase  → darkened source footage + Pexels + big hook text
+  Segment phase → source footage + word-by-word caption
+  CTA phase   → Pexels + CTA text + emoji
 """
-import json, subprocess, asyncio, random, shutil, edge_tts
+import json, subprocess, asyncio, random, shutil, math
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
+import edge_tts
 
-PROJECT = Path("/Users/hung/code/ai/shorts")
-OUTDIR  = PROJECT / "output" / "explore_v7"
+PROJECT  = Path("/Users/hung/code/ai/shorts")
+OUTDIR   = PROJECT / "output" / "explore_v7"
 OUTDIR.mkdir(parents=True, exist_ok=True)
-TMPDIR  = PROJECT / "output" / "tmp_explore7"
+TMPDIR   = PROJECT / "output" / "tmp_explore7"
 TMPDIR.mkdir(parents=True, exist_ok=True)
 
-SRC_MP4    = str(PROJECT / "output/source/2eicF3iPf1s.mp4")
-SRC_WEBM   = str(PROJECT / "output/source/2eicF3iPf1s.webm")
-SRC_AUDIO  = TMPDIR / "source_full.wav"
+SRC_MP4   = str(PROJECT / "output/source/2eicF3iPf1s.mp4")
+SRC_AUDIO = TMPDIR / "source_full.wav"
+PEXELS_DIR = PROJECT / "output" / "pexels"
 
-FPS    = 30
-WIDTH   = 1080
-HEIGHT  = 1920
+FPS   = 30
+WIDTH  = 1080
+HEIGHT = 1920
 AUDIO_PARAMS = ["-ac", "1", "-ar", "44100"]
 
 # Colors
-BG      = (0, 0, 0)
-ACCENT  = (50, 255, 130)
-WHITE   = (255, 255, 255)
-DIM     = (160, 160, 160)
-DARK_BG = (10, 10, 10)
+C_BLACK  = (0, 0, 0)
+C_WHITE  = (255, 255, 255)
+C_GOLD   = (255, 215, 0)
+C_CYAN   = (0, 200, 255)
+C_RED    = (255, 68, 68)
+C_GREEN  = (0, 255, 136)
+C_DARK   = (10, 10, 14)
 
-try:
-    FONT_BOLD = str(Path("/System/Library/Fonts/Supplemental/Arial Bold.ttf"))
-    FONT      = str(Path("/System/Library/Fonts/Supplemental/Arial.ttf"))
-except:
-    FONT_BOLD = str(Path("/System/Library/Fonts/Helvetica.ttc"))
-    FONT      = str(Path("/System/Library/Fonts/Helvetica.ttc"))
+FONT_BOLD = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
+FONT_REG  = "/System/Library/Fonts/Supplemental/Arial.ttf"
+FONT_ROUND = "/System/Library/Fonts/Supplemental/Arial Rounded Bold.ttf"
 
-# ═══════════════════════════════════════════════════════════════
-# NARRATIVES — 6 new videos using SoHK title patterns
-# All Mode A: TTS hook → source verbatim segments → TTS CTA
-# ═══════════════════════════════════════════════════════════════
+def font(size, path=FONT_BOLD):
+    try:
+        return ImageFont.truetype(path, max(1, int(size)))
+    except:
+        return ImageFont.load_default()
 
-NARRATIVES = [
-    # ── #1: MONEY+NUMBER — "$58,380 in 10 Years" ──
-    {
-        "id": "new1_10year",
-        "hook": "HE MADE $58,380 IN 10 YEARS",
-        "hook_tts": "He made fifty eight thousand, three hundred and eighty dollars in ten years. Then he built a billion dollar company.",
-        "mode": "A",
-        "segments": [
-            {"start": 349.9, "end": 354.0},   # first 3 years didn't make any money
-            {"start": 354.0, "end": 363.1},   # first 10 years total I made $58,380
-            {"start": 363.1, "end": 367.6},   # worked other jobs, bartending, side hustles
-            {"start": 367.6, "end": 371.7},   # first couple of years we lived in the back of our store
-        ],
-        "cta_tts": "Ten years of grinding. Most people would have quit. He didn't. That's the difference between those who make it and those who don't.",
-    },
+# ── Pexels clips ──
+PEXELS_CLIPS = sorted(PEXELS_DIR.glob("pex_*.mp4"))
 
-    # ── #2: THIS — "THIS Is the Real Secret of Success" ──
-    {
-        "id": "new2_secret",
-        "hook": "THIS IS THE REAL SECRET OF SUCCESS",
-        "hook_tts": "You want to know the real secret of success? It's not talent. It's not luck. It's this.",
-        "mode": "A",
-        "segments": [
-            {"start": 413.9, "end": 418.1},   # anybody out there can learn skills
-            {"start": 418.1, "end": 422.8},   # learn to be resilient and gritty and tough
-            {"start": 422.8, "end": 427.3},   # required to win
-            {"start": 427.3, "end": 432.1},   # ability to be great as long as willing to pay the price
-        ],
-        "cta_tts": "Skills can be learned. Resilience can be built. Greatness is available to everyone. The only question is: are you willing to pay the price?",
-    },
-
-    # ── #3: Contrarian — "Why CEOs Build Weak Cultures" ──
-    {
-        "id": "new3_culture",
-        "hook": "GOOD CULTURE ISN'T MADE IN THE GAME",
-        "hook_tts": "Most CEOs think culture is built in the boardroom. Andy says it's built somewhere else entirely.",
-        "mode": "A",
-        "segments": [
-            {"start": 259.6, "end": 263.7},   # good culture isn't made in the game
-            {"start": 263.7, "end": 267.8},   # made in those hard times, struggling together
-            {"start": 238.0, "end": 242.2},   # mutual suffering
-            {"start": 233.8, "end": 237.9},   # huge correlation, you asked about culture
-        ],
-        "cta_tts": "Culture isn't built when things are easy. It's forged in the struggle. When everybody suffers together, that's when you build something real.",
-    },
-
-    # ── #4: THIS + Emotional — "A 20-Year-Old Sacrificed Everything" ──
-    {
-        "id": "new4_sacrifice",
-        "hook": "A 20-YEAR-OLD SACRIFICED EVERYTHING",
-        "hook_tts": "While you're complaining about your job, a twenty year old stormed the beaches of Normandy. That's perspective.",
-        "mode": "A",
-        "segments": [
-            {"start": 827.6, "end": 832.8},   # my family made big sacrifices
-            {"start": 833.4, "end": 839.5},   # grandma pregnant when he went to WWII, stormed D-Day
-            {"start": 851.0, "end": 855.4},   # owe those men and women
-            {"start": 855.4, "end": 860.4},   # if a 20-year-old man can sacrifice everything
-        ],
-        "cta_tts": "If a twenty year old can sacrifice his entire future for this country, you can push through your discomfort. That's the real meaning of hard work.",
-    },
-
-    # ── #5: MONEY+NUMBER + THIS — "$2.5M Car" ──
-    {
-        "id": "new5_car",
-        "hook": "HE OWNS A $2.5 MILLION CAR",
-        "hook_tts": "A two and a half million dollar car. And Andy says it's not even his favorite one.",
-        "mode": "A",
-        "segments": [
-            {"start": 1108.3, "end": 1113.3}, # 69 charger Daytona, worth $2.5M
-            {"start": 1041.6, "end": 1047.0}, # 70s Chevelle, thought was the coolest car ever made
-            {"start": 1047.0, "end": 1051.4}, # out of all the cars, that's the one
-            {"start": 1055.2, "end": 1059.5}, # if I was a car, I would be this car
-        ],
-        "cta_tts": "A two and a half million dollar car sits in his garage. But his favorite? A seventy Chevelle. Because it reminds him where he came from.",
-    },
-
-    # ── #6: Authority — "I Was Never Meant for the Ordinary" ──
-    {
-        "id": "new6_ordinary",
-        "hook": "I KNEW I WAS MEANT FOR MORE",
-        "hook_tts": "Andy Frisella knew he wasn't meant for a normal life. Here's how he knew.",
-        "mode": "A",
-        "segments": [
-            {"start": 536.3, "end": 540.4},   # I knew I was going to do something
-            {"start": 540.4, "end": 544.6},   # not meant for everything else
-            {"start": 548.5, "end": 552.7},   # right out of high school, college for one semester
-            {"start": 552.7, "end": 557.0},   # this is not for me, started retail store
-        ],
-        "cta_tts": "Most people settle for the life they're given. Andy refused. That one decision changed everything. The question is: what are you settling for?",
-    },
-]
-
-
-# ── Utils ──
-def extract_audio_44100(src, out):
-    """Extract audio from source as 44100Hz mono WAV."""
+def pexel_frames_for_range(path, start, dur, n_frames):
+    """Extract n_frames from a Pexels clip at given offset."""
+    frames = []
+    fd = TMPDIR / f"pex_{path.stem}_{start:.0f}"
+    fd.mkdir(exist_ok=True)
     subprocess.run([
-        "ffmpeg", "-y", "-i", src,
-        "-ac", "1", "-ar", "44100", "-sample_fmt", "s16",
-        str(out)
-    ], capture_output=True, check=True)
+        "ffmpeg", "-y", "-ss", str(start), "-i", str(path),
+        "-t", str(dur),
+        "-vf", f"fps={FPS},scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920",
+        "-an", "-q:v", "2", str(fd / "f_%05d.jpg")
+    ], capture_output=True)
+    frames = sorted(fd.glob("*.jpg"))
+    return [str(f) for f in frames], fd
 
-def ensure_source_audio():
-    """Ensure source audio is extracted once."""
-    if not SRC_AUDIO.exists():
-        print("  Extracting source audio (44100Hz mono)...")
-        try:
-            extract_audio_44100(SRC_WEBM, SRC_AUDIO)
-        except:
-            extract_audio_44100(SRC_MP4, SRC_AUDIO)
+# ── Source footage extraction ──
+def extract_source_frames(start_window, end_window, vid_id):
+    """Extract source video frames (Andy Frisella) at 10fps."""
+    src_fd = TMPDIR / f"{vid_id}_src"
+    src_fd.mkdir(exist_ok=True)
+    # Clear stale frames
+    for f in src_fd.glob("*.jpg"):
+        f.unlink()
+    dur = end_window - start_window
+    subprocess.run([
+        "ffmpeg", "-y", "-ss", str(start_window), "-i", SRC_MP4,
+        "-t", str(dur),
+        "-vf", "fps=10,scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920",
+        "-an", "-q:v", "2", str(src_fd / "f_%05d.jpg")
+    ], capture_output=True)
+    return sorted(src_fd.glob("*.jpg")), src_fd
 
+# ── TTS ──
 async def gen_tts(text, out_path):
-    """Generate TTS audio, return duration in seconds."""
     out_path = Path(out_path) if not isinstance(out_path, Path) else out_path
-    wav_path = out_path.with_suffix(".wav")
-    mp3_path = out_path.with_suffix(".mp3")
-    communicate = edge_tts.Communicate(text, voice="en-US-GuyNeural")
-    await communicate.save(str(mp3_path))
+    comm = edge_tts.Communicate(text, "en-US-GuyNeural")
+    tmp_mp3 = out_path.with_suffix(".mp3")
+    await comm.save(str(tmp_mp3))
     subprocess.run([
-        "ffmpeg", "-y", "-i", str(mp3_path),
-        "-ac", "1", "-ar", "44100", "-sample_fmt", "s16",
-        str(wav_path)
-    ], capture_output=True, check=True)
-    mp3_path.unlink(missing_ok=True)
-    dur = float(subprocess.run([
-        "ffprobe", "-v", "error", "-show_entries", "format=duration",
-        "-of", "csv=p=0", str(wav_path)
-    ], capture_output=True, text=True).stdout.strip())
-    return dur
-
+        "ffmpeg", "-y", "-i", str(tmp_mp3),
+        "-ac", "1", "-ar", "44100", str(out_path)
+    ], capture_output=True)
+    tmp_mp3.unlink(missing_ok=True)
+    r = subprocess.run(["ffprobe", "-v", "quiet", "-show_entries", "format=duration",
+                        "-of", "csv=p=0", str(out_path)], capture_output=True, text=True)
+    return float(r.stdout.strip()) if r.stdout.strip() else 0
 
 def get_duration(path):
-    return float(subprocess.run([
-        "ffprobe", "-v", "error", "-show_entries", "format=duration",
-        "-of", "csv=p=0", str(path)
-    ], capture_output=True, text=True).stdout.strip())
+    r = subprocess.run(["ffprobe", "-v", "quiet", "-show_entries", "format=duration",
+                        "-of", "csv=p=0", str(path)], capture_output=True, text=True)
+    return float(r.stdout.strip()) if r.stdout.strip() else 0
 
+def ensure_source_audio():
+    if not SRC_AUDIO.exists():
+        subprocess.run([
+            "ffmpeg", "-y", "-i", SRC_MP4, *AUDIO_PARAMS, str(SRC_AUDIO)
+        ], capture_output=True)
 
-# ── Frame gen ──
-def gen_frame_image(text, hook=False, cta=False):
-    """Generate a single 1080x1920 frame with centered quote layout."""
-    img = Image.new("RGB", (WIDTH, HEIGHT), DARK_BG)
-    draw = ImageDraw.Draw(img)
+# ── Helpers ──
+def get_segment_text(start, end):
+    with open(str(PROJECT / "output/source/2eic_transcript.json")) as f:
+        data = json.load(f)
+    texts = []
+    for s in data.get("segments", []):
+        if s["start"] >= start - 0.5 and s["end"] <= end + 0.5:
+            texts.append(s["text"].strip())
+    if not texts:
+        for s in data.get("segments", []):
+            if s["start"] < end and s["end"] > start:
+                texts.append(s["text"].strip())
+    return " ".join(texts) if texts else ""
 
-    # Subtle gradient overlay
-    for y in range(HEIGHT):
-        alpha = int(20 * (1 - y / HEIGHT))
-        c = tuple(max(0, v - alpha) for v in DARK_BG)
-        draw.line([(0, y), (WIDTH, y)], fill=c)
-
-    if hook:
-        font_size = 72
-        color = ACCENT
-    elif cta:
-        font_size = 52
-        color = ACCENT
-    else:
-        font_size = 56
-        color = WHITE
-
-    try:
-        font = ImageFont.truetype(FONT_BOLD if hook or cta else FONT, font_size)
-        font2 = ImageFont.truetype(FONT if not hook and not cta else FONT_BOLD, 28)
-    except:
-        font = ImageFont.load_default()
-        font2 = ImageFont.load_default()
-
-    # Word-wrap text
+def word_wrap(text, draw, font_obj, max_width):
     words = text.split()
     lines = []
     current = ""
     for w in words:
         test = current + " " + w if current else w
-        bbox = draw.textbbox((0, 0), test, font=font)
-        tw = bbox[2] - bbox[0]
-        if tw > WIDTH - 160 and current:
+        bbox = draw.textbbox((0, 0), test, font=font_obj)
+        if bbox[2] - bbox[0] > max_width and current:
             lines.append(current)
             current = w
         else:
             current = test
     if current:
         lines.append(current)
+    return lines
 
-    total_h = sum(draw.textbbox((0, 0), l, font=font)[3] - draw.textbbox((0, 0), l, font=font)[1] for l in lines)
-    total_h += (len(lines) - 1) * 12
-    y_start = (HEIGHT - total_h) // 2 - 40
+# ── Frame renderer ──
+def render_frame(bg_img, texts, y_start=400, font_size=52, color=C_WHITE, phase="seg"):
+    """Overlay text on background image."""
+    draw = ImageDraw.Draw(bg_img)
+    fo = font(font_size)
 
-    for line in lines:
-        bbox = draw.textbbox((0, 0), line, font=font)
+    total_h = 0
+    wrapped_all = []
+    for txt in texts:
+        lines = word_wrap(txt, draw, fo, WIDTH - 160)
+        for l in lines:
+            bbox = draw.textbbox((0, 0), l, font=fo)
+            lh = bbox[3] - bbox[1]
+            total_h += lh + 16
+            wrapped_all.append(l)
+
+    cy = y_start - total_h // 2
+    for l in wrapped_all:
+        bbox = draw.textbbox((0, 0), l, font=fo)
         lw = bbox[2] - bbox[0]
-        x = (WIDTH - lw) // 2
-        # Subtle shadow
-        draw.text((x+2, y_start+2), line, font=font, fill=(0, 0, 0))
-        draw.text((x, y_start), line, font=font, fill=color)
         lh = bbox[3] - bbox[1]
-        y_start += lh + 12
+        x = (WIDTH - lw) // 2
+        # Shadow
+        draw.text((x + 3, cy + 3), l, font=fo, fill=(0, 0, 0))
+        draw.text((x, cy), l, font=fo, fill=color)
+        cy += lh + 16
 
-    # Attribution bar
-    attr = "Andy Frisella — First Form"
-    ab = draw.textbbox((0, 0), attr, font=font2)
-    draw.text((WIDTH - ab[2] - 60, HEIGHT - 80), attr, font=font2, fill=DIM)
+    return bg_img
 
-    return img
+def add_progress_bar(img, progress, color=C_CYAN):
+    draw = ImageDraw.Draw(img)
+    bar_w = int(WIDTH * progress)
+    draw.rectangle([0, HEIGHT - 6, bar_w, HEIGHT], fill=color)
 
+def add_emoji(img, emoji_str, x, y, size=80):
+    """Add emoji as large text."""
+    draw = ImageDraw.Draw(img)
+    fo = font(size, FONT_ROUND)
+    draw.text((x, y), emoji_str, font=fo, fill=C_WHITE)
 
-def render_frames(texts, prefix):
-    """Render list of text strings as PNG frames, return all paths."""
-    paths = []
-    for fi, txt in enumerate(texts):
-        fpath = TMPDIR / f"{prefix}_f{fi:06d}.png"
-        if fpath.exists():
-            paths.append(str(fpath))
-            continue
-        img = gen_frame_image(txt, hook=(fi == 0), cta=(fi == len(texts)-1))
-        img.save(fpath)
-        paths.append(str(fpath))
-    return paths
+def apply_ken_burns(img, t, total_dur, zoom_max=1.04):
+    """Subtle zoom effect."""
+    zoom = 1.0 + zoom_max * (t / total_dur)
+    bw = int(WIDTH / zoom)
+    bh = int(HEIGHT / zoom)
+    bx = (WIDTH - bw) // 2
+    by = int((HEIGHT - bh) * 0.15 * (t / total_dur))
+    return img.crop((bx, by, bx + bw, by + bh)).resize((WIDTH, HEIGHT), Image.Resampling.LANCZOS)
 
+def darken(img, factor=0.4):
+    overlay = Image.new("RGB", img.size, C_BLACK)
+    return Image.blend(img, overlay, factor)
 
-# ── Render variant A (Mode A: verbatim segments) ──
-async def render_variant_a(narr, hook_text, idx, out_dir):
+# ═══════════════════════════════════════════════════════════════
+# 6 NARRATIVES — SoHK Patterns
+# ═══════════════════════════════════════════════════════════════
+NARRATIVES = [
+    {
+        "id": "new1_10year",
+        "mode": "A",
+        "hook": "HE MADE $58,380 IN 10 YEARS",
+        "hook_tts": "He made fifty eight thousand three hundred and eighty dollars in ten years. And that changed everything.",
+        "emoji": "💰",
+        "segments": [
+            {"start": 957.0, "end": 962.2},
+            {"start": 962.2, "end": 967.5},
+            {"start": 969.0, "end": 975.0},
+            {"start": 977.0, "end": 982.5},
+        ],
+        "cta_tts": "That's the power of compounding. The first ten years feel like nothing. The next ten change your life.",
+        "pexel_keywords": ["money", "cash", "business"],
+    },
+    {
+        "id": "new2_secret",
+        "mode": "A",
+        "hook": "THIS IS THE REAL SECRET OF SUCCESS",
+        "hook_tts": "Everyone wants the secret. Well here it is. This is the real secret of success.",
+        "emoji": "🎯",
+        "segments": [
+            {"start": 389.0, "end": 394.5},
+            {"start": 396.0, "end": 401.5},
+            {"start": 403.0, "end": 408.5},
+            {"start": 410.0, "end": 415.5},
+        ],
+        "cta_tts": "The secret isn't talent. It isn't luck. It's showing up every single day when nobody's watching.",
+        "pexel_keywords": ["success", "goal", "focus"],
+    },
+    {
+        "id": "new3_culture",
+        "mode": "A",
+        "hook": "GOOD CULTURE ISN'T MADE IN THE GAME",
+        "hook_tts": "Good culture isn't made in the game. It's made in the practice. Here's what that means.",
+        "emoji": "🧱",
+        "segments": [
+            {"start": 259.6, "end": 263.7},
+            {"start": 263.7, "end": 267.8},
+            {"start": 238.0, "end": 242.2},
+            {"start": 233.8, "end": 237.9},
+        ],
+        "cta_tts": "You don't build culture when things are easy. You build it when things are hard. That's when it counts.",
+        "pexel_keywords": ["team", "business", "office"],
+    },
+    {
+        "id": "new4_sacrifice",
+        "mode": "A",
+        "hook": "A 20-YEAR-OLD SACRIFICED EVERYTHING",
+        "hook_tts": "A twenty year old sacrificed everything. His friends. His weekends. His comfort. And it paid off.",
+        "emoji": "🔥",
+        "segments": [
+            {"start": 827.6, "end": 832.8},
+            {"start": 833.4, "end": 839.5},
+            {"start": 851.0, "end": 855.4},
+            {"start": 855.4, "end": 860.4},
+        ],
+        "cta_tts": "Most people aren't willing to sacrifice their twenties. That's exactly why most people stay average.",
+        "pexel_keywords": ["hustle", "work", "night"],
+    },
+    {
+        "id": "new5_car",
+        "mode": "A",
+        "hook": "HE OWNS A $2.5 MILLION CAR",
+        "hook_tts": "He owns a two point five million dollar car. But that's not the interesting part.",
+        "emoji": "🏎️",
+        "segments": [
+            {"start": 1108.3, "end": 1113.3},
+            {"start": 1041.6, "end": 1047.0},
+            {"start": 1047.0, "end": 1051.4},
+            {"start": 1055.2, "end": 1059.5},
+        ],
+        "cta_tts": "The car isn't the point. The point is what he had to become to afford it. That's the real flex.",
+        "pexel_keywords": ["car", "luxury", "money"],
+    },
+    {
+        "id": "new6_ordinary",
+        "mode": "A",
+        "hook": "I KNEW I WAS MEANT FOR MORE",
+        "hook_tts": "I knew I was meant for more. I just didn't know how yet. But I started anyway.",
+        "emoji": "🚀",
+        "segments": [
+            {"start": 536.3, "end": 540.4},
+            {"start": 540.4, "end": 544.6},
+            {"start": 548.5, "end": 552.7},
+            {"start": 552.7, "end": 557.0},
+        ],
+        "cta_tts": "You don't need to know how. You just need to start. The how reveals itself when you move.",
+        "pexel_keywords": ["rocket", "sky", "success"],
+    },
+]
+
+# ═══════════════════════════════════════════════════════════════
+# RENDER
+# ═══════════════════════════════════════════════════════════════
+async def render_variant_a(narr, idx, out_dir):
     vid_id = f"exp{idx:02d}_{narr['id']}_A"
     out_path = Path(out_dir) / f"{vid_id}.mp4"
     if out_path.exists():
         dur = get_duration(str(out_path))
         mb = out_path.stat().st_size / 1_048_576
-        print(f"  ✅ Already exists: {vid_id} ({dur:.1f}s, {mb:.1f}MB)")
+        print(f"  ⏭️  Exists: {vid_id} ({dur:.1f}s, {mb:.1f}MB) — delete to re-render")
         return dur, mb
 
-    print(f"  Mode A: {vid_id}")
+    print(f"\n  [{vid_id}] Hook: {narr['hook']}")
 
-    # 1. Generate TTS hook
+    # 1. TTS hook
     hook_audio = TMPDIR / f"{vid_id}_hook.wav"
-    hook_dur = await gen_tts(narr["hook_tts"], str(hook_audio))
-    print(f"  Hook: {hook_dur:.1f}s")
+    hook_dur = await gen_tts(narr["hook_tts"], hook_audio)
+    print(f"  Hook TTS: {hook_dur:.1f}s")
 
-    # 2. Extract segments from source audio
+    # 2. Extract source audio segments
     seg_audios = []
+    seg_texts = []
     for si, seg in enumerate(narr["segments"]):
         seg_path = TMPDIR / f"{vid_id}_seg{si}.wav"
         subprocess.run([
-            "ffmpeg", "-y", "-i", str(SRC_AUDIO),
+            "ffmpeg", "-y", "-i", SRC_MP4,
             "-ss", str(seg["start"]), "-to", str(seg["end"]),
-            "-ac", "1", "-ar", "44100",
-            str(seg_path)
-        ], capture_output=True, check=True)
+            *AUDIO_PARAMS, str(seg_path)
+        ], capture_output=True)
         seg_audios.append(seg_path)
-        dur = seg["end"] - seg["start"]
-        print(f"  Seg {si}: {seg['start']:.1f}-{seg['end']:.1f} ({dur:.1f}s)")
+        txt = get_segment_text(seg["start"], seg["end"])
+        seg_texts.append(txt)
+        print(f"  Seg {si}: {seg['start']:.1f}-{seg['end']:.1f} → \"{txt[:60]}...\"")
 
-    # 3. Generate CTA
+    # 3. TTS CTA
     cta_audio = TMPDIR / f"{vid_id}_cta.wav"
-    cta_dur = await gen_tts(narr["cta_tts"], str(cta_audio))
-    print(f"  CTA: {cta_dur:.1f}s")
+    cta_dur = await gen_tts(narr["cta_tts"], cta_audio)
+    print(f"  CTA TTS: {cta_dur:.1f}s")
 
-    # 4. Check duration and add padding if needed
-    total_audio = hook_dur + sum(s["end"] - s["start"] for s in narr["segments"]) + cta_dur
+    # 4. Concat audio
+    seg_durs = [get_duration(str(a)) for a in seg_audios]
+    total_audio = hook_dur + sum(seg_durs) + cta_dur
 
+    # Padding if needed
     extra_audio = None
-    extra_text = ""
-    n_extra = 0
+    extra_text = "That's the reality. Let that sink in."
     if total_audio < 30:
-        need = 30 - total_audio
-        extra_text = "That's the reality. Let that sink in. Think about what that means for you."
         extra_audio = TMPDIR / f"{vid_id}_extra.wav"
-        extra_dur = await gen_tts(extra_text, str(extra_audio))
-        print(f"  Extra padding: {extra_dur:.1f}s (needed {need:.1f}s)")
-        total_audio = hook_dur + sum(s["end"] - s["start"] for s in narr["segments"]) + cta_dur + extra_dur
+        extra_dur = await gen_tts(extra_text, extra_audio)
+        total_audio = hook_dur + sum(seg_durs) + cta_dur + extra_dur
     else:
         extra_dur = 0
 
-    # 5. Concat all audio as WAV master
-    full_audio = TMPDIR / f"{vid_id}_full.wav"
-
-    concat_files = [str(hook_audio)] + [str(s) for s in seg_audios] + [str(cta_audio)]
+    # Concat WAV master
+    concat_files = [str(hook_audio)] + [str(a) for a in seg_audios] + [str(cta_audio)]
     if extra_audio:
         concat_files.append(str(extra_audio))
 
-    filter_parts = [f"[{i}:a]" for i in range(len(concat_files))]
-    concat_filter = f"\"{' '.join(filter_parts)}concat=n={len(concat_files)}:v=0:a=1[out]\""
-
+    full_audio = TMPDIR / f"{vid_id}_full.wav"
     inputs = []
     for cf in concat_files:
         inputs.extend(["-i", cf])
-
+    n = len(concat_files)
+    filter_parts = [f"[{i}:a]" for i in range(n)]
     subprocess.run([
         "ffmpeg", "-y", *inputs,
-        "-filter_complex", f"{' '.join(filter_parts)}concat=n={len(concat_files)}:v=0:a=1[out]",
-        "-map", "[out]", "-ac", "1", "-ar", "44100",
-        str(full_audio)
-    ], capture_output=True, check=True)
-    print(f"  Full audio: {get_duration(str(full_audio)):.1f}s")
+        "-filter_complex", f"{' '.join(filter_parts)}concat=n={n}:v=0:a=1[out]",
+        "-map", "[out]", *AUDIO_PARAMS, str(full_audio)
+    ], capture_output=True)
 
-    # 6. Extract segments video frames
-    frame_windows = []
-    for seg in narr["segments"]:
-        win_start = max(0, seg["start"] - 2)
-        frame_windows.append((win_start, seg["end"] + 2))
+    final_audio_dur = get_duration(str(full_audio))
+    print(f"  Full audio: {final_audio_dur:.1f}s")
 
-    # 7. Render frames — frame counts driven by ACTUAL audio durations
-    hook_text = narr["hook"]
-    cta_text = narr["cta_tts"]
+    # 5. Extract source frames (wide window covering all segments)
+    seg_starts = [s["start"] for s in narr["segments"]]
+    seg_ends = [s["end"] for s in narr["segments"]]
+    win_start = max(0, min(seg_starts) - 15)
+    win_end = min(1152.0, max(seg_ends) + 15)
+    src_frames, src_fd = extract_source_frames(win_start, win_end, vid_id)
+    print(f"  Source frames: {len(src_frames)} ({win_start:.0f}s–{win_end:.0f}s)")
 
-    all_frame_texts = []
+    # 6. Pexels clip for hook & CTA
+    random.seed(idx)
+    pexel_clip = random.choice(PEXELS_CLIPS) if PEXELS_CLIPS else None
+    pexel_dur = get_duration(str(pexel_clip)) if pexel_clip else 0
 
-    # Hook frames — match hook audio duration
-    hook_nframes = int(hook_dur * FPS)
-    for _ in range(hook_nframes):
-        all_frame_texts.append(hook_text)
+    # Extract pexels frames for hook phase
+    pexel_frames = []
+    pexel_fd = None
+    if pexel_clip and pexel_dur > hook_dur:
+        pexel_frames, pexel_fd = pexel_frames_for_range(
+            pexel_clip, max(0, pexel_dur / 3), hook_dur + 1, int(hook_dur * FPS)
+        )
+        print(f"  Pexels hook frames: {len(pexel_frames)}")
 
-    # Segment text frames (one text per segment, repeated for its duration)
-    for seg_idx, seg in enumerate(narr["segments"]):
-        seg_text = f"\"{get_segment_text(seg['start'], seg['end'])}\""
-        dur = seg["end"] - seg["start"]
-        n_frames = int(dur * FPS)
-        for _ in range(n_frames):
-            all_frame_texts.append(seg_text)
+    # 7. Render all frames
+    total_frames = int(final_audio_dur * FPS)
+    frame_dir = TMPDIR / f"{vid_id}_frames"
+    frame_dir.mkdir(exist_ok=True)
+    # Clear old frames
+    for f in frame_dir.glob("*.png"):
+        f.unlink()
 
-    # CTA frames — match CTA audio duration
-    cta_nframes = int(cta_dur * FPS)
-    for _ in range(cta_nframes):
-        all_frame_texts.append(cta_text)
+    print(f"  Rendering {total_frames} frames...")
 
-    # Extra padding frames if needed
-    n_extra = 0
-    if extra_audio:
-        extra_dur_val = get_duration(str(extra_audio))
-        n_extra = int(extra_dur_val * FPS)
-        for _ in range(n_extra):
-            all_frame_texts.append(extra_text)
+    # Phase boundaries (in seconds)
+    hook_end = hook_dur
+    seg_phase_durs = seg_durs  # actual durations
+    seg_phase_starts = []
+    cur = hook_end
+    for sd in seg_phase_durs:
+        seg_phase_starts.append((cur, cur + sd))
+        cur += sd
+    cta_start = cur
+    cta_end = cta_start + cta_dur
+    extra_start = cta_end
+    extra_end = extra_start + extra_dur if extra_audio else cta_end
 
-    print(f"  Rendering {len(all_frame_texts)} frames...")
+    for fi in range(total_frames):
+        t = fi / FPS
 
-    # Render all frames
-    frame_paths = []
-    for fi, txt in enumerate(all_frame_texts):
-        fpath = TMPDIR / f"{vid_id}_f{fi:06d}.png"
-        if fpath.exists():
-            frame_paths.append(str(fpath))
-            continue
-        is_hook = fi < hook_nframes
-        is_cta = fi >= len(all_frame_texts) - n_extra - cta_nframes and fi < len(all_frame_texts) - n_extra
-        img = gen_frame_image(txt, hook=is_hook, cta=is_cta)
-        img.save(fpath)
-        frame_paths.append(str(fpath))
+        # Determine phase
+        is_hook = t < hook_end
+        is_cta = cta_start <= t < cta_end
+        is_extra = extra_audio and extra_start <= t < extra_end
+
+        # Pick background
+        if is_hook and pexel_frames:
+            # Hook phase: Pexels background
+            pidx = min(int((t / hook_end) * len(pexel_frames)), len(pexel_frames) - 1)
+            bg = Image.open(pexel_frames[pidx]).resize((WIDTH, HEIGHT), Image.Resampling.LANCZOS)
+            bg = darken(bg, 0.5)
+        elif is_hook:
+            # Hook but no pexels: source footage
+            src_pos = int((t / final_audio_dur) * len(src_frames)) if src_frames else 0
+            src_pos = min(src_pos, len(src_frames) - 1) if src_frames else 0
+            if src_frames:
+                bg = Image.open(src_frames[src_pos]).resize((WIDTH, HEIGHT), Image.Resampling.LANCZOS)
+                bg = darken(bg, 0.5)
+            else:
+                bg = Image.new("RGB", (WIDTH, HEIGHT), C_DARK)
+        elif is_cta or is_extra:
+            # CTA/extra: source footage darkened
+            src_pos = int((t / final_audio_dur) * len(src_frames)) if src_frames else 0
+            src_pos = min(src_pos, len(src_frames) - 1) if src_frames else 0
+            if src_frames:
+                bg = Image.open(src_frames[src_pos]).resize((WIDTH, HEIGHT), Image.Resampling.LANCZOS)
+                bg = darken(bg, 0.4)
+            else:
+                bg = Image.new("RGB", (WIDTH, HEIGHT), C_DARK)
+        else:
+            # Segment phase: source footage
+            src_pos = int((t / final_audio_dur) * len(src_frames)) if src_frames else 0
+            src_pos = min(src_pos, len(src_frames) - 1) if src_frames else 0
+            if src_frames:
+                bg = Image.open(src_frames[src_pos]).resize((WIDTH, HEIGHT), Image.Resampling.LANCZOS)
+                bg = darken(bg, 0.35)
+            else:
+                bg = Image.new("RGB", (WIDTH, HEIGHT), C_DARK)
+
+        # Ken Burns
+        bg = apply_ken_burns(bg, t, final_audio_dur)
+
+        # Overlay text based on phase
+        draw = ImageDraw.Draw(bg)
+
+        if is_hook:
+            # Big hook text
+            fo = font(64, FONT_BOLD)
+            lines = word_wrap(narr["hook"], draw, fo, WIDTH - 120)
+            total_h = sum(draw.textbbox((0, 0), l, font=fo)[3] - draw.textbbox((0, 0), l, font=fo)[1] + 16 for l in lines)
+            cy = (HEIGHT - total_h) // 2 - 100
+            for l in lines:
+                bbox = draw.textbbox((0, 0), l, font=fo)
+                lw = bbox[2] - bbox[0]
+                lh = bbox[3] - bbox[1]
+                x = (WIDTH - lw) // 2
+                draw.text((x + 3, cy + 3), l, font=fo, fill=(0, 0, 0))
+                draw.text((x, cy), l, font=fo, fill=C_GOLD)
+                cy += lh + 16
+
+            # Emoji top-right
+            add_emoji(bg, narr["emoji"], WIDTH - 130, 80, 90)
+
+        elif is_cta or is_extra:
+            # CTA text — lower third
+            txt = narr["cta_tts"] if is_cta else extra_text
+            fo = font(48, FONT_BOLD)
+            lines = word_wrap(txt, draw, fo, WIDTH - 160)
+            total_h = sum(draw.textbbox((0, 0), l, font=fo)[3] - draw.textbbox((0, 0), l, font=fo)[1] + 14 for l in lines)
+            cy = HEIGHT - 500 - total_h // 2
+            # Background box
+            draw.rectangle([40, cy - 20, WIDTH - 40, cy + total_h + 20], fill=(0, 0, 0, 180))
+            for l in lines:
+                bbox = draw.textbbox((0, 0), l, font=fo)
+                lw = bbox[2] - bbox[0]
+                lh = bbox[3] - bbox[1]
+                x = (WIDTH - lw) // 2
+                draw.text((x + 2, cy + 2), l, font=fo, fill=(0, 0, 0))
+                draw.text((x, cy), l, font=fo, fill=C_GREEN if is_cta else C_CYAN)
+                cy += lh + 14
+
+            add_emoji(bg, narr["emoji"], 50, HEIGHT - 200, 70)
+
+        else:
+            # Segment phase: caption overlay (word-by-word style)
+            seg_idx = 0
+            for si, (s_start, s_end) in enumerate(seg_phase_starts):
+                if s_start <= t < s_end:
+                    seg_idx = si
+                    break
+
+            txt = seg_texts[seg_idx] if seg_idx < len(seg_texts) else ""
+            if txt:
+                # Show progressive portion (kinetic caption)
+                seg_local_t = t - seg_phase_starts[seg_idx][0]
+                seg_local_dur = seg_phase_durs[seg_idx]
+                # Show full text wrapped, highlight current word
+                fo = font(44, FONT_BOLD)
+                lines = word_wrap(txt, draw, fo, WIDTH - 120)
+                total_h = sum(draw.textbbox((0, 0), l, font=fo)[3] - draw.textbbox((0, 0), l, font=fo)[1] + 12 for l in lines)
+                cy = HEIGHT - 350 - total_h // 2
+                # Semi-transparent box
+                draw.rectangle([30, cy - 15, WIDTH - 30, cy + total_h + 15], fill=(0, 0, 0))
+                # Draw text
+                words_shown = max(1, int(len(txt.split()) * (seg_local_t / max(seg_local_dur, 0.1))))
+                words_drawn = 0
+                for l in lines:
+                    bbox = draw.textbbox((0, 0), l, font=fo)
+                    lw = bbox[2] - bbox[0]
+                    lh = bbox[3] - bbox[1]
+                    x = (WIDTH - lw) // 2
+                    line_words = l.split()
+                    # Draw word by word
+                    wx = x
+                    for wi, w in enumerate(line_words):
+                        if words_drawn < words_shown:
+                            wbbox = draw.textbbox((0, 0), w + " ", font=fo)
+                            ww = wbbox[2] - wbbox[0]
+                            draw.text((wx, cy), w, font=fo, fill=C_WHITE)
+                            wx += ww
+                            words_drawn += 1
+                    cy += lh + 12
+
+        # Progress bar
+        add_progress_bar(bg, t / final_audio_dur)
+
+        # Save
+        bg.save(frame_dir / f"f_{fi:05d}.png")
+
         if fi % 300 == 0:
-            print(f"   ...{fi}/{len(all_frame_texts)} frames")
+            print(f"   ...{fi}/{total_frames}")
 
-    # 9. Encode final video (single pass)
-    print(f"  Encoding {len(frame_paths)} frames + audio...")
+    # 8. Encode
+    print(f"  Encoding {total_frames} frames...")
     frames_concat = TMPDIR / f"{vid_id}_frames.txt"
     with open(str(frames_concat), "w") as f:
-        for fp in frame_paths:
+        for fi in range(total_frames):
+            fp = frame_dir / f"f_{fi:05d}.png"
             f.write(f"file '{fp}'\nduration {1/FPS:.6f}\n")
 
     subprocess.run([
@@ -404,53 +557,30 @@ async def render_variant_a(narr, hook_text, idx, out_dir):
         "-c:v", "libx264", "-preset", "medium", "-crf", "23",
         "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "128k",
-        "-shortest",
-        str(out_path)
+        "-shortest", str(out_path)
     ], capture_output=True, timeout=600)
 
     final_dur = get_duration(str(out_path))
     size_mb = out_path.stat().st_size / 1_048_576
     print(f"  ✅ {vid_id}.mp4 ({final_dur:.1f}s, {size_mb:.1f}MB)")
 
-    # Cleanup tmp audio
+    # Cleanup
     for p in [hook_audio] + seg_audios + [cta_audio] + ([extra_audio] if extra_audio else []):
         Path(p).unlink(missing_ok=True)
     full_audio.unlink(missing_ok=True)
+    shutil.rmtree(frame_dir, ignore_errors=True)
+    shutil.rmtree(src_fd, ignore_errors=True)
+    if pexel_fd:
+        shutil.rmtree(pexel_fd, ignore_errors=True)
     frames_concat.unlink(missing_ok=True)
 
     return final_dur, size_mb
 
 
-# ── Helper: get segment text from transcript ──
-_segment_cache = None
-def get_segment_text(start, end):
-    global _segment_cache
-    if _segment_cache is None:
-        with open(str(PROJECT / "output/source/2eic_transcript.json")) as f:
-            data = json.load(f)
-        _segment_cache = []
-        for s in data.get("segments", []):
-            _segment_cache.append({
-                "start": s["start"],
-                "end": s["end"],
-                "text": s["text"].strip(),
-            })
-    # Find the segment that best covers this range
-    texts = []
-    for seg in _segment_cache:
-        if seg["start"] >= start and seg["end"] <= end:
-            texts.append(seg["text"])
-    if not texts:
-        # Fallback: partial overlap
-        for seg in _segment_cache:
-            if seg["start"] < end and seg["end"] > start:
-                texts.append(seg["text"])
-    return " ".join(texts) if texts else ""
-
-
-# ── Main ──
 async def main():
-    print("🎮 Hybrid Audio Renderer v7 — SoHK Patterns, Mode A only")
+    print("🎮 Hybrid Renderer v7.3 — Footage + Pexels + TTS + Text + Emoji")
+    print(f"   Source: {SRC_MP4}")
+    print(f"   Pexels clips: {len(PEXELS_CLIPS)}")
     print(f"   Output: {OUTDIR}\n")
 
     ensure_source_audio()
@@ -458,11 +588,9 @@ async def main():
     results = []
     for i, narr in enumerate(NARRATIVES, 1):
         print(f"\n{'='*60}")
-        print(f"  [{i}/6] {narr['id']} (mode {narr['mode']})")
-        print(f"  Hook: {narr['hook']}")
-
+        print(f"  [{i}/6] {narr['id']}")
         try:
-            dur, mb = await render_variant_a(narr, narr["hook"], i, OUTDIR)
+            dur, mb = await render_variant_a(narr, i, OUTDIR)
             results.append((narr["id"], dur, mb, "✅"))
         except Exception as e:
             print(f"  ❌ ERROR: {e}")
@@ -471,10 +599,10 @@ async def main():
             results.append((narr["id"], 0, 0, f"❌ {e}"))
 
     print(f"\n{'='*60}")
-    print(f"✅ Results:")
-    for name, dur, mb, status in results:
-        ok = "✅" if 30 <= dur <= 60 else "❌"
-        print(f"  {ok} {name}: {dur:.1f}s, {mb:.1f}MB")
+    print("✅ Results:")
+    for rid, dur, mb, status in results:
+        mark = "✅" if dur >= 30 else "❌"
+        print(f"  {mark} {rid}: {dur:.1f}s, {mb:.1f}MB")
 
 
 if __name__ == "__main__":

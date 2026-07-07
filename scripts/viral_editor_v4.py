@@ -32,8 +32,15 @@ C_GREEN  = (0, 255, 136)
 C_PURPLE = (180, 50, 255)
 C_DARK   = (15, 15, 20)
 
-FONT_BOLD = "/System/Library/Fonts/Helvetica.ttc"
+FONT_BOLD = "/System/Library/Fonts/Supplemental/Arial Unicode.ttf"
 FONT_ARIAL = "/System/Library/Fonts/Supplemental/Arial Rounded Bold.ttf"
+FONT_VI = "/System/Library/Fonts/Supplemental/Arial Unicode.ttf"  # Vietnamese diacriticals
+
+# Voice map per language
+TTS_VOICES = {
+    "en": {"voice": "en-US-GuyNeural",   "rate": "+10%"},
+    "vi": {"voice": "vi-VN-NamMinhNeural", "rate": "+0%"},
+}
 
 def font(size, path=FONT_BOLD, bold=True):
     size = max(1, int(size))
@@ -41,6 +48,10 @@ def font(size, path=FONT_BOLD, bold=True):
         return ImageFont.truetype(path, size, index=1 if bold else 0)
     except:
         return ImageFont.truetype(path, size)
+
+def vi_font(size):
+    """Font that renders Vietnamese diacriticals correctly."""
+    return font(size, path=FONT_VI)
 
 # ── Load pexels clips ──
 PEXELS_CLIPS = sorted(PEXELS_DIR.glob("pex_*.mp4"))
@@ -245,6 +256,58 @@ SCRIPTS = [
         ],
         "keywords": ["success", "education", "mindset", "wealth"],
     },
+    # ── Vietnamese scripts ──
+    {
+        "id": "vi_01_tiet_kiem_ngheo",
+        "hook": "TIẾT KIỆM ĐANG LÀM BẠN NGHÈO ĐI",
+        "hook_short": "Tiết kiệm = nghèo?",
+        "lang": "vi",
+        "tts_text": (
+            "Đây là sự thật mà ngân hàng không muốn bạn biết. "
+            "Gửi tiết kiệm tài khoản thường thực sự đang làm bạn nghèo đi mỗi ngày. "
+            "Với lạm phát 3.5 phần trăm và tài khoản tiết kiệm chỉ trả 0.01 phần trăm, "
+            "bạn đang mất 3.49 phần trăm sức mua mỗi năm. "
+            "Trên mười nghìn đô la, đó là ba trăm bốn mươi chín đô la bay mất. "
+            "Không bao giờ quay lại. "
+            "Người giàu không tiết kiệm. Họ đầu tư. Họ mua tài sản tăng giá nhanh hơn lạm phát. "
+            "Bất động sản. Cổ phiếu. Doanh nghiệp. "
+            "Người giàu trung bình có bảy nguồn thu nhập. "
+            "Không phải bảy tài khoản tiết kiệm. "
+            "Hãy ngừng tiết kiệm theo cách dẫn đến nghèo khổ."
+        ),
+        "cta": "Bắt đầu đầu tư. Tương lai bạn sẽ cảm ơn bạn.",
+        "stats": [
+            ("$349/năm", "Mất trên $10k tiết kiệm"),
+            ("3.5%", "Tỷ lệ lạm phát 2026"),
+            ("7×", "Nguồn thu nhập của người giàu"),
+        ],
+        "keywords": ["money", "wealth", "investment", "finance"],
+    },
+    {
+        "id": "vi_02_lam_thue_rui_ro",
+        "hook": "LÀM CÔNG ĂN LƯƠNG LÀ RỦI RO NHẤT",
+        "hook_short": "Làm thuê là rủi ro?",
+        "lang": "vi",
+        "tts_text": (
+            "Nghĩ rằng có việc làm là an toàn? Hãy suy nghĩ lại. "
+            "Người trung bình sẽ bị sa thải hoặc cho thôi việc bảy lần trong sự nghiệp. "
+            "Bảy lần. Và trợ cấp trung bình chỉ đủ chi phí hai tuần. "
+            "Trong khi đó, hơn 40 triệu người Mỹ có nghề tay trái vì họ biết "
+            "một khoản lương cách khủng hoảng hai tuần không phải là chiến lược. "
+            "Người giàu có tài sản làm việc khi họ ngủ. "
+            "Giới trung lưu có ông chủ có thể sa thải họ với thông báo hai tuần. "
+            "Đó không phải là sự an toàn. Đó là một sợi dây xích. "
+            "Sự an toàn thực sự không phải là khoản lương ổn định. "
+            "Đó là có nhiều nguồn thu nhập mà không ai có thể lấy đi."
+        ),
+        "cta": "Xây dựng thứ gì đó bên cạnh. Việc làm của bạn sẽ không tồn tại mãi.",
+        "stats": [
+            ("7×", "Lần trung bình bị sa thải"),
+            ("40M+", "Người Mỹ có nghề tay trái"),
+            ("2 tuần", "Trợ cấp trung bình"),
+        ],
+        "keywords": ["business", "office", "entrepreneur", "startup"],
+    },
 ]
 
 # ── Load overlays ──
@@ -259,8 +322,14 @@ def get_overlay(name):
 # RENDERER
 # ════════════════════════════════════════════════════════════
 
-async def gen_tts(text, out_path, voice="en-US-GuyNeural", rate="+10%"):
-    """Generate TTS, return (path, duration_sec)."""
+async def gen_tts(text, out_path, voice=None, rate=None, lang="en"):
+    """Generate TTS, return (path, duration_sec). Voice/rate auto-selected by lang if not given."""
+    if voice is None:
+        cfg = TTS_VOICES.get(lang, TTS_VOICES["en"])
+        voice = cfg["voice"]
+    if rate is None:
+        cfg = TTS_VOICES.get(lang, TTS_VOICES["en"])
+        rate = cfg["rate"]
     comm = edge_tts.Communicate(text, voice, rate=rate)
     await comm.save(str(out_path))
     r = subprocess.run(["ffprobe","-v","quiet","-show_entries","format=duration","-of","csv=p=0",str(out_path)],
@@ -321,6 +390,7 @@ def ease_out_bounce(t):
 async def render_video(script, idx):
     """Render one full video from script definition."""
     vid_id = script["id"]
+    lang = script.get("lang", "en")
     print(f"\n{'='*70}")
     print(f"🎬 [{idx}/6] {vid_id}")
     print(f"   Hook: {script['hook']}")
@@ -331,7 +401,7 @@ async def render_video(script, idx):
     # ── 1. Generate TTS ──
     print(f"   🎙 Generating TTS...")
     tts_path = vid_dir / "tts.mp3"
-    tts_path, tts_dur = await gen_tts(script["tts_text"], tts_path)
+    tts_path, tts_dur = await gen_tts(script["tts_text"], tts_path, lang=lang)
     print(f"      TTS duration: {tts_dur:.1f}s ({len(script['tts_text'].split())} words)")
     
     total_dur = max(30, min(60, tts_dur + 3.5))  # pad for hook + CTA
@@ -395,6 +465,12 @@ async def render_video(script, idx):
     # Stats timing
     stats = script.get("stats", [])
     
+    # Pre-select fonts based on language
+    use_vi = (lang == "vi")
+    HOOK_FONT  = FONT_VI if use_vi else FONT_ARIAL
+    STAT_FONT  = FONT_VI if use_vi else FONT_ARIAL
+    CAPTION_FONT = FONT_VI if use_vi else FONT_ARIAL
+    
     # Kitty bounce animation
     kitty_bounce_frames = []
     for ki in range(60):  # precompute 60 bounce frames
@@ -430,7 +506,7 @@ async def render_video(script, idx):
         if t < 3.0:
             hook_progress = min(1.0, t / 0.4)
             hook_scale = max(1, int(58 * hook_progress))
-            fo = font(hook_scale, FONT_ARIAL)
+            fo = font(hook_scale, HOOK_FONT)
             hook_text = script["hook"]
             bbox = draw.textbbox((0, 0), hook_text, font=fo)
             tw = bbox[2] - bbox[0]
@@ -457,7 +533,7 @@ async def render_video(script, idx):
                     scale = min(1.0, local_t * 3)
                     
                     # Big number
-                    num_fnt = font(int(120 * scale), FONT_ARIAL)
+                    num_fnt = font(int(120 * scale), STAT_FONT)
                     label_fnt = font(int(28 * scale))
                     
                     # Background
@@ -517,7 +593,7 @@ async def render_video(script, idx):
                         continue
                     
                     scale = ease_out_cubic(word_progress)
-                    caption_fnt = font(int(48 * max(0.01, scale)), FONT_ARIAL)
+                    caption_fnt = font(int(48 * max(0.01, scale)), CAPTION_FONT)
                     
                     # Word color: highlight money-related words in gold
                     is_money_word = any(sym in word for sym in ["$", "%", "×", "million", "thousand", "billion", "%"])
@@ -528,11 +604,11 @@ async def render_video(script, idx):
                     
                     # Calculate x position: center the entire line, then position this word
                     line_str = " ".join(line_words)
-                    lb = draw.textbbox((0, 0), line_str, font=font(48, FONT_ARIAL))
+                    lb = draw.textbbox((0, 0), line_str, font=font(48, CAPTION_FONT))
                     line_w = lb[2] - lb[0]
                     
                     prefix = " ".join(line_words[:wi]) + (" " if wi > 0 else "")
-                    pb = draw.textbbox((0, 0), prefix, font=font(48, FONT_ARIAL))
+                    pb = draw.textbbox((0, 0), prefix, font=font(48, CAPTION_FONT))
                     prefix_w = pb[2] - pb[0]
                     
                     x = (WIDTH - line_w) // 2 + prefix_w

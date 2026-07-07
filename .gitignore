@@ -16,3 +16,7 @@ output/**/*.mov
 
 node_modules
 data
+src/remotion/audio/**/*.mp3
+src/remotion/out/*.mp4
+src/remotion/preview/*.png
+src/remotion/public/assets/*.jpg
