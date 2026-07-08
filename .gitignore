@@ -1,21 +1,24 @@
+# IDE
 .idea
 .DS_Store
+
+# Output (large files not in git)
 output/**/*.mp4
 output/**/*.mp3
+output/**/*.wav
+output/**/*.webm
+output/**/*.mov
 output/**/*.png
 output/**/*.jpg
 output/**/*.log
-output/**/*.txt
 output/**/*.srt
 output/**/*.ass
-output/**/*.webm
 output/**/*.json
-output/**/*.md
-output/**/*.wav
-output/**/*.mov
 
-node_modules
+# Data (stateful, not in git)
 data
+
+# Remotion (deleted, keeping for reference if re-enabled)
 src/remotion/audio/**/*.mp3
 src/remotion/out/*.mp4
 src/remotion/preview/*.png

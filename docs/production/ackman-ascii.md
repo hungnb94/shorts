@@ -97,3 +97,52 @@ scripts/
 - Source: `output/source/Z7aS-7Mw_Wg_4k.mp4`
 - Word-level: `output/source/Z7aS-7Mw_Wg_transcript_words.json`
 - Tool: mlx-whisper (mlx-community/whisper-base-mlx)
+
+## Performance
+
+- **Retention: 26%** (viewers who stayed to watch)
+- **Format: Clip Curation Edit** (real footage → colored ASCII conversion)
+
+### Retention Analysis
+
+26% retention is LOW. Target for Shorts: 50-70%+. Root causes:
+
+1. **ASCII art is visually static** — despite color, the 120×120 grid has minimal motion between frames. No zoom, no camera movement, no cuts. Viewer brain detects "nothing is changing" → swipe.
+
+2. **No frequent editing** — 9 segments run 1.3-10.2s each. Longest segment (B_ideas) is 10.2s of continuous ASCII with no visual interruption. ADR-0016 rule: edit every 3s. This video violates it in 7 of 9 segments.
+
+3. **Hook is weak** — "Excuse me sir! Bill!" is audio-only drama. Visually it's the same ASCII grid. No text hook, no shock value in first 2 seconds. The chase audio is compelling but the VISUAL doesn't match the energy.
+
+4. **Quote text is too small** — 28px gold on 1080×1920 = barely readable on mobile. Should be 40-50px minimum for Shorts.
+
+5. **No emoji/symbol pops** — The 6 Dangote videos with emoji overlays (450px native macOS emoji) will likely outperform this because they have visual events every subtitle change.
+
+6. **Progress bar is the only motion** — The cyan progress bar at the bottom is the only element that moves continuously. Everything else is static ASCII + text.
+
+### What Worked (relative to pure animation)
+
+- **Original voice** preserved — audio is the strongest element
+- **Chase hook** creates curiosity — "who is he chasing?" keeps some viewers
+- **9-segment arc** has narrative structure — not random clips
+- **Colored ASCII is novel** — first 3-5 seconds may get curiosity clicks
+
+### Lessons for Next Batch
+
+| Issue | Fix |
+|-------|-----|
+| Static ASCII | Add zoompan push-in + symbol pops every 3s |
+| Weak hook | Add 28px yellow text hook in first 2s |
+| Small quotes | Increase to 40px, add border |
+| No emoji | Add 450px emoji overlays at keyword matches |
+| Long segments | Cut segments to max 5s, add more cuts |
+
+### Comparison: ASCII vs Dangote Pipeline
+
+| Metric | KspJ3qHjtRU (ASCII) | Dangote (emoji overlay) |
+|--------|---------------------|------------------------|
+| Retention | 26% | TBD |
+| Visual motion | Low (static grid) | High (zoompan + emoji pops) |
+| Frequent editing | No (long segments) | Yes (emoji every subtitle) |
+| Hook text | None | 28px yellow, 0-5s |
+| Emoji overlays | None | 450px native macOS |
+| Source footage | Real (Ackman) | Real (Dangote) |
