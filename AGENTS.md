@@ -233,6 +233,9 @@ YouTube and TikTok strip or flag raw affiliate links. Always use a redirect doma
 ### Hook timing is non-negotiable
 HEIT framework: Hook must land in 0-2 seconds. Scripts that spend 5+ seconds on intro will tank AVD. The script-gen layer targets 15-25 words for hook section. If hook exceeds 25 words, it's too slow.
 
+### Hook-Window: frame 0 MUST show a human face (ADR-0017)
+The 0-2s hook window is not just about hook TEXT — it is about what the viewer SEES at frame 0. For Clip Curation Edit, the source segment's first frame MUST contain a human face (skin-tone ≥10% by pixel stats). Title cards, static text graphics, "numbered list" transitions, and B-roll establishing shots are FORBIDDEN as segment starts. The first Pexels/value-add overlay must land ≤t=2s. Verified root cause of bacsihai V1 (YQTWHqTS1e8, 8.6% stayed) vs Dangote (ChWLcE3OYpA, 50% stayed): bacsihai's segment started at 304.5s = a static pink/white "Sai lầm số 5" title card (85% near-white, 0% face, first face at t=5s). Dangote started on his face at t=0. Before upload, verify with `inspect_image.py` on hook0.jpg — reject if skin-tone <10%. This rule sits ABOVE the Contiguous VO constraint: keep contiguity, but select the contiguous range so frame 0 shows a person.
+
 ### Clip Curation Edit must pass the Transformative Gate
 Video Type #7 (Clip Curation Edit) uses real footage from Source Channel — unlike the 6 animation types (zero-footage). Before upload, every Clip Curation Edit MUST pass all 3 Transformative Gate rules: (1) commentary track required, (2) min 2 value-adds from [fact-check callout, data viz, source citation, multi-source mashup, animated annotation, counter-argument], (3) cut ≤50% source duration + each clip <15s. Uploading a clip edit that fails the gate = copyright strike risk. Attribution is intentionally dropped per user decision.
 

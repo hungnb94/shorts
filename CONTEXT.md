@@ -34,8 +34,12 @@ Giá trị cụ thể của biến đang test. VD: "hook type = Contrarian" là 
 _Avoid_: "version", "option"
 
 **Hook**:
-0-2 giây đầu video. Theo HEIT framework, 3 types: Context, Contrarian, Intrigue.
+0-2 giây đầu video. Theo HEIT framework, 3 types: Context, Contrarian, Intrigue. Với Clip Curation Edit, frame t=0 của cut PHẢI chứa mặt người (xem Hook-Window Rule).
 _Avoid_: "intro", "opening"
+
+**Hook-Window Rule**:
+Quy tắc chọn điểm bắt đầu source segment cho Clip Curation Edit (ADR-0017): frame tại t=0 của cut phải chứa mặt người — skin-tone ≥10% theo pixel statistics, hoặc confirm visually. Title card / text graphic / slide / B-roll establishing / "numbered list transition" bị cấm làm segment start. Overlay đầu tiên phải land ≤t=2s. Nguyên nhân ra đời: bacsihai V1 (YQTWHqTS1e8) = 8.6% stayed vì segment bắt đầu tại 304.5s = static title card "Sai lầm số 5" (85% near-white, 0% face), mặt người đầu tiên ở t=5s. So với Dangote (ChWLcE3OYpA) = 50% stayed, mặt người + motion ngay t=0.
+_Avoid_: "hook rule", "face rule"
 
 **AVD** (Average View Duration):
 Phần trăm video trung bình người xem xem trước khi scroll. Metric #1 cho viral potential.
