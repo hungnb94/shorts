@@ -15,6 +15,14 @@ output/**/*.srt
 output/**/*.ass
 output/**/*.json
 
+# Research evidence (reproducible via yt-dlp/ffmpeg from timestamps in REPORT.md)
+docs/research/**/frames/
+docs/research/**/clip.mp4
+docs/research/**/meta.info.json
+
+# Render scratch (regenerated on each pipeline run)
+output/**/temp/
+
 # Data (stateful, not in git)
 data
 
