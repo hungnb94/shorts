@@ -22,6 +22,7 @@ Decisions that shaped the project.
 | 0016 | Frequent editing (every 3s) |
 | 0017 | Hook-Window: frame 0 must show a human face |
 | 0018 | Hook caption sync and cadence |
+| 0019 | Multi-niche AB testing (finance/English + health/Vietnamese) |
 
 ## Production Traces
 Per-video documentation with pipeline, effects, retention data.

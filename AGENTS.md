@@ -2,7 +2,7 @@
 
 Animated short video factory — tự động sản xuất 6 videos/ngày (9:16, 30-60s) để AB test viral content formulas trên YouTube + TikTok, kiếm tiền qua ads revenue và affiliate marketing.
 
-Niche: Finance/money-making. Language: English. Format: Kitty Explain (animated mascot + pop-up text + wild subtitles).
+Niche: Finance/money-making (English) as the primary/documented vertical, run in parallel with a second, deliberately-chosen vertical — health/longevity (Vietnamese, Source Channel "Bác sĩ Hải") — per ADR-0019 (multi-niche AB testing: more parallel data streams → faster overall learning). Format: Kitty Explain (animated mascot + pop-up text + wild subtitles) for the finance vertical; the health vertical uses Clip Curation Edit exclusively (see `pipeline/bacsihai/`).
 
 ## Architecture (Target — not yet built)
 
@@ -141,7 +141,7 @@ None of these commands exist today; `package.json` has no scripts. Kept here as 
 - **Autonomous optimization** — MAB selects variants, no human chooses experiments. System learns from AVD data. See ADR 0009.
 - **3-day cycle** — upload 18 videos (6/day × 3), wait 48h for metrics, analyze + adjust, repeat. No daily manual intervention.
 - **Video specs fixed** — 9:16 (1080x1920), 30-60s, MP4 H.264. No exceptions.
-- **English only** — all content in English. See ADR 0004.
+- **English for the finance vertical, Vietnamese for the health vertical** — each niche's output stays in its own Source Channel's language (ADR 0004 for finance; ADR 0019 for the parallel health/Vietnamese vertical). Never mix languages within one video.
 - **Affiliate at end** — value first, pitch last. Never front-load affiliate mentions.
 - **Chrome profile auth** — user logs into YouTube once, system reuses profile. No OAuth flow. See ADR 0009.
 - **Download max quality** — always download source videos at highest available resolution (2160p/4K) using `yt-dlp -f "bestvideo[height>=2160]+bestaudio"`. Never accept default 720p.
@@ -295,7 +295,7 @@ The value-add overlay layer (ADR 0008) must be a separate compositing step AFTER
 
 ### Ask First
 - Adding a new animation format (requires research + ADR)
-- Changing niche away from finance/money-making
+- Adding a third niche/vertical beyond the two confirmed in ADR 0019 (finance/English, health/Vietnamese)
 - Changing epsilon schedule (affects exploration strategy)
 - Spending money on paid tools/APIs
 - Adding a new platform (TikTok, Instagram)

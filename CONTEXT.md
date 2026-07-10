@@ -62,7 +62,7 @@ Một trong 7 visual rendering styles: Stock Footage, Kinetic Typography, Data V
 _Avoid_: "format", "template" (use specific term)
 
 **Source Channel**:
-Kênh YouTube finance viral (VD: School of Hard Knocks, 2.08M subs) dùng làm research input. Chỉ lấy topic/facts/hooks, KHÔNG lấy footage.
+Kênh YouTube dùng làm research input, cho MỘT trong 2 niche song song (ADR-0019): finance viral (VD: School of Hard Knocks, 2.08M subs, tiếng Anh) hoặc health/longevity (VD: Bác sĩ Hải, tiếng Việt). Với 6 animation types (Repackage), chỉ lấy topic/facts/hooks, KHÔNG lấy footage. Với Clip Curation Edit, có lấy footage nhưng vẫn transform (xem Transformative Gate).
 _Avoid_: "inspiration", "reference channel"
 
 **Curate**:
