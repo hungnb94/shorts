@@ -4,7 +4,9 @@ Animated short video factory — tự động sản xuất 6 videos/ngày (9:16,
 
 Niche: Finance/money-making. Language: English. Format: Kitty Explain (animated mascot + pop-up text + wild subtitles).
 
-## Architecture
+## Architecture (Target — not yet built)
+
+Everything below this heading through "Commands" describes the intended autonomous TypeScript system. **None of it exists yet** — there is no `src/` directory and `package.json` has an empty `scripts: {}`. See **Current Implementation** below for what actually runs today.
 
 ```
                     ┌──────────────────────────────────────────────┐
@@ -71,7 +73,25 @@ Niche: Finance/money-making. Language: English. Format: Kitty Explain (animated 
 | Data / Storage | `src/data/` | SQLite: video_metrics, mab_state, variant_performance |
 | CLI / Cron | `src/cli/` | Autonomous cycle runner, 3-day loop orchestration |
 
-## File Dependency Chain
+## Current Implementation (as of 2026-07-10)
+
+The real, working pipeline is manual/semi-manual Python + ffmpeg, run per project rather than as an autonomous loop:
+
+| Path | Contents |
+|------|----------|
+| `pipeline/<project>/render_*.py` | Per-project render scripts (e.g. `pipeline/bacsihai/`, `pipeline/giannis/`, `pipeline/hardknocks/`) |
+| `pipeline/render_shorts.py`, `pipeline/make_shorts.sh` | Generic/shared render entry points |
+| `pipeline/tools/` | Shared utilities (`transcribe.py`, `montage.sh`) |
+| `output/projects/<name>/{source,clips,final,scripts}` | One folder per project: raw source download, cut scene clips, final assembled 9:16 shorts, storyboard/script drafts |
+| `output/shared/{pexels,emoji_processed,metadata}` | Libraries reused across projects |
+| `output/archive/<name>/` | Retired/superseded projects, kept intact |
+| `output/unsorted/<video-id>/` | Downloaded source clips not yet assigned to a named project |
+| `data/mab_state.json`, `data/tracked_videos.csv`, `data/targets/`, `data/video_metrics.db` | Real stateful data — see Known Pitfalls, never delete |
+| `scripts/*.md` | Markdown video script drafts (content, not code) |
+
+`npm install`/`npm run ...` do not work yet — `package.json` has no dependencies or scripts. There is no Chrome uploader automation, no MAB engine, and no autonomous loop; videos are produced and uploaded manually per the current per-project Python scripts.
+
+## File Dependency Chain (Target — not yet built)
 
 ```
 src/optimization/mab-strategy.ts     (variant selection — no deps)
@@ -95,7 +115,9 @@ src/optimization/analyzer.ts         (key moments, rank variants, update MAB)
        [loop back to mab-strategy.ts for next cycle]
 ```
 
-## Commands
+## Commands (Target — not yet built)
+
+None of these commands exist today; `package.json` has no scripts. Kept here as the target CLI surface for when the autonomous system is built.
 
 | Action | Command | Location |
 |--------|---------|----------|
@@ -113,7 +135,7 @@ src/optimization/analyzer.ts         (key moments, rank variants, update MAB)
 
 ## Key Conventions
 
-- **TypeScript everywhere** — no Python. User default for new projects.
+- **TypeScript everywhere** — no Python. User default for new projects; the target autonomous system should be built this way. The current working pipeline (`pipeline/`) is Python + ffmpeg, predating this convention — not a model to copy for new code.
 - **HEIT structure mandatory** — every script follows Hook(0-2s) → Explain → Illustrate → Teach. See CONTEXT.md.
 - **Copy, don't invent** — find proven viral formats → repackage. Never invent new formats from scratch. See ADR 0002.
 - **Autonomous optimization** — MAB selects variants, no human chooses experiments. System learns from AVD data. See ADR 0009.
@@ -125,7 +147,9 @@ src/optimization/analyzer.ts         (key moments, rank variants, update MAB)
 - **Download max quality** — always download source videos at highest available resolution (2160p/4K) using `yt-dlp -f "bestvideo[height>=2160]+bestaudio"`. Never accept default 720p.
 - **3-source combo for engagement** — every video combines: (1) original source footage, (2) animated overlays (kinetic text, data viz, whiteboard), (3) Pexels b-roll for visual variety. This maximizes retention by avoiding visual monotony.
 
-## How to Setup Autonomous System
+## How to Setup Autonomous System (Target — not yet built)
+
+The four "How to" sections below (through "How to Add a New Platform") describe procedures for the target TypeScript system and reference `src/` paths and `npm run` commands that don't exist yet. See **Current Implementation** above for what to actually run today.
 
 1. **Chrome profile setup**:
    ```bash
