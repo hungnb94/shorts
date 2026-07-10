@@ -41,9 +41,17 @@ _Avoid_: "intro", "opening"
 Quy tắc chọn điểm bắt đầu source segment cho Clip Curation Edit (ADR-0017): frame tại t=0 của cut phải chứa mặt người — skin-tone ≥10% theo pixel statistics, hoặc confirm visually. Title card / text graphic / slide / B-roll establishing / "numbered list transition" bị cấm làm segment start. Overlay đầu tiên phải land ≤t=2s. Nguyên nhân ra đời: bacsihai V1 (YQTWHqTS1e8) = 8.6% stayed vì segment bắt đầu tại 304.5s = static title card "Sai lầm số 5" (85% near-white, 0% face), mặt người đầu tiên ở t=5s. So với Dangote (ChWLcE3OYpA) = 50% stayed, mặt người + motion ngay t=0.
 _Avoid_: "hook rule", "face rule"
 
+**Swiped Away**:
+% impressions trong Shorts feed mà viewer swipe trong vài giây đầu. Label: YouTube Studio → Engagement → "How viewers engaged" → "Swiped away." Denominator = impressions. Đo sức hút của frame 0. Khi Stayed to Watch hoặc AVD không hiển thị (video ít view), đây là metric fallback duy nhất.
+_Avoid_: "bounce rate", "scroll away", "exit rate"
+
+**Stayed to Watch**:
+% views (không phải impressions) mà viewer xem vượt qua vài giây đầu — "engaged views" theo YouTube Partner Program. Label: YouTube Studio → Engagement → Audience retention → "Stayed to watch." Denominator = views (đã loại swiped away). Đo engagement ở gate 2 — viewer ĐÃ vào xem, có ở lại hay thoát ngay. [NOTE: denominator chính xác chưa verify trực tiếp với YouTube docs — web research (shortimize.com) cho biết đây = engaged views, không phải impressions. Cần confirm khi có thêm data.]
+_Avoid_: "viewed percentage" (đó là 100 − Swiped away, denominator khác), "retention", "viewed" (use specific term)
+
 **AVD** (Average View Duration):
-Phần trăm video trung bình người xem xem trước khi scroll. Metric #1 cho viral potential.
-_Avoid_: "watch time", "retention" (use specific term)
+Số giây tuyệt đối trung bình viewer xem video (những người ĐÃ stayed). Label: YouTube Studio → Overview → "Average view duration." Đo sức giữ của toàn bộ video. Để so sánh giữa các video khác duration, chia AVD cho tổng duration → Average percentage viewed. KHÔNG phải % — là số giây. Định nghĩa cũ (dòng trước đây nói "phần trăm") SAI.
+_Avoid_: "watch time" (tổng giây của tất cả viewers, không phải trung bình), "retention" (use specific term)
 
 **Video Type**:
 Một trong 7 visual rendering styles: Stock Footage, Kinetic Typography, Data Viz, HTML/CSS Motion, Whiteboard Sketch, Meme/Notification, Clip Curation Edit. Là AB variable chính.
