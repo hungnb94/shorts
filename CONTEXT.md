@@ -34,8 +34,12 @@ Giá trị cụ thể của biến đang test. VD: "hook type = Contrarian" là 
 _Avoid_: "version", "option"
 
 **Hook**:
-0-2 giây đầu video. Theo HEIT framework, 3 types: Context, Contrarian, Intrigue. Với Clip Curation Edit, frame t=0 của cut PHẢI chứa mặt người (xem Hook-Window Rule).
+0-2 giây đầu video — nhưng thực chất là 1 cung 2 giai đoạn: setup 1 gap/mystery (vật thể chưa rõ, danh tính bị giấu, câu hỏi bị né) rồi partial reveal trong 5-8s, không phải 1 câu tuyên bố tĩnh đã đầy đủ nghĩa. HEIT liệt kê 3 type (Context, Contrarian, Intrigue) nhưng khảo sát 6 video viral (2026-07, xem `docs/research/hook-benchmarks-2026-07/REPORT.md`) cho thấy hook hiệu quả thường là hybrid Context→Intrigue, hoặc dạng **Dare/Challenge** (thách đố kết cục nhị phân) chưa khớp type nào trong 3 type gốc. Với Clip Curation Edit, frame t=0 của cut PHẢI chứa mặt người hoặc hành động/prop rõ ràng — không phải title card tĩnh (xem Hook-Window Rule).
 _Avoid_: "intro", "opening"
+
+**Hook Caption Sync**:
+Caption burned-in phải bắt đầu ngay t=0 (không đợi giây thứ 2-3), sync theo từng cụm từ đang nói, với 1 từ khóa cảm xúc/số liệu nhấn màu khác (thường vàng). Xuất hiện ở 6/6 video trong khảo sát `docs/research/hook-benchmarks-2026-07/REPORT.md` — pattern chưa được ghi nhận trước đó dù universal.
+_Avoid_: "subtitle", "text overlay" (quá chung, không nói rõ yêu cầu timing/nhấn từ)
 
 **Hook-Window Rule**:
 Quy tắc chọn điểm bắt đầu source segment cho Clip Curation Edit (ADR-0017): frame tại t=0 của cut phải chứa mặt người — skin-tone ≥10% theo pixel statistics, hoặc confirm visually. Title card / text graphic / slide / B-roll establishing / "numbered list transition" bị cấm làm segment start. Overlay đầu tiên phải land ≤t=2s. Nguyên nhân ra đời: bacsihai V1 (YQTWHqTS1e8) = 8.6% stayed vì segment bắt đầu tại 304.5s = static title card "Sai lầm số 5" (85% near-white, 0% face), mặt người đầu tiên ở t=5s. So với Dangote (ChWLcE3OYpA) = 50% stayed, mặt người + motion ngay t=0.
