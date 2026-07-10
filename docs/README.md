@@ -18,6 +18,8 @@ Decisions that shaped the project.
 | 0011 | Success formula strategic layer |
 | 0012 | AI video generation pipeline |
 | 0016 | Frequent editing (every 3s) |
+| 0017 | Hook-Window: frame 0 must show a human face |
+| 0018 | Hook caption sync and cadence |
 
 ## Production Traces
 Per-video documentation with pipeline, effects, retention data.
@@ -29,6 +31,9 @@ Per-video documentation with pipeline, effects, retention data.
 | Dangote V9 (vision) | Emoji overlay | TBD | [dangote-v9.md](production/dangote-v9.md) |
 | Dangote transcript | — | — | [dangote-transcript-analysis.md](production/dangote-transcript-analysis.md) |
 | Billionaire V1→V2 | Kitty Explain | — | [billionaire-improvements.md](production/billionaire-improvements.md) |
+
+## Research
+- [hook-benchmarks-2026-07/REPORT.md](research/hook-benchmarks-2026-07/REPORT.md) — Hook analysis of 6 viral finance Shorts (frames + transcript + comments), basis for ADR-0018
 
 ## Reference
 - [vision-model-setup.md](vision-model-setup.md) — GPT-4o vision for video analysis
