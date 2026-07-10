@@ -1,0 +1,33 @@
+{
+  "top_3_by_like_count": [
+    {
+      "text": "That man is right. A supporting wife means everything",
+      "like_count": 15000,
+      "author": "@DeEmperor1",
+      "is_pinned": false,
+      "reply_count": 50
+    },
+    {
+      "text": "The man speaks with grace. He exudes class.",
+      "like_count": 11000,
+      "author": "@AprilYeshua9943",
+      "is_pinned": false,
+      "reply_count": 4
+    },
+    {
+      "text": "I like this entrepreneurs's attitude. He didn't act untouchable.",
+      "like_count": 8400,
+      "author": "@mr.ezback3232",
+      "is_pinned": false,
+      "reply_count": 0
+    }
+  ],
+  "most_replied_comment": {
+    "text": "That man is right. A supporting wife means everything",
+    "like_count": 15000,
+    "author": "@DeEmperor1",
+    "is_pinned": false,
+    "reply_count": 50
+  },
+  "note": "reply_count computed by counting child comments whose parent field references this comment id (yt-dlp output does not include a direct reply_count field)."
+}

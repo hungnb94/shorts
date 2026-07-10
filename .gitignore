@@ -1,2 +1,34 @@
+# IDE
 .idea
-*.mp4
+.DS_Store
+
+# Output (large files not in git)
+output/**/*.mp4
+output/**/*.mp3
+output/**/*.wav
+output/**/*.webm
+output/**/*.mov
+output/**/*.png
+output/**/*.jpg
+output/**/*.log
+output/**/*.srt
+output/**/*.ass
+output/**/*.json
+
+# Research evidence (reproducible via yt-dlp/ffmpeg from timestamps in REPORT.md)
+docs/research/**/frames/
+docs/research/**/clip.mp4
+docs/research/**/meta.info.json
+
+# Render scratch (regenerated on each pipeline run)
+output/**/temp/
+
+# Data (stateful, not in git)
+data
+
+# Remotion (deleted, keeping for reference if re-enabled)
+src/remotion/audio/**/*.mp3
+src/remotion/out/*.mp4
+src/remotion/preview/*.png
+src/remotion/public/assets/*.jpg
+output/bacsihai_fasting/8vM7rPWzTlI_autosub.vi.vtt

@@ -1,0 +1,33 @@
+{
+  "top_3_most_liked": [
+    {
+      "text": "He fell for the oldest trick in the book 😂",
+      "like_count": 100000,
+      "author": "@exlittz",
+      "is_pinned": false,
+      "reply_count": 43
+    },
+    {
+      "text": "How to actually become a billionaire:\n1○ Create a problem\n\n2○ Sell the solution",
+      "like_count": 43000,
+      "author": "@WingDingsArts",
+      "is_pinned": false,
+      "reply_count": 0
+    },
+    {
+      "text": "“Sir why would I sell you this pen”",
+      "like_count": 23000,
+      "author": "@9yasono",
+      "is_pinned": false,
+      "reply_count": 0
+    }
+  ],
+  "top_1_most_replied": {
+    "text": "He fell for the oldest trick in the book 😂",
+    "like_count": 100000,
+    "author": "@exlittz",
+    "is_pinned": false,
+    "reply_count": 43
+  },
+  "note": "reply_count computed manually by counting comments whose 'parent' field matches a top-level comment's id (not a native yt-dlp field). Only meaningful among the 20 top-level comments fetched (max_comments limited replies to 100 total across all threads)."
+}

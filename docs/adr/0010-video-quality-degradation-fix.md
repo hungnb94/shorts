@@ -1,0 +1,3 @@
+# Video Quality Degradation Fix
+
+When downscaling from 2160p source to 1080x1920 output, the pipeline was producing visibly blurry videos. Root cause: (1) `render_clip.py` scale filter lacked `flags=lanczos` (default bilinear = lower quality), (2) intermediate concat/loop/trim steps had no CRF specified (ffmpeg defaults to CRF=23, medium quality), (3) all final composite steps used CRF=18. Fixed by adding `flags=lanczos` to all scale operations and lowering CRF to 15 across all encoding steps (extract, concat, loop, trim, composite). CRF=15 is near-lossless visually and compensates for cumulative quality loss across multiple encoding passes.
