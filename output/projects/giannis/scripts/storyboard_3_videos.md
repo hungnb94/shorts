@@ -2,7 +2,7 @@
 
 **Source**: "Asking One Of The Richest NBA Players How He Got Rich!" (NSeL8fFz5hw)
 **Channel**: School of Hard Knocks (2.15M subs)
-**Source file**: `output/NSeL8fFz5hw/NSeL8fFz5hw_2160p.mp4` (3840x2160 VP9, 16:15)
+**Source file**: `output/projects/giannis/source/NSeL8fFz5hw_2160p.mp4` (3840x2160 VP9, 16:15)
 **Spec**: 9:16 (1080x1920) | MP4 H.264 | 30fps | 45-60s
 **ADR-0017 verified**: All 3 segment starts show Giannis's face (skin-tone 25-32%) at t=0, 0.5s, 2s.
 **Pipeline**: `render_bacsihai_v4.py` pattern — contiguous source VO + Pexels overlays + drawtext subs + hook bar + progress bar.

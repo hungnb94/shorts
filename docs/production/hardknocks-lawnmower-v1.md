@@ -13,8 +13,8 @@
 - Resolution: 1080x1920 (9:16 portrait)
 - Codec: H.264 (libx264, crf 18), 30fps
 - Audio: AAC, 192kbps, 48kHz, stereo
-- File: `output/shorts/hardknocks/hardknocks_lawnmower_v1.mp4` (43.1MB)
-- Render script: `output/KxoKCNCLOss/render_hardknocks_v1.py`
+- File: `output/projects/hardknocks/final/hardknocks_lawnmower_v1.mp4` (43.1MB)
+- Render script: `pipeline/hardknocks/render_hardknocks_v1.py`
 
 ## YouTube Title
 He Mowed Lawns At 12... Now He Owns 2,600 Apartments

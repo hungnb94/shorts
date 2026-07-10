@@ -74,4 +74,4 @@ Each subtitle window has an emoji overlay at a "position-appropriate" location:
 
 ## Source
 Interview: Aliko Dangote (Forbes interview)
-Source video: output/source_videos/source.webm
+Source video: output/projects/dangote/source/source.webm

@@ -55,7 +55,7 @@ For each clip in all 9 variants:
 
 ## Affected Files
 - `render_shorts.py` — modify `render_variant()` to add zoompan + emoji overlays
-- `output/shorts/dangote/` — all 9 videos will be regenerated
+- `output/projects/dangote/final/` — all 9 videos will be regenerated
 
 ## Risks
 - Zoompan on 4K-cropped-to-1080p footage might show pixelation at edges (mitigate: limit zoom to 1.05x max)

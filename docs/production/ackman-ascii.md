@@ -94,8 +94,8 @@ scripts/
 
 ## Transcript
 
-- Source: `output/source/Z7aS-7Mw_Wg_4k.mp4`
-- Word-level: `output/source/Z7aS-7Mw_Wg_transcript_words.json`
+- Source: `output/unsorted/Z7aS-7Mw_Wg/Z7aS-7Mw_Wg_4k.mp4`
+- Word-level: `output/unsorted/Z7aS-7Mw_Wg/Z7aS-7Mw_Wg_transcript_words.json`
 - Tool: mlx-whisper (mlx-community/whisper-base-mlx)
 
 ## Performance
