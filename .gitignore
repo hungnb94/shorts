@@ -23,12 +23,15 @@ docs/research/**/meta.info.json
 # Render scratch (regenerated on each pipeline run)
 output/**/temp/
 
-# Data (stateful, not in git)
-data
+# Data (stateful, not in git — mab_state.json/tracked_videos.csv/targets are tracked deliberately)
+data/video_metrics.db
+data/backups/
 
-# Remotion (deleted, keeping for reference if re-enabled)
-src/remotion/audio/**/*.mp3
-src/remotion/out/*.mp4
-src/remotion/preview/*.png
-src/remotion/public/assets/*.jpg
-output/bacsihai_fasting/8vM7rPWzTlI_autosub.vi.vtt
+# Pipeline scratch assets
+pipeline/tools/*.wav
+
+# Auto-generated subtitle file (not a source transcript, unlike tracked .en.vtt files)
+output/projects/bacsihai/source/8vM7rPWzTlI_autosub.vi.vtt
+
+# Cleanup staging (manually reviewed and purged, not auto-deleted)
+_trash/
