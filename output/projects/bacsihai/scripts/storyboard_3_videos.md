@@ -1,7 +1,7 @@
 # STORYBOARD CHI TIẾT — 3 VIDEOS SHORTS
 
 **Nguồn**: Bác sĩ Hải — "5 Sai Lầm Khi Nhịn Ăn Gián Đoạn" (8vM7rPWzTlI)
-**Folder output**: `output/bacsihai_fasting/`
+**Folder output**: `output/projects/bacsihai/source/`
 **Spec**: 9:16 (1080x1920) | MP4 H.264 | 30fps | 45-50s mỗi video
 
 **Legend ký hiệu**:

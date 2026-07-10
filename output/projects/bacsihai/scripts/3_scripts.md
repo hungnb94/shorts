@@ -1,8 +1,8 @@
 # 3 Kịch Bản Shorts — Dựa trên "5 Sai Lầm Khi Nhịn Ăn Gián Đoạn" (Bác sĩ Hải)
 
 **Nguồn**: https://www.youtube.com/watch?v=8vM7rPWzTlI (13:17, 1080p)
-**File phụ đề**: `output/bacsihai_fasting/8vM7rPWzTlI_autosub.vi.vtt`
-**File video**: `output/bacsihai_fasting/8vM7rPWzTlI_1080p.mp4`
+**File phụ đề**: `output/projects/bacsihai/source/8vM7rPWzTlI_autosub.vi.vtt`
+**File video**: `output/projects/bacsihai/source/8vM7rPWzTlI_1080p.mp4`
 
 ## Phân Tích Nguồn
 
@@ -207,7 +207,7 @@ Bác sĩ Hải nêu 5 sai lầm (đếm ngược 5→1):
 ### Thông số chung (cả 3 kịch bản)
 - **Tỷ lệ khung hình**: 9:16 (1080×1920)
 - **Thời lượng**: 45-50s mỗi video
-- **Video nguồn**: `output/bacsihai_fasting/8vM7rPWzTlI_1080p.mp4` (1080p)
+- **Video nguồn**: `output/projects/bacsihai/source/8vM7rPWzTlI_1080p.mp4` (1080p)
 - **Phụ đề**: drawtext (KHÔNG dùng subtitles filter), tối đa 28px hook / 22px body
 - **Một người nói mỗi dòng phụ đề** — không trộn lồng
 - **Không dùng dấu apostrophe** trong text overlay
