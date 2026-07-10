@@ -3,10 +3,17 @@
 ## Status
 | Field | Value |
 |-------|-------|
-| YouTube Video ID | Not yet uploaded (manual upload — no Chrome uploader automation exists) |
+| YouTube Video ID | Uploaded 2026-07-10 — video ID not yet provided, update this row and `docs/experiments/EXPERIMENT-LOG.md` once known |
 | Rendered | 2026-07-10 |
-| Metrics fetch after (48h rule) | 48h after manual upload, whenever that happens |
-| Metrics status | N/A — not uploaded yet |
+| Metrics fetch after (48h rule) | 48h after upload timestamp (pending video ID to compute exact time) |
+| Metrics status | Not yet fetched — too early |
+
+## Known Issue: Weak Hook (self-caught before upload, uploaded anyway)
+User asked directly after production whether the hook was weak — correctly. Three concrete problems, now written into AGENTS.md's Known Pitfalls so future videos catch this before rendering, not after:
+1. The hook overlay ("LAO ĐỘNG CHÂN TAY ÍT BỊ ALZHEIMER HƠN?") names both the cause (manual labor) and the specific disease (Alzheimer) — almost no gap left; the viewer already knows the whole claim from the headline alone.
+2. The actual VO payoff (Parkinson's/Alzheimer's reveal) doesn't land until t≈33s of a 52.6s clip — far past the 5-8s ideal partial-reveal window. Most of the clip is clarifying "what counts as manual labor," not delivering the surprising fact.
+3. The source gives no percentage, only "much lower" — a qualitative claim is a structurally weaker hook than a Money+Number or Contrarian-Reveal pattern, and no amount of overlay-copy editing fixes that; it's a source-selection constraint.
+Decision: ship as-is and use real retention data as the read on how much this actually cost, rather than re-render pre-emptively. See "What To Check At 48h" below — retention-graph shape should confirm whether the drop-off is concentrated in the 0-8s hook window (expected, if this critique is right) or elsewhere.
 
 ## Video Specs
 - Duration: 52.6s
@@ -52,6 +59,7 @@ ADR-0007 item 3 reads "cut ≤50% of source duration AND each individual clip <1
 `render_hardknocks_v1.py` concatenates 6 non-contiguous clips (with gaps between them, e.g. clip 4 ends at abs 605.3s and clip 5 starts at abs 660.5s) via `concat`, which appears to violate ADR-0013's "MUST be a single, non-split contiguous segment" / "never `concat`" rule. That video is already uploaded (`dHDpDXSIAkA`, metrics pending) — out of scope to fix retroactively here, but flagged since I ported technique from that script and want the inconsistency on record rather than silently reproduced.
 
 ## What To Check At 48h (for post-hoc analysis, once uploaded)
+- **Retention-graph drop-off shape** — per the "Known Issue: Weak Hook" section above, check whether the drop-off concentrates in the 0-8s hook window (would confirm the hook-copy/payoff-timing critique) vs. spread through the ~33s wait for the Parkinson's/Alzheimer's reveal (would point at the slow payoff specifically, not the overlay wording).
 - Stayed to Watch / AVD vs. the existing benchmarks in `docs/experiments/EXPERIMENT-LOG.md` (Dangote 51.6% GOOD, bacsihai v4 8.6% BAD, hardknocks_v1 pending)
 - Whether the ~4-5s body-caption cadence (vs v4's ~8-9s) actually helps retention through the middle of the video, not just the 0-5s hook window
 - Whether Vietnamese-language mlx_whisper transcription (first use in this repo, `whisper-medium-mlx`) produced accurate enough word timestamps — check the rendered captions against the source audio for any diacritic/timing drift
