@@ -1,0 +1,23 @@
+{
+  "top_3_by_like_count": [
+    {
+      "text": "How to be more wealthy: be wealthy",
+      "like_count": 108000,
+      "author": "@Itachi-uchiha-OG",
+      "is_pinned": false
+    },
+    {
+      "text": "This is not \"poor becoming rich\" this is staying rich and becoming richer",
+      "like_count": 55000,
+      "author": "@miyagi5642",
+      "is_pinned": false
+    },
+    {
+      "text": "Bro has more businesses than my Gta online character 💀\nEdit: this comment is ass why did it get so many like🗣🔥",
+      "like_count": 38000,
+      "author": "@Oi_shoesuke",
+      "is_pinned": false
+    }
+  ],
+  "highest_reply_count": "NOT AVAILABLE - yt-dlp extractor output for this video does not include a reply_count field per comment, so this could not be determined reliably. (Reply relationships via the \"parent\" field exist but are capped by the max_comments extraction limits, so counts derived from them would undercount actual reply totals and are not a reliable proxy.)"
+}

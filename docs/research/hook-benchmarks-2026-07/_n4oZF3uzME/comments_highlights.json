@@ -1,0 +1,32 @@
+{
+  "top_3_by_likes": [
+    {
+      "text": "\"You ask a lot of questions\"\n\"I ask a lot of yes questions\"\nThat's gold bro",
+      "like_count": 33000,
+      "reply_count": 50,
+      "is_pinned": false,
+      "author": "@redx2215"
+    },
+    {
+      "text": "I love how he perked up when you said it was for the younger generation. You could tell he wanted to help",
+      "like_count": 16000,
+      "reply_count": 26,
+      "is_pinned": false,
+      "author": "@Ladyinred95"
+    },
+    {
+      "text": "I love it when successful people come from nothing. Humble and genuine people.\nCongratulations wishing you the best.",
+      "like_count": 6300,
+      "reply_count": 0,
+      "is_pinned": false,
+      "author": "@Nieceyy11"
+    }
+  ],
+  "top_1_by_replies": {
+    "text": "\"You ask a lot of questions\"\n\"I ask a lot of yes questions\"\nThat's gold bro",
+    "like_count": 33000,
+    "reply_count": 50,
+    "is_pinned": false,
+    "author": "@redx2215"
+  }
+}

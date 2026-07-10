@@ -1,0 +1,32 @@
+{
+  "top_3_by_likes": [
+    {
+      "text": "I love that all of these finance videos always boil down to \n\nHow to solve your money problems: have money",
+      "like_count": 81000,
+      "reply_count": 50,
+      "is_pinned": false,
+      "author": "@sidwirb3629"
+    },
+    {
+      "text": "\"Want money? Get a third job.\" \n\n💀",
+      "like_count": 28000,
+      "reply_count": 36,
+      "is_pinned": false,
+      "author": "@MonsterUmbrella"
+    },
+    {
+      "text": "“How rich are you”\n“My train goes in a full circle”",
+      "like_count": 11000,
+      "reply_count": 0,
+      "is_pinned": false,
+      "author": "@that_regularity"
+    }
+  ],
+  "most_replied": {
+    "text": "I love that all of these finance videos always boil down to \n\nHow to solve your money problems: have money",
+    "like_count": 81000,
+    "reply_count": 50,
+    "is_pinned": false,
+    "author": "@sidwirb3629"
+  }
+}
