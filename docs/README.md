@@ -23,6 +23,7 @@ Decisions that shaped the project.
 | 0017 | Hook-Window: frame 0 must show a human face |
 | 0018 | Hook caption sync and cadence |
 | 0019 | Multi-niche AB testing (finance/English + health/Vietnamese) |
+| 0020 | Third niche: AI education (English) |
 
 ## Production Traces
 Per-video documentation with pipeline, effects, retention data.

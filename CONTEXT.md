@@ -2,8 +2,8 @@
 
 Animated short video factory: tự động sản xuất 6 videos/ngày (9:16, 30-60s) để AB test viral content formulas trên YouTube + TikTok, kiếm tiền qua ads revenue và affiliate marketing.
 
-Niche: Finance / money-making (crypto, side hustle, investing).
-Ngôn ngữ: Tiếng Anh (global audience, RPM cao).
+Niche: 3 verticals song song (ADR-0019, ADR-0020) — Finance/money-making (crypto, side hustle, investing, tiếng Anh, niche gốc), Health/longevity (tiếng Việt, Source Channel "Bác sĩ Hải"), AI education (tiếng Anh, professionals/knowledge workers).
+Ngôn ngữ: Tiếng Anh cho niche finance + AI education (global audience, RPM cao); Tiếng Việt cho niche health (khán giả Việt Nam).
 Content strategy: Curate + Repackage — lấy topic/facts/hooks từ kênh finance viral, render lại 100% bằng animation gốc. Zero footage từ nguồn.
 Automation: Phased — Phase 1 semi-auto (AI generate, human review) → Phase 2 fully autonomous cron pipeline.
 
@@ -62,7 +62,7 @@ Một trong 7 visual rendering styles: Stock Footage, Kinetic Typography, Data V
 _Avoid_: "format", "template" (use specific term)
 
 **Source Channel**:
-Kênh YouTube dùng làm research input, cho MỘT trong 2 niche song song (ADR-0019): finance viral (VD: School of Hard Knocks, 2.08M subs, tiếng Anh) hoặc health/longevity (VD: Bác sĩ Hải, tiếng Việt). Với 6 animation types (Repackage), chỉ lấy topic/facts/hooks, KHÔNG lấy footage. Với Clip Curation Edit, có lấy footage nhưng vẫn transform (xem Transformative Gate).
+Kênh YouTube dùng làm research input, cho MỘT trong 3 niche song song (ADR-0019, ADR-0020): finance viral (VD: School of Hard Knocks, 2.08M subs, tiếng Anh), health/longevity (VD: Bác sĩ Hải, tiếng Việt), hoặc AI education (VD: @mattpocockuk, @anthropic-ai — kênh practitioner/product, không nhất thiết phải "viral how-to" như 2 niche kia). Với 6 animation types (Repackage), chỉ lấy topic/facts/hooks (hoặc style/structure với niche AI education), KHÔNG lấy footage. Với Clip Curation Edit, có lấy footage nhưng vẫn transform (xem Transformative Gate).
 _Avoid_: "inspiration", "reference channel"
 
 **Curate**:

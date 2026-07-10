@@ -1,0 +1,27 @@
+Channel Name: Working With AI
+(Alt: AI, Actually)
+
+Channel Description (About):
+Most people are using about 10% of what AI can actually do for their work.
+
+Working With AI is short, practical breakdowns of how professionals are actually
+using tools like ChatGPT and Claude — real workflows, real prompts, real time saved.
+No hype, no "AI will take your job" fearmongering, no 47-tool listicles.
+
+Just what to type, why it works, and what to try next.
+
+New videos every week. Subscribe if you want AI to make your job easier, not more
+confusing.
+
+Avatar Prompt:
+Minimalist YouTube logo for an AI-education channel, a clean flat vector icon of
+two overlapping chat-bubble shapes forming a subtle spark/asterisk, professional,
+indigo blue and white color palette, isolated on white background, high resolution,
+no text.
+
+Banner Prompt:
+Minimalist YouTube banner, clean and modern aesthetic. Central text "Working With AI"
+in bold elegant sans-serif font. Background features subtle outline icons of a chat
+bubble, a cursor, and a lightning-bolt spark, suggesting practical AI workflows.
+Indigo blue and off-white color scheme, airy and highly organized, professional
+studio style, 2560x1440.

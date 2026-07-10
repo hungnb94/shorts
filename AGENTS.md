@@ -2,7 +2,7 @@
 
 Animated short video factory — tự động sản xuất 6 videos/ngày (9:16, 30-60s) để AB test viral content formulas trên YouTube + TikTok, kiếm tiền qua ads revenue và affiliate marketing.
 
-Niche: Finance/money-making (English) as the primary/documented vertical, run in parallel with a second, deliberately-chosen vertical — health/longevity (Vietnamese, Source Channel "Bác sĩ Hải") — per ADR-0019 (multi-niche AB testing: more parallel data streams → faster overall learning). Format: Kitty Explain (animated mascot + pop-up text + wild subtitles) for the finance vertical; the health vertical uses Clip Curation Edit exclusively (see `pipeline/bacsihai/`).
+Niche: Finance/money-making (English) as the primary/documented vertical, run in parallel with two additional, deliberately-chosen verticals — health/longevity (Vietnamese, Source Channel "Bác sĩ Hải") per ADR-0019, and AI education (English, professionals/knowledge workers) per ADR-0020 — multi-niche AB testing: more parallel data streams → faster overall learning. Format: Kitty Explain (animated mascot + pop-up text + wild subtitles) for the finance vertical; the health vertical uses Clip Curation Edit exclusively (see `pipeline/bacsihai/`); the AI-education vertical uses Curate+Repackage (zero footage reuse) with the specific Video Type still undecided (see ADR-0020).
 
 ## Architecture (Target — not yet built)
 
@@ -298,7 +298,7 @@ The value-add overlay layer (ADR 0008) must be a separate compositing step AFTER
 
 ### Ask First
 - Adding a new animation format (requires research + ADR)
-- Adding a third niche/vertical beyond the two confirmed in ADR 0019 (finance/English, health/Vietnamese)
+- Adding a fourth niche/vertical beyond the three confirmed (finance/English ADR-0001/0004, health/Vietnamese ADR-0019, AI-education/English ADR-0020)
 - Changing epsilon schedule (affects exploration strategy)
 - Spending money on paid tools/APIs
 - Adding a new platform (TikTok, Instagram)
