@@ -17,6 +17,8 @@ Decisions that shaped the project.
 | 0010 | Video quality degradation fix |
 | 0011 | Success formula strategic layer |
 | 0012 | AI video generation pipeline |
+| 0013 | Contiguous VO Pipeline (architectural pattern) |
+| 0014 | Dedicated vision model for video analysis |
 | 0016 | Frequent editing (every 3s) |
 | 0017 | Hook-Window: frame 0 must show a human face |
 | 0018 | Hook caption sync and cadence |

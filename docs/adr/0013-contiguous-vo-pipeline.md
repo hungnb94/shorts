@@ -1,4 +1,4 @@
-# ADR 0010: Contiguous VO Pipeline (Architectural Pattern)
+# ADR 0013: Contiguous VO Pipeline (Architectural Pattern)
 
 ## Status
 Approved

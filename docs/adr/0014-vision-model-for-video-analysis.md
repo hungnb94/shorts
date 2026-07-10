@@ -1,4 +1,4 @@
-# ADR 001: Dedicated Vision Model for Video Analysis
+# ADR 0014: Dedicated Vision Model for Video Analysis
 
 **Status:** Accepted
 **Date:** 2026-07-08
