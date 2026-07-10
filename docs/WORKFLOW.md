@@ -1,0 +1,98 @@
+# Flow Chuẩn — Cắt/Sản Xuất Video
+
+Living document. File này tiến hóa qua thực tế sử dụng: mỗi lần sản xuất kết thúc bằng **Post-Production Retro** (Stage 5), xác nhận flow này vẫn đủ hoặc sửa file này *trước khi* video được coi là xong. Không được bỏ qua bước check này.
+
+Doc này sắp xếp thứ tự pipeline và định nghĩa các gate cứng. Không lặp lại nội dung rule đã có trong ADR hay `AGENTS.md` — chỉ cite theo số/tên để tránh lệch pha khi ADR thay đổi.
+
+## Stage 0 — HOOK GATE (chặn cứng)
+
+Chạy bước này trên MỌI candidate segment trước khi cắt, render, hoặc làm overlay. Không bước nào dưới đây được bắt đầu trước khi có 1 candidate pass.
+
+```
+1. Frame-0 face/action check (ADR-0017): tại t=0 candidate phải có mặt người
+   hoặc hành động/prop rõ ràng — không phải title card, static text, hay B-roll.
+   Check bằng mắt (visual inspection thủ công), không dùng script.
+2. Gap-not-resolved check (CONTEXT.md → Hook): hook line dự kiến, đọc riêng,
+   KHÔNG được nói hết toàn bộ claim — phải mở 1 gap/mystery ở 0-2s, chỉ
+   partial reveal ở 5-8s.
+3. Cause+effect co-naming check (AGENTS.md pitfall, bacsihai v5): headline
+   không được nêu cả nguyên nhân VÀ hệ quả cụ thể cùng lúc.
+4. Payoff-timing check (bacsihai v5 pitfall): payoff thật của VO trong segment
+   phải rơi trong ~5-10s đầu, không bị chôn sau ~15s.
+5. Caption-sync feasibility (ADR-0018): source có clean speech onset ngay
+   tại điểm bắt đầu candidate để caption lên màn hình được từ t=0.2s.
+6. Cadence feasibility (ADR-0018/0016): trong 0-5s phải có sẵn 1 visual change
+   mỗi 1-2s (cut, zoom, overlay, hoặc motion liên tục) — không phải shot tĩnh
+   hoàn toàn, không có motion/prop/overlay slot nào.
+7. Claim-strength flag (docs/research/hook-benchmarks-2026-07/REPORT.md): ghi
+   nhận source có cho số liệu cụ thể hay chỉ có claim định tính — không tự
+   động fail, nhưng phải log lại và ưu tiên candidate dạng Money+Number/
+   Contrarian-Reveal nếu có.
+```
+
+**GATE RULE**: nếu bất kỳ item 1-6 fail trên MỌI candidate span trong source hiện tại, và không thể fix bằng cách chọn span khác trong cùng bản download, thì STOP. Quay lại Stage 1 — chọn span khác hoặc source video khác. Không được tiến sang Stage 2/3/4, và không được ship 1 hook đã biết là yếu với lý do "để retention data trả lời sau." (Đây chính là anti-pattern mà `docs/production/bacsihai-v5-lao-dong-tay.md` đã ghi nhận — self-caught weak hook, vẫn ship. Từ nay không được lặp lại.)
+
+## Stage 1 — Source Research & Candidate Selection
+
+- Chọn Source Channel theo từng niche (ADR-0001/0004 finance, ADR-0019 health/VN, ADR-0020 AI-ed).
+- Download max quality: `yt-dlp -f "bestvideo[height>=2160]+bestaudio"` (không bao giờ nhận default 720p — AGENTS.md).
+- Transcribe (mlx_whisper).
+- Xác định một hoặc nhiều candidate contiguous span, mỗi span kèm 1 hook angle sơ bộ → đưa từng candidate vào Stage 0.
+
+## Stage 2 — Cut Segment
+
+- Extract candidate đã pass Stage 0. Phải thỏa ADR-0013 (Contiguous VO: 45-60s, một span liền mạch, audio bất biến, không bao giờ `concat`).
+
+## Stage 3 — Hook Text + Overlays
+
+- Viết hook overlay/caption/value-add. Phải thỏa ADR-0018 (caption sync/cadence), ADR-0016 (2-Second Rule, toàn video), ADR-0008 (Value-Add Layer).
+- Nếu là Clip Curation Edit: phải thỏa thêm Transformative Gate của ADR-0007 (commentary track + ≥2 value-add + ≤50% source duration / mỗi clip <15s).
+
+## Stage 4 — Render & Spec Verify
+
+- Chạy `pipeline/<project>/render_*.py`.
+- Verify 9:16 (1080x1920), ≤60s, H.264, có audio stream — trước khi qua bước tiếp.
+
+## Stage 5 — Document & Retro (`docs/production/<name>.md`)
+
+Điền theo template hiện có (Status, Video Specs, YouTube Title/Description, Source, Why This Segment, Hook Formula Applied, Value-Adds, Known Issues, What to Check at 48h) — xem `docs/production/bacsihai-v5-lao-dong-tay.md` làm mẫu.
+
+Sau đó bắt buộc kết thúc mọi production doc bằng section này — yêu cầu MỌI lần, không chỉ khi có vấn đề:
+
+```
+## Post-Production Retro
+
+### Hook Retro (bắt buộc, mọi video — proactive)
+- Verbal: có cách nào làm hook lời nói/text mạnh hơn trong 3 giây đầu không?
+  (Có ý tưởng mới? Viết ra. Không tìm được gì tốt hơn? Viết "none found.")
+- Visual: có cách nào làm hook hình ảnh mạnh hơn trong 3 giây đầu không
+  (framing, motion, prop, cut timing,...)? Áp dụng cùng rule.
+- Nếu ý tưởng generalize được ra ngoài video này, cập nhật/thêm 1 item vào
+  checklist Stage 0 trong docs/WORKFLOW.md ngay, cite video này làm nguồn.
+
+### Workflow Delta (bắt buộc, mọi video — reactive)
+Lần sản xuất này có gặp case mà các stage trong docs/WORKFLOW.md chưa cover không?
+- Không -> viết "none".
+- Có -> thực hiện đúng 1 hành động trước khi coi video này là xong:
+  - Lỗ hổng về thứ tự/quy trình (rule đã tồn tại ở nơi khác, workflow chỉ
+    chưa nói rõ khi nào check) -> sửa ngay stage tương ứng trong WORKFLOW.md.
+  - Rule hoàn toàn mới, chưa từng được thiết lập -> viết ADR mới, rồi thêm
+    1 dòng cite vào WORKFLOW.md.
+  - Sự cố một lần, không phải rule chung -> thêm entry vào AGENTS.md Known
+    Pitfalls thay vào đó.
+```
+
+**Enforcement**: Status của production doc một video KHÔNG được đánh dấu done, và dòng của nó trong `docs/experiments/EXPERIMENT-LOG.md` KHÔNG được đánh dấu final, cho tới khi cả 2 subsection trên đã điền đầy đủ — dù chỉ là "none" / "none found".
+
+## Stage 6 — Upload & Log
+
+- Upload thủ công. Không paste raw affiliate link trong description (dùng redirect domain).
+- Log dòng đầu tiên vào `docs/experiments/EXPERIMENT-LOG.md`.
+- Chờ 48h (metrics nhiễu nếu fetch trước đó — AGENTS.md). Fetch từ YouTube Studio, điền "What To Check At 48h" trong production doc và dòng log.
+
+## Nằm ngoài scope (đã biết, không fix trong doc này)
+
+- Vi phạm ADR-0013 (concat) của `render_hardknocks_v1.py`.
+- Ambiguity ở item 3 của Transformative Gate cho video dạng single-contiguous-segment.
+- Các hàm helper bị duplicate giữa các render script trong `pipeline/<project>/`.
+- Không có tool tự động check frame (ví dụ `inspect_image.py`) — frame-0 face check ở Stage 0 chủ đích giữ là visual judgment thủ công.
