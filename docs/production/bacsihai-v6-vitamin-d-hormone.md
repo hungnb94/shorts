@@ -3,10 +3,10 @@
 ## Status
 | Field | Value |
 |-------|-------|
-| YouTube Video ID | Not yet uploaded |
+| YouTube Video ID | [EpTPDrWONS0](https://youtu.be/EpTPDrWONS0) |
 | Rendered | 2026-07-11 |
-| Metrics fetch after (48h rule) | N/A — compute once uploaded (`/log-video`) |
-| Metrics status | Not applicable — not uploaded |
+| Metrics fetch after (48h rule) | 2026-07-13 10:42 +0700 |
+| Metrics status | Not yet fetched, too early |
 
 ## Video Specs
 - Duration: 43.0s
