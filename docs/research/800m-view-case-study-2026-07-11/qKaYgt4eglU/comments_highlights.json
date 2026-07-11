@@ -1,0 +1,59 @@
+{
+  "top_3_by_likes": [
+    {
+      "text": "Call of duty snipers😂😂",
+      "like_count": 114000,
+      "reply_count_sampled": 1,
+      "is_pinned": true,
+      "author": "@raggaskrogsterd9030"
+    },
+    {
+      "text": "The lady walking forward handled it decently well",
+      "like_count": 26000,
+      "reply_count_sampled": 1,
+      "is_pinned": false,
+      "author": "@StudioPurpleTiger"
+    },
+    {
+      "text": "the shotgun guy handled the recoil perfectly his shorts are the ones that failed to handle it",
+      "like_count": 24000,
+      "reply_count_sampled": 2,
+      "is_pinned": false,
+      "author": "@nogabug"
+    }
+  ],
+  "most_replied_sampled": {
+    "text": "That Lady going forward while shooting had the best Posture and techniques among them all ( except the last guy ) she was amazing tbh",
+    "like_count": 671,
+    "reply_count_sampled": 3,
+    "is_pinned": false,
+    "author": "@geneticuploader6331"
+  },
+  "sample_reply_thread": {
+    "parent": {
+      "text": "That Lady going forward while shooting had the best Posture and techniques among them all ( except the last guy ) she was amazing tbh",
+      "like_count": 671,
+      "reply_count_sampled": 3,
+      "is_pinned": false,
+      "author": "@geneticuploader6331"
+    },
+    "replies_sample": [
+      {
+        "text": "True but the person who shot the desert eagle, it had to hurt lol",
+        "like_count": 1,
+        "author": "@ElijahTheSonic"
+      },
+      {
+        "text": "BRO 12M LIKES",
+        "like_count": 1,
+        "author": "@TeresaRizo-qr6zn"
+      },
+      {
+        "text": "😮😮😮😮",
+        "like_count": 0,
+        "author": "@shaafiali2036"
+      }
+    ]
+  },
+  "_methodology_note": "reply_count is NOT exposed by yt-dlp's youtube extractor for this video (confirmed empty even with max_replies>0) - 'reply_count_sampled' is a lower-bound count of replies actually fetched (capped at 60 total / 3 per thread), not the true total reply count."
+}
