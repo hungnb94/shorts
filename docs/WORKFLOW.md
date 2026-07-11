@@ -75,6 +75,12 @@ Sau đó bắt buộc kết thúc mọi production doc bằng section này — y
   (Có ý tưởng mới? Viết ra. Không tìm được gì tốt hơn? Viết "none found.")
 - Visual: có cách nào làm hook hình ảnh mạnh hơn trong 3 giây đầu không
   (framing, motion, prop, cut timing,...)? Áp dụng cùng rule.
+- Công cụ hỗ trợ (khuyến khích, không bắt buộc): dùng skill
+  `viral-video-analysis` (`.claude/skills/viral-video-analysis/SKILL.md`) để so
+  sánh video vừa làm với 1-2 video viral cùng niche — trả lời 2 mục trên bằng
+  bằng chứng cụ thể (hook pattern, frame-0 check, cadence, sound design) thay
+  vì đoán. ADR-0023 giải thích vì sao skill này thay thế `video-analyzer`
+  (Hermes/GPT-4o) cho use-case này.
 - Nếu ý tưởng generalize được ra ngoài video này, cập nhật/thêm 1 item vào
   checklist Stage 0 trong docs/WORKFLOW.md ngay, cite video này làm nguồn.
 
