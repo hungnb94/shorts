@@ -339,3 +339,5 @@ Integration tests mock TTS and animation APIs but validate real video output spe
 - **Metrics data is append-only**: `video_metrics` table never mutates. Each fetch writes new row with timestamp.
 - **Chrome profile is single source of auth**: No OAuth flow, no API keys for upload. User logs in once, system reuses profile.
 - **MAB rewards are cumulative**: Each variant's reward = running average of AVD across all samples. More samples = more confident reward estimate.
+
+## Ngôn ngữ khi trao đổi, giao tiếp: Tiếng Việt
