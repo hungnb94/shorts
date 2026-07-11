@@ -6,6 +6,7 @@
 output/**/*.mp4
 output/**/*.mp3
 output/**/*.wav
+output/**/*.aiff
 output/**/*.webm
 output/**/*.mov
 output/**/*.png

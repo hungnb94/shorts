@@ -274,6 +274,12 @@ Caveat: burst timing above was measured on English interview speech; Vietnamese 
 ### Clip Curation Edit must pass the Transformative Gate
 Video Type #7 (Clip Curation Edit) uses real footage from Source Channel — unlike the 6 animation types (zero-footage). Before upload, every Clip Curation Edit MUST pass all 3 Transformative Gate rules: (1) commentary track required, (2) min 2 value-adds from [fact-check callout, data viz, source citation, multi-source mashup, animated annotation, counter-argument], (3) cut ≤50% source duration + each clip <15s. Uploading a clip edit that fails the gate = copyright strike risk. Attribution is intentionally dropped per user decision.
 
+### ffmpeg drawtext silently drops text containing a literal "%" (aiwork v1)
+`drawtext`'s default `expansion=normal` parsing treats a bare `%` as a template-escape trigger (e.g. `%{pts}`) and silently drops the rest of the string when it isn't one - the filter still exits 0, with only a buried "Stray %" warning in stderr, so a caption can vanish from a render with no visible top-level error. Any caption/overlay text that may contain a real percentage (e.g. "25%") needs `expansion=none` added to its `drawtext` filter args. Doubling to `%%` did not reliably fix this in testing - use `expansion=none` instead. First hit in `pipeline/aiwork/render_aiwork_v1.py` (percentage-heavy captions); grepped `render_bacsihai_v5.py`/`render_hardknocks_v1.py` and confirmed neither has this problem today since their captions never contain a literal `%`.
+
+### System fonts used in this repo lack some Unicode glyphs (aiwork v1)
+`Helvetica.ttc`/`HelveticaNeue.ttc` (the only fonts used across this repo's render scripts) don't include every Unicode symbol - e.g. the arrow `→` renders as a missing-glyph "tofu" box. Stick to ASCII in `drawtext` caption content (e.g. `->` instead of `→`); verify visually via a rendered frame before assuming a symbol will show up.
+
 ### "Original" content underperforms
 Per wiki research (1.2B views case study): "Put your ego down and stop trying to be original." Every video should follow a proven format with variations. Inventing new formats from scratch is the #1 reason channels fail.
 

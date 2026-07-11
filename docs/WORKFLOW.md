@@ -47,6 +47,7 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 
 - Viết hook overlay/caption/value-add. Phải thỏa ADR-0018 (caption sync/cadence), ADR-0016 (2-Second Rule, toàn video), ADR-0008 (Value-Add Layer).
 - Nếu là Clip Curation Edit: phải thỏa thêm Transformative Gate của ADR-0007 (commentary track + ≥2 value-add + ≤50% source duration / mỗi clip <15s).
+- Nếu commentary track là spoken TTS (không chỉ text overlay) layered lên audio gốc: xem ADR-0021 cho pattern mixing (ducking + amix + dynaudnorm) và cách diễn giải "audio bất biến" của ADR-0013.
 
 ## Stage 4 — Render & Spec Verify
 
