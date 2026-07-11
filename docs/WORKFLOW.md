@@ -39,9 +39,11 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 ## Stage 1 — Source Research & Candidate Selection
 
 - Chọn Source Channel theo từng niche (ADR-0001/0004 finance, ADR-0019 health/VN, ADR-0020 AI-ed).
+- Check `data/source_videos.csv` (source-video dedup registry) theo video ID/kênh trước khi chọn — tránh chọn lại đúng video hoặc lặp kịch bản đã dùng.
 - Download max quality: `yt-dlp -f "bestvideo[height>=2160]+bestaudio"` (không bao giờ nhận default 720p — AGENTS.md).
 - Transcribe (mlx_whisper).
 - Xác định một hoặc nhiều candidate contiguous span, mỗi span kèm 1 hook angle sơ bộ → đưa từng candidate vào Stage 0.
+- Sau khi chốt source video dùng cho video mới, append 1 dòng vào `data/source_videos.csv`.
 
 ## Stage 2 — Cut Segment
 
