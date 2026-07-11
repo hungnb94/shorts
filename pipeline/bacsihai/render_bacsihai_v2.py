@@ -67,7 +67,7 @@ def normalize_for_concat(inp, out, mute=False):
 # Timeline calculated from measured clip durations (see analysis output)
 VARIANTS = [
     {
-        "id": "V1_duong_pha_nhi",
+        "id": "2026-07-08-V1_duong_pha_nhi",
         "hook": "NHỊN ĂN MÀ VẪN KHÔNG GIẢM CÂN?",
         "cta": "THEO DÕI ĐỂ BIẾT THÊM MẸO NHỊN ĂN",
         "clips": [

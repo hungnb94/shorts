@@ -34,7 +34,7 @@ O.mkdir(parents=True, exist_ok=True)
 (O / "assets").mkdir(parents=True, exist_ok=True)
 T.mkdir(parents=True, exist_ok=True)
 
-VID = "capability_curve_v1"
+VID = "2026-07-10-capability_curve_v1"  # date-prefixed per AGENTS.md convention
 # SRC_START was originally 234.90 (start of a natural audio pause) but frame-inspection
 # (docs/production/aiwork-v1-capability-curve.md) showed the camera is still on the
 # faceless chart-closeup shot there, with a crossfade to the presenter only completing at

@@ -12,14 +12,14 @@
 - Duration: 43.0s
 - Resolution: 1080x1920 (9:16 portrait)
 - Codec: H.264 (libx264, crf 18/20), AAC 192kbps 48kHz stereo
-- File: `output/projects/bacsihai/final/vitamin_d_hormone_v6.mp4` (14.1MB)
+- File: `output/projects/bacsihai/final/2026-07-11-vitamin_d_hormone_v6.mp4` (14.1MB)
 - Render script: `pipeline/bacsihai/render_bacsihai_v6.py`
 
 ## YouTube Title
 Vitamin D Không Phải Là "Vitamin"? Sự Thật Rất Ít Người Biết
 
 ## YouTube Description
-See `output/projects/bacsihai/final/vitamin_d_hormone_v6.txt` (Vietnamese, hashtags at end).
+See `output/projects/bacsihai/final/2026-07-11-vitamin_d_hormone_v6.txt` (Vietnamese, hashtags at end).
 
 ## Source
 - Channel: Bác sĩ Hải (same Source Channel as `pipeline/bacsihai/` v1-v5, ADR-0019)

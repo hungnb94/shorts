@@ -28,7 +28,7 @@ CROP = "scale=-2:1920,crop=1080:1920:(in_w-1080)/2:0"
 O.mkdir(parents=True, exist_ok=True)
 T.mkdir(parents=True, exist_ok=True)
 
-VID = "lao_dong_tay_v5"
+VID = "2026-07-10-lao_dong_tay_v5"  # date-prefixed per AGENTS.md convention
 SRC_START = 314.36
 SRC_END = 367.00
 

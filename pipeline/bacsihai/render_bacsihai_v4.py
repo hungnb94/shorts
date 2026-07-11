@@ -71,7 +71,7 @@ def make_pexels_clip(key, duration, out):
 # === 3 VIDEOS — each is ONE contiguous segment ===
 VARIANTS = [
     {
-        "id": "V1_duong_pha_nhi",
+        "id": "2026-07-08-V1_duong_pha_nhi",
         "src_start": 304.5,
         "src_end": 364.0,
         "hook": "NHỊN ĂN MÀ VẪN KHÔNG GIẢM CÂN?",

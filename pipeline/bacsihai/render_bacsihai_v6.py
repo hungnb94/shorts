@@ -43,7 +43,7 @@ FONT_BOLD = "/System/Library/Fonts/HelveticaNeue.ttc"
 O.mkdir(parents=True, exist_ok=True)
 T.mkdir(parents=True, exist_ok=True)
 
-VID = "vitamin_d_hormone_v6"
+VID = "2026-07-11-vitamin_d_hormone_v6"  # date-prefixed per AGENTS.md convention
 SPEED = 1.1
 
 # Multi-Clip Mashup pieces (ADR-0022) -- abs timestamps in the source.

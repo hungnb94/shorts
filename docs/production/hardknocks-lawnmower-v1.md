@@ -13,7 +13,7 @@
 - Resolution: 1080x1920 (9:16 portrait)
 - Codec: H.264 (libx264, crf 18), 30fps
 - Audio: AAC, 192kbps, 48kHz, stereo
-- File: `output/projects/hardknocks/final/hardknocks_lawnmower_v1.mp4` (43.1MB)
+- File: `output/projects/hardknocks/final/2026-07-10-hardknocks_lawnmower_v1.mp4` (43.1MB)
 - Render script: `pipeline/hardknocks/render_hardknocks_v1.py`
 
 ## YouTube Title

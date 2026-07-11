@@ -13,14 +13,14 @@
 - Resolution: 1080x1920 (9:16 portrait)
 - Codec: H.264 (libx264, crf 18/20), 30fps
 - Audio: AAC, 192kbps, 48kHz, stereo (mixed: original source audio + TTS commentary, see ADR-0021)
-- File: `output/projects/aiwork/final/capability_curve_v1.mp4` (10.5MB)
+- File: `output/projects/aiwork/final/2026-07-10-capability_curve_v1.mp4` (10.5MB)
 - Render script: `pipeline/aiwork/render_aiwork_v1.py`
 
 ## YouTube Title
 AI Coding Jumped From 62% to 88% in ONE Year (Real Benchmark)
 
 ## YouTube Description
-See `output/projects/aiwork/final/capability_curve_v1.txt` (credits the source channel per ADR-0021's brand-sensitivity mitigation).
+See `output/projects/aiwork/final/2026-07-10-capability_curve_v1.txt` (credits the source channel per ADR-0021's brand-sensitivity mitigation).
 
 ## Source
 - Channel: Claude (Anthropic's own official YouTube channel)

@@ -53,21 +53,21 @@ def get_subs(src_start, src_end):
 # === 3 VARIANTS ===
 VARIANTS = [
     {
-        "id": "V1_ferrari_1.1M",
+        "id": "2026-07-09-V1_ferrari_1.1M",
         "src_start": 414.2, "src_end": 470.0,
         "hook": "A FERRARI COSTS $1.1M",
         "cta": "FOLLOW FOR MORE MONEY SECRETS",
         "pexels": [(1,2,"watch"),(5,2,"art"),(9,2,"house"),(22,2.5,"ferrari"),(38,2,"race")],
     },
     {
-        "id": "V2_60pct_broke",
+        "id": "2026-07-09-V2_60pct_broke",
         "src_start": 623.2, "src_end": 675.0,
         "hook": "60% OF ATHLETES GO BROKE",
         "cta": "BUILD WEALTH. NOT IMAGE.",
         "pexels": [(1,2,"stadium"),(8,2,"luxcar"),(20,2,"mansion"),(25,2,"chart")],
     },
     {
-        "id": "V3_lawyer_agent",
+        "id": "2026-07-09-V3_lawyer_agent",
         "src_start": 348.0, "src_end": 404.1,
         "hook": "NEVER LET YOUR LAWYER KNOW YOUR AGENT",
         "cta": "EDUCATE YOURSELF. FOLLOW FOR MORE.",

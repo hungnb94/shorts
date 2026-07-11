@@ -26,7 +26,7 @@ CLIP_AUDIO = {
 
 VARIANTS = [
     {
-        "id": "V1_authority",
+        "id": "2026-07-08-V1_authority",
         "name": "The Richest Black Man on Earth Is Worth $30B",
         "clips": ["C1_hook","C2_candy","C9_backward","C8_10b_revenue","C10_40b","C11_humble","C16_asia_africa","C21_young_africa","C12_industrialize","C17_dont_give_up","C13_worth_it"],
         "hook": "THE RICHEST BLACK MAN ON EARTH IS WORTH $30B",
@@ -47,7 +47,7 @@ VARIANTS = [
         ],
     },
     {
-        "id": "V2_underdog",
+        "id": "2026-07-08-V2_underdog",
         "name": "Candy to $30B Journey",
         "clips": ["C1_hook","C2_candy","C9_backward","C16_asia_africa","C21_young_africa","C11_humble","C12_industrialize","C17_dont_give_up","C13_worth_it"],
         "hook": "HE SOLD CANDY AS A KID. NOW HE IS WORTH $30B",
@@ -66,7 +66,7 @@ VARIANTS = [
         ],
     },
     {
-        "id": "V3_refuse_no",
+        "id": "2026-07-08-V3_refuse_no",
         "name": "99% Success = Refuse No",
         "clips": ["C7_pregnant","C14_lehman","C18_small_biz_gap","C6_150b","C4_8years","C3_refuse_no","C15_do_your_best","C17_dont_give_up"],
         "hook": "99% OF SUCCESS IS REFUSING TO TAKE NO",
@@ -84,7 +84,7 @@ VARIANTS = [
         ],
     },
     {
-        "id": "V4_persistence",
+        "id": "2026-07-08-V4_persistence",
         "name": "8 Years to Raise a Fund",
         "clips": ["C14_lehman","C7_pregnant","C18_small_biz_gap","C6_150b","C4_8years","C3_refuse_no","C15_do_your_best","C17_dont_give_up"],
         "hook": "8 YEARS OF REJECTION. SHE BUILT THE BIGGEST FUND IN AFRICA",
@@ -102,7 +102,7 @@ VARIANTS = [
         ],
     },
     {
-        "id": "V5_table",
+        "id": "2026-07-08-V5_table",
         "name": "No Seat? Build the Table",
         "clips": ["C7_pregnant","C14_lehman","C4_8years","C18_small_biz_gap","C6_150b","C3_refuse_no","C15_do_your_best","C17_dont_give_up","C13_worth_it"],
         "hook": "NO SEAT AT THE TABLE? BUILD YOUR OWN.",
@@ -121,7 +121,7 @@ VARIANTS = [
         ],
     },
     {
-        "id": "V6_negotiation",
+        "id": "2026-07-08-V6_negotiation",
         "name": "3-Word Negotiation Secret",
         "clips": ["C5_negotiation","C15_do_your_best","C4_8years","C3_refuse_no","C6_150b","C17_dont_give_up","C13_worth_it"],
         "hook": "CLOSED A $1B DEAL. HIS SECRET? 3 WORDS.",
@@ -138,7 +138,7 @@ VARIANTS = [
         ],
     },
     {
-        "id": "V7_marketgap",
+        "id": "2026-07-08-V7_marketgap",
         "name": "$150B Opportunity, Only 2% to Women",
         "clips": ["C18_small_biz_gap","C6_150b","C7_pregnant","C14_lehman","C4_8years","C3_refuse_no","C15_do_your_best","C17_dont_give_up","C13_worth_it"],
         "hook": "$150B OPPORTUNITY. ONLY 2% GOES TO WOMEN.",
@@ -157,7 +157,7 @@ VARIANTS = [
         ],
     },
     {
-        "id": "V8_pregnant",
+        "id": "2026-07-08-V8_pregnant",
         "name": "Pregnant at 29, Built Africa's Largest Fund",
         "clips": ["C7_pregnant","C14_lehman","C18_small_biz_gap","C6_150b","C4_8years","C3_refuse_no","C15_do_your_best","C17_dont_give_up","C13_worth_it"],
         "hook": "5 MONTHS PREGNANT. STARTED AFRICA LARGEST VC FUND.",
@@ -176,7 +176,7 @@ VARIANTS = [
         ],
     },
     {
-        "id": "V9_vision",
+        "id": "2026-07-08-V9_vision",
         "name": "$40B, Humble, Industrialize Africa",
         "clips": ["C10_40b","C11_humble","C16_asia_africa","C21_young_africa","C9_backward","C12_industrialize","C17_dont_give_up","C13_worth_it"],
         "hook": "WORTH $40B. DRIVES A TOYOTA. WANTS TO INDUSTRIALIZE AFRICA.",

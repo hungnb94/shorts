@@ -20,14 +20,14 @@ Decision: ship as-is and use real retention data as the read on how much this ac
 - Resolution: 1080x1920 (9:16 portrait)
 - Codec: H.264 (libx264, crf 18/20), 30fps
 - Audio: AAC, 192kbps, 48kHz, stereo
-- File: `output/projects/bacsihai/final/lao_dong_tay_v5.mp4` (18.7MB)
+- File: `output/projects/bacsihai/final/2026-07-10-lao_dong_tay_v5.mp4` (18.7MB)
 - Render script: `pipeline/bacsihai/render_bacsihai_v5.py`
 
 ## YouTube Title
 Vì Sao Người Lao Động Chân Tay Ít Bị Alzheimer Hơn?
 
 ## YouTube Description
-See `output/projects/bacsihai/final/lao_dong_tay_v5.txt` (Vietnamese, hashtags at end).
+See `output/projects/bacsihai/final/2026-07-10-lao_dong_tay_v5.txt` (Vietnamese, hashtags at end).
 
 ## Source
 - Channel: Bác sĩ Hải (same channel as `pipeline/bacsihai/` v1-v4)

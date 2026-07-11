@@ -44,7 +44,7 @@ FONT_BOLD = "/System/Library/Fonts/HelveticaNeue.ttc"
 O.mkdir(parents=True, exist_ok=True)
 T.mkdir(parents=True, exist_ok=True)
 
-VID = "capability_curve_v2"
+VID = "2026-07-11-capability_curve_v2"  # date-prefixed per AGENTS.md convention
 SPEED = 1.1
 
 # Presenter crops (verified via frame extraction, see docstring above)

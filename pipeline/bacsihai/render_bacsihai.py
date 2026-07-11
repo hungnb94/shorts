@@ -61,7 +61,7 @@ PEXELS = {
 # Subs: (start_sec, end_sec, text) — Vietnamese
 VARIANTS = [
     {
-        "id": "V1_duong_pha_nhi",
+        "id": "2026-07-08-V1_duong_pha_nhi",
         "name": "Sai lam so 1 khien ban nhi an vo ich",
         "hook": "NHỊN ĂN MÀ VẪN KHÔNG GIẢM CÂN?",
         "cta": "THEO DÕI ĐỂ BIẾT THÊM MẸO NHỊN ĂN",

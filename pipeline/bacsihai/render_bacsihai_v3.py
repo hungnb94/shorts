@@ -72,7 +72,7 @@ def make_pexels_overlay_clip(key, duration, out):
 # subs: (start, end, text) — matched to src timeline
 VARIANTS = [
     {
-        "id": "V1_duong_pha_nhi",
+        "id": "2026-07-08-V1_duong_pha_nhi",
         "hook": "NHỊN ĂN MÀ VẪN KHÔNG GIẢM CÂN?",
         "cta": "THEO DÕI ĐỂ BIẾT THÊM MẸO NHỊN ĂN",
         "src_clips": [

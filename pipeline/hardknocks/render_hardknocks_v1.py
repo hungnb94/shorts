@@ -139,7 +139,7 @@ def main():
     concat_list = T / "concat_list.txt"
     concat_list.write_text("\n".join(f"file '{p.resolve()}'" for p in outputs))
 
-    final = O / "hardknocks_lawnmower_v1.mp4"
+    final = O / "2026-07-10-hardknocks_lawnmower_v1.mp4"  # date-prefixed per AGENTS.md convention
     cmd3 = ["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat_list),
             "-c", "copy", str(final)]
     r = subprocess.run(cmd3, capture_output=True, text=True, timeout=120)
