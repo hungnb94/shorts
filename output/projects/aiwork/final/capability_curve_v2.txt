@@ -1,0 +1,12 @@
+Title: AI Coding Jumped From 62% to 88% in ONE Year (Real Benchmark)
+
+Description:
+Raise your hand if you feel like Claude made you 10x faster than a year ago. Here's the actual number: on SWE-bench Verified - a benchmark built from real GitHub coding tasks, not a marketing number - Claude went from 62.3% to 87.6% in about a year. That's more than 3x fewer failures on the exact same hard pull requests older models used to choke on.
+
+This clip cuts together the reveal, the reasoning, and a live before/after demo of the same task run 12 months apart - so you can judge the gap yourself, not just take the number on faith.
+
+Source: Claude YouTube channel, "The Capability Curve" (Alex Albert) - commentary and data-viz overlay added here.
+
+Working With AI - short, practical breakdowns of how professionals actually use AI tools. No hype, no "AI will take your job" fearmongering. Just what to type, why it works, and what to try next.
+
+#AI #Claude #Anthropic #SWEBench #AICoding #Productivity

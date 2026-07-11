@@ -11,7 +11,11 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 ```
 1. Frame-0 face/action check (ADR-0017): tại t=0 candidate phải có mặt người
    hoặc hành động/prop rõ ràng — không phải title card, static text, hay B-roll.
-   Check bằng mắt (visual inspection thủ công), không dùng script.
+   Check bằng mắt (visual inspection thủ công), không dùng script. Nếu nguồn có
+   cả 2 lựa chọn, ưu tiên shot cận/tight (mặt chiếm phần lớn khung hình) hơn
+   wide/establishing shot — mặt lớn hơn, rõ hơn, "đọc" nhanh hơn là có người
+   đang nói chuyện với mình (aiwork v2: tight portrait mở đầu > v1's wide stage
+   shot cho cùng Hook Gate item 1).
 2. Gap-not-resolved check (CONTEXT.md → Hook): hook line dự kiến, đọc riêng,
    KHÔNG được nói hết toàn bộ claim — phải mở 1 gap/mystery ở 0-2s, chỉ
    partial reveal ở 5-8s.
@@ -41,7 +45,10 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 
 ## Stage 2 — Cut Segment
 
-- Extract candidate đã pass Stage 0. Phải thỏa ADR-0013 (Contiguous VO: 45-60s, một span liền mạch, audio bất biến, không bao giờ `concat`).
+- Extract candidate đã pass Stage 0. Chọn 1 trong 2 sub-format của Clip Curation Edit (ADR-0022):
+  - **Contiguous VO** (ADR-0013): một span liền mạch 45-60s, audio bất biến, không bao giờ `concat` — dùng khi hook + payoff mạnh nhất đã nằm gọn trong 1 cửa sổ 45-60s của nguồn.
+  - **Multi-Clip Mashup** (ADR-0022): nhiều đoạn rời rạc (mỗi đoạn <15s theo ADR-0007 item 3), nối bằng ffmpeg concat demuxer, hard-cut tại mọi điểm nối (không crossfade/sound-design) — dùng khi các moment mạnh nhất nằm rải rác quá xa nhau để gom vào 1 cửa sổ 45-60s duy nhất. Vẫn phải đạt tổng 45-60s sau khi ghép.
+- Production doc phải nêu rõ đang dùng sub-format nào (cite ADR-0013 hoặc ADR-0022) trong phần "Why This Segment".
 
 ## Stage 3 — Hook Text + Overlays
 
@@ -93,7 +100,6 @@ Lần sản xuất này có gặp case mà các stage trong docs/WORKFLOW.md ch�
 
 ## Nằm ngoài scope (đã biết, không fix trong doc này)
 
-- Vi phạm ADR-0013 (concat) của `render_hardknocks_v1.py`.
 - Ambiguity ở item 3 của Transformative Gate cho video dạng single-contiguous-segment.
 - Các hàm helper bị duplicate giữa các render script trong `pipeline/<project>/`.
 - Không có tool tự động check frame (ví dụ `inspect_image.py`) — frame-0 face check ở Stage 0 chủ đích giữ là visual judgment thủ công.
