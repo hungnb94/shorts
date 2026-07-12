@@ -43,6 +43,7 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 - Download max quality: `yt-dlp -f "bestvideo[height>=2160]+bestaudio"` (không bao giờ nhận default 720p — AGENTS.md).
 - Transcribe (mlx_whisper).
 - Xác định một hoặc nhiều candidate contiguous span, mỗi span kèm 1 hook angle sơ bộ → đưa từng candidate vào Stage 0.
+- **Với nguồn dạng conference/talk dài (nhiều chục phút), trích 1 frame kiểm tra nhanh cho MỖI candidate window đã chọn từ transcript — không chỉ window của HOOK — trước khi chốt kế hoạch cắt** (aiwork_v3: 3/4 candidate windows chọn thuần từ nội dung transcript hóa ra là slide kiến trúc kỹ thuật hoặc màn hình CLI/terminal đầy jargon, chỉ phát hiện được khi trích frame thật ở Stage 2 — phải re-plan lại toàn bộ giữa chừng. Nội dung transcript hợp lý không đảm bảo hình ảnh tại đúng mốc đó dùng được, đặc biệt khi có ràng buộc audience-fit/né-code).
 - Sau khi chốt source video dùng cho video mới, append 1 dòng vào `data/source_videos.csv`.
 
 ## Stage 2 — Cut Segment

@@ -1,0 +1,12 @@
+Title: Why Adding More Instructions Makes Your AI Worse
+
+Description:
+A team building their own AI assistant kept adding instructions every time it needed a new capability - until the instructions ballooned to hundreds of lines and it started making mistakes it never made before.
+
+The fix wasn't more instructions. It was breaking everything down into small, focused steps instead of one giant prompt trying to do everything at once.
+
+Source: Claude YouTube channel, "Tool, skill, or subagent?" (Code with Claude London) - commentary and value-add overlays added here.
+
+Working With AI - short, practical breakdowns of how professionals actually use AI tools. No hype, no "AI will take your job" fearmongering. Just what to try next.
+
+#AI #Claude #Anthropic #PromptEngineering #Productivity
