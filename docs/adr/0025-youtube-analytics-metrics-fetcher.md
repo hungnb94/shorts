@@ -70,6 +70,82 @@ that applies equally here. Likewise, per-video CTR (impressions-based) availabil
 is unconfirmed for Shorts and is reported as unavailable with a reason string if the API call
 fails, rather than silently omitted.
 
+## Addendum (2026-07-12): confirmed via real API calls against the live channel
+
+Verified end-to-end with a real OAuth token against the actual channel (MONEY BLINDSPOT,
+`UCG_yrDQF5Sj6iMTZB0KSBAA`):
+
+- **CTR/impressions: confirmed unavailable, not just unconfirmed.** `metrics=impressions` (and
+  `impressionsClickThroughRate`) returns a hard `400 Unknown identifier (impressions) given in
+  field parameters.metrics` — this API simply does not expose an impressions/CTR metric under
+  those names. `ctr.available` will always be `false` in practice; the fetch-metrics skill's
+  "leave CTR pending" behavior is therefore the permanent behavior, not a temporary fallback.
+- **`averageViewPercentage` vs `Stayed (Retention/Overall)`: mapping is provisional, not
+  confirmed.** A real fetch against `ChWLcE3OYpA` (Dangote, `ADR-0016`'s benchmark) returned
+  `averageViewPercentage: 57.6`, `averageViewDuration: 26s` — neither matches the historical
+  EXPERIMENT-LOG.md row for this same video (`Stayed (Retention/Overall)`: 51.6%, `AVD`: 0:19).
+  57.6% sits closer to that row's `Swiped Away` (57.7%) than to `Stayed (Retention/Overall)`.
+  This may simply be natural drift (the historical numbers were a human's Studio read at an
+  earlier point with fewer accumulated views; retention % can shift as more of the audience
+  arrives later), or the metric-to-Studio-panel mapping assumed above may be wrong. **Not
+  resolved here** — the fetch-metrics skill should flag this in its report the first several
+  times it runs (cross-check the written `averageViewPercentage` against the same video's live
+  Studio dashboard once) rather than trust the mapping silently.
+- **New-video indexing lag, distinct from CTR/mapping issues**: the intended first test video,
+  `dHDpDXSIAkA` (hardknocks_v1, uploaded 2026-07-10, public view count 1114 per `yt-dlp`, already
+  past the 48h wait), returned **zero** for every metric (views, AVD, retention curve — all
+  empty), and does not appear at all in a channel-wide `dimensions=video` breakdown that
+  correctly lists 8 *other*, older videos on the same channel with real numbers (proving the
+  query mechanics, auth, and channel scoping are all correct). This means the Analytics
+  *reporting* API can lag well past the 48h mark for very recently uploaded videos on a
+  low-traffic channel, independent of whatever YouTube Studio's own dashboard shows. Recorded as
+  a new pitfall in AGENTS.md — always retry after another day or two if a due video comes back
+  empty, rather than treating an empty result as "this video has no data."
+
+## Addendum (2026-07-12): this project uploads to 3 separate channels — one OAuth token per channel, not one for "the channel"
+
+This ADR's original Decision assumed a single OAuth token would cover fetching. That assumption
+was wrong: the project uploads to **3 distinct YouTube channels**, one per vertical, confirmed
+via `yt-dlp`'s public `channel`/`channel_id` fields on real uploaded videos:
+
+| Channel | Channel ID | Vertical / project folders |
+|---|---|---|
+| MONEY BLINDSPOT | `UCG_yrDQF5Sj6iMTZB0KSBAA` | Finance (ADR-0001/0004) — `hardknocks`, `dangote`, `giannis` |
+| Giảm Cân Healthy - Thực Chiến | `UC4hMMkCOuGlV9bYl8wA8RGA` | Health/Vietnamese (ADR-0019) — `bacsihai` |
+| Working With AI | `UCop24nsu-TdXZSAO_Ii_QbA` | AI-education (ADR-0020) — `aiwork` |
+
+Also confirmed the hard way: **`channel==MINE` is unreliable and must never be used.** It
+resolves to whichever channel the *authenticated Google Account's own identity* owns — not
+necessarily any of the 3 channels above, and not consistently the same one across different
+consent flows by different accounts. One real OAuth consent (from the account already used for
+MONEY BLINDSPOT) correctly returned MONEY BLINDSPOT's data under `channel==MINE`. A second
+consent, done with a different Google account (the one that originally created all 3 Brand
+Account channels), returned **403 Forbidden on all 3 explicit channel IDs**, including the one
+that had just worked — meaning "having created a Brand Account channel" does not imply "currently
+holds recognized Manager/Owner permission on it" for Analytics API purposes. Studio's own
+account-switcher (which channels an identity can currently manage) is the reliable ground truth,
+not assumptions about who "owns" a channel.
+
+**Revised decision**: every explicit-channel query uses `channel==<ID>`, never `MINE`.
+Credentials are stored one refresh token per channel alias
+(`GOOGLE_REFRESH_TOKEN_FINANCE`/`_HEALTH`/`_AIWORK` in `.env`), sharing one OAuth Client
+ID/Secret (Google Cloud OAuth Clients are reusable across multiple separate user consents — no
+need for 3 separate Cloud projects). `npm run oauth:setup:<alias>` runs the consent flow once per
+channel, each time signed in as whichever Google account Studio confirms has Manager/Owner access
+to that specific channel. `src/platforms/youtube-analytics.ts`'s `fetchAll` groups a batch's
+input videos by channel alias and fetches each group with its own token, so one channel's
+missing/broken token does not block metrics for videos on a different, already-set-up channel in
+the same run.
+
+**Operational lesson, not a code defect**: exchanging a new authorization code for a given
+`.env` key overwrites whatever refresh token was there before — there is no way to recover an
+overwritten token short of re-running consent again with the correct account. `--exchange-code`
+and `--setup-oauth` now require an explicit `--channel <alias>` so this can't happen by accident
+across channels, but re-running consent for the *same* channel/alias will still overwrite that
+channel's own prior token, which is expected (Google only issues a fresh refresh token on
+`prompt=consent`, and there's no reason to keep an old one once a new one for the same channel
+exists).
+
 ## Consequences
 
 - This is the first OAuth integration and the first real `src/` TypeScript file in the repo —

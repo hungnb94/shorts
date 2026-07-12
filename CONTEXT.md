@@ -62,8 +62,12 @@ Một trong 7 visual rendering styles: Stock Footage, Kinetic Typography, Data V
 _Avoid_: "format", "template" (use specific term)
 
 **Source Channel**:
-Kênh YouTube dùng làm research input, cho MỘT trong 3 niche song song (ADR-0019, ADR-0020): finance viral (VD: School of Hard Knocks, 2.08M subs, tiếng Anh), health/longevity (VD: Bác sĩ Hải, tiếng Việt), hoặc AI education (VD: @mattpocockuk, @anthropic-ai — kênh practitioner/product, không nhất thiết phải "viral how-to" như 2 niche kia). Với 6 animation types (Repackage), chỉ lấy topic/facts/hooks (hoặc style/structure với niche AI education), KHÔNG lấy footage. Với Clip Curation Edit, có lấy footage nhưng vẫn transform (xem Transformative Gate).
+Kênh YouTube dùng làm research input, cho MỘT trong 3 niche song song (ADR-0019, ADR-0020): finance viral (VD: School of Hard Knocks, 2.08M subs, tiếng Anh), health/longevity (VD: Bác sĩ Hải, tiếng Việt), hoặc AI education (VD: @mattpocockuk, @anthropic-ai — kênh practitioner/product, không nhất thiết phải "viral how-to" như 2 niche kia). Với 6 animation types (Repackage), chỉ lấy topic/facts/hooks (hoặc style/structure với niche AI education), KHÔNG lấy footage. Với Clip Curation Edit, có lấy footage nhưng vẫn transform (xem Transformative Gate). KHÁC Destination Channel (bên dưới) — Source Channel không phải kênh của user.
 _Avoid_: "inspiration", "reference channel"
+
+**Destination Channel**:
+Kênh YouTube CỦA USER, nơi video đã render được upload lên — 1 kênh riêng cho mỗi vertical (ADR-0025 addendum): MONEY BLINDSPOT (finance — `hardknocks`/`dangote`/`giannis`), Giảm Cân Healthy - Thực Chiến (health — `bacsihai`), Working With AI (AI-education — `aiwork`). Mỗi kênh cần OAuth token riêng để fetch Analytics (`GOOGLE_REFRESH_TOKEN_FINANCE`/`_HEALTH`/`_AIWORK`) — `channel==MINE` KHÔNG dùng được vì không resolve đáng tin cậy về đúng kênh này (xem ADR-0025).
+_Avoid_: nhầm với "Source Channel" ở trên — 2 khái niệm hoàn toàn khác nhau
 
 **Curate**:
 Quá trình xem video từ Source Channel, extract topic + facts + hook pattern. Output = text research notes, không phải video.

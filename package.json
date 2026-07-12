@@ -8,7 +8,10 @@
   },
   "scripts": {
     "metrics:fetch": "tsx src/platforms/youtube-analytics.ts",
-    "oauth:setup": "tsx src/platforms/youtube-analytics.ts --setup-oauth"
+    "oauth:setup": "tsx src/platforms/youtube-analytics.ts --setup-oauth",
+    "oauth:setup:finance": "tsx src/platforms/youtube-analytics.ts --setup-oauth --channel finance",
+    "oauth:setup:health": "tsx src/platforms/youtube-analytics.ts --setup-oauth --channel health",
+    "oauth:setup:aiwork": "tsx src/platforms/youtube-analytics.ts --setup-oauth --channel aiwork"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

@@ -1,10 +1,20 @@
 // YouTube Analytics API fetcher — see docs/adr/0025-youtube-analytics-metrics-fetcher.md
 //
+// This project uploads to 3 separate YouTube channels (one per vertical, ADR-0025 addendum) —
+// each requires its OWN OAuth consent (its own Google account with Manager/Owner access), so
+// credentials are stored per-channel-alias, not as a single shared token.
+//
 // Modes:
-//   --setup-oauth   one-time interactive OAuth consent, writes GOOGLE_REFRESH_TOKEN into .env
-//   --whoami        smoke test: refresh a token and run one trivial Analytics query
-//   --dry-run       skip real API calls, return mock data (validates plumbing/shape only)
-//   (default)       real fetch — input via stdin JSON [{videoId, durationSeconds?}] or --ids a,b,c
+//   --setup-oauth --channel <alias>     one-time interactive OAuth consent for that channel,
+//                                        writes GOOGLE_REFRESH_TOKEN_<ALIAS> into .env
+//   --exchange-code <code> --channel <alias>   same, but using a code already copied from the
+//                                        browser's address bar (fallback when the local callback
+//                                        port is occupied by something else)
+//   --whoami --channel <alias>          smoke test: refresh that channel's token, run one query
+//   --dry-run                           skip real API calls, return mock data (validates plumbing/shape only)
+//   (default)                           real fetch — input via stdin JSON
+//                                        [{videoId, durationSeconds?, channel}] or
+//                                        --ids a,b,c --channel <alias>
 //
 // Output (default/--dry-run mode): a JSON array on stdout, one entry per input video.
 
@@ -19,7 +29,27 @@ const AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";
 const ANALYTICS_URL = "https://youtubeanalytics.googleapis.com/v2/reports";
 const SCOPE = "https://www.googleapis.com/auth/yt-analytics.readonly";
 
-type VideoInput = { videoId: string; durationSeconds?: number };
+// Confirmed by direct API probing (ADR-0025 addendum, 2026-07-12) — "channel==MINE" resolves to
+// whichever channel the authenticated Google Account's own identity owns, which is NOT
+// necessarily any of these 3 project channels depending on which account did the consent. Always
+// address channels explicitly by ID, never MINE.
+const CHANNEL_ALIASES: Record<string, string> = {
+  finance: "UCG_yrDQF5Sj6iMTZB0KSBAA", // MONEY BLINDSPOT (hardknocks, dangote, giannis, ...)
+  health: "UC4hMMkCOuGlV9bYl8wA8RGA", // Giảm Cân Healthy - Thực Chiến (bacsihai)
+  aiwork: "UCop24nsu-TdXZSAO_Ii_QbA", // Working With AI (aiwork)
+};
+
+function resolveChannelId(alias: string): string {
+  const id = CHANNEL_ALIASES[alias];
+  if (!id) throw new Error(`Unknown channel alias "${alias}" — expected one of: ${Object.keys(CHANNEL_ALIASES).join(", ")}`);
+  return id;
+}
+
+function tokenEnvKey(alias: string): string {
+  return `GOOGLE_REFRESH_TOKEN_${alias.toUpperCase()}`;
+}
+
+type VideoInput = { videoId: string; durationSeconds?: number; channel?: string };
 
 type RetentionPoint = { elapsedRatio: number; elapsedSeconds: number | null; audienceWatchRatio: number };
 type KeyMoment = { type: "dip" | "peak"; elapsedSeconds: number | null; elapsedRatio: number; magnitudePct: number; zScore: number };
@@ -51,7 +81,7 @@ function loadEnv(): void {
 function requireEnv(name: string): string {
   const value = process.env[name];
   if (!value) {
-    throw new Error(`Missing ${name} in .env — see .env.example (run: cp .env.example .env, fill it in, then npm run oauth:setup)`);
+    throw new Error(`Missing ${name} in .env — see .env.example (run: cp .env.example .env, fill it in, then npm run oauth:setup:<channel>)`);
   }
   return value;
 }
@@ -76,8 +106,53 @@ async function readStdin(): Promise<string> {
 
 // ---- OAuth ----
 
-async function setupOAuth(): Promise<void> {
+async function exchangeCodeForRefreshToken(
+  code: string,
+  clientId: string,
+  clientSecret: string,
+  redirectUri: string,
+  channelAlias: string,
+): Promise<void> {
+  const tokenRes = await fetch(TOKEN_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      code,
+      client_id: clientId,
+      client_secret: clientSecret,
+      redirect_uri: redirectUri,
+      grant_type: "authorization_code",
+    }),
+  });
+  const tokenJson: any = await tokenRes.json();
+  if (!tokenRes.ok) throw new Error(`Token exchange failed: ${JSON.stringify(tokenJson)}`);
+  if (!tokenJson.refresh_token) {
+    throw new Error(
+      "No refresh_token in response — Google only issues one on first consent. Revoke prior access at https://myaccount.google.com/permissions and re-run.",
+    );
+  }
+  const key = tokenEnvKey(channelAlias);
+  upsertEnvVar(key, tokenJson.refresh_token);
+  console.error(`Success — ${key} written to .env`);
+}
+
+// Fallback for --setup-oauth when the local callback port is already occupied by something
+// else (e.g. Jenkins on 8080): exchange an authorization code copied by hand from the browser's
+// address bar after Google's redirect, without needing our own server to receive it. The
+// redirect_uri here is used only for Google's server-side validation that it matches the
+// original auth request — it does not need to be reachable for this call to succeed.
+async function exchangeCode(code: string, channelAlias: string): Promise<void> {
   loadEnv();
+  resolveChannelId(channelAlias); // validates alias early, before spending the (single-use) code
+  const clientId = requireEnv("GOOGLE_CLIENT_ID");
+  const clientSecret = requireEnv("GOOGLE_CLIENT_SECRET");
+  const redirectUri = requireEnv("GOOGLE_REDIRECT_URI");
+  await exchangeCodeForRefreshToken(code, clientId, clientSecret, redirectUri, channelAlias);
+}
+
+async function setupOAuth(channelAlias: string): Promise<void> {
+  loadEnv();
+  resolveChannelId(channelAlias);
   const clientId = requireEnv("GOOGLE_CLIENT_ID");
   const clientSecret = requireEnv("GOOGLE_CLIENT_SECRET");
   const redirectUri = requireEnv("GOOGLE_REDIRECT_URI");
@@ -91,6 +166,7 @@ async function setupOAuth(): Promise<void> {
   authUrl.searchParams.set("access_type", "offline");
   authUrl.searchParams.set("prompt", "consent");
 
+  console.error(`Authorizing channel "${channelAlias}" — sign in with the Google account that has Manager/Owner access to it.`);
   console.error("Open this URL to authorize (attempting to open it automatically too):");
   console.error(authUrl.toString());
   exec(`open "${authUrl.toString()}"`, () => {
@@ -114,36 +190,31 @@ async function setupOAuth(): Promise<void> {
         resolve(authCode);
       }
     });
+    server.on("error", (err: NodeJS.ErrnoException) => {
+      if (err.code === "EADDRINUSE") {
+        reject(
+          new Error(
+            `Port ${port} is already in use by another process — cannot receive the OAuth redirect. ` +
+              `Either free the port, change GOOGLE_REDIRECT_URI to a different port (and update it on the ` +
+              `OAuth client in Google Cloud Console to match), or if you already have a ?code=... from the ` +
+              `browser's address bar, run: npm run --silent metrics:fetch -- --exchange-code "<code>" --channel ${channelAlias}`,
+          ),
+        );
+      } else {
+        reject(err);
+      }
+    });
     server.listen(port);
   });
 
-  const tokenRes = await fetch(TOKEN_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      code,
-      client_id: clientId,
-      client_secret: clientSecret,
-      redirect_uri: redirectUri,
-      grant_type: "authorization_code",
-    }),
-  });
-  const tokenJson: any = await tokenRes.json();
-  if (!tokenRes.ok) throw new Error(`Token exchange failed: ${JSON.stringify(tokenJson)}`);
-  if (!tokenJson.refresh_token) {
-    throw new Error(
-      "No refresh_token in response — Google only issues one on first consent. Revoke prior access at https://myaccount.google.com/permissions and re-run.",
-    );
-  }
-  upsertEnvVar("GOOGLE_REFRESH_TOKEN", tokenJson.refresh_token);
-  console.error("Success — GOOGLE_REFRESH_TOKEN written to .env");
+  await exchangeCodeForRefreshToken(code, clientId, clientSecret, redirectUri, channelAlias);
 }
 
-async function getAccessToken(): Promise<string> {
+async function getAccessToken(channelAlias: string): Promise<string> {
   loadEnv();
   const clientId = requireEnv("GOOGLE_CLIENT_ID");
   const clientSecret = requireEnv("GOOGLE_CLIENT_SECRET");
-  const refreshToken = requireEnv("GOOGLE_REFRESH_TOKEN");
+  const refreshToken = requireEnv(tokenEnvKey(channelAlias));
 
   const res = await fetch(TOKEN_URL, {
     method: "POST",
@@ -156,21 +227,22 @@ async function getAccessToken(): Promise<string> {
     }),
   });
   const json: any = await res.json();
-  if (!res.ok) throw new Error(`Token refresh failed: ${JSON.stringify(json)}`);
+  if (!res.ok) throw new Error(`Token refresh failed for channel "${channelAlias}": ${JSON.stringify(json)}`);
   return json.access_token;
 }
 
-async function whoami(): Promise<void> {
-  const accessToken = await getAccessToken();
+async function whoami(channelAlias: string): Promise<void> {
+  const channelId = resolveChannelId(channelAlias);
+  const accessToken = await getAccessToken(channelAlias);
   const url = new URL(ANALYTICS_URL);
-  url.searchParams.set("ids", "channel==MINE");
+  url.searchParams.set("ids", `channel==${channelId}`);
   url.searchParams.set("startDate", "2020-01-01");
   url.searchParams.set("endDate", todayISO());
   url.searchParams.set("metrics", "views");
   const res = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` } });
   const json: any = await res.json();
-  if (!res.ok) throw new Error(`Analytics API call failed: ${JSON.stringify(json)}`);
-  console.error("Auth OK. Channel lifetime views (sanity check):", JSON.stringify(json.rows));
+  if (!res.ok) throw new Error(`Analytics API call failed for channel "${channelAlias}" (${channelId}): ${JSON.stringify(json)}`);
+  console.error(`Auth OK for "${channelAlias}" (${channelId}). Lifetime views (sanity check):`, JSON.stringify(json.rows));
 }
 
 // ---- Analytics fetch ----
@@ -179,9 +251,9 @@ function todayISO(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
-async function analyticsQuery(accessToken: string, params: Record<string, string>): Promise<any> {
+async function analyticsQuery(accessToken: string, channelId: string, params: Record<string, string>): Promise<any> {
   const url = new URL(ANALYTICS_URL);
-  url.searchParams.set("ids", "channel==MINE");
+  url.searchParams.set("ids", `channel==${channelId}`);
   url.searchParams.set("startDate", "2020-01-01");
   url.searchParams.set("endDate", todayISO());
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
@@ -193,6 +265,7 @@ async function analyticsQuery(accessToken: string, params: Record<string, string
 
 async function fetchTopLineMetrics(
   accessToken: string,
+  channelId: string,
   videoIds: string[],
 ): Promise<Map<string, { views?: number; averageViewDuration?: number; averageViewPercentage?: number; ctr: Availability<number> }>> {
   const result = new Map<
@@ -201,10 +274,13 @@ async function fetchTopLineMetrics(
   >();
   const filters = `video==${videoIds.join(",")}`;
 
+  // Confirmed (ADR-0025 addendum): `impressions`/`impressionsClickThroughRate` are not
+  // recognized metric identifiers on this API at all (400 Unknown identifier) — this always
+  // fails, kept as a guarded attempt in case that ever changes rather than assumed permanently.
   let ctrReason = "";
   let withCtr: any = null;
   try {
-    withCtr = await analyticsQuery(accessToken, {
+    withCtr = await analyticsQuery(accessToken, channelId, {
       dimensions: "video",
       filters,
       metrics: "views,averageViewDuration,averageViewPercentage,impressions,impressionsClickThroughRate",
@@ -213,11 +289,13 @@ async function fetchTopLineMetrics(
     ctrReason = (err as Error).message;
   }
 
-  const base = withCtr ?? (await analyticsQuery(accessToken, {
-    dimensions: "video",
-    filters,
-    metrics: "views,averageViewDuration,averageViewPercentage",
-  }));
+  const base =
+    withCtr ??
+    (await analyticsQuery(accessToken, channelId, {
+      dimensions: "video",
+      filters,
+      metrics: "views,averageViewDuration,averageViewPercentage",
+    }));
 
   const headers: string[] = (base.columnHeaders ?? []).map((h: any) => h.name);
   const videoIdx = headers.indexOf("video");
@@ -242,8 +320,13 @@ async function fetchTopLineMetrics(
   return result;
 }
 
-async function fetchRetentionCurve(accessToken: string, videoId: string, durationSeconds?: number): Promise<RetentionPoint[]> {
-  const json = await analyticsQuery(accessToken, {
+async function fetchRetentionCurve(
+  accessToken: string,
+  channelId: string,
+  videoId: string,
+  durationSeconds?: number,
+): Promise<RetentionPoint[]> {
+  const json = await analyticsQuery(accessToken, channelId, {
     dimensions: "elapsedVideoTimeRatio",
     filters: `video==${videoId}`,
     metrics: "audienceWatchRatio",
@@ -334,41 +417,91 @@ function detectKeyMoments(curve: RetentionPoint[], durationSeconds?: number): Ke
 // ---- Real fetch orchestration ----
 
 async function fetchAll(inputs: VideoInput[]): Promise<VideoMetrics[]> {
-  const accessToken = await getAccessToken();
-  const results: VideoMetrics[] = [];
-
-  let topLine: Awaited<ReturnType<typeof fetchTopLineMetrics>>;
-  try {
-    topLine = await fetchTopLineMetrics(accessToken, inputs.map((i) => i.videoId));
-  } catch (err) {
-    // Hard stop only if even the batched top-line call fails outright.
-    throw new Error(`Top-line metrics fetch failed: ${(err as Error).message}`);
+  const groups = new Map<string, VideoInput[]>();
+  for (const input of inputs) {
+    if (!input.channel) {
+      // handled per-item below via the "missing channel" error path
+    }
+    const key = input.channel ?? "__missing__";
+    const list = groups.get(key) ?? [];
+    list.push(input);
+    groups.set(key, list);
   }
 
-  for (const input of inputs) {
+  const results: VideoMetrics[] = [];
+
+  const missing = groups.get("__missing__");
+  if (missing) {
+    for (const input of missing) {
+      results.push({
+        videoId: input.videoId,
+        engagementRetention: { available: false, reason: "no channel specified" },
+        error: `Missing "channel" field — expected one of: ${Object.keys(CHANNEL_ALIASES).join(", ")}`,
+      });
+    }
+    groups.delete("__missing__");
+  }
+
+  for (const [channelAlias, groupInputs] of groups) {
+    let channelId: string;
+    let accessToken: string;
     try {
-      const line = topLine.get(input.videoId);
-      const retentionCurve = await fetchRetentionCurve(accessToken, input.videoId, input.durationSeconds);
-      const keyMoments = detectKeyMoments(retentionCurve, input.durationSeconds);
-      results.push({
-        videoId: input.videoId,
-        views: line?.views,
-        averageViewDuration: line?.averageViewDuration,
-        averageViewPercentage: line?.averageViewPercentage,
-        ctr: line?.ctr,
-        engagementRetention: {
-          available: false,
-          reason: "no documented YouTube Analytics API field found for Shorts swipe-away/engagement retention; see ADR-0025",
-        },
-        retentionCurve,
-        keyMoments,
-      });
+      channelId = resolveChannelId(channelAlias);
+      accessToken = await getAccessToken(channelAlias);
     } catch (err) {
-      results.push({
-        videoId: input.videoId,
-        engagementRetention: { available: false, reason: "fetch failed" },
-        error: (err as Error).message,
-      });
+      for (const input of groupInputs) {
+        results.push({
+          videoId: input.videoId,
+          engagementRetention: { available: false, reason: "auth failed" },
+          error: `Channel "${channelAlias}": ${(err as Error).message}`,
+        });
+      }
+      continue;
+    }
+
+    let topLine: Awaited<ReturnType<typeof fetchTopLineMetrics>>;
+    try {
+      topLine = await fetchTopLineMetrics(
+        accessToken,
+        channelId,
+        groupInputs.map((i) => i.videoId),
+      );
+    } catch (err) {
+      for (const input of groupInputs) {
+        results.push({
+          videoId: input.videoId,
+          engagementRetention: { available: false, reason: "fetch failed" },
+          error: `Top-line metrics fetch failed for channel "${channelAlias}": ${(err as Error).message}`,
+        });
+      }
+      continue;
+    }
+
+    for (const input of groupInputs) {
+      try {
+        const line = topLine.get(input.videoId);
+        const retentionCurve = await fetchRetentionCurve(accessToken, channelId, input.videoId, input.durationSeconds);
+        const keyMoments = detectKeyMoments(retentionCurve, input.durationSeconds);
+        results.push({
+          videoId: input.videoId,
+          views: line?.views,
+          averageViewDuration: line?.averageViewDuration,
+          averageViewPercentage: line?.averageViewPercentage,
+          ctr: line?.ctr,
+          engagementRetention: {
+            available: false,
+            reason: "no documented YouTube Analytics API field found for Shorts swipe-away/engagement retention; see ADR-0025",
+          },
+          retentionCurve,
+          keyMoments,
+        });
+      } catch (err) {
+        results.push({
+          videoId: input.videoId,
+          engagementRetention: { available: false, reason: "fetch failed" },
+          error: (err as Error).message,
+        });
+      }
     }
   }
   return results;
@@ -405,25 +538,40 @@ async function parseInputs(): Promise<VideoInput[]> {
   const idsIdx = args.indexOf("--ids");
   if (idsIdx !== -1) {
     const ids = args[idsIdx + 1]?.split(",").map((s) => s.trim()) ?? [];
-    return ids.map((videoId) => ({ videoId }));
+    const channelIdx = args.indexOf("--channel");
+    const channel = channelIdx !== -1 ? args[channelIdx + 1] : undefined;
+    return ids.map((videoId) => ({ videoId, channel }));
   }
   if (process.stdin.isTTY) {
-    throw new Error("No --ids given and stdin is a TTY — pipe JSON [{videoId, durationSeconds?}] or pass --ids id1,id2");
+    throw new Error("No --ids given and stdin is a TTY — pipe JSON [{videoId, durationSeconds?, channel}] or pass --ids id1,id2 --channel <alias>");
   }
   const raw = await readStdin();
-  if (!raw.trim()) throw new Error("Empty stdin — expected JSON [{videoId, durationSeconds?}]");
+  if (!raw.trim()) throw new Error("Empty stdin — expected JSON [{videoId, durationSeconds?, channel}]");
   return JSON.parse(raw);
 }
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
   try {
+    const channelIdx = args.indexOf("--channel");
+    const channelAlias = channelIdx !== -1 ? args[channelIdx + 1] : undefined;
+
     if (args.includes("--setup-oauth")) {
-      await setupOAuth();
+      if (!channelAlias) throw new Error(`--setup-oauth requires --channel <alias> (one of: ${Object.keys(CHANNEL_ALIASES).join(", ")})`);
+      await setupOAuth(channelAlias);
+      return;
+    }
+    const exchangeIdx = args.indexOf("--exchange-code");
+    if (exchangeIdx !== -1) {
+      const code = args[exchangeIdx + 1];
+      if (!code) throw new Error("--exchange-code requires a value (the ?code=... from the redirect URL)");
+      if (!channelAlias) throw new Error(`--exchange-code requires --channel <alias> (one of: ${Object.keys(CHANNEL_ALIASES).join(", ")})`);
+      await exchangeCode(code, channelAlias);
       return;
     }
     if (args.includes("--whoami")) {
-      await whoami();
+      if (!channelAlias) throw new Error(`--whoami requires --channel <alias> (one of: ${Object.keys(CHANNEL_ALIASES).join(", ")})`);
+      await whoami(channelAlias);
       return;
     }
     const inputs = await parseInputs();
