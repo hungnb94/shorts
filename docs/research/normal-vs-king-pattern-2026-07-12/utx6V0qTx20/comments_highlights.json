@@ -1,0 +1,69 @@
+{
+  "top_3_by_likes": [
+    {
+      "text": "The firefighter:🗿💯💯👍🏻👍🏻\nThe editor:🧠🤏🥀",
+      "like_count": 25000,
+      "reply_count_sampled": 132,
+      "is_pinned": false,
+      "author": "@Xenorexzz"
+    },
+    {
+      "text": "Everyone else :🗿💯 \nThe editor: 🤡🧠🤏",
+      "like_count": 12000,
+      "reply_count_sampled": 95,
+      "is_pinned": false,
+      "author": "@Real_viral_YT"
+    },
+    {
+      "text": "Do you even know how hard being a firefighter is?",
+      "like_count": 7200,
+      "reply_count_sampled": 56,
+      "is_pinned": false,
+      "author": "@Yummi_melonoriginal"
+    }
+  ],
+  "most_replied_sampled": {
+    "text": "The firefighter:🗿💯💯👍🏻👍🏻\nThe editor:🧠🤏🥀",
+    "like_count": 25000,
+    "reply_count_sampled": 132,
+    "is_pinned": false,
+    "author": "@Xenorexzz"
+  },
+  "sample_reply_thread": {
+    "parent": {
+      "text": "The firefighter:🗿💯💯👍🏻👍🏻\nThe editor:🧠🤏🥀",
+      "like_count": 25000,
+      "reply_count_sampled": 132,
+      "is_pinned": false,
+      "author": "@Xenorexzz"
+    },
+    "replies_sample": [
+      {
+        "text": "Mfs aint evolved yet🥀🥀🙏",
+        "like_count": 79,
+        "author": "@Creeper_editz008"
+      },
+      {
+        "text": "Wah💯💯💯💯😎🤐",
+        "like_count": 32,
+        "author": "@idaminarsih5614"
+      },
+      {
+        "text": "💀☠️",
+        "like_count": 86,
+        "author": "@GladyssuyapaMendez-c8v"
+      },
+      {
+        "text": "these replies and ts comment is FRYING my brain💔✌️😔😭",
+        "like_count": 50,
+        "author": "@1pringyessir1"
+      },
+      {
+        "text": "What kind of edit is that",
+        "like_count": 3,
+        "author": "@leeznxstudios-7"
+      }
+    ]
+  },
+  "_methodology_note": "reply_count is NOT exposed by yt-dlp's youtube extractor for this video - reply_count_sampled is computed by counting fetched reply comments whose parent matches this comment's id (total 683 replies fetched across 8464 top-level comments, comment_count field=9147), not the true total reply count per thread."
+}

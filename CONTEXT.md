@@ -107,7 +107,7 @@ Post-render compositing step — render base video trước, rồi composite val
 _Avoid_: "overlay", "effect" (quá chung)
 
 **Value-Add Type**:
-1 trong 9 information overlays: (hiện có) fact_check_callout, data_viz_overlay, counter_argument, source_citation, animated_annotation, multi_source_mashup + (mới) this_or_that_overlay, split_screen_comparison, timeline_overlay. multi_source_mashup = clip-only (cần footage). Max 8 apply cho animation.
+1 trong 10 information overlays: (hiện có) fact_check_callout, data_viz_overlay, counter_argument, source_citation, animated_annotation, multi_source_mashup + (mới) this_or_that_overlay, split_screen_comparison, timeline_overlay, circular_spotlight_reveal. multi_source_mashup = clip-only (cần footage). Max 8 apply cho animation.
 _Avoid_: "annotation", "widget"
 
 **Retention Techniques**:
@@ -125,6 +125,10 @@ _Avoid_: "dual screen"
 **timeline_overlay**:
 Value-Add Type mới. Timeline/milestone bar (VD: "Day 1 → Day 30 → $1M"). Phù hợp "He made $X in Y time" hooks.
 _Avoid_: "progress bar" (đã có trong render), "timeline video"
+
+**circular_spotlight_reveal**:
+Value-Add Type mới (1 mẫu, xem `docs/research/normal-vs-king-pattern-2026-07-12/REPORT.md`). Vòng tròn (khung hình elevated/aerial quay 1 set piece tròn thật, hoặc vignette/glow ring dựng bằng animation) bao quanh chủ thể payoff trong lúc camera dwell — tách biệt hẳn khỏi khung hình hỗn loạn/hand-held của đoạn setup. Khác `animated_annotation` (đó là annotation vẽ thêm lên nội dung có sẵn) — đây là 1 lựa chọn staging/framing riêng cho khoảnh khắc payoff. Chưa confirm cross-video (mới 1 mẫu).
+_Avoid_: "vignette" (quá chung), "spotlight effect"
 
 **Autonomous Optimization System**:
 Hệ thống tự động upload + measure + improve videos. 3-day cycle: upload 18 videos → wait 48h metrics → MAB adjust strategy → repeat. Không cần human input sau setup.
@@ -191,11 +195,11 @@ Tính toán mean AVD của 18 videos (3 cycles) sau khi metrics fetched. So sán
 _Avoid_: "cohort review", "post-mortem"
 
 **Source Channel Pattern**:
-Format hook được trích xuất từ phân tích top videos của kênh viral reference (vd: @theschoolofhardknocks — 31M views/top short). 3 pattern types đã identify: (1) Money+Number ($58,380, $2.5M car), (2) Curiosity Gap ("THIS is the real secret"), (3) Contrarian Reveal ("Good culture isn't made in the game"). Khác AB Variable (đơn lẻ) — Source Channel Pattern là combo hook+structure hoàn chỉnh copy từ proven viral. [NOTE: 1 phân tích khác (`docs/research/800m-view-case-study-2026-07-11/REPORT.md`, kênh RandomDude 808M views) tìm thấy 1 pattern thứ 4 chưa khớp cả 3 type trên — xem "Implied Comparison Hook" bên dưới. Chỉ 1 video, coi là hypothesis chưa confirm.]
+Format hook được trích xuất từ phân tích top videos của kênh viral reference (vd: @theschoolofhardknocks — 31M views/top short). 3 pattern types đã identify: (1) Money+Number ($58,380, $2.5M car), (2) Curiosity Gap ("THIS is the real secret"), (3) Contrarian Reveal ("Good culture isn't made in the game"). Khác AB Variable (đơn lẻ) — Source Channel Pattern là combo hook+structure hoàn chỉnh copy từ proven viral. [NOTE: 1 pattern thứ 4 (Implied Comparison, xem bên dưới) được tìm thấy ở kênh RandomDude, nay đã confirm qua 2 video (808M + 418M views, xem `docs/research/800m-view-case-study-2026-07-11/REPORT.md` và `docs/research/normal-vs-king-pattern-2026-07-12/REPORT.md`).]
 _Avoid_: "hook template", "title formula"
 
 **Implied Comparison Hook**:
-Pattern hook thứ 4 (hypothesis, 1 video, xem `docs/research/800m-view-case-study-2026-07-11/REPORT.md`), khác 3 Source Channel Pattern gốc. Không có 1 dòng hook nào tự giải thích gap — caption chỉ label 1 phía ("OTHERS X SKILL") và chính TITLE/thể loại video ngầm hứa hẹn phía còn lại ("...VS King of X") sẽ xuất hiện sau. Cho phép gap dài bất thường (~40s trong case study, so với 5-8s target hiện có của HEIT) MIỄN LÀ đoạn chờ được lấp bằng 1 montage đủ đa dạng/giải trí để tự nó giữ chân người xem — gap không được resolve bởi câu chữ mà bởi kỳ vọng thể loại. Payoff/reveal luôn được camera "dwell" lâu hơn hẳn (case study: ~3x) so với các clip dựng cảnh (setup) trước đó.
+Pattern hook thứ 4, **confirmed 2/2 video cùng kênh RandomDude** (`docs/research/800m-view-case-study-2026-07-11/REPORT.md` — shooting, 808M views; `docs/research/normal-vs-king-pattern-2026-07-12/REPORT.md` — firefighters, 418M views), khác 3 Source Channel Pattern gốc. Không có 1 dòng hook nào tự giải thích gap — caption chỉ label 1 phía ("OTHERS X") và chính TITLE/thể loại video ngầm hứa hẹn phía còn lại ("...VS King of X") sẽ xuất hiện sau. Cho phép gap dài bất thường (~40-41s ở cả 2 video, so với 5-8s target hiện có của HEIT) MIỄN LÀ đoạn chờ được lấp bằng 1 montage đủ đa dạng/giải trí để tự nó giữ chân người xem — gap không được resolve bởi câu chữ mà bởi kỳ vọng thể loại. Payoff/reveal luôn được camera "dwell" lâu hơn hẳn (~3x ở video 1, ~17.3s/29% tổng video ở video 2) so với các clip dựng cảnh (setup) trước đó. Caption template (trắng/vàng "OTHERS X" → đỏ-glow pivot) và sticker capstone (skull+cowboy hat) giống hệt ở cả 2 video — đây là brand signature của kênh, không phải lựa chọn ngẫu nhiên mỗi video. [Lưu ý: động lực tâm lý comment KHÔNG cố định — video 1 (others thực sự kém) khiến khán giả chê "others"; video 2 (others cũng là chuyên gia thật) khiến khán giả quay sang chê "the editor" vì so sánh không công bằng. Chọn source material có cân nhắc bên nào sẽ bị/được đùa cợt.]
 _Avoid_: "comparison hook" (thiếu phần "không resolve bằng câu chữ"), "vs hook"
 
 **Verbatim Segment**:
