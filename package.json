@@ -2,5 +2,17 @@
   "name": "shorts",
   "version": "0.1.0",
   "private": true,
-  "scripts": {}
+  "type": "module",
+  "engines": {
+    "node": ">=20.12.0"
+  },
+  "scripts": {
+    "metrics:fetch": "tsx src/platforms/youtube-analytics.ts",
+    "oauth:setup": "tsx src/platforms/youtube-analytics.ts --setup-oauth"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
 }

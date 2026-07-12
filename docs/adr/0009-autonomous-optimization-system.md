@@ -92,3 +92,15 @@
 - Phase 3: Multi-platform (TikTok) when YouTube stable
 
 2026-07-04
+
+## Addendum (2026-07-12): Metrics Fetcher corrected — OAuth, not "no auth, uses Studio export"
+
+The Metrics Fetcher line above ("YouTube Analytics API (no auth, uses Studio export)") was
+stale/self-contradictory — an API call inherently needs auth, and "uses Studio export" actually
+described a manual CSV-export workflow, not an automated one. `docs/adr/0025-youtube-analytics-metrics-fetcher.md`
+builds the first real slice of this component: **OAuth (`yt-analytics.readonly` scope), one-time
+interactive consent, refresh token persisted in a git-ignored `.env`** — implemented in
+`src/platforms/youtube-analytics.ts`, the first real file in this ADR's target `src/`
+architecture. See ADR-0025 for the full decision, including a known limitation (Shorts-specific
+engagement/swipe-away and per-video CTR availability via this API is unconfirmed as of this
+writing).

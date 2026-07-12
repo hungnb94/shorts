@@ -5,6 +5,13 @@
 # Python venv
 .venv
 
+# Node (TS tooling — src/platforms/)
+node_modules/
+dist/
+
+# OAuth credentials/refresh token — never commit
+.env
+
 # Output (large files not in git)
 output/**/*.mp4
 output/**/*.mp3

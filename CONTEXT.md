@@ -143,12 +143,16 @@ Upload method: user đăng nhập YouTube vào Chrome profile cố định, syst
 _Avoid_: "browser automation", "headless Chrome"
 
 **Retention Graph**:
-Per-second audience retention curve từ YouTube Analytics API. Dùng để detect key moments (dips = boring, peaks = viral). 48h lag.
+Per-second audience retention curve từ YouTube Analytics API. Dùng để detect key moments (dips = boring, peaks = viral). 48h lag. Implemented (ADR-0025): fetched by `src/platforms/youtube-analytics.ts` via OAuth (`yt-analytics.readonly`), triggered qua `/fetch-metrics` skill, raw curve lưu tại `output/projects/<project>/final/<video-id>-retention.csv` (per-second data quá lớn cho markdown table).
 _Avoid_: "watch time graph"
 
 **Key Moment**:
-Điểm đặc biệt trong retention graph: dip (viewers skip), peak (rewatch), flat (engaged). Inform hook/pacing decisions cho videos tiếp.
+Điểm đặc biệt trong retention graph: dip (viewers skip), peak (rewatch), flat (engaged). Inform hook/pacing decisions cho videos tiếp. Implemented (ADR-0025): detect bằng z-score của residual so với rolling-average baseline, ngưỡng tính riêng cho từng video (không hardcode 1 hằng số chung cho mọi video) — cùng nguyên tắc với pause-trim threshold (AGENTS.md).
 _Avoid_: "highlight", "retention spike"
+
+**Metrics Status**:
+Chuỗi literal trong production doc's Status table (`Metrics status` field) mà `/fetch-metrics` skill dùng để tự quét: `"Not yet fetched..."` (match substring, prose có thể khác nhau) = còn due để fetch; `"Fetched YYYY-MM-DD"` (chính xác, không thêm prose) = đã fetch xong, loại khỏi batch scan sau này.
+_Avoid_: viết prose tự do vào field này sau khi đã fetch — phải đúng literal `Fetched YYYY-MM-DD` để scanner nhận diện được
 
 **Target**:
 Mục tiêu dạng outcome-measurable đặt cho 2 tuần (Target Cohort horizon), KHÔNG phải per-video hay per-cycle. Đo = AVD trung bình cohort ≥ ngưỡng X%. Khác Optimization Cycle (3 ngày execute unit). Đây là layer strategic phía trên MAB.
