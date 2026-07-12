@@ -1,0 +1,52 @@
+# Video Analysis: Ronaldo checks on a struck security guard, gifts his jersey (1 video, @asim7x)
+
+## 1. Per-video breakdown
+
+### 1.1 `Migd5sn-0uc` — Asım (@asim7x), "W Ronaldo...❤🥰" (147,238,474 views; channel ~100K subs per pinned comment, small/mid aggregator channel)
+
+- **Hook line (0-2s, verbatim)**: None spoken or captioned. The only hook device is a pink "GIRL" name-tag + downward arrow burned onto a random figure (a stadium security guard, masked, in the foreground of a wide establishing shot of the goal area). No text at all otherwise in 0-2s.
+- **Hook pattern classification**: Intrigue-type hook, executed through a mechanism not previously catalogued: a **character name-tag callout** rather than a withheld verbal claim or question. Still matches CONTEXT.md's core Hook definition (gap setup → partial reveal in 5-8s) almost exactly — just visual instead of verbal.
+- **Gap-not-resolved check**: PASS. The "GIRL" tag plants a real unanswered question ("why is she marked?") that stays open until t=7-9s, when the caption "THE BALL HIS HEAD" resolves it — landing squarely inside the 5-8s target HEIT/CONTEXT.md already specify.
+- **Frame-0 check**: Technical PASS but a weak instance. `inspect_image.py`: skin-tone 14.51% (Hook-Window Rule threshold is ≥10%). A real person is present, but she's small, distant, and partially obscured (surgical mask + the tag overlay itself) inside a busy wide shot — not a close, unambiguous hero face like the Dangote precedent in CONTEXT.md. Not a title-card violation, but not a strong pass either.
+- **Cut cadence (0-5s)**: cuts at 0.0, 1.0, 3.0, 4.0(approx), 5.0s → gaps of 1, 2, 1, 1s. All within the 1-2s target from ADR-0018 except the 1→3s gap, which sits right at the 2s boundary.
+- **Sound design**: 7 of 8 detected visual cuts land on-beat (87.5%, tempo 117.2 BPM). Two energy jumps: +10.6dB at t=0.03s (coincides with the very first cut/tag reveal — a "make it feel important" swell right at the open) and +8.0dB at t=5.54s (no cut lands there — most likely the actual ball-impact/crowd-reaction sound, a mid-scene swell not tied to any edit point).
+- **Overlay/text observed**: Name-tag callouts recur on the same two subjects at multiple timestamps ("GIRL" pink at ~0/3/5s; "RONALDO" yellow at 8.77s and 21s). Green all-caps burned-in captions don't start until **~t=4s** ("BEFORE MATCH"), then build word-by-word through 7-9s ("THE BA" → "THE BALL HIS HEAD"), continuing at 12s ("HE IS GO TO HELP") and 17-18s ("UNDERSTANDS THAT THE" / "SITUATION IS GOOD"). Grammar throughout is non-native/broken English (missing verb "hit," wrong pronoun "his" instead of "her").
+- **Structure**: No HEIT/CTA structure. A single continuous real-world-incident narrative, 23.1s total, no explicit CTA — ends on the "jump back onto the pitch" beat.
+- **Narrative Arc** (new dimension — see Playbook/CONTEXT.md below): Setup (pitch/crowd establishing shot, "GIRL" tag planted, 0-3s) → Inciting Incident (Ronaldo strikes the ball; implied by a blown-out/motion-blurred frame around t=2s, never shown cleanly) → Rising Tension (caption reveals the impact at 7-9s; Ronaldo walks toward her 8.77-12s) → Resolution/Turn (bystander/staff checks on her, caption "situation is good," 17-18s) → Reward (jersey gift — stated in the video description, not fully visible within this specific 23s cut) → Return to normalcy (barrier jump back, 21s). This 5-beat arc, not any single hook line, is the actual retention mechanism here.
+- **Why it worked**: The video substitutes a *visual* intrigue gap (an unexplained name-tag on a background figure) for a verbal one, then pays it off inside this project's own proven 5-8s reveal window — while running a genuine cause→tension→resolution→reward story that a hook-body-CTA format never attempts. Cut-on-beat editing (87.5%) and 1-2s visual cadence carried the pre-caption 0-4s window even with zero caption support, which is the one clear deviation from this project's own Hook Caption Sync rule (ADR-0018).
+
+## 3. Audience psychology from comments (partial read — see Limitations)
+
+- **What viewers praise**: "respect" is the single most-repeated word across the sample ("Ronaldo respect," "Ronaldo's respect," "Respect ❤" recur independently many times), alongside "class act," "gentleman," "kind hearted," "real hero."
+- **What viewers mock/fact-check**: The caption grammar ("the ball his head") is corrected or mocked by a large fraction of distinct commenters ("The ball his head 🚫 the ball her head ✅," "He hit the girl. but they said he hit HIS head," an explicit "illiteracy epidemic" jab) — this is the single most-quoted line in the sample, but quoted to criticize, not praise. A separate skepticism thread questions authenticity/staging ("your video is a fake," "Plot twist: this guy is a professional, he did that on purpose," "she acted like she was shot," a sarcastic Polish comment reading roughly "she got a jersey and now her headache's gone"). A third, unrelated thread relitigates the Ronaldo/Messi rivalry and Ronaldo's off-field reputation, independent of this specific clip.
+- **What viewers are confused about**: No genuine comprehension gap — the recurring "confusion" is entirely the grammar correction above, not viewers failing to follow the story.
+- **Recurring phrases lifted from the video**: "the ball his head" and "he is go to help" both get repeated verbatim by multiple commenters — but as corrections, not endorsements. Caution: verbatim repetition of a video's line is not automatically a positive signal (contrast with the hook-benchmarks precedent, where repetition indicated praise).
+- **Niche-transfer caveats**: This audience is a global, football-fan, largely non-native-English comment section on a small aggregator channel — categorically different from this project's finance/health-VN/AI-education audiences. The grammar-mockery dynamic in particular is specific to this channel's caption-generation quality and shouldn't be read as "grammar mistakes are safe" in general.
+
+## 4. Playbook — apply immediately when writing the next hook/edit
+
+**DO**
+- Use a name/subject tag-callout on the character who will matter later, planted *before* their role is explained — a visual gap doesn't require a spoken question.
+- Target the reveal caption at 7-9s in a ~20-25s video — this project's 5-8s guidance held at real scale (147M views).
+- Keep 1-2s visual cadence even with zero caption support in the first few seconds, *if* the frame itself signals something is being withheld (a tag, a stare, a covered subject) — this is not the same as having no hook at all.
+- Treat a complete incident → tension → resolution → reward arc as its own retention mechanism, independent of and possibly stronger than a hook-body-CTA format, whenever the source material is a real, resolved event.
+
+**DON'T**
+- Don't read "no caption in 0-4s" as evidence that Hook Caption Sync (ADR-0018) is wrong — this is one video in a different genre (incident narrative vs. this project's own scripted/interview-style benchmarks); treat it as a scope question, not a refutation.
+- Don't intentionally ship broken-grammar captions expecting the same free engagement — this is an n=1 observation about tolerance, not a technique to replicate.
+
+## 5. Suggested Next Video / AB-Test
+
+- **Niche**: Health VN (Bác sĩ Hải) — per explicit decision, since this video's own content (celebrity sports) doesn't map to any of the 3 approved niches; only the *structural* technique transfers.
+- **AB Variable exercised**: Value-Add Type (`subject_tag_callout`, new) combined with a visual-Intrigue Hook Type variant.
+- **Concrete hook line draft**: Open a Clip Curation Edit on a real patient-case segment with a Vietnamese tag like "BỆNH NHÂN NÀY" ("this patient") + arrow planted on the patient at t=0, no caption otherwise; hold the visual gap through 1-2s cadence cuts; reveal the diagnosis/outcome via caption at t=7-9s, matching this study's timing exactly.
+- **What would falsify this**: If the resulting video's AVD / Stayed-to-Watch is not higher than the channel's existing Clip Curation Edit baseline (bacsihai_v4-v7 average), the tag-then-reveal + narrative-arc technique did not transfer from a global celebrity-sports/English audience to a Vietnamese health audience, and the pattern should be scoped as entertainment/sports-specific rather than general.
+
+## 6. Limitations of this analysis
+
+- **Comment sample is not a true top-100-by-likes of the full comment pool.** The full `--write-comments` fetch timed out twice against this video's ~5,800 comments; the comment set was bounded via `max_comments` extractor-args to ~300 comments, and "top 100" here is only the top 100 *of that subset* by like count, not of the full 5,800. Like counts across the sample are uniformly low (max non-pinned comment: 6 likes), which itself suggests the genuinely most-liked comments channel-wide are not in this sample. Treat Section 3 as directional, weaker evidence than the `800m-view-case-study` or `normal-vs-king-pattern` precedents, which read genuine top-100-by-likes sets.
+- **n=1 for both new candidate patterns** (Narrative Arc, `subject_tag_callout`) — neither is confirmed across multiple videos the way Implied Comparison Hook was (2/2 videos) or even flagged-unconfirmed the way `circular_spotlight_reveal` was (1 video, explicitly marked unconfirmed in CONTEXT.md).
+- **Genre/format confound**: this is a real-world incident clip from a reaction/compilation channel — categorically different from both the interview/talking-head videos behind ADR-0016/ADR-0018 and this project's own scripted, educational HEIT content. Technique transfer to Health VN (or any niche) is a hypothesis to test, not a proven equivalence.
+- **Caption-sync deviation** (no caption until ~t=4s, against ADR-0018's ≤0.2s rule) is a single counterexample against a rule confirmed on 6 videos — explicitly *not* strong enough evidence to revise CONTEXT.md's Hook Caption Sync term; recorded here as an open scope question, not a refutation (per user decision, no CONTEXT.md edit made for this finding).
+- `librosa` onset/beat detection is heuristic (see `references/sound-design.md`) — the 87.5% cut-on-beat rate and the t=5.54s energy jump were not manually verified by re-listening.
+- No ASR transcript exists for this video (no dialogue/captions in yt-dlp's caption track; all on-screen text is burned-in overlay, read visually rather than transcribed).

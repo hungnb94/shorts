@@ -130,6 +130,10 @@ _Avoid_: "progress bar" (đã có trong render), "timeline video"
 Value-Add Type mới (1 mẫu, xem `docs/research/normal-vs-king-pattern-2026-07-12/REPORT.md`). Vòng tròn (khung hình elevated/aerial quay 1 set piece tròn thật, hoặc vignette/glow ring dựng bằng animation) bao quanh chủ thể payoff trong lúc camera dwell — tách biệt hẳn khỏi khung hình hỗn loạn/hand-held của đoạn setup. Khác `animated_annotation` (đó là annotation vẽ thêm lên nội dung có sẵn) — đây là 1 lựa chọn staging/framing riêng cho khoảnh khắc payoff. Chưa confirm cross-video (mới 1 mẫu).
 _Avoid_: "vignette" (quá chung), "spotlight effect"
 
+**subject_tag_callout**:
+Value-Add Type mới (1 mẫu, xem `docs/research/ronaldo-security-guard-kindness-2026-07-13/REPORT.md`). Name-tag + mũi tên gắn lên 1 nhân vật ngay khi họ xuất hiện trong khung hình, TRƯỚC KHI vai trò/sự liên quan của họ được giải thích — tạo gap thị giác (viewer thắc mắc "sao lại tag người này?") thay vì gap bằng lời thoại/câu hỏi. Khác `animated_annotation` (chú thích thêm cho nội dung đã rõ nghĩa, không tạo gap) — đây là công cụ TẠO gap thị giác, dùng ở đầu Hook. Chưa confirm cross-video.
+_Avoid_: "label overlay", "name tag" (quá chung, thiếu vai trò tạo-gap)
+
 **Autonomous Optimization System**:
 Hệ thống tự động upload + measure + improve videos. 3-day cycle: upload 18 videos → wait 48h metrics → MAB adjust strategy → repeat. Không cần human input sau setup.
 _Avoid_: "AI optimizer", "auto-improve"
@@ -201,6 +205,10 @@ _Avoid_: "hook template", "title formula"
 **Implied Comparison Hook**:
 Pattern hook thứ 4, **confirmed 2/2 video cùng kênh RandomDude** (`docs/research/800m-view-case-study-2026-07-11/REPORT.md` — shooting, 808M views; `docs/research/normal-vs-king-pattern-2026-07-12/REPORT.md` — firefighters, 418M views), khác 3 Source Channel Pattern gốc. Không có 1 dòng hook nào tự giải thích gap — caption chỉ label 1 phía ("OTHERS X") và chính TITLE/thể loại video ngầm hứa hẹn phía còn lại ("...VS King of X") sẽ xuất hiện sau. Cho phép gap dài bất thường (~40-41s ở cả 2 video, so với 5-8s target hiện có của HEIT) MIỄN LÀ đoạn chờ được lấp bằng 1 montage đủ đa dạng/giải trí để tự nó giữ chân người xem — gap không được resolve bởi câu chữ mà bởi kỳ vọng thể loại. Payoff/reveal luôn được camera "dwell" lâu hơn hẳn (~3x ở video 1, ~17.3s/29% tổng video ở video 2) so với các clip dựng cảnh (setup) trước đó. Caption template (trắng/vàng "OTHERS X" → đỏ-glow pivot) và sticker capstone (skull+cowboy hat) giống hệt ở cả 2 video — đây là brand signature của kênh, không phải lựa chọn ngẫu nhiên mỗi video. [Lưu ý: động lực tâm lý comment KHÔNG cố định — video 1 (others thực sự kém) khiến khán giả chê "others"; video 2 (others cũng là chuyên gia thật) khiến khán giả quay sang chê "the editor" vì so sánh không công bằng. Chọn source material có cân nhắc bên nào sẽ bị/được đùa cợt.]
 _Avoid_: "comparison hook" (thiếu phần "không resolve bằng câu chữ"), "vs hook"
+
+**Narrative Arc**:
+Cấu trúc kể chuyện 5 nhịp cho Clip Curation Edit dựng trên 1 sự kiện thật: Setup (thiết lập bối cảnh) → Inciting Incident (sự cố xảy ra) → Rising Tension (căng thẳng/gap chưa giải quyết) → Resolution (nhân vật xử lý, căng thẳng hạ) → Reward (phần thưởng/twist bất ngờ nâng tầm nhân vật). Khác HEIT (cấu trúc giáo dục hook/explain/illustrate/teach) và khác Source Channel Pattern (hook đơn lẻ, không phải cả mạch truyện). Phát hiện từ 1 video (Migd5sn-0uc, Ronaldo đỡ nhân viên an ninh bị bóng trúng đầu, 147M views — xem `docs/research/ronaldo-security-guard-kindness-2026-07-13/REPORT.md`), chưa confirm cross-video. Phù hợp nhất với nội dung dựng từ 1 sự kiện thật đã xảy ra (vd Clip Curation Edit từ case bệnh nhân thật), không áp dụng cho nội dung giáo dục/liệt kê thuần túy.
+_Avoid_: "story structure", "plot" (quá chung)
 
 **Verbatim Segment**:
 Đoạn audio gốc từ source video (Andy Frisella etc.) được extract nguyên bản, không TTS override. Là cốt lõi của Mode A. TTS chỉ dùng cho hook và CTA — phần giá trị giữa luôn là giọng thật. Xác nhận perform tốt hơn pure TTS (19.5% AVD cho pure TTS vs winner Mode A).
