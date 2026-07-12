@@ -90,6 +90,10 @@ _Avoid_: "highlight edit", "re-edit"
 3 pipeline rules ALL required trước khi upload Clip Curation Edit: (1) commentary track, (2) min 2 value-adds, (3) cut ≤50% source + mỗi clip <15s. Auto-checkable.
 _Avoid_: "Fair Use check"
 
+**Hard-Crop Convention** (ADR-0024):
+Mọi Clip Curation Edit BẮT BUỘC crop lấp đầy toàn bộ khung 1080x1920 bằng footage nét — không dùng blur-fill pillarbox (nền mờ full-bleed + video thu nhỏ ở giữa), dù pillarbox vẫn kỹ thuật đúng spec 9:16. Nếu caption cháy sẵn của nguồn bị crop cắt mất, tự viết lại caption (drawtext, word-synced từ transcript) thay vì chuyển sang pillarbox. `bacsihai_v6` (đã upload) được grandfathered, không re-render.
+_Avoid_: "pillarbox", "letterbox" (kỹ thuật đã bị cấm dùng làm giải pháp, trừ bacsihai_v6 grandfathered)
+
 **Value-Added Editing (VAE)**:
 Umbrella term cho việc thêm layers giá trị mới (thông tin + retention) mà bản gốc không có. Apply cho TẤT CẢ 7 video types, không chỉ Clip Curation Edit. Bao gồm 2 nhóm: Value-Add Layer (AB testable) + Retention Techniques (base quality).
 _Avoid_: "editing style", "format enhancement"
