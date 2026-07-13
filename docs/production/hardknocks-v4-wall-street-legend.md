@@ -3,10 +3,12 @@
 ## Status
 | Field | Value |
 |-------|-------|
-| YouTube Video ID | Not yet uploaded |
+| YouTube Video ID | `3HRpaESmJWY` |
 | Rendered | 2026-07-13 |
-| Metrics fetch after (48h rule) | Recompute once uploaded |
-| Metrics status | Not yet fetched, not yet uploaded |
+| Uploaded | 2026-07-13 11:46 +07 |
+| Metrics fetch after (48h rule) | 2026-07-15 11:46 +07 |
+| Metrics status | Pending — do not fetch before the date above |
+| Studio Analytics | https://studio.youtube.com/video/3HRpaESmJWY/analytics/tab-overview/period-default |
 
 ## Video Specs
 - Duration: 48.7s (raw cut 49.9s, 1.03x speed-up — mild, since the raw cut already landed at the ~50s target)
@@ -76,7 +78,7 @@ Commentary track: the structure caption + stat cards + comparison card + CTA (dr
 - No zoom-punch/pattern-interrupt was added within individual pieces this round (cadence currently relies on hard cuts between pieces plus caption-burst changes) — flagged as a Hook Retro idea below, not yet applied.
 
 ## What To Check At 48h
-(Recompute the exact 48h deadline once this video is actually uploaded — not yet uploaded as of this writing.)
+Uploaded 2026-07-13 11:46 +07 — do not fetch before 2026-07-15 11:46 +07.
 - AVD / Stayed % vs. `hardknocks_v1` (`dHDpDXSIAkA`, same channel, same single-person-reveal device applied to a Contiguous VO instead of a Multi-Clip Mashup) and `hardknocks_v3` (`dySR-oQ_rME`, same same-person-callback Implied Comparison device, different payoff type — belief vs. tragedy).
 - Retention graph shape at the pivot point (~t=10.6s post-speed-up, when "Have you ever been broke before?" lands) — does retention hold through the tone shift from confident HOOK to vulnerable PIVOT?
 - Retention through the reveal_tragedy piece specifically (~t=22-31s post-speed-up) — the single most emotionally weighty stretch; check whether it sustains or loses viewers, as a direct read on whether the resilience-first tone decision (vs. a more clickbait-forward alternative the user explicitly rejected) cost or helped retention.
