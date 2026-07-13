@@ -146,6 +146,133 @@ channel's own prior token, which is expected (Google only issues a fresh refresh
 `prompt=consent`, and there's no reason to keep an old one once a new one for the same channel
 exists).
 
+## Addendum (2026-07-13): confirmed — `averageViewPercentage` runs systematically higher than Studio's real "Stayed to watch" (2nd data point)
+
+A user-provided Studio screenshot for `dHDpDXSIAkA` (hardknocks_lawnmower_v1) gives a second real
+data point beyond the Dangote case in the 2026-07-12 addendum above:
+
+| Video | API `averageViewPercentage` | Studio "Stayed to watch" | Gap |
+|---|---|---|---|
+| Dangote (`ChWLcE3OYpA`) | 57.6% | 51.6% | +6.0pp |
+| hardknocks_lawnmower_v1 (`dHDpDXSIAkA`) | 59.84% | 54.1% | +5.74pp |
+
+Both cases show the API reading roughly 6 percentage points *higher* than Studio's real number,
+in the same direction — no longer plausibly random drift, this looks like a systematic bias
+(possibly a different denominator/window than Studio's Shorts-specific "Stayed to watch"
+definition). Root cause still unidentified. Given 2/2 confirmed cases in the same direction,
+`fetch-metrics` should stop treating this as merely "provisional, needs a cross-check" and treat
+any API-populated `Stayed (Retention/Overall)` value as an approximation with a known positive
+bias of roughly 5-6 percentage points until the cause is found — prefer a real Studio read when
+the user provides one (as happened here) and overwrite the API value with it rather than keep
+both. `dHDpDXSIAkA`'s `EXPERIMENT-LOG.md` row and `docs/production/hardknocks-lawnmower-v1.md`'s
+`## Retention Analysis` section were corrected to the real Studio numbers (54.1% Stayed, 45.9%
+Swiped, 0:30 AVD) on 2026-07-13.
+
+Also observed: for this video, Studio's "Audience retention" panel's "Stayed to watch" (54.1%) and
+the "How viewers engaged" panel's "Stayed to watch" (54.1%) read the *same* number — unlike
+Dangote's historical row where `Stayed (Engagement/Hook)` (43.4%) and `Stayed (Retention/Overall)`
+(51.6%) differ. Whether these two Studio panels always converge for Shorts, or only did so here by
+coincidence, is not yet established — another open question for a future cross-check.
+
+## Addendum (2026-07-13, 2nd): retraction — it is NOT a fixed +5-6pp bias; it's a different metric family entirely, and it's not a code bug
+
+The addendum immediately above concluded, from 2 data points, that `averageViewPercentage` reads
+a "systematic" +5-6pp higher than Studio's real "Stayed to watch." A 3rd real Studio screenshot
+(`Mw7jeR6R6iE`, aiwork_v2) disproves that conclusion:
+
+| Video | API `averageViewPercentage` | Studio "Stayed to watch" | Gap |
+|---|---|---|---|
+| Dangote (`ChWLcE3OYpA`) | 57.6% | 51.6% | +6.0pp |
+| hardknocks_lawnmower_v1 (`dHDpDXSIAkA`) | 59.84% | 54.1% | +5.74pp |
+| aiwork_v2 (`Mw7jeR6R6iE`) | 36.74% | 43.6% | **-6.86pp** |
+
+The gap flips direction on the 3rd case. AVD tells the same story: API vs. Studio was +7s
+(Dangote: 26s vs 19s), +1s (`dHDpDXSIAkA`: 31s vs 30s), then **-3s** (`Mw7jeR6R6iE`: 17s vs 20s).
+There is no fixed-magnitude, fixed-direction correction factor to apply — the earlier "~5-6pp
+positive bias" framing (and the numeric "corrected" estimates it produced for two other pending
+videos, since retracted in `EXPERIMENT-LOG.md`) is wrong and should not be repeated.
+
+**Root cause, investigated directly rather than assumed**: prompted by the user asking "maybe the
+fetch-metrics code itself is wrong" — read `src/platforms/youtube-analytics.ts` end-to-end. The
+query construction is correct: `dimensions=video`, `filters=video==<id>` (correctly scoped to the
+specific video, not aggregated across others), metrics `views,averageViewDuration,
+averageViewPercentage` (the real, documented metric names), and a `startDate` of `2020-01-01`
+(predates every video in this project, so the range covers each video's full lifetime — equivalent
+in intent to Studio's "since uploaded (lifetime)" window). **This is not a parameter/logic bug in
+this project's code.**
+
+Checked Google's official metric definitions
+(developers.google.com/youtube/analytics/metrics): `averageViewDuration` and
+`averageViewPercentage` are both documented as, verbatim, "the average length/percentage of a
+video watched during a video playback. **As of December 13, 2021, this metric excludes looping
+clips traffic.**" These are generic, pre-Shorts-era, long-form-video metrics. YouTube Studio's
+Shorts-specific "Stayed to watch" / "How viewers engaged" panels are a separate, proprietary
+Shorts-feed computation (swipe-based engagement, not simple watch-page playback) with **no
+documented public Analytics API field**. This is the exact same root cause this ADR's original
+Decision section already identified for `Stayed (Engagement/Hook)`/`Swiped Away` ("no confirmed
+YouTube Analytics API field equivalent to YouTube Studio's Shorts-specific... panel") — this
+addendum confirms, with 3 real data points, that the same limitation extends to
+`Stayed (Retention/Overall)` too. The earlier "provisional mapping, needs a cross-check" framing
+undersold this: it isn't a mapping that's slightly off, it's two different metrics from two
+different systems that happen to both be percentages.
+
+**Practical consequence for `fetch-metrics`**: never derive an estimated "real" number from the
+API value (no correction factor exists). Continue writing the raw API value with a clear
+"unconfirmed vs Studio" caveat when no real Studio read exists yet, and only ever overwrite with a
+real Studio screenshot when the user provides one (Studio Cross-Check Correction section of the
+skill) — never with a computed estimate.
+
+## Addendum (2026-07-13, 3rd): ruled out "reporting lag" as the explanation; `engagedViews` tested and also doesn't match
+
+After the 2nd addendum above, the user asked whether all of this might simply be YouTube Analytics
+reporting lag (the API hasn't finished processing recent data yet) rather than a genuine
+metric-family mismatch — a fair question given AGENTS.md's own separate "can lag well past 48h"
+pitfall. Checked directly, two ways:
+
+1. **Stability under re-fetch**: `dHDpDXSIAkA` was fetched twice in the same session, hours apart
+   (once directly, once via a force-refetch requested to test idempotency). Both fetches returned
+   *identical* numbers (987 views, AVD 31s, `averageViewPercentage` 59.84%) down to the decimal. If
+   the gap vs. Studio's real 54.1% were a processing-lag artifact "catching up," the number should
+   have moved between the two fetches. It didn't.
+2. **Direction of the gap is inconsistent with lag**: reporting lag would mean the API
+   undercounts recent activity — so `averageViewPercentage` should read *lower* than Studio's
+   fully-processed number every time, if lag were the cause. Instead 2 of 3 confirmed cases show
+   the API reading *higher* (Dangote +6.0pp, `dHDpDXSIAkA` +5.74pp) and only 1 reads lower
+   (`Mw7jeR6R6iE` -6.86pp). A pure undercount-from-lag theory doesn't produce a metric that's
+   sometimes higher than ground truth.
+
+Conclusion: not reporting lag. Stands by the 2nd addendum's conclusion — genuinely different
+metric systems, not something that resolves by waiting longer or re-fetching again later.
+
+**Also tested `engagedViews`** (a real, valid metric — confirmed via live API calls, requires the
+`creatorContentType` dimension; calling `metrics=views,engagedViews` with only `dimensions=video`
+returns a `500 Internal error`, not a documented restriction, just an observed quirk) as a
+candidate for a closer match to Studio's Shorts-specific numbers, since Studio's Engagement tab
+literally has a tile labeled "Engaged views":
+
+| Video | API `engagedViews`/`views` | Studio "Stayed to watch" | Gap | API `engagedViews` (raw) | Studio "Engaged views" (raw) |
+|---|---|---|---|---|---|
+| `dHDpDXSIAkA` | 516/987 = 52.28% | 54.1% | -1.82pp | 516 | 634 |
+| `Mw7jeR6R6iE` | 113/396 = 28.54% | 43.6% | -15.06pp | 113 | 426 |
+| Dangote (stale historical Studio number, not simultaneous) | 71/173 = 41.04% | 51.6% | -10.56pp | 71 | n/a |
+
+Same-named metric, different values, in both the ratio and the raw count. `engagedViews` does not
+give a reliable unified number either — don't retry this specific path expecting a different
+outcome. Also confirmed via live 400 responses that `shownInFeed`, `swipedAway`, and
+`uniqueViewers` are not valid metric identifiers on this API (ruling out the most obvious
+guesses for Studio's "Shown in Feed" / "Viewed vs. swiped away" tiles having a direct API
+equivalent under those names).
+
+**Decision, given all of the above**: paused further investigation here at the user's request.
+The practical rule from the 2nd addendum stands unchanged — YouTube Studio's real numbers are the
+only reliable source for `Stayed (Retention/Overall)`, `Stayed (Engagement/Hook)`, `AVD`, and
+`Swiped Away`; the API remains useful for `views`, the retention curve's shape, and key-moment
+detection, not for these four columns. Whether to formally change `fetch-metrics`'s batch-mode
+behavior to stop auto-filling those four columns from the API (vs. keep writing the API value with
+an "unconfirmed" caveat, as it does today) is an open decision, not yet made — revisit before
+relying on any of `EXPERIMENT-LOG.md`'s API-only `Stayed (Retention/Overall)`/`AVD` values for a
+real MAB/optimization decision.
+
 ## Consequences
 
 - This is the first OAuth integration and the first real `src/` TypeScript file in the repo —
