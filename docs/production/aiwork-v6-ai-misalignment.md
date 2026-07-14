@@ -3,11 +3,11 @@
 ## Status
 | Field | Value |
 |-------|-------|
-| YouTube Video ID | Not yet uploaded (manual upload per `docs/WORKFLOW.md` Stage 6) |
+| YouTube Video ID | [Bc70S4c9z_g](https://youtube.com/watch?v=Bc70S4c9z_g) |
 | Rendered | 2026-07-14 |
-| Uploaded | Pending |
-| Metrics fetch after (48h rule) | Pending (starts counting from upload time) |
-| Metrics status | Pending |
+| Uploaded | 2026-07-14 09:50 +07 |
+| Metrics fetch after (48h rule) | 2026-07-16 09:50 +07 |
+| Metrics status | Not yet fetched, too early |
 
 ## Video Specs
 - Duration: 47.8s (raw cut 48.68s, 1.02x speed-up — mild, matching the hardknocks_v5 rationale: the 6 selected pieces are already all-substantive, nothing left to trim for pace)
