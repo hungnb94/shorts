@@ -36,6 +36,7 @@ docs/research/**/meta.info.json
 output/**/temp/
 output/**/clips/**/*.ffscript
 output/**/clips/**/*concat.txt
+output/projects/*/source/*.json3
 
 # Data (stateful, not in git — mab_state.json/tracked_videos.csv/targets are tracked deliberately)
 data/video_metrics.db
