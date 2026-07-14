@@ -1,0 +1,13 @@
+Title:
+Why Your AI Keeps Getting It Wrong
+
+Description:
+A developer building his own AI planning tool said the quiet part out loud: so much of AI misalignment isn't a model problem - it's that the AI never asked what you actually cared about in the first place.
+
+Watch it happen in real time: the AI asks a real clarifying question, he gives a real answer it could never have guessed - and that's the difference between an AI that guesses and one that asks first.
+
+Source: Matt Pocock (@mattpocockuk) YouTube channel, live "/wayfinder Demo" stream - commentary and value-add overlays added here.
+
+Working With AI - short, practical breakdowns of how professionals actually use AI tools. No hype, no "AI will take your job" fearmongering. Just what to try next.
+
+#AI #Claude #PromptEngineering #Productivity

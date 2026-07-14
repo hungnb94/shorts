@@ -44,6 +44,7 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 - Transcribe (mlx_whisper).
 - Xác định một hoặc nhiều candidate contiguous span, mỗi span kèm 1 hook angle sơ bộ → đưa từng candidate vào Stage 0.
 - **Với nguồn dạng conference/talk dài (nhiều chục phút), trích 1 frame kiểm tra nhanh cho MỖI candidate window đã chọn từ transcript — không chỉ window của HOOK — trước khi chốt kế hoạch cắt** (aiwork_v3: 3/4 candidate windows chọn thuần từ nội dung transcript hóa ra là slide kiến trúc kỹ thuật hoặc màn hình CLI/terminal đầy jargon, chỉ phát hiện được khi trích frame thật ở Stage 2 — phải re-plan lại toàn bộ giữa chừng. Nội dung transcript hợp lý không đảm bảo hình ảnh tại đúng mốc đó dùng được, đặc biệt khi có ràng buộc audience-fit/né-code).
+- **Với nguồn rất dài (~1 giờ trở lên), đừng đọc/xem tuyến tính toàn bộ transcript để tìm candidate — keyword-scan trước.** Quét toàn bộ transcript bằng các từ khóa liên quan tới insight tổng quát hóa được (ví dụ: "question", "clarify", "the reason", "the point", "why", "important because") để khoanh vùng ứng viên, sau đó mới đọc kỹ + frame-check từng vùng đã khoanh (Stage 0 item 1, và note ở trên). Đọc tuyến tính không khả thi ở độ dài này (aiwork_v6: nguồn 4480s/74.6 phút, 599 segments — quét từ khóa tìm ra đúng 1 câu tổng quát hóa được, nằm ở phút 53:41 của một buổi livestream lập trình gần như toàn bộ là screen-share/jargon).
 - Sau khi chốt source video dùng cho video mới, append 1 dòng vào `data/source_videos.csv`.
 
 ## Stage 2 — Cut Segment
