@@ -210,6 +210,26 @@ _Avoid_: "comparison hook" (thiếu phần "không resolve bằng câu chữ"), 
 Cấu trúc kể chuyện 5 nhịp: Setup (thiết lập bối cảnh) → Inciting Incident (sự cố xảy ra) → Rising Tension (căng thẳng/gap chưa giải quyết) → Resolution (nhân vật xử lý, căng thẳng hạ) → Reward (phần thưởng/twist bất ngờ nâng tầm nhân vật). Khác HEIT (cấu trúc giáo dục hook/explain/illustrate/teach) và khác Source Channel Pattern (hook đơn lẻ, không phải cả mạch truyện). **Confirmed 2/2 video, 2 kênh/2 thể loại khác nhau**: Migd5sn-0uc (Ronaldo đỡ nhân viên an ninh bị bóng trúng đầu, 147M views, real sports incident — xem `docs/research/ronaldo-security-guard-kindness-2026-07-13/REPORT.md`) và i_elsC4Kg8c (Sunnah Edit, "Hard Work Always Pays Off", 249M views, staged reward vignette — xem `docs/research/hard-work-pays-off-2026-07-13/REPORT.md`). Video thứ 2 dựng cả 5 nhịp rõ hơn hẳn (bao gồm 1 đoạn hỏi-đáp thật qua caption ở Rising Tension: "FOR HOW LONG?" → "3 YEARS") và không cần thoại/giọng nói — 100% dẫn chuyện bằng caption trên nhạc nền. Phù hợp nhất với nội dung dựng từ 1 sự kiện/case thật (vd Clip Curation Edit từ case bệnh nhân thật), không áp dụng cho nội dung giáo dục/liệt kê thuần túy. [Lưu ý: retention mechanism này khác hẳn hook-line-first — gap chính nằm ở toàn mạch truyện (điều gì sẽ xảy ra với người này?), không phải ở 1 câu hook 0-2s.]
 _Avoid_: "story structure", "plot" (quá chung)
 
+**Proof-First Narrative**:
+Retention engine cho finance Short trong đó người xem chứng kiến một sự kiện tiền bạc thật, lựa chọn có stakes và hậu quả nhìn thấy được; lời giải thích chỉ bổ trợ, không thay thế bằng chứng hình ảnh. Khác Interview Wisdom ở chỗ giá trị đến từ diễn biến được quan sát trực tiếp, không phải lời kể hồi tưởng hay claim thành công.
+_Avoid_: "success story", "testimonial", "interview wisdom"
+
+**Impossible Trade Ladder**:
+Một subtype của Proof-First Narrative: bắt đầu bằng vật thể giá trị rất thấp rồi cho người xem chứng kiến chuỗi trao đổi liên tiếp dẫn tới tài sản tưởng như không thể đạt được. Gap cốt lõi là liệu giao dịch kế tiếp có xảy ra và vật cuối cùng sẽ lớn tới đâu, không phải một lời khuyên làm giàu.
+_Avoid_: "flipping story", "barter challenge", "rags to riches"
+
+**Worst-Trade Reversal**:
+Góc kể của Impossible Trade Ladder trong đó một giao dịch bị một nhóm khán giả được ghi nhận xem là thua cuộc sau đó trở thành cầu nối quyết định tới payoff, vì một counterparty cụ thể định giá món đồ khác thị trường chung. Hook phải gán phản ứng cho đúng nhóm có bằng chứng (VD: "her followers"), không được nâng "many followers" thành "everyone". Khác Contrarian Reveal ở chỗ cú lật được chứng minh bằng chuỗi giao dịch nhìn thấy được, không chỉ bằng một claim đối lập. Xem ADR-0027.
+_Avoid_: "bad trade", "lucky trade", "contrarian story"
+
+**Counterparty Value**:
+Giá trị sử dụng mà một người mua/đối tác cụ thể gán cho tài sản, có thể cao hơn đáng kể so với định giá phổ biến hoặc sticker price vì nhu cầu, danh tính hoặc utility riêng của họ. Trong Worst-Trade Reversal, payoff không đến từ việc món đồ tự nhiên tăng giá mà từ việc tìm đúng counterparty có willingness-to-trade khác số đông. Khác market value (giá thị trường điển hình) và khác may mắn thuần túy vì việc tìm counterparty là hành động chiến lược. Xem ADR-0027.
+_Avoid_: "true value", "intrinsic value", "lucky buyer"
+
+**Source-Grounded Hook Claim**:
+Một claim trong hook có mức độ khái quát không vượt quá bằng chứng trực tiếp. Nếu nguồn chỉ nói "many followers", hook phải giữ chủ thể "followers" hoặc "many followers"; không đổi thành "everyone", "the internet" hay gán quan điểm đó cho nhân vật. Đây là quality gate cho Proof-First Narrative: open loop có thể mạnh, nhưng attribution phải đúng. Xem ADR-0027.
+_Avoid_: "clickbait license", "close enough", "universalized claim"
+
 **Verbatim Segment**:
 Đoạn audio gốc từ source video (Andy Frisella etc.) được extract nguyên bản, không TTS override. Là cốt lõi của Mode A. TTS chỉ dùng cho hook và CTA — phần giá trị giữa luôn là giọng thật. Xác nhận perform tốt hơn pure TTS (19.5% AVD cho pure TTS vs winner Mode A).
 _Avoid_: "source clip", "raw audio", "original quote"
