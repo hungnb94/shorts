@@ -23,6 +23,10 @@ WIDTH = 1080
 HEIGHT = 1920
 TOTAL_FRAMES = 1500
 TOTAL_DURATION = TOTAL_FRAMES / FPS
+REQUIRED_DIALOGUE_WINDOWS = [
+    (20.88, 25.00, -24.0),
+    (43.02, 49.60, -24.0),
+]
 
 ROOT = Path(__file__).resolve().parents[2]
 PROJECT = ROOT / "output/projects/laundromat"
@@ -31,6 +35,8 @@ PEXELS = {
     "books": PROJECT / "source/pexels/books_finance_7710748.mp4",
     "contract": PROJECT / "source/pexels/contract_signing_7981954.mp4",
     "house": PROJECT / "source/pexels/real_estate_37694695.mp4",
+    "hook_owner": PROJECT / "source/pexels/business_owner_packing_7288127.mp4",
+    "hook_money": PROJECT / "source/pexels/woman_counting_money_13736697.mp4",
 }
 WORK = PROJECT / "clips/v1_work"
 CLIPS = WORK / "timeline"
@@ -92,11 +98,12 @@ class AudioPiece:
 
 
 # Any frame containing CNBC footage counts as source footage, including the
-# two partial Pexels inserts in the first ten seconds. The total is exactly 50%.
+# two partial Pexels inserts in the first ten seconds. Moving Pexels replaces
+# the old freeze-frame hook, reducing source footage to 44.4%.
 TIMELINE = [
-    TimelineClip("hook_face_a", 0, 24, True),
-    TimelineClip("hook_face_b", 24, 51, True),
-    TimelineClip("hook_face_c", 51, 84, True),
+    TimelineClip("hook_face_a", 0, 24, False),
+    TimelineClip("hook_face_b", 24, 51, False),
+    TimelineClip("hook_face_c", 51, 84, False),
     TimelineClip("bet_owner", 84, 165, True),
     TimelineClip("bet_house_split", 165, 225, True),
     TimelineClip("price_contract_split", 225, 300, True),
@@ -112,9 +119,9 @@ TIMELINE = [
 ]
 
 VISUAL_RECIPES = {
-    "hook_face_a": VisualRecipe("freeze", source_start=236.08, focus=0.50),
-    "hook_face_b": VisualRecipe("freeze", source_start=240.00, focus=0.50),
-    "hook_face_c": VisualRecipe("freeze", source_start=244.00, focus=0.50),
+    "hook_face_a": VisualRecipe("pexels", pexels_key="hook_owner", pexels_start=0.00),
+    "hook_face_b": VisualRecipe("pexels", pexels_key="hook_owner", pexels_start=0.80),
+    "hook_face_c": VisualRecipe("pexels", pexels_key="hook_money", pexels_start=0.00),
     "bet_owner": VisualRecipe("source", source_start=6.80, focus=0.50),
     "bet_house_split": VisualRecipe(
         "split", source_start=12.00, focus=0.50, pexels_key="house", pexels_start=1.0
@@ -136,11 +143,24 @@ VISUAL_RECIPES = {
 AUDIO_PIECES = [
     AudioPiece("sale", 176.80, 179.38, 0.00, "sold home for $310K"),
     AudioPiece("equity", 182.16, 190.94, 2.58, "$150K equity went toward laundromat down payment"),
-    AudioPiece("finance", 198.00, 203.86, 11.36, "$100K seller financing at 6% over two years"),
-    AudioPiece("revenue", 18.82, 22.48, 17.22, "$475K revenue in 2024"),
-    AudioPiece("owner_pay", 438.56, 443.58, 25.00, "$66K owner pay in 2024"),
+    AudioPiece("finance", 198.00, 203.86, 11.36, "$100K seller financing at 6%"),
+    AudioPiece("revenue", 18.82, 22.48, 17.22, "$475K 2024 revenue"),
+    AudioPiece(
+        "profit_context",
+        398.30,
+        402.42,
+        20.88,
+        "takes a small percentage and reinvests it in the laundromat",
+    ),
+    AudioPiece("owner_pay", 438.56, 443.58, 25.00, "$66K 2024 owner pay"),
     AudioPiece("hours", 235.76, 244.08, 30.02, "5-6 hours now; not true five years ago"),
-    AudioPiece("systems", 249.00, 253.68, 38.34, "hired employees and incorporated more systems"),
+    AudioPiece(
+        "systems",
+        249.00,
+        260.26,
+        38.34,
+        "employees and systems remove her from operations to focus on growth",
+    ),
 ]
 
 
@@ -443,19 +463,22 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         (11.36, 13.20, "Dialogue", "SELLER FINANCED {\\c&H0047D4FF&}$100K"),
         (13.20, 17.22, "Dialogue", "AT {\\c&H0047D4FF&}6% OVER TWO YEARS"),
         (17.22, 20.88, "Dialogue", "{\\c&H0047E67C&}$475K IN 2024"),
-        (20.88, 22.80, "Dialogue", "{\\c&H0047E67C&}$119K BUSINESS PROFIT"),
-        (22.80, 25.00, "Dialogue", "REVENUE IS NOT OWNER PAY"),
+        (20.88, 22.20, "Dialogue", "WHATEVER I MAKE ON THE LAUNDROMAT"),
+        (22.20, 23.60, "Dialogue", "I TAKE A SMALL PERCENTAGE"),
+        (23.60, 25.00, "Dialogue", "AND PUT IT BACK INTO THE LAUNDROMAT"),
         (25.00, 27.20, "Dialogue", "IN 2024"),
         (27.20, 30.02, "Dialogue", "I PAID MYSELF {\\c&H0047E67C&}$66K"),
         (30.02, 33.00, "Dialogue", "{\\c&H0047E67C&}5-6 HOURS A WEEK NOW"),
         (33.00, 35.20, "Dialogue", "I'M HESITANT TO TELL PEOPLE THAT"),
         (35.20, 38.34, "Dialogue", "NOT HOW IT WAS FIVE YEARS AGO"),
-        (38.34, 40.80, "Dialogue", "{\\c&H0047E67C&}HIRED EMPLOYEES"),
-        (40.80, 43.02, "Dialogue", "INCORPORATED MORE SYSTEMS"),
+        (38.34, 40.20, "Dialogue", "{\\c&H0047E67C&}HIRED EMPLOYEES"),
+        (40.20, 42.20, "Dialogue", "INCORPORATED MORE SYSTEMS"),
+        (42.20, 44.20, "Dialogue", "TO REMOVE ME FROM THE BUSINESS"),
+        (44.20, 46.40, "Dialogue", "SO I CAN FOCUS ON GROWING IT"),
+        (46.40, 49.60, "Dialogue", "NOT WORKING IN THE BUSINESS"),
         (43.02, 45.20, "Final", "{\\c&H0047E67C&}SMART."),
-        (45.20, 47.20, "Final", "BUT NOT BECAUSE OF REVENUE."),
-        (47.20, 48.80, "Final", "CHECK PRICE. OWNER PAY. OWNER HOURS."),
-        (48.80, 50.00, "Final", "{\\c&H0047D4FF&}WOULD YOU SELL YOUR HOUSE?"),
+        (45.20, 47.60, "Final", "BECAUSE SHE BUILT SYSTEMS."),
+        (47.60, 50.00, "Final", "NOT BECAUSE OF $475K REVENUE."),
     ]
     lines = [header]
     for start, end, style, text in events:
@@ -584,7 +607,9 @@ def make_overlay_video(base: Path, subtitles: Path) -> Path:
     return output
 
 
-def max_volume_db(path: Path, start: float = 0.0, duration: float | None = None) -> float:
+def volume_stats_db(
+    path: Path, start: float = 0.0, duration: float | None = None
+) -> tuple[float, float]:
     command = [
         "ffmpeg",
         "-hide_banner",
@@ -600,10 +625,15 @@ def max_volume_db(path: Path, start: float = 0.0, duration: float | None = None)
     result = subprocess.run(command, capture_output=True, text=True, timeout=120)
     if result.returncode != 0:
         raise RuntimeError(f"volumedetect failed for {path}: {result.stderr[-2000:]}")
-    match = re.search(r"max_volume: ([\-\d.]+) dB", result.stderr)
-    if not match:
-        raise RuntimeError(f"No max_volume result for {path}")
-    return float(match.group(1))
+    mean_match = re.search(r"mean_volume: ([\-\d.]+) dB", result.stderr)
+    max_match = re.search(r"max_volume: ([\-\d.]+) dB", result.stderr)
+    if not mean_match or not max_match:
+        raise RuntimeError(f"No volume result for {path}")
+    return float(mean_match.group(1)), float(max_match.group(1))
+
+
+def max_volume_db(path: Path, start: float = 0.0, duration: float | None = None) -> float:
+    return volume_stats_db(path, start=start, duration=duration)[1]
 
 
 def extract_audio_pieces() -> list[Path]:
@@ -708,10 +738,7 @@ def generate_music_and_sfx() -> tuple[Path, Path]:
 
 
 def music_volume_expression() -> str:
-    return (
-        "volume='if(between(t,20.88,25.00),0.20,"
-        "if(gte(t,43.02),0.22,0.035))':eval=frame"
-    )
+    return "volume='if(gte(t,49.60),1.00,0.035)':eval=frame"
 
 
 def mix_and_finish(
@@ -740,7 +767,7 @@ def mix_and_finish(
         )
         mix_labels.append(f"[{label}]")
 
-    impact_times = [0.00, 17.22, 20.88, 25.00, 43.02]
+    impact_times = [0.00, 17.22, 20.88, 25.00, 43.02, 49.60]
     split_labels = "".join(f"[impact{i}]" for i in range(len(impact_times)))
     lines.append(
         f"[{sfx_index}:a]aresample=48000,aformat=channel_layouts=stereo,"
@@ -820,9 +847,9 @@ def write_script_document() -> None:
     ]
     content = f"""# laundromat_v1 — Decision-Lock script
 
-**Render:** `2026-07-14-laundromat_v1_decision_lock.mp4`  
-**Duration:** {TOTAL_DURATION:.2f}s / {TOTAL_FRAMES} frames @ {FPS}fps  
-**Source visual share:** {source_share(TIMELINE) * 100:.1f}%  
+**Render:** `2026-07-14-laundromat_v1_decision_lock.mp4`
+**Duration:** {TOTAL_DURATION:.2f}s / {TOTAL_FRAMES} frames @ {FPS}fps
+**Source visual share:** {source_share(TIMELINE) * 100:.1f}%
 **Audio:** CNBC verbatim quotes; no TTS
 
 ## Viewer promise
@@ -840,8 +867,9 @@ owner-time evidence.
 | 11.36–17.22s | Financing | $100K seller financing at 6% over two years |
 | 17.22–25.00s | Revenue vs profit | $475K revenue; CNBC-reported $119K profit; calculated 25.05% margin |
 | 25.00–30.02s | Owner outcome | $66K paid to owner in 2024 |
-| 30.02–43.02s | Time qualification | 5–6 hours/week now, explicitly not true five years ago; employees/systems |
-| 43.02–50.00s | Verdict + semantic loop | Smart for qualified cash flow/time, not headline revenue alone |
+| 30.02–38.34s | Time qualification | 5–6 hours/week now, explicitly not true five years ago |
+| 38.34–49.60s | Systems payoff + verdict | Employees/systems remove the owner from operations; SMART because of systems, not headline revenue |
+| 49.60–50.00s | Audio tail | Impact/music resolves the final beat |
 
 ## Visual timeline
 
@@ -862,7 +890,7 @@ owner-time evidence.
    persistent decision meter, time qualification, and final decision checklist.
 3. Source visual use: {source_share(TIMELINE) * 100:.1f}% of frames; every source
    visual clip is shorter than 15 seconds.
-4. Three-source mix: CNBC footage + animated overlays + three Pexels library clips.
+4. Three-source mix: CNBC footage + animated overlays + five Pexels library clips.
 
 ## Financial language guardrail
 
@@ -982,6 +1010,22 @@ def validate_final() -> dict[str, Any]:
     hook_max = max_volume_db(FINAL, start=0.0, duration=3.0)
     if hook_max <= -30.0:
         raise AssertionError(f"Hook audio too quiet: {hook_max} dB")
+    required_dialogue_audio = {}
+    for start, end, minimum_mean in REQUIRED_DIALOGUE_WINDOWS:
+        window_duration = end - start
+        mean_volume, max_volume = volume_stats_db(
+            FINAL, start=start, duration=window_duration
+        )
+        label = f"{start:.2f}-{end:.2f}s"
+        required_dialogue_audio[label] = {
+            "mean_db": mean_volume,
+            "max_db": max_volume,
+        }
+        if mean_volume < minimum_mean:
+            raise AssertionError(
+                f"Required dialogue too quiet at {label}: "
+                f"{mean_volume} dB mean (minimum {minimum_mean} dB)"
+            )
     return {
         "output": str(FINAL),
         "duration": duration,
@@ -995,6 +1039,7 @@ def validate_final() -> dict[str, Any]:
         "integrated_lufs": integrated_lufs,
         "true_peak_dbfs": true_peak,
         "hook_max_db": hook_max,
+        "required_dialogue_audio": required_dialogue_audio,
         "unique_colors_at_15s": colors,
         "decode_check": "passed",
     }

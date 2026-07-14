@@ -47,19 +47,21 @@ Every source window is under 15 seconds. Each boundary was verified against Whis
 ## Hook-window decision
 
 - Rejected as frame 0: `177.12–198.47`, because the source displays a static purple house/acquisition infographic with no face.
-- Selected 0–2.8s hook visuals: animated portraits from `236.08`, `240.00`, and `244.00`; preflight skin-tone measured `16.79%`, `28.31%`, and `27.36%`, respectively.
+- Selected 0–1.7s hook visual: moving Pexels footage `7288127`, a woman packing an order in her small business.
+- Selected 1.7–2.8s hook visual: moving Pexels footage `13736697`, a woman counting money while working.
+- Final hook skin-tone measured `57.17%`, `57.44%`, and `41.49%` at `0.0s`, `0.5s`, and `2.0s`; every consecutive 0.1s sample in the first 2.8s changed (`median motion=3.386`, `minimum=1.650`).
 - Selected 2.8–10s action/split-screen visual windows: `6.80–9.50`, `12.00–14.00`, and `14.00–16.50`; none contains a full-screen graphic.
 - Rejected `18.08–20.88`: it cuts from Cami to a washer close-up and then reveals the source's large headline, failing the first render's face and clean-caption gates.
 - Rejected `438.80–441.50`: the source `$22,023` graphic appears during the clip and collides with the Decision-Lock overlay.
-- Selected hook audio: `SALE` from `176.80` followed by `EQUITY` from `182.16`; all three opening portraits are frozen before action B-roll begins, avoiding both lip-sync mismatch and the static source infographic.
+- Selected hook audio: `SALE` from `176.80` followed by `EQUITY` from `182.16`. Moving stock footage avoids both lip-sync mismatch and the static source infographic; no freeze frame remains.
 - Post-render face/skin-tone verification remains mandatory.
 
 ## Pexels library assets
 
-Existing project-level assets are reused without new API quota:
-
 - `books_finance_7710748.mp4` — receipts/calculator; cash-flow checkpoint
 - `contract_signing_7981954.mp4` — hands signing/closing a deal; acquisition checkpoint
 - `real_estate_37694695.mp4` — house exterior; sold-home checkpoint
+- `business_owner_packing_7288127.mp4` — moving small-business owner; hook 0–1.7s
+- `woman_counting_money_13736697.mp4` — moving money-counting action; hook 1.7–2.8s
 
 Rejected for this story: `stock_chart_8480284.mp4` and `suited_businessman_18514374.mp4`, because they are generic corporate/market imagery rather than evidence-linked visuals.
