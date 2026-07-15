@@ -134,6 +134,30 @@ The final retention speed is 1.02×. The selected speech was already approximate
 - Editorial analysis is visually separated and never styled as a spoken quote.
 - Yellow/white/black visual grammar follows the WEALTHIAN benchmark, while safe zones and face-window rules follow this repository.
 
+## YouTube Metadata
+
+### Title
+
+`His Professor Said It Would Never Work. Now He's Worth $20B`
+
+### Description
+
+His professor said a restaurant built around one core product would never work. Todd Graves kept the focus, combined $50,000 of his own equity with a $50,000 SBA loan, rebuilt an old restaurant, and scaled Raising Cane's.
+
+The lesson isn't “sell chicken.” It's build around a craveable product, focus the operation, build the team, then scale. The exact $50K loan amounts and $400M single-year figure are Todd Graves' source-reported claims; Forbes estimates his current net worth at about $22B as of July 13, 2026.
+
+Source interview: School of Hard Knocks — https://www.youtube.com/watch?v=n5EmUiLNVjg
+
+#Entrepreneurship #BusinessStrategy #Shorts
+
+### Hashtags
+
+`#Entrepreneurship #BusinessStrategy #Shorts`
+
+### YouTube Tags
+
+`Todd Graves, Raising Cane's, Raising Canes, School of Hard Knocks, entrepreneur, entrepreneurship, business strategy, restaurant business, focus strategy, startup story, business case study, founder story, SBA loan, chicken fingers, YouTube Shorts`
+
 ## Verification Results
 
 - V7 unit tests: 17/17 passed.

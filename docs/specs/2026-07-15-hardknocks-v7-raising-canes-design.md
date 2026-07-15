@@ -4,6 +4,8 @@
 
 Approved by delegated choice after the user asked the producer to select the source and the approval prompt timed out with an instruction to proceed using best judgment.
 
+Publishing-metadata extension approved by the user on 2026-07-15: keep one canonical upload package in the production doc and enforce it through Workflow Stages 5 and 6.
+
 ## Goal
 
 Produce one English YouTube Short that adapts WEALTHIAN's `Authority-Led Hidden Economics Reveal` semantic engine to a new School of Hard Knocks source while satisfying this project's Hook Gate, Transformative Gate, 3-source visual rule, and fixed output specifications.
@@ -154,6 +156,17 @@ The final edit must include:
 - 45–60 seconds; hard maximum 60 seconds
 - Date-prefixed final filename
 
+## Publishing metadata contract
+
+`docs/production/hardknocks-v7-raising-canes-focus-bet.md` is the single source of truth for the upload package. It must contain all four fields before the production status can be `Completed`:
+
+1. One canonical YouTube title; no unresolved alternatives.
+2. A concise YouTube description that states the case-study payoff without overstating causality or converting source-reported numbers into independently verified facts.
+3. Three relevant visible hashtags for the end of the description.
+4. A separate comma-delimited YouTube tags field for Studio metadata.
+
+Do not create a second metadata file and do not generate metadata from the renderer. Workflow Stage 5 blocks completion when any field is missing; Stage 6 blocks upload until the production doc is complete.
+
 Supporting deliverables:
 
 - `pipeline/hardknocks/render_hardknocks_v7.py`
@@ -174,11 +187,12 @@ Supporting deliverables:
 9. Final-export ASR check for every critical phrase and number.
 10. Manual narrative review: rejection → focus mechanism → capital proof → scale proof → rebuild rule.
 11. Post-Production Retro and Workflow Delta before marking complete.
+12. Publishing-metadata review: title gap, factual support, description/hashtag duplication, tag relevance, and absence of raw affiliate links.
 
 ## Explicit non-goals
 
-- No title/description drafting unless separately requested.
 - No upload.
+- No separate metadata file or renderer-generated metadata JSON.
 - No policy rewrite based on one render.
 - No tax, investing, or legal advice.
 - No generic subscribe/follow CTA.
