@@ -75,6 +75,17 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 
 Điền theo template hiện có (Status, Video Specs, YouTube Title/Description, Source, Why This Segment, Hook Formula Applied, Value-Adds, Known Issues, What to Check at 48h) — xem `docs/production/bacsihai-v5-lao-dong-tay.md` làm mẫu.
 
+### Publishing Metadata Gate (blocking)
+
+Trước khi đặt Status của production doc thành `Completed`, doc phải chứa đúng một canonical upload package với đủ bốn trường:
+
+1. `Title`: một title đã chọn, không còn alternatives chưa quyết định, tối đa 100 ký tự.
+2. `Description`: upload copy hoàn chỉnh, tối đa 5,000 ký tự; giữ rõ ranh giới giữa fact độc lập và claim chỉ source-reported; không chứa raw affiliate link.
+3. `Hashtags`: đúng ba hashtag liên quan, dùng để đặt ở cuối description.
+4. `YouTube Tags`: trường Studio tags riêng, comma-delimited, tối đa 500 ký tự; chỉ chứa entity/topic liên quan, không nhét misleading trend tags.
+
+`Hashtags` và `YouTube Tags` là hai trường khác nhau, không được dùng một trường thay cho trường kia. Nếu bất kỳ trường nào trống, còn placeholder, vượt giới hạn, hoặc vi phạm claim/link guardrail, video chưa được coi là done và Stage 6 bị block.
+
 Sau đó bắt buộc kết thúc mọi production doc bằng section này — yêu cầu MỌI lần, không chỉ khi có vấn đề:
 
 ```
@@ -110,6 +121,7 @@ Lần sản xuất này có gặp case mà các stage trong docs/WORKFLOW.md ch�
 
 ## Stage 6 — Upload & Log
 
+- Pre-upload gate: mở production doc và kiểm lại đủ `Title`, `Description`, đúng ba `Hashtags`, và `YouTube Tags` theo Stage 5. Copy canonical package từ doc; không tự ứng biến copy mới trong upload UI. Nếu cần sửa phút cuối, cập nhật production doc trước rồi mới upload.
 - Upload thủ công. Không paste raw affiliate link trong description (dùng redirect domain).
 - Log dòng đầu tiên vào `docs/experiments/EXPERIMENT-LOG.md`.
 - Chờ 48h (metrics nhiễu nếu fetch trước đó — AGENTS.md). Fetch từ YouTube Studio, điền "What To Check At 48h" trong production doc và dòng log.
