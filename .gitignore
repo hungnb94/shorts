@@ -55,3 +55,4 @@ output/projects/bacsihai/source/8vM7rPWzTlI_autosub.vi.vtt
 
 # Cleanup staging (manually reviewed and purged, not auto-deleted)
 _trash/
+docs/research/**/*.jpg
