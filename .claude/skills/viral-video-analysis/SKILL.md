@@ -32,14 +32,18 @@ and whether this run is happening as part of a Stage 5 Retro for a specific prod
 
 ```bash
 mkdir -p docs/research/<topic-slug>-<YYYY-MM-DD>/<video_id>
-yt-dlp -f "best[height<=1080]" -o "docs/research/<slug>/<id>/source.mp4" "<url>"
+yt-dlp -f "bv*+ba/b" -S "res:1080" --merge-output-format mp4 \
+  -o "docs/research/<slug>/<id>/source.mp4" "<url>"
 yt-dlp --write-subs --write-auto-sub --sub-lang en --skip-download -o "docs/research/<slug>/<id>/transcript" "<url>"
 yt-dlp --write-comments --skip-download -o "docs/research/<slug>/<id>/comments.%(ext)s" "<url>"
 ```
 
-Quality note: `height<=1080` is deliberate here — this is analysis, not footage for reuse, so
-the "always download max quality / 4K" rule in `AGENTS.md` (which governs Source Channel
-footage that gets edited into this project's own videos) does not apply.
+Quality note: `-S "res:1080"` caps the shorter dimension at approximately 1080 while preserving
+orientation: it selects up to 1920x1080 for landscape and 1080x1920 for portrait. Do not use
+`height<=1080` here: on a portrait Short that selector rejects the 1080x1920 source and can
+silently fall back to 360x640. The analysis cap is deliberate — this is analysis, not footage
+for reuse, so the "always download max quality / 4K" rule in `AGENTS.md` (which governs Source
+Channel footage that gets edited into this project's own videos) does not apply.
 
 Extract `comments_top100.json` / `comments_highlights.json` from the raw comments JSON the same
 way `docs/research/hook-benchmarks-2026-07/<video_id>/` already does it — match that existing

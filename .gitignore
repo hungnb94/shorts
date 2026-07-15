@@ -4,6 +4,7 @@
 
 # Python venv
 .venv
+__pycache__/
 
 # Node (TS tooling — src/platforms/)
 node_modules/
@@ -14,6 +15,7 @@ dist/
 
 # Output (large files not in git)
 output/**/*.mp4
+output/**/*.m4a
 output/**/*.mp3
 output/**/*.wav
 output/**/*.aiff
@@ -28,6 +30,9 @@ output/**/*.json
 
 # Research evidence (reproducible via yt-dlp/ffmpeg from timestamps in REPORT.md)
 docs/research/**/frames/
+docs/research/**/frames-*/
+docs/research/**/contact-sheets/
+docs/research/**/targeted-frames/
 docs/research/**/clip.mp4
 docs/research/**/source.mp4
 docs/research/**/meta.info.json

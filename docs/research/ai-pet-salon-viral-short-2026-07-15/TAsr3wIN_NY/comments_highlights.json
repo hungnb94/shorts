@@ -1,0 +1,32 @@
+{
+  "top_3_by_likes": [
+    {
+      "text": "who's here after watching Jack Craig Video?",
+      "like_count": 1200,
+      "reply_count": 45,
+      "is_pinned": false,
+      "author": "@STBAYRON"
+    },
+    {
+      "text": "Hello jack 👀",
+      "like_count": 288,
+      "reply_count": 0,
+      "is_pinned": false,
+      "author": "@Pitchpopreal"
+    },
+    {
+      "text": "Who’s here from the Jack Craig video?",
+      "like_count": 184,
+      "reply_count": 4,
+      "is_pinned": false,
+      "author": "@susminion"
+    }
+  ],
+  "most_replied": {
+    "text": "who's here after watching Jack Craig Video?",
+    "like_count": 1200,
+    "reply_count": 45,
+    "is_pinned": false,
+    "author": "@STBAYRON"
+  }
+}
