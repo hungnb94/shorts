@@ -15,7 +15,7 @@
 **Files:**
 - Modify: `docs/production/hardknocks-v7-raising-canes-focus-bet.md`
 
-- [ ] **Step 1: Add the metadata section before `Verification Results`**
+- [x] **Step 1: Add the metadata section before `Verification Results`**
 
 Insert this exact content:
 
@@ -45,7 +45,7 @@ Source interview: School of Hard Knocks — https://www.youtube.com/watch?v=n5Em
 `Todd Graves, Raising Cane's, Raising Canes, School of Hard Knocks, entrepreneur, entrepreneurship, business strategy, restaurant business, focus strategy, startup story, business case study, founder story, SBA loan, chicken fingers, YouTube Shorts`
 ```
 
-- [ ] **Step 2: Validate platform limits and factual guardrails**
+- [x] **Step 2: Validate platform limits and factual guardrails**
 
 Run:
 
@@ -70,7 +70,7 @@ Confirm manually that the description labels the exact `$50K` loan amounts and `
 **Files:**
 - Modify: `docs/WORKFLOW.md:74-115`
 
-- [ ] **Step 1: Add a blocking Stage 5 metadata checklist**
+- [x] **Step 1: Add a blocking Stage 5 metadata checklist**
 
 After the production-doc template sentence, require these four non-empty fields:
 
@@ -87,11 +87,11 @@ Before setting a production doc to `Completed`, it must contain one canonical up
 If any field is empty, placeholder text remains, or limits/claim guardrails fail, the video is not done and Stage 6 is blocked.
 ```
 
-- [ ] **Step 2: Add the Stage 6 pre-upload check**
+- [x] **Step 2: Add the Stage 6 pre-upload check**
 
 Change Stage 6 so its first action is to copy the canonical package from the production doc and verify all four fields against the Stage 5 gate before uploading. Preserve the existing raw-affiliate-link prohibition, experiment logging, and 48-hour wait.
 
-- [ ] **Step 3: Verify the documentation contract**
+- [x] **Step 3: Verify the documentation contract**
 
 Run:
 
