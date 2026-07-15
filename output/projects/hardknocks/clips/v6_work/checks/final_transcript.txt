@@ -1,0 +1,19 @@
+Final semantic-audio verification — 2026-07-15
+Model: mlx-community/whisper-small-mlx / cross-checked tail with whisper-large-v3-mlx
+
+00.00–04.84  These guys are nuts. They're crazy. There's too much inventory, too many people on the floor, price levels are too low.
+04.88–07.00  These guys, they're gonna go broke. Have you ever been to Home Depot?
+07.32–07.42  Yes.
+07.50–08.34  You've ever been in a Home Depot?
+08.54–08.68  Yes.
+08.86–10.42  That's how I got rich. That was my company.
+10.56–15.78  At 36 years old, you were fired from your job. Did you have people that doubted you or thought you were crazy when you started Home Depot?
+15.90–20.94  Absolutely. In September of '81, we went public. And the volumes that we were doing were unbelievable.
+21.16–26.02  People couldn't believe the amount of revenue we were producing out of these first four stores.
+26.02–29.08  And that was all as a response of listening and responding.
+29.32–35.76  Listening to what customers wanted, not debating, not forcing our arguments on them, learning from them, and having real humility.
+35.98–41.60  The people that we're serving truly do know better than we do.
+41.74–48.58  In all these businesses, it's critical that you develop trust, whether with associates or the people you're serving.
+48.72–57.42  Once trust is established, people open their hearts and minds and eventually their wallets because they have a trust relationship.
+
+Result: complete hook, middle proof/mechanism, and final “trust relationship” payoff are present. No neural TTS is used.
