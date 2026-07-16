@@ -114,6 +114,18 @@ _Avoid_: "annotation", "widget"
 Base quality layer áp dụng TỰ ĐỘNG cho mọi video, KHÔNG phải AB variable: sound design (whoosh/riser/impact), zoom punch, pattern interrupt (visual change mỗi 2-4s), cut rhythm. Thiếu = kém chất lượng, không công bằng khi test.
 _Avoid_: "effects", "polish"
 
+**Active-Speaker Reframing**:
+Quy tắc dựng phỏng vấn 1-1 trong khung dọc: portrait crop chuyển trọng tâm sang người đang phát ra câu thoại — host khi hỏi, guest khi trả lời — thay vì giữ một center crop cố định cho cả cuộc trao đổi. Có thể là đổi camera thật hoặc digital reframe từ two-shot ngang; điều kiện cốt lõi là lượt thoại và visual focus phải đồng bộ.
+_Avoid_: "center crop", "random angle switch", "speaker tracking" (dễ hiểu nhầm là bám mặt liên tục trong cùng một lượt thoại)
+
+**Semantic Zoom**:
+Quy tắc đổi magnification theo chức năng của beat, không theo timer: dùng medium crop ở setup, câu hỏi mới, đoạn giải thích dài hoặc khi gesture cần ngữ cảnh; punch-in close-up ở con số, confession, mệnh lệnh hoặc punchline; reset về medium ở topic/question kế tiếp. Trong một lượt trả lời, mặc định tối đa một lần punch-in để tránh zoom pumping.
+_Avoid_: "cadence zoom", "constant push-in", "random punch zoom", "zoom every 2 seconds"
+
+**Proof-Coupled B-Roll**:
+Footage minh họa xuất hiện cùng beat với claim mà nó chứng minh hoặc làm rõ, thay vì chèn chỉ để tạo chuyển động. Với Clip Curation Edit dạng phỏng vấn, budget mục tiêu là 25–35% timeline; trong 0–10s chỉ dùng partial/corner insert để mặt người nói vẫn hiện diện, sau đó mới cho phép full-screen proof khi cần. Thứ tự ưu tiên nguồn: footage thật gắn trực tiếp với subject/object/platform đang được nhắc tới → stock footage cho ý trừu tượng hoặc khi không có evidence footage phù hợp.
+_Avoid_: "decorative b-roll", "random stock footage", "visual variety" (nếu footage không gắn với claim cụ thể)
+
 **this_or_that_overlay**:
 Value-Add Type mới. Binary choice overlay "A vs B" (VD: "Rent vs Buy", "Index vs Stock pick"). Phù hợp niche finance, MONEY+TIMEFRAME hook pattern.
 _Avoid_: "comparison widget"
@@ -213,6 +225,10 @@ _Avoid_: "story structure", "plot" (quá chung)
 **Decision-Lock Narrative**:
 Retention engine yêu cầu viewer chốt một phán đoán nhị phân trước khi biết đủ dữ kiện, rồi mở khóa evidence theo từng checkpoint để họ tự kiểm tra quyết định ban đầu. Khác `this_or_that_overlay` (một Value-Add Type đơn lẻ) và Proof-First Narrative (viewer quan sát bằng chứng nhưng không bắt buộc tự cam kết một đáp án); open loop chính là “mình đoán đúng hay sai?”. Xem ADR-0028.
 _Avoid_: "quiz", "poll", "this-or-that video", "choose-your-own-adventure"
+
+**Delayed Platform-Fit Narrative**:
+Retention engine kể một năng lực bị xem nhẹ hoặc chưa tạo kết quả trong thời gian dài, rồi payoff bằng khoảnh khắc một nền tảng/cơ hội mới khớp với năng lực đã tích lũy. Evidence ladder bắt buộc phân biệt rõ thời gian luyện tập trước đó, trigger tạo platform fit, và kết quả kinh tế sau đó; không kể thành công như một cú may mắn qua đêm. Khác “overnight success” (bỏ qua accumulated skill) và khác founder origin story chung chung (không có platform-fit trigger cụ thể).
+_Avoid_: "overnight success", "lucky break", "10,000-hours story" (chỉ mô tả thời gian, thiếu platform-fit payoff)
 
 **Proof-First Narrative**:
 Retention engine cho finance Short trong đó người xem chứng kiến một sự kiện tiền bạc thật, lựa chọn có stakes và hậu quả nhìn thấy được; lời giải thích chỉ bổ trợ, không thay thế bằng chứng hình ảnh. Khác Interview Wisdom ở chỗ giá trị đến từ diễn biến được quan sát trực tiếp, không phải lời kể hồi tưởng hay claim thành công.
