@@ -2,11 +2,20 @@
 
 ## Status
 
-- Completed and ready for human review.
+| Field | Value |
+|---|---|
+| Rendered | 2026-07-15 |
+| Uploaded | 2026-07-15 (user-reported); live public metadata reports `upload_date=2026-07-16`; exact upload time unavailable |
+| YouTube Video ID | [`3mfOtQLLt1Y`](https://www.youtube.com/watch?v=3mfOtQLLt1Y) |
+| Public metadata | Title matches; channel `MONEY BLINDSPOT`; public; duration 47s |
+| Studio Analytics | https://studio.youtube.com/video/3mfOtQLLt1Y/analytics/tab-overview/period-default |
+| Metrics fetch after (48h rule) | 2026-07-18 or later (conservative deadline from the public 2026-07-16 date because exact upload time is unavailable) |
+| Metrics status | Not yet fetched — wait until 48h after the public upload date |
+| Upload metadata | Complete in `## YouTube Metadata` below |
+
 - Source locked and downloaded at maximum available 2160p.
 - Stage 0 Hook Gate: passed on 2026-07-15.
 - Final render and post-render verification: passed on 2026-07-15.
-- Final upload metadata is out of scope unless separately requested.
 
 ## Source
 
