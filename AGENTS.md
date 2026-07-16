@@ -147,6 +147,7 @@ None of these commands exist today; `package.json` has no scripts. Kept here as 
 - **Download max quality** — always download source videos at highest available resolution (2160p/4K) using `yt-dlp -f "bestvideo[height>=2160]+bestaudio"`. Never accept default 720p.
 - **3-source combo for engagement** — every video combines: (1) original source footage, (2) animated overlays (kinetic text, data viz, whiteboard), (3) Pexels b-roll for visual variety. This maximizes retention by avoiding visual monotony.
 - **Standard workflow** — see `docs/WORKFLOW.md` for the mandatory per-video sequence, the blocking Hook Gate (Stage 0, no cutting/rendering before a strong 0-3s hook is chosen), and the required per-video Post-Production Retro.
+- **Media-first verification; no renderer unit tests** — the current `pipeline/<project>/render_*.py` files are one-off video-production tools, not product code. Do not create, extend, or require `test_render_*.py` files and do not apply TDD to these renderers unless the user explicitly requests automated code tests. Verify the rendered MP4 itself with ffprobe/spec checks, full decode, final ASR, detector output, and manual frame/contact-sheet review. Existing renderer tests are legacy artifacts, not templates for future videos. Do not proactively revise a completed video; wait for the user to request a revision.
 - **Final video filenames are date-prefixed** — every rendered file under `output/projects/<project>/final/` uses `yyyy-mm-dd-<name>.mp4` (the render date), e.g. `2026-07-11-hardknocks_v2_implied_comparison.mp4`, so the creation date is visible without checking file metadata. Applies going forward from 2026-07-11; older files are not being renamed retroactively.
 
 ## How to Setup Autonomous System (Target — not yet built)
@@ -351,16 +352,22 @@ Practical rule: treat any `fetch-metrics`-populated `Stayed (Retention/Overall)`
 - Reset MAB state mid-cycle (lose learned rewards)
 - Fetch metrics before 48h (noisy data → bad decisions)
 - Skip logging autonomous decisions (no audit trail = can't debug bad strategy)
+- Create or expand unit tests for current Python video renderers (`test_render_*.py`) unless the user explicitly asks for them; old plans/specs/tests that used TDD are historical, not current policy
+- Proactively change or rerender a completed video after handoff; wait for explicit revision feedback from the user
 
-## Testing
+## Testing & Media Verification
 
-| What | Command | Why |
-|------|---------|-----|
-| Unit tests | `npm test` | Pipeline stages, AB test logic, video spec validation |
-| Integration test | `npm run test:integration` | Full pipeline: script → render → verify output specs |
-| Spec validation | `npm run test:specs` | Every rendered video checked for 9:16, duration, codec |
+The commands below belong only to the future TypeScript autonomous system; they are not completion gates for today's per-video Python/ffmpeg production scripts.
 
-Integration tests mock TTS and animation APIs but validate real video output specs (ffprobe). This catches spec violations early without burning API credits.
+| Area | Check | Policy |
+|------|-------|--------|
+| Current `pipeline/<project>/render_*.py` | Render the actual MP4, then run ffprobe/spec validation, full decode, final ASR, black/freeze/silence/audio checks, and manual frame/contact-sheet review | Required media QC; no new renderer unit test unless explicitly requested |
+| Existing `test_render_*.py` files | Leave untouched unless the user asks to change/remove them | Legacy artifacts; do not copy them into the next video version and do not require them for handoff |
+| Future TypeScript unit tests | `npm test` | Applies when the autonomous TypeScript system actually exists |
+| Future TypeScript integration tests | `npm run test:integration` | Applies to the future script → render → output pipeline |
+| Future TypeScript spec validation | `npm run test:specs` | Applies to future automated output enforcement |
+
+For current video production, the deliverable is the verified media artifact, not test coverage. A renderer implementation is complete when the real output passes media QC and the production doc is complete.
 
 ## Architectural Policies
 

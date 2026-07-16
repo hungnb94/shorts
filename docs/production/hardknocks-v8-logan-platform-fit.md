@@ -16,7 +16,7 @@
 | Studio Analytics | https://studio.youtube.com/video/-xSqHo7XjB8/analytics/tab-overview/period-default |
 | Final video | `output/projects/hardknocks/final/2026-07-16-hardknocks_v8_logan_platform_fit.mp4` |
 | Renderer | `pipeline/hardknocks/render_hardknocks_v8.py` |
-| Tests | `pipeline/hardknocks/test_render_hardknocks_v8.py` |
+| Legacy test artifact | `pipeline/hardknocks/test_render_hardknocks_v8.py` — retained as historical output; not a template or completion gate for future renderers |
 | Plan | `docs/plans/2026-07-16-hardknocks-v8-logan-platform-fit.md` |
 | Framing ADR | `docs/adr/0030-active-speaker-reframing-and-semantic-zoom.md` |
 
@@ -181,7 +181,9 @@ Manually inspected:
 - t=54.00s: stable Logan close; no black frame or abrupt visual cutoff.
 - Captions stay inside the 1080×1920 safe area and do not expose source subtitles.
 
-## Tests executed
+## Historical automated checks
+
+The renderer tests below were created before the user clarified the repository policy. They are retained only as a historical record. Per `AGENTS.md` and `docs/WORKFLOW.md` Stage 4, future `render_*.py` work uses artifact-level media QC and must not create or expand `test_render_*.py` unless the user explicitly requests automated tests.
 
 ```text
 python3 -m unittest discover -s pipeline/hardknocks -p 'test_render_hardknocks_v*.py'
