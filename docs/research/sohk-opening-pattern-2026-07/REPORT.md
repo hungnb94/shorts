@@ -237,3 +237,11 @@ The user confirmed the two beat maps and shared understanding. Production then c
 - V10: `output/projects/hardknocks/final/2026-07-17-hardknocks_v10_100m_get_rich_slow.mp4`
 
 Both artifacts passed media-first QC per `docs/WORKFLOW.md`; see their production documents for exact EDL, detector, ASR, visual-review, and upload-metadata records.
+
+### Subsequent V10 revision treatment
+
+After the original V10 render, the user requested a separate revision that applies the Live-Approach grammar to the same robot-founder story while removing synthetic narration. Production preserved the original V10 artifact and created:
+
+- V10R: `output/projects/hardknocks/final/2026-07-17-hardknocks_v10r_live_approach_original_voice.mp4`
+
+The approved V10R opening is host → driver → G-Wagon proof → host affordability question → driver robot answer, followed by humanoid authority and the `$100M`/age escalation. It uses no TTS and no face inset/PiP, runs 58.966667 seconds, and passed media-first QC. Because both hook grammar and voice treatment changed relative to V10, V10R is a revision treatment—not the matched one-variable experiment described by ADR-0031. See `docs/production/hardknocks-v10r-live-approach-original-voice.md`.

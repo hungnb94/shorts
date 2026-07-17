@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render HardKnocks V9/V9R/V10 from the SOHK long-form interview.
+"""Render HardKnocks V9/V9R/V10/V10R from the SOHK long-form interview.
 
 V9 tests a Live-Approach hook while preserving ADR-0017 with a moving,
 same-interview subject inset. V10 is a comparison Short (not a control) with
@@ -10,6 +10,11 @@ and the established 1.03x retention finish.
 V9R is the surgical original-voice revision: it removes V9's two synthetic
 bridges, closes those timeline gaps, and preserves the hook, source beats,
 caption language, evidence types, and finishing treatment.
+
+V10R applies the reviewed SOHK Live-Approach grammar to V10's robot-founder
+story without TTS or picture-in-picture: host -> driver -> G-Wagon proof ->
+affordability question -> business/status escalation. The body remains an
+Original-Voice Editorial Commentary treatment and finishes on "get rich slow."
 """
 
 from __future__ import annotations
@@ -177,6 +182,66 @@ B_SEGMENTS = (
     Segment("payoff_yes", "source", 837.90, 838.20, 0.30, 1.42, ("YEAH",)),
 )
 
+C_SEGMENTS = (
+    Segment("host_ownership", "source", 754.98, 755.70, 0.70, 1.42, ("DO YOU LIVE HERE?",)),
+    Segment("subject_ownership", "source", 755.80, 756.98, 0.30, 1.42, ("YEAH — IT'S MY HOUSE",)),
+    Segment("g_wagon_cutaway", "source", 752.30, 752.95, 0.30, 1.05, ()),
+    Segment(
+        "host_afford",
+        "source",
+        766.16,
+        769.38,
+        0.70,
+        1.30,
+        ("WHAT DID YOU DO", "TO AFFORD THIS PLACE?", "ONE OF THE RICHEST", "NEIGHBORHOODS IN AMERICA"),
+    ),
+    Segment("robots_answer", "source", 769.66, 770.30, 0.30, 1.40, ("I SELL ROBOTS",)),
+    Segment("robots_repeat", "source", 770.52, 771.14, 0.70, 1.38, ("YOU SELL ROBOTS?",)),
+    Segment("robots_confirm", "source", 771.14, 771.88, 0.30, 1.40, ("SELL ROBOTS",)),
+    Segment("robots_question", "source", 772.16, 772.72, 0.70, 1.38, ("DO YOU ACTUALLY?",)),
+    Segment(
+        "humanoid_setup",
+        "source",
+        772.72,
+        776.22,
+        0.30,
+        1.30,
+        ("YOU'VE SEEN THE SILVER", "HUMANOIDS ONLINE"),
+    ),
+    Segment(
+        "humanoid_authority",
+        "source",
+        776.74,
+        778.66,
+        0.30,
+        1.38,
+        ("WE'VE SOLD MORE HUMANOIDS", "THAN ANYONE IN THE WORLD"),
+    ),
+    Segment("authority_reaction", "source", 778.82, 779.30, 0.70, 1.42, ("ARE YOU SERIOUS?",)),
+    Segment(
+        "revenue_question",
+        "source",
+        787.62,
+        789.52,
+        0.70,
+        1.28,
+        ("MOST MONEY", "IN A SINGLE YEAR?"),
+    ),
+    Segment("projection", "source", 789.62, 791.42, 0.30, 1.38, ("ON TRACK FOR", "OVER $100 MILLION")),
+    Segment("age_question", "source", 791.54, 792.76, 0.70, 1.38, ("$100 MILLION?", "HOW OLD ARE YOU?")),
+    Segment("age_answer", "source", 792.96, 793.74, 0.30, 1.42, ("I'M 30 YEARS OLD",)),
+    Segment("disbelief", "source", 793.80, 795.22, 0.70, 1.42, ("NO, YOU'RE NOT", "ARE YOU SERIOUS?")),
+    Segment("money_question", "source", 795.74, 797.80, 0.70, 1.28, ("DID YOU COME FROM MONEY?", "MONEY WHEN YOU STARTED?")),
+    Segment("drone_origin", "source", 797.88, 801.80, 0.30, 1.32, ("NO — I GOT LUCKY", "STARTED A DRONE BUSINESS", "IN HIGH SCHOOL")),
+    Segment("drone_mechanism", "source", 802.86, 810.38, 0.30, 1.24, ("MARKETING WITH DRONES", "FIRST IN THE AREA", "DRONE PHOTOGRAPHY", "BUILT THEM", "TOOK THE PICTURES")),
+    Segment("patience", "source", 818.42, 823.56, 0.30, 1.26, ("A BIG PATIENCE LEVEL", "MOST PEOPLE DON'T HAVE", "IT TAKES LONGER")),
+    Segment("fast_money", "source", 828.72, 834.60, 0.30, 1.32, ("FAST MONEY NEVER LASTS", "KEEP BUILDING", "BE PATIENT", "THAT'S AN ENTREPRENEUR")),
+    Segment("four_years", "source", 844.82, 848.36, 0.30, 1.34, ("LONG-TERM GROWTH", "ROBOTICS: FOUR YEARS")),
+    Segment("growth_proof", "source", 856.98, 864.36, 0.30, 1.34, ("ZERO TO $1 MILLION", "VERY QUICK", "THEN THE LAST 12 MONTHS", "THE JUMP WAS ~100X")),
+    Segment("payoff_host", "source", 834.60, 837.50, 0.70, 1.40, ("LONGEVITY AND ENDURANCE", "IN OTHER WORDS", "YOU GET RICH SLOW")),
+    Segment("payoff_yes", "source", 837.90, 838.20, 0.30, 1.42, ("YEAH",)),
+)
+
 VARIANTS = {
     "a": Variant(
         "a",
@@ -219,6 +284,22 @@ VARIANTS = {
         ),
         44.0,
         47.0,
+        0,
+        0.65,
+    ),
+    "c": Variant(
+        "c",
+        "v10r",
+        "2026-07-17-hardknocks_v10r_live_approach_original_voice.mp4",
+        C_SEGMENTS,
+        (
+            Evidence("headline_reframe", 16.20, 3.20, "panel", "b_headline.png", "FOUNDER PROJECTION"),
+            Evidence("drone_origin", 27.60, 4.10, "video", str(PEXELS_DRONE), "ILLUSTRATION: PEXELS", 2.0, 0.5),
+            Evidence("four_year_timeline", 46.10, 4.10, "panel", "b_timeline.png", "INTERVIEW CLAIM"),
+            Evidence("growth_curve", 51.00, 4.10, "panel", "b_growth.png", "INTERVIEW CLAIM"),
+        ),
+        45.0,
+        60.0,
         0,
         0.65,
     ),
@@ -458,6 +539,8 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         start = item["start_frame"] / FPS
         end = item["end_frame"] / FPS
         captions = item["captions"]
+        if not captions:
+            continue
         span = (end - start) / len(captions)
         for caption_index, text in enumerate(captions):
             cap_start = start + caption_index * span
@@ -507,7 +590,6 @@ def mix_and_caption(video: Path, subtitles: Path, music: Path, impact: Path, wor
     script.write_text(";\n".join(lines) + "\n", encoding="utf-8")
     output = work / "raw_mix.mp4"
     vf = (
-        "drawbox=x=0:y=1460:w=1080:h=460:color=black@1.0:t=fill,"
         f"subtitles='{subtitles}':fontsdir='/System/Library/Fonts/Supplemental',"
         f"drawbox=x=0:y=ih-5:w=iw*(t/{raw_duration:.6f}):h=5:color=0xFFD447:t=fill"
     )
@@ -627,7 +709,7 @@ def render_variant(variant: Variant) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--variant", choices=("a", "b", "r", "all"), default="all")
+    parser.add_argument("--variant", choices=("a", "b", "r", "c", "all"), default="all")
     args = parser.parse_args()
     selected = ("a", "b") if args.variant == "all" else (args.variant,)
     for key in selected:

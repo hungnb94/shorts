@@ -1,7 +1,7 @@
 # HardKnocks V9R — Original-Voice Revision
 
 **Date:** 2026-07-17
-**Status:** Production complete; QC passed; not uploaded
+**Status:** Production complete; QC passed; uploaded/public
 **Parent treatment:** HardKnocks V9 Live-Approach (`U_3cCYOcCmk`)
 
 ## Decision Record
@@ -155,7 +155,7 @@ If V9R is uploaded, log it as a **revision treatment**, not as a clean control.
 
 ### Title
 
-`They Collected $100M. His Check Was $10K.`
+`They Collected $100M. His Check Was $10K`
 
 ### Description
 
@@ -169,8 +169,17 @@ He says a company collected about $100 million from an internet program he helpe
 
 ### Upload State
 
-- Status: Not uploaded
-- YouTube video ID: Not assigned
-- Metrics: Not available
+- Status: Uploaded; public
+- YouTube video ID: `GGGDbkuZUD0`
+- YouTube URL: https://youtube.com/shorts/GGGDbkuZUD0
+- Shared URL supplied by user: https://youtube.com/shorts/GGGDbkuZUD0?feature=share
+- Upload reported by user: 2026-07-17 11:25:39 +07
+- Public timestamp verified from metadata: 2026-07-17 11:23:29 +07
+- Public title: `They Collected $100M. His Check Was $10K`
+- Public channel: MONEY BLINDSPOT (`UCG_yrDQF5Sj6iMTZB0KSBAA`), matching the configured `finance` channel
+- Public duration: 46s rounded
+- Metrics status: Not yet fetched — wait at least 48 hours
+- Metrics fetch after: 2026-07-19 11:23:29 +07 or later
+- Studio Analytics: https://studio.youtube.com/video/GGGDbkuZUD0/analytics/tab-overview/period-default
 
-No upload, deletion, commit or push was performed by the agent.
+The agent did not perform the upload. No deletion, commit or push was performed.
