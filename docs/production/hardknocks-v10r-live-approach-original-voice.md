@@ -6,8 +6,11 @@
 |---|---|
 | Production | Complete |
 | Render date | 2026-07-17 |
-| Upload status | Not uploaded |
-| Metrics status | Not applicable until uploaded; wait at least 48 hours after public release |
+| Upload status | Public — 2026-07-17 20:25:13 +07 |
+| Metrics status | Fetch after 2026-07-19 20:25:13 +07 (48h minimum) |
+| YouTube ID | `LAONFI-soVY` |
+| YouTube URL | https://youtube.com/shorts/LAONFI-soVY?feature=share |
+| Studio Analytics | https://studio.youtube.com/video/LAONFI-soVY/analytics/tab-overview/period-default |
 | Final video | `output/projects/hardknocks/final/2026-07-17-hardknocks_v10r_live_approach_original_voice.mp4` |
 | Parent treatment | `docs/production/hardknocks-v10-100m-get-rich-slow.md` |
 | Renderer | `pipeline/hardknocks/render_hardknocks_v9_v10_sohk.py --variant c` |
