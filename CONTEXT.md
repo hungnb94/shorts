@@ -94,6 +94,10 @@ _Avoid_: "highlight edit", "re-edit"
 3 pipeline rules ALL required trước khi upload Clip Curation Edit: (1) commentary track, (2) min 2 value-adds, (3) cut ≤50% source + mỗi clip <15s. Auto-checkable.
 _Avoid_: "Fair Use check"
 
+**Original-Voice Editorial Commentary**:
+Commentary track của Clip Curation Edit được tạo bằng cách chọn, sắp xếp lại và juxtapose lời nói gốc thành một thesis mới, không thêm synthetic narration/TTS. Vẫn phải qua đủ Transformative Gate; không đồng nghĩa với đăng raw clip. Một revision bỏ TTS chỉ kiểm tra treatment mới khi các biến khác được giữ ổn định, và không chứng minh TTS là nguyên nhân nếu bản trước chưa có exposure.
+_Avoid_: "no-commentary edit", "raw interview cut", "TTS-free means untransformed"
+
 **Hard-Crop Convention** (ADR-0024):
 Mọi Clip Curation Edit BẮT BUỘC crop lấp đầy toàn bộ khung 1080x1920 bằng footage nét — không dùng blur-fill pillarbox (nền mờ full-bleed + video thu nhỏ ở giữa), dù pillarbox vẫn kỹ thuật đúng spec 9:16. Nếu caption cháy sẵn của nguồn bị crop cắt mất, tự viết lại caption (drawtext, word-synced từ transcript) thay vì chuyển sang pillarbox. `bacsihai_v6` (đã upload) được grandfathered, không re-render.
 _Avoid_: "pillarbox", "letterbox" (kỹ thuật đã bị cấm dùng làm giải pháp, trừ bacsihai_v6 grandfathered)

@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Render HardKnocks V9/V10 from the SOHK long-form interview.
+"""Render HardKnocks V9/V9R/V10 from the SOHK long-form interview.
 
 V9 tests a Live-Approach hook while preserving ADR-0017 with a moving,
 same-interview subject inset. V10 is a comparison Short (not a control) with
 a source-native Money+Number cold open. Both use two short TTS bridges,
 proof-coupled evidence after the protected 0-10s window, word-burst captions,
 and the established 1.03x retention finish.
+
+V9R is the surgical original-voice revision: it removes V9's two synthetic
+bridges, closes those timeline gaps, and preserves the hook, source beats,
+caption language, evidence types, and finishing treatment.
 """
 
 from __future__ import annotations
@@ -75,6 +79,8 @@ class Variant:
     evidence: tuple[Evidence, ...]
     target_min: float
     target_max: float
+    expected_tts_bridges: int = 2
+    tail_pad: float = 0.0
 
 
 A_SEGMENTS = (
@@ -127,6 +133,8 @@ A_SEGMENTS = (
     ),
     Segment("agency_payoff", "source", 400.40, 404.46, 0.30, 1.34, ("THEY COLLECTED $100M", "THEY GAVE ME $10K", "I'M DOING THIS", "ON MY OWN")),
 )
+
+A_ORIGINAL_VOICE_SEGMENTS = tuple(segment for segment in A_SEGMENTS if segment.kind == "source")
 
 B_SEGMENTS = (
     Segment("projection", "source", 789.72, 791.54, 0.30, 1.36, ("ON TRACK FOR", "OVER $100 MILLION")),
@@ -197,6 +205,22 @@ VARIANTS = {
         ),
         50.0,
         56.0,
+    ),
+    "r": Variant(
+        "r",
+        "v9r",
+        "2026-07-17-hardknocks_v9r_original_voice.mp4",
+        A_ORIGINAL_VOICE_SEGMENTS,
+        (
+            Evidence("exit_card", 19.60, 3.00, "panel", "a_exit.png", "INTERVIEW CLAIM"),
+            Evidence("home_start", 24.50, 3.50, "video", str(PEXELS_HOME), "ILLUSTRATION: PEXELS", 1.0, 0.5),
+            Evidence("printed_pages", 36.50, 3.00, "video", str(PEXELS_PAGES), "ILLUSTRATION: PEXELS", 0.5, 0.5),
+            Evidence("commission_gap", 42.00, 3.50, "panel", "a_gap.png", "INTERVIEW CLAIM"),
+        ),
+        44.0,
+        47.0,
+        0,
+        0.65,
     ),
 }
 
@@ -493,12 +517,21 @@ def mix_and_caption(video: Path, subtitles: Path, music: Path, impact: Path, wor
     return output
 
 
-def finish(raw_mix: Path, final: Path) -> None:
+def finish(raw_mix: Path, final: Path, tail_pad: float = 0.0) -> None:
     final.parent.mkdir(parents=True, exist_ok=True)
+    video_filter = f"setpts=PTS/{POST_SPEED}"
+    audio_filter = f"atempo={POST_SPEED}"
+    output_limit = ["-shortest"]
+    if tail_pad > 0:
+        raw_duration = float(probe(raw_mix)["format"]["duration"])
+        target_duration = raw_duration / POST_SPEED + tail_pad
+        video_filter = f"tpad=stop_mode=clone:stop_duration={tail_pad * POST_SPEED:.6f},setpts=PTS/{POST_SPEED}"
+        audio_filter += f",apad=whole_dur={target_duration:.6f},atrim=0:{target_duration:.6f}"
+        output_limit = ["-t", f"{target_duration:.6f}"]
     run(["ffmpeg", "-y", "-v", "error", "-i", str(raw_mix),
-         "-filter_complex", f"[0:v]setpts=PTS/{POST_SPEED}[v];[0:a]atempo={POST_SPEED}[a]",
+         "-filter_complex", f"[0:v]{video_filter}[v];[0:a]{audio_filter}[a]",
          "-map", "[v]", "-map", "[a]", *encode_args(), "-c:a", "aac", "-b:a", "192k",
-         "-ar", "48000", "-ac", "2", "-movflags", "+faststart", "-shortest", str(final)])
+         "-ar", "48000", "-ac", "2", "-movflags", "+faststart", *output_limit, str(final)])
 
 
 def extract_checks(final: Path, checks: Path) -> None:
@@ -539,7 +572,7 @@ def validate(variant: Variant, final: Path, timeline: list[dict[str, Any]], tota
         "first_evidence_after_10": first_evidence >= 10.0,
         "source_usage": source_seconds / SOURCE_DURATION <= 0.50,
         "source_clips_under_15": all((item["frames"] / FPS) < 15.0 for item in timeline if item["kind"] == "source"),
-        "two_tts_bridges": sum(item["kind"] == "tts" for item in timeline) == 2,
+        "expected_tts_bridges": sum(item["kind"] == "tts" for item in timeline) == variant.expected_tts_bridges,
     }
     failed = [name for name, passed in assertions.items() if not passed]
     if failed:
@@ -587,14 +620,14 @@ def render_variant(variant: Variant) -> None:
     subtitles = make_subtitles(variant, timeline, work, raw_duration)
     music, impact = generate_audio_assets(work, raw_duration)
     raw_mix = mix_and_caption(with_evidence, subtitles, music, impact, work, raw_duration, variant)
-    finish(raw_mix, final)
+    finish(raw_mix, final, variant.tail_pad)
     extract_checks(final, checks)
     validate(variant, final, timeline, total_frames, checks)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--variant", choices=("a", "b", "all"), default="all")
+    parser.add_argument("--variant", choices=("a", "b", "r", "all"), default="all")
     args = parser.parse_args()
     selected = ("a", "b") if args.variant == "all" else (args.variant,)
     for key in selected:

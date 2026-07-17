@@ -255,4 +255,19 @@ Uploaded by the user as YouTube Short `U_3cCYOcCmk`:
 - Public duration: 56s rounded
 - Metrics: do not fetch before 2026-07-19 09:38:08 +07
 
+### Early distribution observation
+
+At `2026-07-17 10:51:13 +07`, approximately 1 hour 13 minutes after the public timestamp, `yt-dlp` still reported `view_count: 0`.
+
+A follow-up check at `2026-07-17 11:17:37 +07`—1 hour 39 minutes 29 seconds after publication—still reported the video as public with `view_count: 0`.
+
+This is evidence of zero observed exposure at that moment, not evidence that viewers rejected the two downstream TTS bridges. With no viewer exposure, no retention response to those lines could yet be measured.
+
+User requested a tighter original-voice revision with both TTS bridges removed. It was produced as V9R:
+
+- production doc: `docs/production/hardknocks-v9r-original-voice.md`;
+- artifact: `output/projects/hardknocks/final/2026-07-17-hardknocks_v9r_original_voice.mp4`;
+- status: production complete, not uploaded;
+- causal boundary: the revision is a production hypothesis, not proof that commentary caused the initial zero-view state.
+
 The agent did not perform the upload. No commit or push was performed.
