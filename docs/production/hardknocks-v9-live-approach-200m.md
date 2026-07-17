@@ -6,8 +6,15 @@
 |---|---|
 | Production | Complete |
 | Render date | 2026-07-17 |
-| Upload status | Not uploaded |
-| Metrics status | Not applicable until uploaded; wait at least 48 hours after public release |
+| Upload status | Uploaded; public |
+| YouTube Video ID | `U_3cCYOcCmk` |
+| YouTube URL | https://youtube.com/shorts/U_3cCYOcCmk |
+| Upload reported at | 2026-07-17 09:39:20 +07 |
+| Public timestamp | 2026-07-17 09:38:08 +07 |
+| Public metadata verification | Verified 2026-07-17 09:39 +07 — title matches, duration rounds to 56s, availability public, channel is MONEY BLINDSPOT (`UCG_yrDQF5Sj6iMTZB0KSBAA`) |
+| Metrics status | Not yet fetched — wait at least 48 hours after public release |
+| Metrics fetch after (48h rule) | 2026-07-19 09:38:08 +07 or later |
+| Studio Analytics | https://studio.youtube.com/video/U_3cCYOcCmk/analytics/tab-overview/period-default |
 | Final video | `output/projects/hardknocks/final/2026-07-17-hardknocks_v9_live_approach_200m.mp4` |
 | Renderer | `pipeline/hardknocks/render_hardknocks_v9_v10_sohk.py --variant a` |
 | Research | `docs/research/sohk-opening-pattern-2026-07/REPORT.md` |
@@ -236,4 +243,16 @@ The face inset is intentionally large enough to satisfy the face-visible gate, b
 
 V9 and V10 are different stories, protagonists, claims, and narrative arcs. They are comparisons, not a controlled hook experiment. A valid Live-Approach test must keep this same story/edit constant and change only the opening treatment.
 
-No upload, commit, or push was performed.
+## Upload state
+
+Uploaded by the user as YouTube Short `U_3cCYOcCmk`:
+
+- URL: https://youtube.com/shorts/U_3cCYOcCmk
+- User reported the upload at: 2026-07-17 09:39:20 +07
+- Public metadata timestamp: 2026-07-17 09:38:08 +07
+- Public title: `They Collected $100M. His Check Was $10K.`
+- Public channel: MONEY BLINDSPOT (`UCG_yrDQF5Sj6iMTZB0KSBAA`), matching the configured finance channel
+- Public duration: 56s rounded
+- Metrics: do not fetch before 2026-07-19 09:38:08 +07
+
+The agent did not perform the upload. No commit or push was performed.
