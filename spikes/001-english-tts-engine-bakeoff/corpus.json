@@ -1,0 +1,28 @@
+{
+  "samples": [
+    {
+      "id": "hook",
+      "category": "short_finance_hook",
+      "text": "Her followers called this her worst trade.",
+      "duration_bounds_seconds": [1.0, 8.0]
+    },
+    {
+      "id": "finance",
+      "category": "full_finance_narration",
+      "text": "Three tractors for one Chipotle card—who wants it? The crowd saw dead weight, but one buyer saw a dream. The same item doubled in reported value with the right buyer. She didn't need a better item. She needed the right buyer.",
+      "duration_bounds_seconds": [8.0, 30.0]
+    },
+    {
+      "id": "ai",
+      "category": "ai_education_explanation",
+      "text": "Claude scored 62.3 percent on SWE-bench Verified. Just over a year later, that number reached 87.6 percent. This benchmark measures whether an AI coding agent can solve real GitHub software issues.",
+      "duration_bounds_seconds": [8.0, 30.0]
+    },
+    {
+      "id": "stress",
+      "category": "numbers_names_and_symbols",
+      "text": "In 2011, GoDaddy was valued at $2.25 billion. On SWE-bench Verified, performance jumped from 62.3% to 87.6%.",
+      "duration_bounds_seconds": [5.0, 24.0]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+huggingface-hub==1.23.0
+llvmlite==0.48.0
+mlx-whisper==0.4.3
+numba==0.66.0
+numpy==2.4.6
+scipy==1.18.0
+tiktoken==0.13.0
+torch==2.13.0

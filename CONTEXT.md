@@ -98,6 +98,30 @@ _Avoid_: "Fair Use check"
 Commentary track của Clip Curation Edit được tạo bằng cách chọn, sắp xếp lại và juxtapose lời nói gốc thành một thesis mới, không thêm synthetic narration/TTS. Vẫn phải qua đủ Transformative Gate; không đồng nghĩa với đăng raw clip. Một revision bỏ TTS chỉ kiểm tra treatment mới khi các biến khác được giữ ổn định, và không chứng minh TTS là nguyên nhân nếu bản trước chưa có exposure.
 _Avoid_: "no-commentary edit", "raw interview cut", "TTS-free means untransformed"
 
+**Synthetic Narration**:
+Spoken audio được tạo bằng TTS, với phạm vi phụ thuộc Video Type thay vì áp dụng một treatment cố định cho mọi Short. Synthetic Narration có thể đọc toàn bộ Short khi visual cần một narrator độc lập, hoặc chỉ đảm nhiệm Hook, CTA và Editorial Bridge ngắn khi source voice vẫn là giọng chính. Không đồng nghĩa với Commentary Track: commentary cũng có thể được thể hiện bằng Original-Voice Editorial Commentary hoặc text overlay.
+_Avoid_: "AI voice" (quá chung), "voiceover" (không phân biệt synthetic với source voice), "TTS-only format"
+
+**Narrator Voice Profile**:
+Voice identity ổn định của Synthetic Narration, được gán cho đúng một Destination Channel và được khóa bằng description/config cùng Canonical Narrator Voice Artifact khi engine dùng designed voice. Finance và AI-education có Narrator Voice Profile riêng phù hợp brand tone; không tự đổi voice theo từng Short hoặc Video Type. Voice chỉ được thay đổi khi chính voice là AB Variable của một Experiment đã khai báo, để tránh tạo biến nhiễu khi đánh giá các variant khác.
+_Avoid_: "random voice", "voice per video", "global narrator" (gộp nhiều Destination Channel)
+
+**Authorized Voice Source**:
+Nguồn voice hợp lệ để tạo Narrator Voice Profile: stock voice được phân phối hợp pháp cùng TTS model; artifact hoàn toàn synthetic do model có license phù hợp tạo từ text description; hoặc giọng của chính chủ/narrator có consent và license rõ ràng cho voice cloning. Không dùng giọng clone của người nổi tiếng, speaker trong Source Channel hoặc bất kỳ người nào chưa cấp quyền. Audio demo công khai chỉ là listening evidence, không tự trở thành Authorized Voice Source để conditioning hay đóng gói lại.
+_Avoid_: "celebrity voice", "source-speaker clone", "public voice means free to clone"
+
+**Canonical Narrator Voice Artifact**:
+Audio reference duy nhất, được version và hash, dùng để khóa identity của một designed Narrator Voice Profile khi sinh lời thoại mới. Đây là domain asset không thể thay bằng audition/output tạm: regenerate từ cùng description vẫn có thể drift khi model/runtime thay đổi. Raw generation, normalized copy, audition, repeatability run và upstream demo đều không phải Canonical Narrator Voice Artifact.
+_Avoid_: "sample WAV", "audition winner file", "regenerate later is identical"
+
+**Narrator Runtime Adapter**:
+Cơ chế kỹ thuật gọi TTS engine để hiện thực hóa một Narrator Voice Profile trong renderer. Voice Selection và Runtime Activation là hai quyết định khác nhau: adapter tạm có thể tiếp tục chạy trong khi canonical profile đã được chọn, nhưng không được hiểu adapter tạm là voice preference hoặc production identity.
+_Avoid_: "selected voice means already integrated", "current adapter is the canonical voice"
+
+**TTS Selection Gate** (ADR-0032):
+Một English open-source engine/voice chỉ trở thành production default sau khi code, weights và exact voice đều qua commercial-use gate, chạy được trên Apple Silicon 16 GB không cần paid API, và được người dùng trực tiếp đánh giá ngang hoặc tốt hơn Edge baseline trên cùng audition corpus. Automated QC chỉ loại artifact invalid/silent/truncated hoặc cảnh báo pronunciation; AI/metric không chọn winner. Nếu không local candidate nào đạt listening bar, tiếp tục dùng `edge-tts`; chỉ benchmark Python API so với batch CLI trên open-source winner đã được chọn.
+_Avoid_: "open source means automatic default", "AI-scored voice winner", "integration-first bake-off"
+
 **Hard-Crop Convention** (ADR-0024):
 Mọi Clip Curation Edit BẮT BUỘC crop lấp đầy toàn bộ khung 1080x1920 bằng footage nét — không dùng blur-fill pillarbox (nền mờ full-bleed + video thu nhỏ ở giữa), dù pillarbox vẫn kỹ thuật đúng spec 9:16. Nếu caption cháy sẵn của nguồn bị crop cắt mất, tự viết lại caption (drawtext, word-synced từ transcript) thay vì chuyển sang pillarbox. `bacsihai_v6` (đã upload) được grandfathered, không re-render.
 _Avoid_: "pillarbox", "letterbox" (kỹ thuật đã bị cấm dùng làm giải pháp, trừ bacsihai_v6 grandfathered)

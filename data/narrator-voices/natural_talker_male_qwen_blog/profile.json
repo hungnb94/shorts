@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "id": "natural_talker_male_qwen_blog",
+  "status": "canonical",
+  "assignment": {
+    "destination_channel": "finance",
+    "language": "en",
+    "role": "synthetic_narrator"
+  },
+  "identity": {
+    "description": "A relaxed, naturally expressive male voice in his late twenties to early thirties, with a moderately low pitch, casual speaking rate, and conversational volume; deliver lines with a light, self-deprecating tone, breaking into genuine, easygoing laughter at moments of embarrassment, while maintaining clear articulation and an overall warm, approachable clarity.",
+    "description_source": "https://qwen.ai/blog?id=qwen3tts-0115",
+    "reference_text": "Yeah, so—uh—I’m a digital nomad, right? Pretty much all my communication is just texts and messages. Heh, somehow that sounded cooler in my head.",
+    "reference_audio": "reference.wav",
+    "reference_sha256": "3272b6aa18551b4961871d9c119fa2e58860b8e77b455bdd3050f4020b671557",
+    "reference_format": {
+      "codec": "pcm_s16le",
+      "sample_rate": 24000,
+      "channels": 1,
+      "duration_seconds": 13.44
+    }
+  },
+  "provenance": {
+    "type": "locally_generated_synthetic_voice",
+    "authorization": "Generated from a text description with Apache-2.0 Qwen3-TTS weights; no human, celebrity, source-channel, or upstream demo audio was used for conditioning.",
+    "official_demo_usage": "Listening comparison only; the upstream demo WAV is not part of this profile and is not used for conditioning.",
+    "model_license": "Apache-2.0",
+    "runtime_license": "MIT",
+    "upstream_model_license_url": "https://github.com/QwenLM/Qwen3-TTS/blob/022e286b98fbec7e1e916cb940cdf532cd9f488e/LICENSE",
+    "runtime_license_url": "https://github.com/Blaizzy/mlx-audio/blob/04151c6abb74b886f879a4457ccdc96761f10102/LICENSE"
+  },
+  "models": {
+    "voice_design": {
+      "repo_id": "mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-6bit",
+      "revision": "ffc6545dc9cb086950aa46c6cd3db490e6ece3e1",
+      "license": "Apache-2.0",
+      "license_url": "https://huggingface.co/mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-6bit/blob/ffc6545dc9cb086950aa46c6cd3db490e6ece3e1/README.md",
+      "weights": [
+        {
+          "path": "model.safetensors",
+          "sha256": "fb3c35f8ca4165f8824ddfd3f4ba97266bd699b3fb003e3a39084f9d3664ce87",
+          "size_bytes": 2009267875
+        },
+        {
+          "path": "speech_tokenizer/model.safetensors",
+          "sha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258",
+          "size_bytes": 682293092
+        }
+      ]
+    },
+    "voice_clone": {
+      "repo_id": "mlx-community/Qwen3-TTS-12Hz-1.7B-Base-6bit",
+      "revision": "34ff5318365b59cba9c03ff729f2eee0814caf72",
+      "license": "Apache-2.0",
+      "license_url": "https://huggingface.co/mlx-community/Qwen3-TTS-12Hz-1.7B-Base-6bit/blob/34ff5318365b59cba9c03ff729f2eee0814caf72/README.md",
+      "weights": [
+        {
+          "path": "model.safetensors",
+          "sha256": "b043693cb63f38f4e0ae5fe39a5cfdb466ef199dc5a767991a4a46235ac27e67",
+          "size_bytes": 2033279427
+        },
+        {
+          "path": "speech_tokenizer/model.safetensors",
+          "sha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258",
+          "size_bytes": 682293092
+        }
+      ]
+    }
+  },
+  "runtime": {
+    "strategy": "voice_design_then_clone",
+    "environments": {
+      "synthesis": {
+        "python": "3.12.9",
+        "lock_file": "requirements-mlx.txt",
+        "lock_sha256": "d0b6676427046ae502cad911a770e284c70e7445fa9fe958b5068266a02b237f"
+      },
+      "asr": {
+        "python": "3.14.6",
+        "lock_file": "requirements-asr.txt",
+        "lock_sha256": "3ad28003000ac02190764fed1b4b0af23ce18f9327a5ab82bff789a162687056"
+      }
+    },
+    "repeatability_fingerprints": {
+      "ffmpeg": {
+        "version_line": "ffmpeg version 7.1.1 Copyright (c) 2000-2025 the FFmpeg developers",
+        "version_output_sha256": "88b12a030360dd4614c0e3999e442dd5cfa63c6df2b7b8dc2f23f56a40399ff9"
+      },
+      "platform": {
+        "system": "Darwin",
+        "macos_version": "26.5.2",
+        "macos_build": "25F84",
+        "machine": "arm64"
+      }
+    }
+  },
+  "generation": {
+    "seed": 20260718,
+    "reference": {
+      "language": "English",
+      "temperature": 0.7,
+      "max_tokens": 384,
+      "top_k": 30,
+      "top_p": 0.9,
+      "repetition_penalty": 1.05
+    },
+    "clone": {
+      "language": "English",
+      "temperature": 0.7,
+      "max_tokens": 768,
+      "top_k": 30,
+      "top_p": 0.9,
+      "repetition_penalty": 1.5
+    }
+  },
+  "verification": {
+    "reference_asr": {
+      "model": {
+        "repo_id": "mlx-community/whisper-small-mlx",
+        "revision": "45f3915923c7a79a5a5b5a7d909d39aeb0e5630e",
+        "weights": [
+          {
+            "path": "weights.npz",
+            "sha256": "55b6674c9b339702d486e2b1573839a66f8ec8f821ed2886993ef717a86b09f5",
+            "size_bytes": 481307592
+          }
+        ]
+      },
+      "historical_sequence_ratio": 0.9781
+    },
+    "cross_process": {
+      "status": "passed_hardened_harness",
+      "validated_at": "2026-07-18T15:31:57+07:00",
+      "independent_processes": 2,
+      "corpus_passages": 4,
+      "raw_hash_matches": 4,
+      "normalized_hash_matches": 4,
+      "maximum_duration_delta_seconds": 0.0,
+      "asr_sequence_ratio": 0.9691,
+      "asr_lcs_word_recall": 0.96
+    }
+  },
+  "selection": {
+    "selected_by": "user",
+    "selected_at": "2026-07-18T13:50:23+07:00",
+    "supersedes": "cinematic_documentary_host"
+  },
+  "runtime_activation": {
+    "status": "pending_integration",
+    "current_temporary_adapter": "edge-tts",
+    "next_decision": "Compare direct Python API with a standalone batch CLI before changing renderers."
+  }
+}
