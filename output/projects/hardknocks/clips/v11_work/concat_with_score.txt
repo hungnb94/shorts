@@ -1,0 +1,2 @@
+file '/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v11_work/with_verify.mp4'
+file '/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v11_work/score_card.mp4'

@@ -1,0 +1,3 @@
+file '/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v11_work/opening_card.mp4'
+file '/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v11_work/with_inline.mp4'
+file '/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v11_work/ending.mp4'
