@@ -1,5 +1,7 @@
 # ADR 0011: Success Formula as Strategic Layer Above MAB Cycles
 
+> **Partial supersession (2026-07-19):** ADR-0035 removes the fixed three-cycle/18-video/two-week cohort assumptions. Success Formula remains the strategic layer, but every new Target Cohort must declare its own sample count and stopping rule under Plateau-Gated Cadence.
+
 ## Context
 The autonomous optimization loop runs 3-day cycles (upload 18 videos → 48h wait → analyze → adjust MAB). This is a **tactical learning loop** — it explores/exploits variant combinations but has no strategic direction. The system needed a **strategic planning layer** that:
 - Sets measurable 2-week targets (Target Cohorts)

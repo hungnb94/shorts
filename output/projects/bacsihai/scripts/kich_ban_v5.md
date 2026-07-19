@@ -2,7 +2,6 @@
 
 ## Nguyên tắc
 - 1 video duy nhất lần này (không phải batch 3 video như v4)
-- Mỗi video = 1 đoạn continuous từ source (VO Bác sĩ Hải nói liên tục, không ngắt) — ADR-0013
 - Frame t=0 của đoạn cắt PHẢI có mặt người — đã verify bằng frame extract, xem `docs/production/bacsihai-v5-lao-dong-tay.md` — ADR-0017
 - Subtitle t=0-5s = word-burst 2-5 từ/cụm, cadence ~1-1.3s, 1 từ khóa nhấn màu vàng — ADR-0018
 - Subtitle t=5s→hết = tóm tắt theo từng đoạn, tightened ~4-5s/block (v4 dùng ~8-9s, quá chậm)

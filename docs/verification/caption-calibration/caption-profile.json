@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "output": {
+    "width": 1080,
+    "height": 1920
+  },
+  "capcut_reference": {
+    "font_size": 16,
+    "stroke": 60,
+    "note": "Visual intent only; CapCut units are not ffmpeg pixels."
+  },
+  "ffmpeg_profile": {
+    "english": {
+      "base_font_size_px": 80,
+      "keyword_font_size_px": 90
+    },
+    "vietnamese": {
+      "base_font_size_px": 96,
+      "keyword_font_size_px": 108
+    },
+    "stroke_width_px": 8,
+    "caption_center_y_ratio": 0.6,
+    "caption_center_y_allowed_min": 0.55,
+    "caption_center_y_allowed_max": 0.65,
+    "horizontal_margin_ratio": 0.08,
+    "burst_words_min": 2,
+    "burst_words_max": 5,
+    "mobile_preview_width": 360,
+    "mobile_preview_height": 640
+  },
+  "fonts": {
+    "english": "assets/fonts/komika-axis/KOMIKAX_.ttf",
+    "vietnamese": "assets/fonts/bangers/Bangers-Regular.ttf"
+  }
+}

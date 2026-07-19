@@ -1,5 +1,7 @@
 # ADR 0019: Multi-Niche AB Testing (Finance/English + Health/Vietnamese)
 
+> **Partial supersession (2026-07-19):** ADR-0034 replaces this ADR's `≤60s` shared spec with `50-75s` for new production. The multi-niche and language-scoping decisions remain accepted.
+
 **Date:** 2026-07-10
 **Status:** Accepted
 

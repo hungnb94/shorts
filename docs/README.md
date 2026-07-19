@@ -10,7 +10,6 @@ Decisions that shaped the project.
 | 0003 | AB test one variable at a time |
 | 0004 | Language: English only |
 | 0005 | Content strategy: curate & repackage |
-| 0006 | Multi-format video types (7 types) |
 | 0007 | Clip Curation Edit (Type #7) |
 | 0008 | Value-Added Editing — all 9 types |
 | 0009 | Autonomous Optimization System |

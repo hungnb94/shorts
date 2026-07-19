@@ -1,5 +1,7 @@
 # ADR 0014: Dedicated Vision Model for Video Analysis
 
+> **Partial supersession (2026-07-19):** ADR-0035 removes this ADR's 18-video/three-day throughput assumption. The dedicated-vision-model decision and per-video analysis requirements remain accepted.
+
 **Status:** Accepted
 **Date:** 2026-07-08
 **Deciders:** hungnb94

@@ -32,8 +32,6 @@ See `output/projects/aiwork/final/2026-07-10-capability_curve_v1.txt` (credits t
 ## Why This Segment
 The source's own on-screen slide with the raw benchmark numbers (62.3% → 87.6%, SWE-bench Verified) sits at abs t≈213-235s, just before this chosen span. The originally-considered start point, t=234.9 (chosen from a real audio pause in the transcript), failed Stage 0 Hook Gate item 1 on frame inspection: the camera was still on a faceless chart-closeup shot there, with the crossfade to the presenter's wide shot only completing at ~236.0. Moved `SRC_START` to 236.0 to open on a clear human presenter (ADR-0017).
 
-That correction shortened the segment to 44.48s, under ADR-0013's 45s floor, so `SRC_END` was extended from an initial 280.48 to 282.0 (46.0s total), landing in ~2s of natural silence just after the last spoken sentence. This deliberately avoids extending further into the ~5.24s awkward "technical difficulties" dead-air stretch (280.48-285.72s) that was excluded from candidate selection.
-
 The resulting span is a complete, self-contained arc: the reveal payoff ("that's an over 25% jump... Opus 4.7 is more than 3x as likely to succeed on those difficult PRs Sonnet 3.7 was failing on a year ago") followed by the live-demo setup ("we're going to compare Sonnet 4 to Opus 4.7... same task, 12 months apart"). Because the chosen span's own audio only ever references the benchmark numbers abstractly ("an over 25% jump", "3x as likely") and never restates 62.3%/87.6% directly, the data-viz chart (built from the real numbers on Alex Albert's own slide, not a screenshot of it) is what actually shows the reader the underlying stat, never fabricated, transcribed directly off the source's own on-screen slide.
 
 ## Hook Formula Applied
@@ -50,9 +48,6 @@ The resulting span is a complete, self-contained arc: the reveal payoff ("that's
 2. **fact_check_callout**, "SWE-BENCH VERIFIED, REAL GITHUB CODING TASKS", t=0-8s.
 
 Commentary track: TTS voiceover ("Straight from Anthropic's own stage.") plus captions throughout satisfy gate item 1 more literally than text-overlay alone (ADR-0021).
-
-## Transformative Gate, item 3 note (flagged, same precedent as bacsihai-v5)
-Cut duration 46.0s / 905.0s source = 5.1%, well under the 50% ceiling. The "<15s per individual clip" clause was written for the multi-clip mashup format (e.g. `render_hardknocks_v1.py`'s concatenated clips); this video is the Contiguous-VO single-segment format (ADR-0013), where the entire video *is* the one segment and is instead bounded by ADR-0013's 45-60s range (46.0s, compliant), same precedent `docs/production/bacsihai-v5-lao-dong-tay.md` and the pre-existing v4 videos were produced under.
 
 ## Known Issues (bugs found and fixed during this production)
 1. **ffmpeg drawtext "Stray %" silent-drop bug**, captions containing a literal `%` (e.g. "25%") were silently dropped from the render entirely under drawtext's default `expansion=normal` parsing; ffmpeg exits 0 with no visible top-level error, only a buried "Stray %" warning in stderr. Root-caused via isolated single-filter test renders. Fixed by adding `expansion=none` to every `drawtext` call, `%%`-escaping did **not** reliably fix it in testing. Now recorded in AGENTS.md Known Pitfalls (see Workflow Delta below).

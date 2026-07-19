@@ -1,6 +1,6 @@
 # Shorts Project Context
 
-Animated short video factory: tự động sản xuất 6 videos/ngày (9:16, 30-60s) để AB test viral content formulas trên YouTube + TikTok, kiếm tiền qua ads revenue và affiliate marketing.
+Animated short video factory: sản xuất Shorts 9:16, 50-75s và phát hành qua ba Channel Pool theo Plateau-Gated Cadence để AB test viral content formulas trên YouTube + TikTok, kiếm tiền qua ads revenue và affiliate marketing.
 
 Niche: 3 verticals song song (ADR-0019, ADR-0020) — Finance/money-making (crypto, side hustle, investing, tiếng Anh, niche gốc), Health/longevity (tiếng Việt, Source Channel "Bác sĩ Hải"), AI education (tiếng Anh, professionals/knowledge workers).
 Ngôn ngữ: Tiếng Anh cho niche finance + AI education (global audience, RPM cao); Tiếng Việt cho niche health (khán giả Việt Nam).
@@ -10,7 +10,7 @@ Automation: Phased — Phase 1 semi-auto (AI generate, human review) → Phase 2
 ## Language
 
 **Short**:
-Một video 9:16, 30-60 giây, MP4 H.264. Đơn vị sản xuất và AB test cơ bản.
+Một video 9:16, 50-75 giây, MP4 H.264 có audio stream. Đơn vị sản xuất và AB test cơ bản (ADR-0034); range này là policy nội bộ, không phải giới hạn kỹ thuật của YouTube.
 _Avoid_: "video", "clip", "content" (quá chung)
 
 **CRF (Constant Rate Factor)**:
@@ -22,11 +22,11 @@ Scaling algorithm cao cấp cho ffmpeg (`flags=lanczos`). Bắt buộc dùng khi
 _Avoid_: "bilinear", "bicubic" (chất lượng thấp hơn)
 
 **Batch**:
-Nhóm 3 videos dùng chung 1 variant (A hoặc B) trong AB test. Mỗi ngày = 1 experiment = 2 batches (A vs B).
+Nhóm 3 Shorts dùng chung 1 variant (A hoặc B) trong AB test, mỗi Short đi vào một lane khác nhau của Channel Pool theo thứ tự round-robin. Batch không còn gắn với một ngày lịch.
 _Avoid_: "group", "set"
 
 **Experiment**:
-Một lần AB test chạy trong 1 ngày: A (control) vs B (test 1 biến). Declare winner sau 7 experiments liên tiếp cùng biến.
+Một lần AB test gồm A (control) vs B (test đúng 1 biến), mỗi phía là một Batch. Experiment hoàn tất khi mọi Short đủ điều kiện đo; không còn mặc định chạy trong một ngày.
 _Avoid_: "test", "comparison"
 
 **Variant**:
@@ -34,12 +34,16 @@ Giá trị cụ thể của biến đang test. VD: "hook type = Contrarian" là 
 _Avoid_: "version", "option"
 
 **Hook**:
-0-2 giây đầu video — nhưng thực chất là 1 cung 2 giai đoạn: setup 1 gap/mystery (vật thể chưa rõ, danh tính bị giấu, câu hỏi bị né) rồi partial reveal trong 5-8s, không phải 1 câu tuyên bố tĩnh đã đầy đủ nghĩa. HEIT liệt kê 3 type (Context, Contrarian, Intrigue) nhưng khảo sát 6 video viral (2026-07, xem `docs/research/hook-benchmarks-2026-07/REPORT.md`) cho thấy hook hiệu quả thường là hybrid Context→Intrigue, hoặc dạng **Dare/Challenge** (thách đố kết cục nhị phân) chưa khớp type nào trong 3 type gốc. Với Clip Curation Edit, frame t=0 của cut PHẢI chứa mặt người hoặc hành động/prop rõ ràng — không phải title card tĩnh (xem Hook-Window Rule).
+0-3 giây đầu video, trong đó gap/mystery và narrative promise phải đọc được trong 0-2s: vật thể chưa rõ, danh tính bị giấu hoặc câu hỏi bị né; partial reveal rơi trong 5-8s, không phải 1 câu tuyên bố tĩnh đã đầy đủ nghĩa. HEIT liệt kê 3 type (Context, Contrarian, Intrigue) nhưng khảo sát 6 video viral (2026-07, xem `docs/research/hook-benchmarks-2026-07/REPORT.md`) cho thấy hook hiệu quả thường là hybrid Context→Intrigue, hoặc dạng **Dare/Challenge** (thách đố kết cục nhị phân) chưa khớp type nào trong 3 type gốc. Với Clip Curation Edit, frame t=0 của cut PHẢI chứa mặt người hoặc hành động/prop rõ ràng — không phải title card tĩnh (xem Hook-Window Rule).
 _Avoid_: "intro", "opening"
 
 **Hook Caption Sync**:
 Caption burned-in phải bắt đầu ngay t=0 (không đợi giây thứ 2-3), sync theo từng cụm từ đang nói, với 1 từ khóa cảm xúc/số liệu nhấn màu khác (thường vàng). Xuất hiện ở 6/6 video trong khảo sát `docs/research/hook-benchmarks-2026-07/REPORT.md` — pattern chưa được ghi nhận trước đó dù universal.
 _Avoid_: "subtitle", "text overlay" (quá chung, không nói rõ yêu cầu timing/nhấn từ)
+
+**Caption Style Profile**:
+Baseline caption project-wide (ADR-0034): 2-5 từ mỗi burst, một keyword được animate/nhấn, tâm caption mặc định ở 55-65% chiều cao frame và chỉ dịch khi visual review xác nhận đang che mặt/proof object. English dùng Komika Axis; health/Vietnamese dùng Bangers. Kích thước ffmpeg phải được calibration để match ngoại hình CapCut size 16/stroke 60, không copy literal hai số đó sang ffmpeg.
+_Avoid_: "renderer default caption", "literal ffmpeg 16/60", "one font without Vietnamese glyphs"
 
 **Hook-Window Rule**:
 Quy tắc chọn điểm bắt đầu source segment cho Clip Curation Edit (ADR-0017): frame tại t=0 của cut phải chứa mặt người — skin-tone ≥10% theo pixel statistics, hoặc confirm visually. Title card / text graphic / slide / B-roll establishing / "numbered list transition" bị cấm làm segment start. Overlay đầu tiên phải land ≤t=2s. Nguyên nhân ra đời: bacsihai V1 (YQTWHqTS1e8) = 8.6% stayed vì segment bắt đầu tại 304.5s = static title card "Sai lầm số 5" (85% near-white, 0% face), mặt người đầu tiên ở t=5s. So với Dangote (ChWLcE3OYpA) = 50% stayed, mặt người + motion ngay t=0.
@@ -66,8 +70,48 @@ Kênh YouTube dùng làm research input, cho MỘT trong 3 niche song song (ADR-
 _Avoid_: "inspiration", "reference channel"
 
 **Destination Channel**:
-Kênh YouTube CỦA USER, nơi video đã render được upload lên — 1 kênh riêng cho mỗi vertical (ADR-0025 addendum): MONEY BLINDSPOT (finance — `hardknocks`/`dangote`/`giannis`), Giảm Cân Healthy - Thực Chiến (health — `bacsihai`), Working With AI (AI-education — `aiwork`). Mỗi kênh cần OAuth token riêng để fetch Analytics (`GOOGLE_REFRESH_TOKEN_FINANCE`/`_HEALTH`/`_AIWORK`) — `channel==MINE` KHÔNG dùng được vì không resolve đáng tin cậy về đúng kênh này (xem ADR-0025).
+Một kênh YouTube CỦA USER nhận Short đã render, thuộc đúng một vertical và là một lane trong Channel Pool của vertical đó. Các kênh hiện có — MONEY BLINDSPOT (finance — `hardknocks`), Giảm Cân Healthy - Thực Chiến (health — `bacsihai`), Working With AI (AI-education — `aiwork`) — là lane đầu tiên của từng Channel Pool, không còn là destination duy nhất. Mỗi Destination Channel cần identity/Analytics scope riêng; `channel==MINE` không resolve đáng tin cậy về đúng channel (xem ADR-0025).
 _Avoid_: nhầm với "Source Channel" ở trên — 2 khái niệm hoàn toàn khác nhau
+
+**Channel Pool**:
+Ba Destination Channel cùng phục vụ một vertical, mỗi channel được phone-verified, đã age ít nhất ba tuần trước upload đầu tiên và nhận Short theo thứ tự round-robin. Mỗi lane giữ subscriber/history riêng nhưng chia sẻ cùng niche và production system; một Short hoặc revision chỉ được phát hành trên một lane tại một thời điểm.
+_Avoid_: "one channel per niche", "random channel", "simultaneous duplicate upload"
+
+**No-Feed State**:
+Trạng thái một Short đã qua 48 giờ nhưng traffic từ Shorts Feed vẫn dưới 60%. Không đồng nghĩa với low views hay Distribution Plateau: một Short ít view vẫn không ở No-Feed State nếu phần lớn traffic của nó đến từ Shorts Feed. Khi vào trạng thái này, bản gốc được giữ lại để bảo toàn delayed-pickup/data và một revision được chuyển sang Destination Channel kế tiếp trong Channel Pool.
+_Avoid_: "flop", "low-view video", "plateau", "delete and repost"
+
+**Material Revision**:
+Phiên bản mới của một Short ở No-Feed State, bắt buộc dựng lại toàn bộ cửa sổ 0–3s (shot/framing, hook copy và early SFX) đồng thời thay ít nhất một trục khác trong pacing/cut order, proof visuals, captions hoặc music. Chỉ đổi metadata, export lại cùng timeline hoặc thay riêng music không đủ để trở thành Material Revision.
+_Avoid_: "re-upload", "metadata refresh", "music swap", "duplicate"
+
+**Channel Burn State**:
+Trạng thái một Destination Channel có ba Short liên tiếp rơi vào No-Feed State dù từng Short đã pass toàn bộ production/publishing gates. Lane này bị loại khỏi rotation cho tới khi có replacement đã phone-verify và age đủ ba tuần; một Short yếu đơn lẻ không đủ để kết luận channel bị burn.
+_Avoid_: "channel feels dead", "one flop means burned", "delete the channel"
+
+**Food-Trial Short (Tòa Án Món Ăn)**:
+Narrative format chủ lực của Companion-Meal Short, trình bày một tranh luận dinh dưỡng như phiên tòa: đối tượng được xét xử là một cáo buộc về món ăn, không phải bản thân món ăn; có bằng chứng ủng hộ và phản biện, rồi một phán quyết có hành động cụ thể cho khẩu phần hoặc bữa còn lại. Hài hước là lớp truyền tải; phán quyết phải dựa trên các giả định khẩu phần được công khai và không được biến thực phẩm thành nhãn đạo đức “tốt/xấu”.
+_Avoid_: "food roast", "món độc hại", "guilty food", "nutrition lecture"
+
+**Living-Comic Treatment**:
+Treatment hình ảnh toàn thời lượng của Food-Trial Short: toàn bộ khung hình được tổ chức như các trang và panel truyện tranh, nhưng panel chính chứa footage nấu ăn thật đang chuyển động. Ảnh tĩnh chỉ được dùng như nhịp vật chứng hoặc reaction ngắn; đây không phải slideshow ảnh có pan/zoom và cũng không phải footage toàn màn hình chỉ gắn vài speech bubble.
+_Avoid_: "static comic", "comic overlay only", "Ken Burns slideshow", "raw-footage layout"
+
+**Lobby Acquittal Twist**:
+Biến cố kết thúc không báo trước trong một số Food-Trial Short đủ điều kiện: sau khi vật chứng đã cho thấy cáo buộc có cơ sở và Companion-Meal Verdict đúng đã được trình bày, quan tòa hư cấu vẫn tuyên tha vì nhận lobby từ một tổ chức thực phẩm hoàn toàn hư cấu. Tập đủ điều kiện được chọn bằng random có kiểm soát để viewer không dự đoán được nhưng tránh lặp twist liên tiếp. Lobby nên là một Earned Evidence Callback gắn với nguyên liệu hoặc phe đã xuất hiện trong hồ sơ; twist không được thay thế hoặc đảo ngược thông tin dinh dưỡng đúng.
+_Avoid_: "default ending", "random envelope", "real-brand bribery", "source-creator corruption", "misleading acquittal"
+
+**Verdict-Pendulum Narrative**:
+Trải nghiệm retention của Food-Trial Short trong đó viewer hình thành một phán đoán ban đầu, rồi Counter-Evidence Ladder làm kết luận tạm thời nghiêng qua lại trước verdict cuối. Pendulum mô tả trải nghiệm của viewer, không phải cấu trúc script: script không luân phiên các fact độc lập mà buộc mỗi checkpoint phải phản đòn, thêm ngoại lệ hoặc làm thay đổi ý nghĩa của vật chứng ngay trước đó. Verdict cân trọng số và ngữ cảnh của toàn bộ Recipe Case, không đếm số card hoặc cố tạo thế cân bằng giả.
+_Avoid_: "alternating fact cards", "evidence dump", "forced both-sides balance", "trivia reversal", "most cards wins"
+
+**Counter-Evidence Ladder**:
+Narrative engine mặc định cho prototype Food-Trial Short đầu tiên: mỗi vật chứng mới phải trực tiếp phản bác hệ quả trước, bổ sung ngữ cảnh làm đổi ý nghĩa, đưa ra ngoại lệ hợp lệ, bóc một giả định ẩn hoặc biến vật chứng cũ thành proof quyết định. Các lượt leo thang cho tới khi một bên không còn counter đủ liên quan và tòa có thể trả lời đúng cáo buộc ban đầu; fact đúng nhưng không thay đổi vụ án bị loại khỏi video. Đây là production hypothesis được chấp nhận từ cross-video analysis Law By Mike, chưa phải causal winner đã được xác nhận.
+_Avoid_: "nutrition checklist", "independent evidence ping-pong", "equal turns per side", "more facts means stronger case"
+
+**Earned Evidence Callback**:
+Payoff cuối tái sử dụng một nguyên liệu, giả định, quy tắc, phe hoặc vật chứng đã được gieo trước đó để tạo proof, character joke hoặc Lobby Acquittal Twist. Callback phải tái diễn giải hồ sơ vừa xem thay vì gắn một punchline ngẫu nhiên vào cuối; đây là pattern ưu tiên chứ không phải yêu cầu mọi tập phải có joke.
+_Avoid_: "random punchline", "unseeded lobby", "unrelated CTA gag", "new evidence after verdict"
 
 **Curate**:
 Quá trình xem video từ Source Channel, extract topic + facts + hook pattern. Output = text research notes, không phải video.
@@ -81,6 +125,10 @@ _Avoid_: "remix", "edit", "cut"
 Một dimension được thay đổi giữa A và B trong experiment. Chỉ 1 biến đổi mỗi experiment.
 VD: video type, hook type, title pattern, video length, voice, CTA, thumbnail.
 _Avoid_: "parameter", "factor"
+
+**Mid-Roll Triple CTA**:
+CTA bắt đầu trong cửa sổ t=38–42s và yêu cầu rõ cả ba hành động Like, Subscribe và Comment. Đây là beat bắt buộc bên trong Short, không phải end card chỉ xuất hiện sau payoff; wording vẫn phải gắn với nội dung cụ thể của Short thay vì dùng một câu generic có thể dán vào mọi video.
+_Avoid_: "end CTA", "like-and-subscribe only", "generic engagement line"
 
 **Clip Curation Edit**:
 Video Type #7. Download footage từ Source Channel + cut + transform (commentary + value-adds). Khác Repackage (zero-footage animation gốc).
@@ -179,12 +227,8 @@ Value-Add Type mới (1 mẫu, xem `docs/research/ronaldo-security-guard-kindnes
 _Avoid_: "label overlay", "name tag" (quá chung, thiếu vai trò tạo-gap)
 
 **Autonomous Optimization System**:
-Hệ thống tự động upload + measure + improve videos. 3-day cycle: upload 18 videos → wait 48h metrics → MAB adjust strategy → repeat. Không cần human input sau setup.
+Hệ thống tự động evaluate eligibility của lane kế tiếp trong Channel Pool, publish theo Plateau-Gated Cadence, chờ metrics, rồi để MAB điều chỉnh strategy. Không có fixed daily upload quota; scheduler phải dừng nếu lane kế tiếp chưa đủ điều kiện.
 _Avoid_: "AI optimizer", "auto-improve"
-
-**Optimization Cycle**:
-1 iteration của autonomous system: 3 days upload (18 videos) + 48h metrics wait = 5 days total. Sau đó analyze + adjust strategy cho cycle tiếp.
-_Avoid_: "training loop", "iteration"
 
 **Multi-Armed Bandit (MAB)**:
 Optimization algorithm chọn variant nào upload tiếp. Balance explore (test mới) vs exploit (dùng top performers). Epsilon-greedy: 50-50 lúc đầu → 20-80 sau 3 cycles.
@@ -206,17 +250,17 @@ _Avoid_: "watch time graph"
 Điểm đặc biệt trong retention graph: dip (viewers skip), peak (rewatch), flat (engaged). Inform hook/pacing decisions cho videos tiếp. Implemented (ADR-0025): detect bằng z-score của residual so với rolling-average baseline, ngưỡng tính riêng cho từng video (không hardcode 1 hằng số chung cho mọi video) — cùng nguyên tắc với pause-trim threshold (AGENTS.md).
 _Avoid_: "highlight", "retention spike"
 
+**Distribution Plateau**:
+Trạng thái một Short đã qua ít nhất 48 giờ và tốc độ tăng view trong cửa sổ 24 giờ gần nhất chỉ còn tối đa 20% so với cửa sổ 24 giờ liền trước, được xác nhận ở hai lần kiểm tra liên tiếp. Đây là tín hiệu momentum phân phối đã suy giảm đủ để mở gate đăng Short kế tiếp trên cùng Destination Channel; một video vẫn giữ tốc độ view/ngày cao và ổn định không phải Distribution Plateau dù tỷ lệ view mới trên tổng view nhỏ.
+_Avoid_: "48h elapsed", "low total views", "the graph looks flat", "fixed seven-day wait"
+
+**Plateau-Gated Cadence**:
+Chính sách mỗi Destination Channel chỉ phát hành Short tiếp theo sau khi Short trước đạt Distribution Plateau, không theo lịch daily/weekly cố định. Cadence được đánh giá độc lập theo từng Destination Channel để momentum của một vertical không chặn hai vertical còn lại.
+_Avoid_: "post daily", "one Short per week", "global queue"
+
 **Metrics Status**:
 Chuỗi literal trong production doc's Status table (`Metrics status` field) mà `/fetch-metrics` skill dùng để tự quét: `"Not yet fetched..."` (match substring, prose có thể khác nhau) = còn due để fetch; `"Fetched YYYY-MM-DD"` (chính xác, không thêm prose) = đã fetch xong, loại khỏi batch scan sau này.
 _Avoid_: viết prose tự do vào field này sau khi đã fetch — phải đúng literal `Fetched YYYY-MM-DD` để scanner nhận diện được
-
-**Target**:
-Mục tiêu dạng outcome-measurable đặt cho 2 tuần (Target Cohort horizon), KHÔNG phải per-video hay per-cycle. Đo = AVD trung bình cohort ≥ ngưỡng X%. Khác Optimization Cycle (3 ngày execute unit). Đây là layer strategic phía trên MAB.
-_Avoid_: "goal", "objective", "target" (khi dùng cho video/cycle)
-
-**Target Cohort**:
-Tập 18 videos × ~3 cycles ≈ 2 tuần mà 1 Target áp dụng. Khi đặt Target mới = bắt đầu cohort mới. Cohort collects outcomes từ các cycle bên trong để chốt đạt/không đạt Target.
-_Avoid_: "batch" (đã dùng cho AB), "period"
 
 **Success Formula**:
 Khung goal-planning 9 bước áp dụng ở đầu mỗi Target Cohort: (1) mục tiêu (Target statement), (2) kết quả đo được, (3) tại sao quan trọng, (4) mức tự tin 1-100%, (5) điều kiện tự tin 100%, (6) việc cần làm, (7) sắp xếp ưu tiên, (8) chọn 3 việc đầu → mổ xẻ hành động, (9) thực thi. Loop feedback: thành công → nâng Target; thất bại → research + nâng cấp → quay bước (6). Khác Optimization Cycle (vòng learning, không có steps 1-3).
@@ -239,7 +283,7 @@ Tự động tìm + tải + phân tích top N finance channels (YouTube search �
 _Avoid_: "scraping", "research bot"
 
 **Cohort Evaluation**:
-Tính toán mean AVD của 18 videos (3 cycles) sau khi metrics fetched. So sánh với Target threshold. Trigger Success Formula Step 9 loop (success → raise target / failure → auto-crawl).
+Tính mean AVD và các metrics đã khai báo của toàn bộ Shorts trong Target Cohort sau khi đạt stopping rule. So sánh với Target threshold và trigger Success Formula Step 9 loop (success → raise target / failure → auto-crawl).
 _Avoid_: "cohort review", "post-mortem"
 
 **Source Channel Pattern**:

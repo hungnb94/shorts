@@ -122,7 +122,7 @@ def drawtext(text, y, size=28, color="white", enable=None, box=True,
 
 
 def extract_segment(src, start, end, out):
-    """Extract the ONE contiguous segment (ADR-0013), crop to the presenter (see CROP
+    """Extract the ONE segment, crop to the presenter (see CROP
     comment above), add a gentle zoompan push-in — this is real edited conference footage
     (already cuts between shots, unlike bacsihai's static livestream camera), but our own
     fixed-position crop still benefits from continuous motion per ADR-0016/0018."""

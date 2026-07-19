@@ -114,7 +114,7 @@ Before Accepted status:
 
 1. Use AI education as the first candidate niche and select one topic that passes the Eligibility Gate.
 2. Produce one Precision Transformation variant and one baseline narrative variant while changing no other AB variable.
-3. Verify 9:16, H.264/AAC, 30-60s, caption timing, cadence, and all existing safety/transformative gates.
+3. Verify 9:16, H.264/AAC, 50-75s (ADR-0034 supersedes this proposal's original 30-60s range), caption timing, cadence, and all existing safety/transformative gates.
 4. Wait the normal 48-hour analytics window.
 5. Compare Stayed to Watch when Studio provides it, APV/AVD as secondary signals, retention dips at phase boundaries, and subscriber conversion.
 

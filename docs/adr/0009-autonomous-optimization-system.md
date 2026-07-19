@@ -1,5 +1,7 @@
 # Autonomous Optimization System
 
+> **Partial supersession (2026-07-19):** ADR-0035 replaces this ADR's fixed `6 videos/day × 3 days`, 18-video cycle, single-channel scheduler and fixed five-day loop with Plateau-Gated three-channel rotation. The MAB, Chrome-upload and 48h-minimum-metrics principles remain accepted; ADR-0025 remains authoritative for the real Analytics implementation and metric limitations.
+
 **Context**: Shorts project hiện tại = semi-manual: agent generates videos → human uploads + reviews metrics → human decides next AB test. Bottleneck = human-in-loop cho upload + metric analysis. User request: "cho quyền truy cập YouTube channel → system tự upload + measure retention + research + improve."
 
 **Decision**: Build autonomous optimization system với 3-day cycle: (1) upload 18 videos theo MAB-selected variants, (2) wait 48h cho YouTube Analytics stable metrics, (3) analyze AVD + retention graphs → adjust strategy → repeat. Không cần human input sau initial setup.
