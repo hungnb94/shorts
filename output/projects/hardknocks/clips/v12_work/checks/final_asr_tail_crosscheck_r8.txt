@@ -1,0 +1,10 @@
+Revision 8 final-tail ASR cross-check
+Source: final MP4, audio extracted from 56.10s to end
+
+mlx-community/whisper-small-mlx
+0.000-1.080: and comment your takeaway.
+
+mlx-community/whisper-large-v3-turbo
+0.400-1.120: comment your takeaway.
+
+Result: both models resolve only the intended CTA; no repeated tail words.

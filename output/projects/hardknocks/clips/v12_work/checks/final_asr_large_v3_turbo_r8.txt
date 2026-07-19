@@ -1,0 +1,35 @@
+TEXT: Is he still a billionaire? Or did that disappear with the stock? He says it's a rags-to-riches story. With five kids, and I was the first one to ever go to college and much less higher education. So I went to law school. So you didn't come from money? No, I came from nothing. What would you say is the total valuation of this house? You know, this is right now the most expensive neighborhood in the United States. The home's out at about $175 million right now. I bought it for $46 million, and I've invested probably about another $20 million into it. Did you ever let it go to your head? Never. Why not? Because to me, money comes and goes. And I learned it. I've had a lot. I've had a little. I've had to struggle. I still remember when I first got married, I didn't have $10 to go to McDonald's. Money's not that important to me. His net worth proves the point. Forbes said $1.5 billion in 2023. Then LIFW crashed, taking the paper fortune with it. The $175 million house? Asking price, not a sale. Net worth is a snapshot. I can go sell lemons in the corner, and I'm going to make more money than anybody else. Because I have the drive, and I know how to do it, and I have the vision. I could lose everything tomorrow, and probably in a year or two I'll be back. Drive and vision are the engine. Comment your takeaway. Allow me to take away. way
+0.00-0.96: Is he still a billionaire?
+1.48-2.90: Or did that disappear with the stock?
+4.46-6.28: He says it's a rags-to-riches story.
+6.68-10.50: With five kids, and I was the first one to ever go to college and much less higher education.
+10.62-11.36: So I went to law school.
+11.42-12.34: So you didn't come from money?
+12.42-13.10: No, I came from nothing.
+13.30-15.60: What would you say is the total valuation of this house?
+15.76-18.94: You know, this is right now the most expensive neighborhood in the United States.
+19.10-21.20: The home's out at about $175 million right now.
+21.36-24.76: I bought it for $46 million, and I've invested probably about another $20 million into it.
+24.80-25.64: Did you ever let it go to your head?
+25.72-25.94: Never.
+26.18-26.44: Why not?
+26.62-27.88: Because to me, money comes and goes.
+28.02-28.42: And I learned it.
+28.50-28.90: I've had a lot.
+28.98-29.44: I've had a little.
+29.44-30.24: I've had to struggle.
+30.42-33.94: I still remember when I first got married, I didn't have $10 to go to McDonald's.
+33.98-34.84: Money's not that important to me.
+35.02-36.18: His net worth proves the point.
+36.68-38.96: Forbes said $1.5 billion in 2023.
+39.94-42.28: Then LIFW crashed, taking the paper fortune with it.
+42.56-44.06: The $175 million house?
+44.38-45.44: Asking price, not a sale.
+45.68-46.42: Net worth is a snapshot.
+46.64-49.54: I can go sell lemons in the corner, and I'm going to make more money than anybody else.
+49.60-51.54: Because I have the drive, and I know how to do it, and I have the vision.
+51.66-54.42: I could lose everything tomorrow, and probably in a year or two I'll be back.
+54.78-56.08: Drive and vision are the engine.
+56.52-57.20: Comment your takeaway.
+57.20-57.22: Allow me to take away.
+57.22-57.24: way

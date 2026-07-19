@@ -154,6 +154,10 @@ _Avoid_: "cadence zoom", "constant push-in", "random punch zoom", "zoom every 2 
 Footage minh họa xuất hiện cùng beat với claim mà nó chứng minh hoặc làm rõ, thay vì chèn chỉ để tạo chuyển động. Với Clip Curation Edit dạng phỏng vấn, budget mục tiêu là 25–35% timeline; trong 0–10s chỉ dùng partial/corner insert để mặt người nói vẫn hiện diện, sau đó mới cho phép full-screen proof khi cần. Thứ tự ưu tiên nguồn: footage thật gắn trực tiếp với subject/object/platform đang được nhắc tới → stock footage cho ý trừu tượng hoặc khi không có evidence footage phù hợp.
 _Avoid_: "decorative b-roll", "random stock footage", "visual variety" (nếu footage không gắn với claim cụ thể)
 
+**Business Lesson Payoff**:
+Beat tổng hợp biến câu chuyện và evidence thành đúng một nguyên lý kinh doanh có thể hành động, nêu rõ cơ chế tạo kết quả và được neo bằng lời nói/hành động thật trong source. Không phải motivational quote chung chung hoặc narrator tự suy diễn. Trong Blindspot Verification, Business Lesson Payoff phải làm video có giá trị ngay cả khi viewer không quan tâm nhân vật được check đúng hay sai.
+_Avoid_: "generic takeaway", "moral of the story", "inspirational quote", "lesson card" (nếu chỉ là một câu slogan không có cơ chế/evidence)
+
 **this_or_that_overlay**:
 Value-Add Type mới. Binary choice overlay "A vs B" (VD: "Rent vs Buy", "Index vs Stock pick"). Phù hợp niche finance, MONEY+TIMEFRAME hook pattern.
 _Avoid_: "comparison widget"

@@ -1,0 +1,12 @@
+TEXT: Is he still a billionaire? Or did that disappear with the stock? He says it's a rags to riches story. Still a billionaire? Forbes said $1.5 billion in 2023. Then life wallet stock crashed, taking the paper fortune with it. The $175 million house? Asking price? Not a sale. Stock wealth isn't cash wealth. Comment your take away.
+0.00-0.90: Is he still a billionaire?
+1.40-2.90: Or did that disappear with the stock?
+4.30-6.30: He says it's a rags to riches story.
+24.28-25.46: Still a billionaire?
+26.06-28.06: Forbes said $1.5 billion in 2023.
+28.58-30.78: Then life wallet stock crashed, taking the paper fortune with it.
+31.08-32.66: The $175 million house?
+33.04-33.40: Asking price?
+33.70-34.02: Not a sale.
+34.42-35.46: Stock wealth isn't cash wealth.
+35.86-36.44: Comment your take away.

@@ -1,0 +1,21 @@
+MODEL: mlx-community/whisper-large-v3-turbo
+TEXT: Is he still a billionaire? Or did that disappear with the stock? He says it's a rags-to-riches story. With five kids, and I was the first one to ever go to college and much less higher education. So I went to law school. So you didn't come from money? No, I came from nothing. What would you say is the total valuation of this house? You know, this is right now the most expensive neighborhood in the United States. The home's out at about $175 million right now. I bought it for $46 million, and I've invested probably about another $20 million into it. Still a billionaire? Forbes said $1.5 billion in 2023. Then LifeWallet stock crashed, taking the paper fortune with it. The $175 million house? Asking price? Not a sale. Stock wealth isn't cash wealth. Comment your takeaway.
+0.00-0.92: Is he still a billionaire?
+1.44-2.90: Or did that disappear with the stock?
+4.60-6.28: He says it's a rags-to-riches story.
+6.52-10.50: With five kids, and I was the first one to ever go to college and much less higher education.
+10.62-11.36: So I went to law school.
+11.44-12.36: So you didn't come from money?
+12.42-13.10: No, I came from nothing.
+13.30-15.60: What would you say is the total valuation of this house?
+15.74-18.96: You know, this is right now the most expensive neighborhood in the United States.
+19.10-21.20: The home's out at about $175 million right now.
+21.30-24.76: I bought it for $46 million, and I've invested probably about another $20 million into it.
+24.94-25.50: Still a billionaire?
+26.02-28.10: Forbes said $1.5 billion in 2023.
+28.10-30.78: Then LifeWallet stock crashed, taking the paper fortune with it.
+31.04-32.70: The $175 million house?
+32.92-33.44: Asking price?
+33.60-34.06: Not a sale.
+34.40-35.50: Stock wealth isn't cash wealth.
+35.72-36.36: Comment your takeaway.

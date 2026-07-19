@@ -1,0 +1,4 @@
+file '/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v12_work/interview_before_proof.mp4'
+file '/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v12_work/ending.mp4'
+file '/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v12_work/lesson_rebuild_captioned.mp4'
+file '/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v12_work/payoff.mp4'
