@@ -1,0 +1,2 @@
+file '/Users/hung/code/ai/shorts/output/projects/foodtrial/clips/date_bark_v2_work/render/segments/05_sugar_context_source.mp4'
+file '/Users/hung/code/ai/shorts/output/projects/foodtrial/clips/date_bark_v2_work/render/segments/05_sugar_context_motion.mp4'
