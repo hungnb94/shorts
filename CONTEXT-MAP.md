@@ -9,6 +9,7 @@
 - `output/unsorted/` : Downloaded source not yet assigned to a named project
 - `data/` : `mab_state.json`, `tracked_videos.csv`, `targets/`, `video_metrics.db` (SQLite), `backups/`
 - `docs/adr/` : Architecture Decision Records
+- `docs/concepts/` : Unapproved concept bibles and style-feasibility artifacts; concepts do not change vertical topology or authorize production
 - `scripts/` : Markdown video script drafts
 
 ## Project Structure (target, not yet built)
@@ -24,3 +25,4 @@ See `AGENTS.md` → "Current Implementation" vs "Architecture (Target)" for the 
 - `package.json` : Dependencies (currently empty — no scripts/deps yet)
 - `AGENTS.md` : Project documentation
 - `CONTEXT.md` : Project context
+- `docs/concepts/outwished/SERIES-BIBLE.md` : Concept backbone for the high-IQ Owner-vs-Genie fair-play wish duel
