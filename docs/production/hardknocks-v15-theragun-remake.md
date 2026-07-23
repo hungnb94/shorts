@@ -6,11 +6,31 @@
 |---|---|---|
 | Production | Complete | Complete |
 | Render date | 2026-07-23 | 2026-07-23 |
-| Upload status | Not uploaded | Not uploaded |
-| Upload gate | Blocked until ADR-0035 lane eligibility and Studio settings are verified | Same |
+| Upload status | Uploaded/public | Not uploaded |
+| YouTube Video ID | `FA7c1g4PvX0` | — |
+| YouTube | https://youtube.com/shorts/FA7c1g4PvX0 | — |
+| Studio Analytics | https://studio.youtube.com/video/FA7c1g4PvX0/analytics/tab-overview/period-default | — |
+| Actual channel | MONEY BLINDSPOT (`UCG_yrDQF5Sj6iMTZB0KSBAA`), matches `finance` alias | — |
+| Upload timestamp | 2026-07-23 23:19:36 +07 | — |
+| Metrics status | Not yet fetched — wait 48h | Not applicable — not uploaded |
+| Metrics fetch after (48h rule) | 2026-07-25 23:19:36 +07 | — |
+| Upload gate | Upload occurred; ADR-0035 lane/Studio gate outcome not independently verified | Blocked until ADR-0035 lane eligibility and Studio settings are verified |
 | Final artifact | `output/projects/hardknocks/final/2026-07-23-hardknocks_v15a_crash_created_theragun.mp4` | `output/projects/hardknocks/final/2026-07-23-hardknocks_v15b_first_patient_to_athletes.mp4` |
 | Runtime | 52.233s | 63.300s |
 | SHA-256 | `ea43cebea4b43efa9b8d8aac409da454866cd5037e7df6216e13c906261811e7` | `e0f7ee6619ded5ccad03932c4cd99c46fafb5502e6e6c7eee4a7ccaf6462371e` |
+
+## Upload Log
+
+V15A public metadata was verified from the live YouTube URL with `yt-dlp` on
+2026-07-23 23:20 +07:
+
+- Availability: public.
+- Exact public timestamp: 2026-07-23 23:19:36 +07.
+- Public title and description match the canonical package in this document.
+- Public duration rounds to 52s, consistent with the 52.233s local artifact.
+- Destination channel is MONEY BLINDSPOT (`UCG_yrDQF5Sj6iMTZB0KSBAA`), matching
+  the configured `finance` channel alias.
+- Do not fetch or interpret retention metrics before 2026-07-25 23:19:36 +07.
 
 ## Source
 
