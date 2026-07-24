@@ -29,13 +29,7 @@ Per-video documentation with pipeline, effects, retention data.
 
 | Video | Format | Retention | File |
 |-------|--------|-----------|------|
-| KspJ3qHjtRU (Ackman ASCII) | Colored ASCII | 26% | [ackman-ascii.md](production/ackman-ascii.md) |
-| KspJ3qHjtRU (clip analysis) | — | — | [ackman-clip-analysis.md](production/ackman-clip-analysis.md) |
-| Dangote V9 (vision) | Emoji overlay | TBD | [dangote-v9.md](production/dangote-v9.md) |
-| Dangote transcript | — | — | [dangote-transcript-analysis.md](production/dangote-transcript-analysis.md) |
-| Billionaire V1→V2 | Kitty Explain | — | [billionaire-improvements.md](production/billionaire-improvements.md) |
 | dHDpDXSIAkA (Lawnmower→2,600 Apartments) | Clip Curation Edit | pending (uploaded 2026-07-10) | [hardknocks-lawnmower-v1.md](production/hardknocks-lawnmower-v1.md) |
-| AGBrXy-2SxI (Lao Động Chân Tay ↓ Alzheimer) | Clip Curation Edit (Contiguous VO) | not yet uploaded (rendered 2026-07-10) | [bacsihai-v5-lao-dong-tay.md](production/bacsihai-v5-lao-dong-tay.md) |
 
 ## Research
 - [hook-benchmarks-2026-07/REPORT.md](research/hook-benchmarks-2026-07/REPORT.md) — Hook analysis of 6 viral finance Shorts (frames + transcript + comments), basis for ADR-0018
