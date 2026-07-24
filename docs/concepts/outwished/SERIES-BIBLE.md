@@ -557,4 +557,3 @@ Known V4 limitations:
 
 - `episodes/001-the-cop-knew-the-code.md` — current 74-second origin script; corrupt-officer betrayal, Lamp discovery in the basement, simple occupied-vault alarm, direct three-thief wish, and a human-tower ending that reveals Veyr loves trolling people. Serialized animation; no HEIT. Draft only; not production or upload authorization.
 - `episodes/001-higgsfield-shot-plan.md` — 12-shot Higgsfield segmentation for Episode 001, plus the generated SHOT-001 prompt experiment, QC score, and reusable prompt standard. Only SHOT-001 has been generated.
-- `episodes/001-the-second-lamp.md` — superseded HEIT-based origin draft retained for history; do not produce.

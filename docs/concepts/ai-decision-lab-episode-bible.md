@@ -362,7 +362,6 @@ No generic motivational quote and no unseeded destruction gag.
 Any future artifact remains subject to existing project policy:
 
 - 9:16, 1080×1920, 50–75 seconds, H.264 with audio;
-- HEIT-compatible educational payload;
 - caption visible immediately and readable on mobile;
 - visual change/meaningful motion every 1–2 seconds in the hook;
 - proof-coupled visuals, not decorative b-roll;

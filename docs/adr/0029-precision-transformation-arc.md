@@ -7,7 +7,7 @@
 
 The analysis of Jack Craig's AI pet-salon case study (`za2VyvLl5T0`) traced the actual generated Short to `TAsr3wIN_NY`, "I Removed 5,000 Tangles From This Street Dog For THIS🐕😳." The Short reached 694.8K views in its first 1 day 22 hours and 962,129 public views by the 2026-07-15 re-fetch. Creator Studio screenshots show 69.8% average percentage viewed at 694.8K views; an earlier 302,541-view screenshot shows +784 subscribers and 97.6% of traffic from the Shorts feed.
 
-The source channel's retained structure is not HEIT. It is a six-phase transformation:
+It is a six-phase transformation:
 
 `DECLARE → ASSESS → ISOLATE → PROCESS → BUILD → REVEAL`
 
@@ -17,14 +17,8 @@ Four scopes were considered during `/grill-with-docs`:
 
 1. Extract only cross-cutting retention mechanics and leave every script structurally unchanged.
 2. Add a specialized **Precision Transformation Arc** for the three existing niches without creating a new niche or Video Type.
-3. Introduce a top-level script framework parallel to HEIT and bind it to AI-Pure / Video Type #8.
+3. Introduce a top-level script framework parallel and bind it to AI-Pure / Video Type #8.
 4. Add a fourth AI-pet-transformation niche and reproduce the source format directly.
-
-No user answer arrived before the interactive question timed out. The second option is selected provisionally because it preserves the useful retention mechanism with the smallest architectural and strategic blast radius. The status remains **Proposed**, not Accepted, until the user explicitly confirms it or approves a concrete experiment.
-
-The follow-up niche-selection question also timed out without a user response. **AI education** is selected as the provisional first-test niche because it can show real, auditable before/after states through screen evidence; finance already has an active Decision-Lock experiment (ADR-0028), while health would add medical-trust and source-footage confounds. This provisional selection does not choose a topic or authorize production.
-
-The topic-selection question then timed out. **Research Audit** is selected as the provisional first-test topic: transform an AI answer containing unsupported claims into a claim ledger backed by primary citations, with contradictions and unresolved uncertainty made visible. It is preferred over another `prompt bloat` video because `aiwork_v3`-`v5` have already used that topic; repeating it would confound a new narrative test with a familiar content claim. This selection still does not authorize production—the exact research question, source corpus, and scoring rubric remain unresolved.
 
 ## Proposed Decision
 
@@ -38,7 +32,6 @@ It is classified as a narrative/retention structure, not as:
 - a Video Type or rendering technology;
 - a Source Channel itself;
 - a Value-Add Type;
-- a replacement for HEIT across the project;
 - a new MAB action-space dimension.
 
 ### Eligibility Gate
@@ -53,17 +46,6 @@ A topic may use the template only when all of the following are true:
 6. **Truthfulness:** precision may simplify a real process, but numbers may not fabricate evidence or imply that synthetic events happened in the real world.
 
 If a topic lacks an observable transformation or requires explanation before the before/after matters, use another Narrative Arc/Source Channel Pattern instead.
-
-### HEIT-Compatible Mapping
-
-Because this option does not create a framework parallel to HEIT, the six-phase arc is nested inside the existing educational structure:
-
-- **Hook:** Declare + the first proof-bearing Assess beat.
-- **Explain:** the remaining Assess beats establish what is wrong and what success means.
-- **Illustrate:** Isolate + Process + Build form the visible completion ladder.
-- **Teach:** the Reveal must carry one transferable rule, decision criterion, or changed capability—not only a cosmetic payoff.
-
-The Teach payload should be integrated into the reveal/series beat rather than appended as a static lecture card. A transformation that cannot produce a truthful teaching payload is not eligible for the three current educational niches under this proposed scope.
 
 ### Required Retention Grammar
 
@@ -100,7 +82,6 @@ Evidence caveats:
 
 ## Consequences
 
-- The three approved niches remain finance/English, health/Vietnamese, and AI education/English. ADR-0020's fourth-niche Ask-First gate remains unchanged.
 - Narrative-template classification remains independent from Video Type, but the current production direction has already rejected animation-only/AI-Pure outputs as too visually monotonous. The first test must use footage-based `stock_footage` or `clip_curation`, with real screen recording as the primary proof surface. This ADR does not reopen the rejected visual types.
 - The action space does not expand until an experiment validates the template and a separate decision promotes it to an AB variable.
 - The first test must change only the narrative template while holding niche, output spec, base retention techniques, and other quality gates constant.
@@ -131,7 +112,6 @@ The hypothesis is weakened if:
 - Evidence must be captured from a real workflow run, not a fabricated terminal, fake benchmark, or generated "before/after" screenshot.
 - Screen recording must remain readable and in motion; do not reproduce `aiwork_v6` as a static presenter plus illegible terminal background.
 - The transformation must be legible to professionals/knowledge workers, not require developer-only jargon.
-- `aiwork_v6`'s repeated presenter-plus-illegible-terminal composition is a known failure mode; the test must make the workflow state itself readable and visually primary.
 - Existing topics (`capability curve`, `prompt bloat`, `AI misalignment`) are research context, not automatic topic approval. Reusing one requires a genuinely new before/after experiment, not a recut of the same source claims.
 
 ### Provisional First-Test Topic: Research Audit

@@ -491,15 +491,6 @@ A faint older indentation is already visible on the page, showing that Aladdin o
 
 Nico and Veyr look at each other rather than camera. Neither is afraid. The rivalry has begun.
 
-## HEIT map
-
-| Framework beat | Time | Function |
-|---|---:|---|
-| Hook | 0–3s | Aladdin's inheritance is an enemy, not treasure. |
-| Explain | 3–23s | Storage auction, discovery, bloodline ownership, Veyr, and the ten-round stakes. |
-| Illustrate | 23–56s | Exact wish, Veyr's language exploit, Nico's translator counter, Veyr's confidence-score counter-counter. |
-| Teach | 56–65s | Searchable is not readable; Nico records the first reusable rule and begins adapting. |
-
 ## Strategic-turn audit
 
 The episode contains exactly three meaningful strategic turns:

@@ -10,7 +10,6 @@
 | **Video analysis** | Programmatic inspection of video content using a vision model: scene detection, OCR, quality check, composition analysis. |
 | **auxiliary.vision** | Hermes Agent config section for routing vision tasks to a dedicated vision-capable model. |
 | **Model routing** | Directing specific tasks (e.g., vision analysis) to different models/providers than the main chat model. |
-| **HEIT compliance** | Verifying a video follows Hook→Explain→Illustrate→Teach structure by analyzing frame content and timing. |
 | **Visual artifact** | Unintended visual glitch in rendered video: blockiness, color banding, missing elements, wrong aspect ratio. |
 | **Composition check** | Verifying video layout meets specs: 9:16 aspect ratio, text within safe zone, proper element positioning. |
 | **JSON analysis report** | Structured output from vision model containing scenes array, text_detected, quality_scores, and issues. |

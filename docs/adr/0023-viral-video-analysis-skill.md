@@ -39,15 +39,6 @@ scene-detection and frame-extraction logic verbatim in spirit, but drops the `an
 `encode_frame` GPT-4o call entirely. `inspect_image.py` is carried over unchanged as optional
 quantitative backup evidence (skin-tone %, near-white %), not the primary judgment mechanism.
 
-### Why project-local, not `~/.agents/skills/` (global)
-
-The skill's logic is inseparable from this project's own vocabulary and gates (HEIT, Hook,
-Hook-Window Rule, AB Variable, Stage 0/5 of `docs/WORKFLOW.md`) — it reads and writes
-`CONTEXT.md`, `docs/adr/`, `docs/WORKFLOW.md`, and `AGENTS.md` directly. A skill this coupled
-to one repo's domain model belongs next to `log-video`/`dedup` in `.claude/skills/`, not in the
-cross-project `~/.agents/skills/` tier (domain-modeling, remotion-best-practices, etc.), which
-holds only genuinely repo-agnostic skills.
-
 ### Why only Stage 5, not Stage 0
 
 Stage 0 (Hook Gate) is a hard blocking gate on the project's own candidate segment, deliberately

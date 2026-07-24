@@ -8,8 +8,7 @@ extended, not duplicated.
 
 ## Current taxonomy (as of CONTEXT.md, cite before assuming these are final)
 
-HEIT names 3 base types: **Context**, **Contrarian**, **Intrigue**. The 2026-07 hook-benchmark
-study (`docs/research/hook-benchmarks-2026-07/REPORT.md`) found real viral hooks are usually a
+The 2026-07 hook-benchmark study (`docs/research/hook-benchmarks-2026-07/REPORT.md`) found real viral hooks are usually a
 **hybrid Context→Intrigue**, or a **Dare/Challenge** type (binary-outcome dare) that didn't fit
 any of the 3 original types. A separate analysis (`source-channel-patterns.md`) identified 3
 surface-level *patterns* that cut across these types:

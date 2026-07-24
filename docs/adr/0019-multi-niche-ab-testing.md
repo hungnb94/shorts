@@ -23,8 +23,6 @@ This project runs **two niches in parallel**, both subject to the same productio
 1. **Finance/money-making, English** (ADR-0001, ADR-0004) — the originally-documented vertical (giannis, dangote, hardknocks, and the finance `scripts/*.md` drafts).
 2. **Health/longevity, Vietnamese** — Source Channel: "Bác sĩ Hải" (`pipeline/bacsihai/`). Output is 100% Vietnamese (title, VO, captions, description) since the source, audience, and channel identity are Vietnamese; this is not a translation of the finance vertical's playbook, it is a parallel one.
 
-Each vertical is otherwise held to the identical bar: HEIT structure, 9:16/≤60s/H.264 specs, Retention Techniques applied unconditionally, Hook-Window Rule (ADR-0017) and Hook Caption Sync/Cadence (ADR-0018) both apply regardless of language — the *evidence* behind those two ADRs (pixel-level face detection, caption cadence) is language-agnostic even though the exact burst-timing constants must be re-derived per language (already noted as a caveat in ADR-0018).
-
 Adding a third niche/vertical, or changing which niches are active, still requires the Ask-First gate — this ADR documents the two verticals already running, it does not pre-approve future ones.
 
 ## Consequences
