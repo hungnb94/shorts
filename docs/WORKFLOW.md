@@ -20,17 +20,22 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
    KHÔNG được nói hết toàn bộ claim — phải mở 1 gap/mystery ở 0-2s, chỉ
    partial reveal ở 5-8s.
 3. Cause+effect co-naming check (AGENTS.md pitfall): headline không được nêu cả nguyên nhân VÀ hệ quả cụ thể cùng lúc.
-4. Cadence feasibility (ADR-0018/0016): trong 0-5s phải có sẵn 1 visual change
-   mỗi 1-2s (cut, zoom, overlay, hoặc motion liên tục).
+4. Cadence feasibility (ADR-0018/0036): trong final 0-5s phải có phương án đạt
+   target 1 Visual Change mỗi 0.8-1.5s; final 5-10s không có gap không giải thích
+   >3s. Cut, reframe/zoom, overlay, đổi layout/source hoặc motion liên tục đều
+   được tính; không ép hard cut làm hỏng câu thoại.
 5. Guide-derived promise check (ADR-0034): trong 0-3s phải có cả visual surprise
    lẫn narrative promise rõ ràng; early SFX phải có slot trong t=0-1s và focal
    target phải đọc được ngay hoặc có thể chỉ bằng arrow/pointer/annotation.
 6. Naive-viewer check: cho một người không tham gia edit xem rough hook 0-3s mà
    không giải thích trước; họ phải nói được open question/promise khiến họ muốn
    xem tiếp. Nếu chỉ hiểu sau khi creator giải thích, hook fail.
+7. Information Progression feasibility (ADR-0036): chuỗi Visual Changes dự kiến
+   phải đẩy ít nhất một question, causal step, contrast, proof state hoặc payoff;
+   không được dùng toàn flash/emoji/zoom trang trí chỉ để đủ cadence.
 ```
 
-**GATE RULE**: nếu bất kỳ item 1-6 trên MỌI candidate span trong source hiện tại, và không thể fix bằng cách chọn span khác trong cùng bản download, thì STOP. Quay lại Stage 1 — chọn span khác hoặc source video khác. Không được tiến sang Stage 2/3/4, và không được ship 1 hook đã biết là yếu với lý do "để retention data trả lời sau."
+**GATE RULE**: nếu bất kỳ item 1-7 trên MỌI candidate span trong source hiện tại, và không thể fix bằng cách chọn span khác trong cùng bản download, thì STOP. Quay lại Stage 1 — chọn span khác hoặc source video khác. Không được tiến sang Stage 2/3/4, và không được ship 1 hook đã biết là yếu với lý do "để retention data trả lời sau."
 
 ## Stage 1 — Source Research & Candidate Selection
 
@@ -51,14 +56,16 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 
 ## Stage 3 — Hook Text + Overlays
 
-- Viết hook overlay/caption/value-add. Phải thỏa ADR-0018 (caption sync/cadence), ADR-0016 (2-Second Rule, toàn video), ADR-0008 (Value-Add Layer).
+- Viết hook overlay/caption/value-add. Phải thỏa ADR-0018 (caption sync), ADR-0036 (tiered cadence + Information Progression), ADR-0008 (Value-Add Layer).
 - Nếu là Clip Curation Edit: phải thỏa thêm Transformative Gate của ADR-0007 (commentary track + ≥2 value-add + ≤50% source duration / mỗi clip <15s).
 - Apply ADR-0034's `Caption Style Profile`: 2-5 từ/burst, một keyword animate/emphasize, tâm caption mặc định ở 55-65% chiều cao frame; chỉ dịch để tránh che face/proof sau visual review. English dùng Komika Axis, Vietnamese dùng Bangers; lấy thông số ffmpeg từ calibration artifact đã verify, không copy literal CapCut size 16/stroke 60.
 - Thêm một early SFX trong t=0-1s. Nếu focal target không rõ ngay, thêm arrow/pointer/animated annotation; không thêm pointer trang trí khi target đã hiển nhiên.
 - Mọi image entrance/exit hoặc transition đã chọn phải có mục đích kể chuyện và matching SFX; generic transition spam fail gate.
+- Bind SFX vào visible/implied event cụ thể; constant effect bed không đạt ADR-0036. Narrative Short có Problem → Discovery → Payoff phải dùng các score state khác nhau và một music attenuation ngắn trước discovery/payoff quyết định; educational Short dùng section-level audio contrast, không bị ép vào arc ba trạng thái.
+- Stock/Pexels phải ghi `ILLUSTRATION` khi reasonable viewer có thể nhầm đó là footage thật của người, sự kiện, sản phẩm hoặc evidence đang được claim. Generic b-roll hiển nhiên không bắt buộc label nhưng không được gọi là proof.
 - Dựng custom on-brand CTA bumper bắt đầu trong t=38-42s, lời CTA nói rõ cả Like + Subscribe + Comment. Generic stock CTA template fail.
 - Thêm moving watermark không che face/proof/caption và thay đổi vị trí theo timeline để chống crop đơn giản.
-- **Hook text overlay tự thêm (không phải caption gốc của nguồn) phải xuất hiện gần như ngay lập tức (~t=0.1-0.2s, không trễ hơn) và cỡ chữ đủ lớn/màu đủ nổi bật để giữ chân người xem ngay từ đầu** (user feedback, hardknocks_v2: bản render đầu tiên delay hook overlay tới t=1.3s với size=36 để tạo cadence beat - quá nhỏ, quá trễ. Cadence (item 6, Stage 0) nên đạt bằng zoompan/motion liên tục hoặc cắt cảnh, KHÔNG phải bằng cách trì hoãn hook text). Tham khảo size ~48-52px ở khung 1080px-rộng là **mốc tối thiểu (floor), không phải mục tiêu (target)** cho hook text chính - hardknocks_v2 nhận feedback tăng size 4 lần liên tiếp trên cùng 1 video (36→52→64→80→84), ưu tiên to hơn khi khung hình còn chỗ, áp dụng cho cả text phụ (stat card/counter-argument/CTA), không chỉ hook chính.
+- **Hook text overlay tự thêm (không phải caption gốc của nguồn) phải xuất hiện gần như ngay lập tức (~t=0.1-0.2s, không trễ hơn) và cỡ chữ đủ lớn/màu đủ nổi bật để giữ chân người xem ngay từ đầu** (user feedback, hardknocks_v2: bản render đầu tiên delay hook overlay tới t=1.3s với size=36 để tạo cadence beat - quá nhỏ, quá trễ. Cadence (item 4, Stage 0) nên đạt bằng zoompan/motion liên tục hoặc cắt cảnh, KHÔNG phải bằng cách trì hoãn hook text). Tham khảo size ~48-52px ở khung 1080px-rộng là **mốc tối thiểu (floor), không phải mục tiêu (target)** cho hook text chính - hardknocks_v2 nhận feedback tăng size 4 lần liên tiếp trên cùng 1 video (36→52→64→80→84), ưu tiên to hơn khi khung hình còn chỗ, áp dụng cho cả text phụ (stat card/counter-argument/CTA), không chỉ hook chính.
 - **Nếu tăng size sẽ khiến chữ bị crop ở mép 1080px, rút ngắn nội dung chữ trước, không coi size hiện tại là trần cố định** (hardknocks_v2: câu hook dài "OTHERS SAY MONEY = HAPPY..." đã chạy sát mép ở size=64, không thể tăng thêm nếu giữ nguyên độ dài - phải rút ngắn còn "OTHERS: MONEY = HAPPY" mới tăng lên size=80 được).
 - **Mỗi lần tăng size phải tự verify lại bằng frame extraction thực tế, không được suy ra an toàn từ margin của lần tăng trước** (hardknocks_v2 vòng 4: rút ngắn chữ thêm + tăng size 80→90 trong 1 bước tưởng là an toàn theo ước tính số ký tự, nhưng frame check phát hiện chữ bị crop cả 2 mép - phải lùi về size=84 mới đạt). Rút ngắn chữ + tăng size cùng lúc có thể cộng dồn vượt ngưỡng dù mỗi thay đổi riêng lẻ trông hợp lý - luôn re-verify bằng Stage 4 self-check sau MỖI lần đổi size, không chỉ lần đầu tiên đổi.
 - **Đo pixel width thực tế trước khi render, không chỉ sau khi render** (bacsihai_v7): trước khi commit 1 size vào render script cho BẤT KỲ drawtext overlay nào (hook text chính, stat card, header, CTA), đo thử bằng `PIL.ImageFont.getlength(text)` với đúng font file/size sẽ dùng, so với chiều rộng khung hình (1080px) trừ margin mong muốn. bacsihai_v7's header overlay ("NHIỀU NGƯỜI NGHĨ: CHOLESTEROL = XẤU" @ size 64) bị tràn khung ở lần render đầu - bắt được qua Stage 4 frame check (đúng như quy trình), nhưng đo trước bằng PIL sẽ bắt được ngay từ đầu, biến việc sửa thành 1 vòng thay vì nhiều vòng thử-sai như hardknocks_v2's 4 rounds. Bước đo pixel không thay thế frame-check bắt buộc sau khi render (vẫn phải làm), chỉ giảm số vòng lặp cần thiết.
@@ -69,6 +76,8 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 - Verify 9:16 (1080x1920), 50-75s, H.264, có audio stream — trước khi qua bước tiếp (ADR-0034).
 - **Chính sách kiểm tra renderer: không viết unit test cho `render_*.py`.** Đây là repository sản xuất media; các renderer Python hiện tại là công cụ dựng video theo từng project, không phải product code cần TDD/test coverage.
 - **Visual self-check bắt buộc**: trích xuất frame tại nhiều mốc trong cửa sổ hook (0-3s) và xem trực tiếp (không chỉ tin vào code) — xác nhận hook text overlay tự thêm hiển thị đúng thời điểm (~t=0.1-0.2s), đủ lớn/đủ nổi bật, không bị đè/che bởi caption gốc của nguồn; visual surprise + narrative promise đọc được; early SFX/focal annotation sync đúng beat. Nếu không đạt, sửa lại trước khi coi Stage 4 là xong — không lùi việc này sang Post-Production Retro.
+- **Cadence + Information Progression check (ADR-0036)**: xem fixed frames/contact sheet ở 0.5-1s cadence xuyên final 0-10s và targeted body spans. Final 0-5s target Visual Change mỗi 0.8-1.5s; final 5-10s không có unexplained gap >3s; sau 10s không có unexplained gap >6s. Scene detector chỉ là advisory. Manual review phải xác nhận mỗi narrative phase có question/causal/proof/payoff progression, không chỉ effect spam.
+- **Loop-Payoff Closure check (ADR-0036)**: đọc lại hook và ending cạnh nhau; ending phải trả đúng open loop ban đầu và không mở một lesson thứ hai mà Short chưa giải thích.
 - **Spoken-TTS preflight bắt buộc trước full render**: synthesize toàn bộ line riêng, đo raw/fitted duration và lưu per-line report (`voice`, engine rate/pitch, post-tempo, target duration, truncation). Không dùng `atempo < 1.0` để kéo chậm giọng lấp visual slot — giữ tốc độ tự nhiên rồi pad silence ở đuôi; nếu line quá dài thì rút gọn copy hoặc tăng nhẹ engine rate, chỉ cho phép post speed-up có bound. Ghép narrator-only preview và transcribe để bắt lỗi nuốt chữ/phát âm trước khi mix nhạc/source audio. Với TTS qua `loudnorm`, fit duration ở sample domain sau resample; xem pitfall chi tiết trong skill `clip-curation-edit`. (Root cause `trademe_v1`: macOS TTS có 5/9 line bị kéo xuống 0.72x, pass codec/loudness nhưng nghe phẳng và thiếu sức sống.)
 - **Checklist bắt buộc trước khi coi Stage 4 là xong** (mỗi mục dưới đây từng là 1 lỗi thật lọt qua `validate()`/decode pass — codec/spec pass KHÔNG có nghĩa là video sạch):
   - [ ] **Guide-derived craft gate (ADR-0034) pass trên artifact cuối**: early SFX nghe được trong t=0-1s; 0-3s có visual surprise + narrative promise; focal pointer có mặt nếu cần; caption đúng font/profile, 2-5 từ/burst, keyword animate/emphasize, đọc được ở mobile preview và không che face/proof; CTA bumper custom bắt đầu t=38-42s và nói đủ Like/Subscribe/Comment; moving watermark thật sự đổi vị trí; transition/image motion có matching SFX. Kiểm bằng waveform + frame/contact-sheet ở đúng timestamp, không chỉ đọc filter graph.

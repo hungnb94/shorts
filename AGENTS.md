@@ -42,10 +42,10 @@ YouTube Analytics data unstable <48h. Fetching at 24h = noisy AVD numbers → ba
 ### Don't reset MAB state mid-cycle
 Deleting `data/mab_state.json` while system running = lose all learned rewards → restart from scratch. Only reset when intentionally changing strategy.
 
-### Hook caption sync and cadence (ADR-0018)
+### Hook caption sync and cadence (ADR-0018, amended by ADR-0036)
 Benchmarked 6 independently viral Shorts (`docs/research/hook-benchmarks-2026-07/REPORT.md`) — all 6 shared two patterns not previously encoded as rules here:
 - **Caption sync**: burned-in caption must be visible by t=0.2s (not delayed for a "clean" shot), updating every ~1-2s in short 2-5 word bursts synced to speech, with one keyword per burst visually emphasized (color/weight distinct from the rest).
-- **Cadence**: at least one visual change (cut, zoom, new overlay, or continuous on-screen motion) every 1-2s within the hook window — tighter than the general 2-3s "2-Second Rule" (ADR-0016), specifically for the 0-5s hook region.
+- **Cadence**: ADR-0036 amends the old uniform rule: final 0-5s targets one Visual Change every 0.8-1.5s, final 5-10s has no unexplained gap >3s, and the body has no unexplained gap >6s. Cut, reframe/zoom, overlay, layout/source change or continuous motion counts; the separate Information Progression Gate blocks decorative effect spam.
 - **Show, don't just tell**: pair any spoken claim (wealth, results, a number) with simultaneous visual evidence (prop, environment, action) rather than narration alone — in the benchmark set, the verbal claim and its visual proof landed in the same beat, not sequentially.
 
 ### Guide-derived craft verification is blocking (ADR-0034)
@@ -123,7 +123,7 @@ Under Plateau-Gated Cadence there is no honest fixed calendar convergence estima
 ### Always
 - Copy proven viral formats, repackage with variations
 - Wait 48h before fetching YouTube Analytics (stable data)
-- Apply Retention Techniques (sound design, zoom, pattern interrupt) to EVERY video — it's base quality, not optional
+- Apply Retention Techniques and ADR-0036's Information Progression, event-bound SFX and Loop-Payoff Closure to EVERY Short — they are base quality, not optional
 - Let MAB select variants autonomously — don't override its choices manually
 - Verify video specs before upload (9:16, 50-75s, MP4 H.264 + audio)
 - Verify the full ADR-0034 craft/metadata package and ADR-0035 lane eligibility before upload

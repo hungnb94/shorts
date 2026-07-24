@@ -1,7 +1,9 @@
 # ADR 0016: Frequent Editing — Retention-Driven Visual Variety
 
 **Date:** 2026-07-08
-**Status:** Accepted
+**Status:** Accepted (amended by ADR-0036)
+
+**2026-07-24 amendment:** ADR-0036 replaces this ADR's undifferentiated 2–3s operational cadence with a front-loaded tiered policy, adds the Information Progression Gate, and rejects blind hard-cut quotas. The research and original decision below remain historical context.
 
 ## Context
 

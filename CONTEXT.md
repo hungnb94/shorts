@@ -151,8 +151,20 @@ _Avoid_: "overlay", "effect" (quá chung)
 _Avoid_: "annotation", "widget"
 
 **Retention Techniques**:
-Base quality layer áp dụng TỰ ĐỘNG cho mọi video, KHÔNG phải AB variable: sound design (whoosh/riser/impact), zoom punch, pattern interrupt (visual change mỗi 2-4s), cut rhythm. Thiếu = kém chất lượng, không công bằng khi test.
+Base quality layer áp dụng TỰ ĐỘNG cho mọi Short, KHÔNG phải AB Variable: sound design, zoom punch, pattern interrupt, cut rhythm, Information Progression và Loop-Payoff Closure. Exact cadence có thể là hypothesis giữa hai treatment đều đạt baseline; không được tạo arm cố ý thiếu sound/motion để làm đối chứng.
 _Avoid_: "effects", "polish"
+
+**Visual Change**:
+Một thay đổi nhìn thấy được có thể reset chú ý: cut, reframe/zoom, overlay xuất hiện/biến mất, đổi layout/source hoặc continuous motion. Visual Change là đơn vị cadence; bản thân nó không khẳng định viewer đã học thêm thông tin.
+_Avoid_: "hard cut" (quá hẹp), "new evidence" (khái niệm khác)
+
+**Information Progression Gate**:
+Quality gate yêu cầu chuỗi Visual Changes trong mỗi narrative phase phải cùng đẩy câu hỏi, causal step, contrast, proof state hoặc payoff tiến lên. Decorative change được tính vào cadence nhưng một phase chỉ có trang trí mà không đổi trạng thái hiểu của viewer vẫn fail.
+_Avoid_: "effect quota", "cut count", "more edits means more information"
+
+**Loop-Payoff Closure**:
+Quan hệ bắt buộc giữa Hook và ending: payoff cuối trả đúng câu hỏi hoặc narrative promise đã mở, thay vì đổi sang một lesson mới chưa được Short giải thích. Closure không yêu cầu tiết lộ toàn bộ đáp án sớm; nó yêu cầu ending hoàn tất hợp đồng đã hứa với viewer.
+_Avoid_: "new ending insight", "second lesson", "generic takeaway"
 
 **Active-Speaker Reframing**:
 Quy tắc dựng phỏng vấn 1-1 trong khung dọc: portrait crop chuyển trọng tâm sang người đang phát ra câu thoại — host khi hỏi, guest khi trả lời — thay vì giữ một center crop cố định cho cả cuộc trao đổi. Có thể là đổi camera thật hoặc digital reframe từ two-shot ngang; điều kiện cốt lõi là lượt thoại và visual focus phải đồng bộ.
