@@ -121,7 +121,6 @@ Under Plateau-Gated Cadence there is no honest fixed calendar convergence estima
 ## Boundaries
 
 ### Always
-- Follow HEIT structure (Hook → Explain → Illustrate → Teach)
 - Copy proven viral formats, repackage with variations
 - Wait 48h before fetching YouTube Analytics (stable data)
 - Apply Retention Techniques (sound design, zoom, pattern interrupt) to EVERY video — it's base quality, not optional

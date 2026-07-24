@@ -1,9 +1,9 @@
 # Shorts Project Context
 
-Animated short video factory: sản xuất Shorts 9:16, 50-75s và phát hành qua ba Channel Pool theo Plateau-Gated Cadence để AB test viral content formulas trên YouTube + TikTok, kiếm tiền qua ads revenue và affiliate marketing.
+Animated short video factory: sản xuất Shorts 9:16, 50-75s và phát hành qua ba Channel Pool theo Plateau-Gated Cadence để AB test viral content formulas trên YouTube + TikTok.
 
-Niche: 3 verticals song song (ADR-0019, ADR-0020) — Finance/money-making (crypto, side hustle, investing, tiếng Anh, niche gốc), Health/longevity (tiếng Việt, Source Channel "Bác sĩ Hải"), AI education (tiếng Anh, professionals/knowledge workers).
-Ngôn ngữ: Tiếng Anh cho niche finance + AI education (global audience, RPM cao); Tiếng Việt cho niche health (khán giả Việt Nam).
+Niche: 3 verticals song song (ADR-0019, ADR-0020) — Finance/money-making (crypto, side hustle, investing, tiếng Anh, niche gốc), Health/longevity, AI education (tiếng Anh, professionals/knowledge workers).
+Ngôn ngữ: Tiếng Anh cho niche finance + AI education (global audience, RPM cao) + Health/longevity.
 Content strategy: Curate + Repackage — lấy topic/facts/hooks từ kênh finance viral, render lại 100% bằng animation gốc. Zero footage từ nguồn.
 Automation: Phased — Phase 1 semi-auto (AI generate, human review) → Phase 2 fully autonomous cron pipeline.
 
@@ -17,24 +17,8 @@ _Avoid_: "video", "clip", "content" (quá chung)
 Tham số chất lượng libx264. Giá trị thấp = chất lượng cao + file lớn. CRF=15 (near-lossless, dùng cho mọi encoding step), CRF=18 (visually lossless, trước đây dùng cho final render), CRF=23 (ffmpeg default, medium quality — tránh). Mọi encoding step trong pipeline phải chỉ định CRF rõ ràng, không để ffmpeg tự chọn default.
 _Avoid_: "quality setting", "compression level"
 
-**Lanczos Filter**:
-Scaling algorithm cao cấp cho ffmpeg (`flags=lanczos`). Bắt buộc dùng khi downscale source 2160p → 1080p hoặc upscale source 640x360 → 1080x1920. Mặc định ffmpeg dùng bilinear (chất lượng thấp hơn rõ rệt). Mọi `scale=` filter trong pipeline phải có `:flags=lanczos`.
-_Avoid_: "bilinear", "bicubic" (chất lượng thấp hơn)
-
-**Batch**:
-Nhóm 3 Shorts dùng chung 1 variant (A hoặc B) trong AB test, mỗi Short đi vào một lane khác nhau của Channel Pool theo thứ tự round-robin. Batch không còn gắn với một ngày lịch.
-_Avoid_: "group", "set"
-
-**Experiment**:
-Một lần AB test gồm A (control) vs B (test đúng 1 biến), mỗi phía là một Batch. Experiment hoàn tất khi mọi Short đủ điều kiện đo; không còn mặc định chạy trong một ngày.
-_Avoid_: "test", "comparison"
-
-**Variant**:
-Giá trị cụ thể của biến đang test. VD: "hook type = Contrarian" là một variant.
-_Avoid_: "version", "option"
-
 **Hook**:
-0-3 giây đầu video, trong đó gap/mystery và narrative promise phải đọc được trong 0-2s: vật thể chưa rõ, danh tính bị giấu hoặc câu hỏi bị né; partial reveal rơi trong 5-8s, không phải 1 câu tuyên bố tĩnh đã đầy đủ nghĩa. HEIT liệt kê 3 type (Context, Contrarian, Intrigue) nhưng khảo sát 6 video viral (2026-07, xem `docs/research/hook-benchmarks-2026-07/REPORT.md`) cho thấy hook hiệu quả thường là hybrid Context→Intrigue, hoặc dạng **Dare/Challenge** (thách đố kết cục nhị phân) chưa khớp type nào trong 3 type gốc. Với Clip Curation Edit, frame t=0 của cut PHẢI chứa mặt người hoặc hành động/prop rõ ràng — không phải title card tĩnh (xem Hook-Window Rule).
+0-3 giây đầu video, trong đó gap/mystery và narrative promise phải đọc được trong 0-2s: vật thể chưa rõ, danh tính bị giấu hoặc câu hỏi bị né; partial reveal rơi trong 5-8s, không phải 1 câu tuyên bố tĩnh đã đầy đủ nghĩa. Hook hiệu quả thường là hybrid Context→Intrigue, hoặc dạng **Dare/Challenge** (thách đố kết cục nhị phân) chưa khớp type nào trong 3 type gốc. Với Clip Curation Edit, frame t=0 của cut PHẢI chứa mặt người hoặc hành động/prop rõ ràng — không phải title card tĩnh (xem Hook-Window Rule).
 _Avoid_: "intro", "opening"
 
 **Hook Caption Sync**:
@@ -42,12 +26,8 @@ Caption burned-in phải bắt đầu ngay t=0 (không đợi giây thứ 2-3), 
 _Avoid_: "subtitle", "text overlay" (quá chung, không nói rõ yêu cầu timing/nhấn từ)
 
 **Caption Style Profile**:
-Baseline caption project-wide (ADR-0034): 2-5 từ mỗi burst, một keyword được animate/nhấn, tâm caption mặc định ở 55-65% chiều cao frame và chỉ dịch khi visual review xác nhận đang che mặt/proof object. English dùng Komika Axis; health/Vietnamese dùng Bangers. Kích thước ffmpeg phải được calibration để match ngoại hình CapCut size 16/stroke 60, không copy literal hai số đó sang ffmpeg.
-_Avoid_: "renderer default caption", "literal ffmpeg 16/60", "one font without Vietnamese glyphs"
-
-**Hook-Window Rule**:
-Quy tắc chọn điểm bắt đầu source segment cho Clip Curation Edit (ADR-0017): frame tại t=0 của cut phải chứa mặt người — skin-tone ≥10% theo pixel statistics, hoặc confirm visually. Title card / text graphic / slide / B-roll establishing / "numbered list transition" bị cấm làm segment start. Overlay đầu tiên phải land ≤t=2s. Nguyên nhân ra đời: bacsihai V1 (YQTWHqTS1e8) = 8.6% stayed vì segment bắt đầu tại 304.5s = static title card "Sai lầm số 5" (85% near-white, 0% face), mặt người đầu tiên ở t=5s. So với Dangote (ChWLcE3OYpA) = 50% stayed, mặt người + motion ngay t=0.
-_Avoid_: "hook rule", "face rule"
+Baseline caption project-wide (ADR-0034): 2-5 từ mỗi burst, một keyword được animate/nhấn, tâm caption mặc định ở 55-65% chiều cao frame và chỉ dịch khi visual review xác nhận đang che mặt/proof object. English dùng Komika Axis. Kích thước ffmpeg phải được calibration để match ngoại hình CapCut size 16/stroke 60, không copy literal hai số đó sang ffmpeg.
+_Avoid_: "renderer default caption", "literal ffmpeg 16/60"
 
 **Swiped Away**:
 % impressions trong Shorts feed mà viewer swipe trong vài giây đầu. Label: YouTube Studio → Engagement → "How viewers engaged" → "Swiped away." Denominator = impressions. Đo sức hút của frame 0. Khi Stayed to Watch hoặc AVD không hiển thị (video ít view), đây là metric fallback duy nhất.
@@ -60,10 +40,6 @@ _Avoid_: "viewed percentage" (đó là 100 − Swiped away, denominator khác), 
 **AVD** (Average View Duration):
 Số giây tuyệt đối trung bình viewer xem video (những người ĐÃ stayed). Label: YouTube Studio → Overview → "Average view duration." Đo sức giữ của toàn bộ video. Để so sánh giữa các video khác duration, chia AVD cho tổng duration → Average percentage viewed. KHÔNG phải % — là số giây. Định nghĩa cũ (dòng trước đây nói "phần trăm") SAI.
 _Avoid_: "watch time" (tổng giây của tất cả viewers, không phải trung bình), "retention" (use specific term)
-
-**Video Type**:
-Một trong 7 visual rendering styles: Stock Footage, Kinetic Typography, Data Viz, HTML/CSS Motion, Whiteboard Sketch, Meme/Notification, Clip Curation Edit. Là AB variable chính.
-_Avoid_: "format", "template" (use specific term)
 
 **Source Channel**:
 Kênh YouTube dùng làm research input, cho MỘT trong 3 niche song song (ADR-0019, ADR-0020): finance viral (VD: School of Hard Knocks, 2.08M subs, tiếng Anh), health/longevity (VD: Bác sĩ Hải, tiếng Việt), hoặc AI education (VD: @mattpocockuk, @anthropic-ai — kênh practitioner/product, không nhất thiết phải "viral how-to" như 2 niche kia). Với 6 animation types (Repackage), chỉ lấy topic/facts/hooks (hoặc style/structure với niche AI education), KHÔNG lấy footage. Với Clip Curation Edit, có lấy footage nhưng vẫn transform (xem Transformative Gate). KHÁC Destination Channel (bên dưới) — Source Channel không phải kênh của user.
@@ -81,10 +57,6 @@ _Avoid_: "one channel per niche", "random channel", "simultaneous duplicate uplo
 Trạng thái một Short đã qua 48 giờ nhưng traffic từ Shorts Feed vẫn dưới 60%. Không đồng nghĩa với low views hay Distribution Plateau: một Short ít view vẫn không ở No-Feed State nếu phần lớn traffic của nó đến từ Shorts Feed. Khi vào trạng thái này, bản gốc được giữ lại để bảo toàn delayed-pickup/data và một revision được chuyển sang Destination Channel kế tiếp trong Channel Pool.
 _Avoid_: "flop", "low-view video", "plateau", "delete and repost"
 
-**Material Revision**:
-Phiên bản mới của một Short ở No-Feed State, bắt buộc dựng lại toàn bộ cửa sổ 0–3s (shot/framing, hook copy và early SFX) đồng thời thay ít nhất một trục khác trong pacing/cut order, proof visuals, captions hoặc music. Chỉ đổi metadata, export lại cùng timeline hoặc thay riêng music không đủ để trở thành Material Revision.
-_Avoid_: "re-upload", "metadata refresh", "music swap", "duplicate"
-
 **Channel Burn State**:
 Trạng thái một Destination Channel có ba Short liên tiếp rơi vào No-Feed State dù từng Short đã pass toàn bộ production/publishing gates. Lane này bị loại khỏi rotation cho tới khi có replacement đã phone-verify và age đủ ba tuần; một Short yếu đơn lẻ không đủ để kết luận channel bị burn.
 _Avoid_: "channel feels dead", "one flop means burned", "delete the channel"
@@ -92,10 +64,6 @@ _Avoid_: "channel feels dead", "one flop means burned", "delete the channel"
 **Food-Trial Short (Tòa Án Món Ăn)**:
 Narrative format chủ lực của Companion-Meal Short, trình bày một tranh luận dinh dưỡng như phiên tòa: đối tượng được xét xử là một cáo buộc về món ăn, không phải bản thân món ăn; có bằng chứng ủng hộ và phản biện, rồi một phán quyết có hành động cụ thể cho khẩu phần hoặc bữa còn lại. Hài hước là lớp truyền tải; phán quyết phải dựa trên các giả định khẩu phần được công khai và không được biến thực phẩm thành nhãn đạo đức “tốt/xấu”.
 _Avoid_: "food roast", "món độc hại", "guilty food", "nutrition lecture"
-
-**Living-Comic Treatment**:
-Treatment hình ảnh toàn thời lượng của Food-Trial Short: toàn bộ khung hình được tổ chức như các trang và panel truyện tranh, nhưng panel chính chứa footage nấu ăn thật đang chuyển động. Ảnh tĩnh chỉ được dùng như nhịp vật chứng hoặc reaction ngắn; đây không phải slideshow ảnh có pan/zoom và cũng không phải footage toàn màn hình chỉ gắn vài speech bubble.
-_Avoid_: "static comic", "comic overlay only", "Ken Burns slideshow", "raw-footage layout"
 
 **Lobby Acquittal Twist**:
 Biến cố kết thúc không báo trước trong một số Food-Trial Short đủ điều kiện: sau khi vật chứng đã cho thấy cáo buộc có cơ sở và Companion-Meal Verdict đúng đã được trình bày, quan tòa hư cấu vẫn tuyên tha vì nhận lobby từ một tổ chức thực phẩm hoàn toàn hư cấu. Tập đủ điều kiện được chọn bằng random có kiểm soát để viewer không dự đoán được nhưng tránh lặp twist liên tiếp. Lobby nên là một Earned Evidence Callback gắn với nguyên liệu hoặc phe đã xuất hiện trong hồ sơ; twist không được thay thế hoặc đảo ngược thông tin dinh dưỡng đúng.
@@ -116,10 +84,6 @@ _Avoid_: "random punchline", "unseeded lobby", "unrelated CTA gag", "new evidenc
 **Curate**:
 Quá trình xem video từ Source Channel, extract topic + facts + hook pattern. Output = text research notes, không phải video.
 _Avoid_: "copy", "steal", "scrape"
-
-**Repackage**:
-Render lại curated content bằng Video Type gốc (animation). Output = 100% original visual, cùng information value. Khác với re-upload (dùng footage gốc).
-_Avoid_: "remix", "edit", "cut"
 
 **AB Variable**:
 Một dimension được thay đổi giữa A và B trong experiment. Chỉ 1 biến đổi mỗi experiment.
@@ -296,7 +260,7 @@ Source Channel Pattern của School of Hard Knocks: một cảnh handheld liên 
 _Avoid_: "street interview intro", "cold open", "walk-up shot"
 
 **Implied Comparison Hook**:
-Pattern hook thứ 4, **confirmed 2/2 video cùng kênh RandomDude** (`docs/research/800m-view-case-study-2026-07-11/REPORT.md` — shooting, 808M views; `docs/research/normal-vs-king-pattern-2026-07-12/REPORT.md` — firefighters, 418M views), khác 3 Source Channel Pattern gốc. Không có 1 dòng hook nào tự giải thích gap — caption chỉ label 1 phía ("OTHERS X") và chính TITLE/thể loại video ngầm hứa hẹn phía còn lại ("...VS King of X") sẽ xuất hiện sau. Cho phép gap dài bất thường (~40-41s ở cả 2 video, so với 5-8s target hiện có của HEIT) MIỄN LÀ đoạn chờ được lấp bằng 1 montage đủ đa dạng/giải trí để tự nó giữ chân người xem — gap không được resolve bởi câu chữ mà bởi kỳ vọng thể loại. Payoff/reveal luôn được camera "dwell" lâu hơn hẳn (~3x ở video 1, ~17.3s/29% tổng video ở video 2) so với các clip dựng cảnh (setup) trước đó. Caption template (trắng/vàng "OTHERS X" → đỏ-glow pivot) và sticker capstone (skull+cowboy hat) giống hệt ở cả 2 video — đây là brand signature của kênh, không phải lựa chọn ngẫu nhiên mỗi video. [Lưu ý: động lực tâm lý comment KHÔNG cố định — video 1 (others thực sự kém) khiến khán giả chê "others"; video 2 (others cũng là chuyên gia thật) khiến khán giả quay sang chê "the editor" vì so sánh không công bằng. Chọn source material có cân nhắc bên nào sẽ bị/được đùa cợt.]
+Pattern hook thứ 4, **confirmed 2/2 video cùng kênh RandomDude** (`docs/research/800m-view-case-study-2026-07-11/REPORT.md` — shooting, 808M views; `docs/research/normal-vs-king-pattern-2026-07-12/REPORT.md` — firefighters, 418M views), khác 3 Source Channel Pattern gốc. Không có 1 dòng hook nào tự giải thích gap — caption chỉ label 1 phía ("OTHERS X") và chính TITLE/thể loại video ngầm hứa hẹn phía còn lại ("...VS King of X") sẽ xuất hiện sau. Cho phép gap dài bất thường (~40-41s ở cả 2 video) MIỄN LÀ đoạn chờ được lấp bằng 1 montage đủ đa dạng/giải trí để tự nó giữ chân người xem — gap không được resolve bởi câu chữ mà bởi kỳ vọng thể loại. Payoff/reveal luôn được camera "dwell" lâu hơn hẳn (~3x ở video 1, ~17.3s/29% tổng video ở video 2) so với các clip dựng cảnh (setup) trước đó. Caption template (trắng/vàng "OTHERS X" → đỏ-glow pivot) và sticker capstone (skull+cowboy hat) giống hệt ở cả 2 video — đây là brand signature của kênh, không phải lựa chọn ngẫu nhiên mỗi video. [Lưu ý: động lực tâm lý comment KHÔNG cố định — video 1 (others thực sự kém) khiến khán giả chê "others"; video 2 (others cũng là chuyên gia thật) khiến khán giả quay sang chê "the editor" vì so sánh không công bằng. Chọn source material có cân nhắc bên nào sẽ bị/được đùa cợt.]
 _Avoid_: "comparison hook" (thiếu phần "không resolve bằng câu chữ"), "vs hook"
 
 **Narrative Arc**:
