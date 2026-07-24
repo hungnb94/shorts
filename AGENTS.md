@@ -1,77 +1,8 @@
 # Shorts
 
-Animated short video factory — sản xuất Shorts 9:16, 50-75s và phát hành qua ba Channel Pool theo Plateau-Gated Cadence để AB test viral content formulas trên YouTube + TikTok, kiếm tiền qua ads revenue và affiliate marketing.
+Animated short video factory — sản xuất Shorts 9:16, 50-75s và phát hành qua Channel Pool theo Plateau-Gated Cadence để AB test viral content formulas trên YouTube + TikTok.
 
-Niche: Finance/money-making (English) as the primary/documented vertical, run in parallel with two additional, deliberately-chosen verticals — health/longevity (Vietnamese, Source Channel "Bác sĩ Hải") per ADR-0019, and AI education (English, professionals/knowledge workers) per ADR-0020 — multi-niche AB testing: more parallel data streams → faster overall learning. Format: Kitty Explain (animated mascot + pop-up text + wild subtitles) for the finance vertical; the health vertical uses Clip Curation Edit exclusively (see `pipeline/bacsihai/`); the AI-education vertical uses Curate+Repackage (zero footage reuse) with the specific Video Type still undecided (see ADR-0020).
-
-## Architecture (Target — not yet built)
-
-Everything below this heading through "Commands" describes the intended autonomous TypeScript system. **None of it exists yet** — there is no `src/` directory and `package.json` has an empty `scripts: {}`. See **Current Implementation** below for what actually runs today.
-
-```
-                    ┌──────────────────────────────────────────────┐
-                    │         AUTONOMOUS OPTIMIZATION LOOP          │
-                    │       (plateau-gated scheduler, no quota)     │
-                    └───────────────────────┬──────────────────────┘
-                                            │
-                    ┌───────────────────────▼──────────────────────┐
-                    │              MAB STRATEGY ENGINE              │
-                    │   Epsilon-greedy: 50-50 → 20-80 after 54 vids │
-                    │   Action: 7 types × 3 hooks × 9 value-adds   │
-                    └───────────────────────┬──────────────────────┘
-                                            │ (select next eligible variant)
-                    ┌───────────────────────▼──────────────────────┐
-                    │           CONTENT PIPELINE                    │
-                    │                                               │
-                    │  ┌─────────┐  ┌──────────┐  ┌─────────────┐ │
-                    │  │ SCRIPT  │→ │ VOICE    │→ │ ANIMATION   │ │
-                    │  │ GEN     │  │ TTS      │  │ RENDER      │ │
-                    │  │ (HEIT)  │  │          │  │ (7 types)   │ │
-                    │  └─────────┘  └──────────┘  └──────┬──────┘ │
-                    │                                     │        │
-                    │  ┌──────────────────────────────────▼──────┐ │
-                    │  │           VIDEO ASSEMBLY                 │ │
-                    │  │  text overlays + subtitles + music + CTA │ │
-                    │  │  → 9:16 MP4 H.264, 50-75s                │ │
-                    │  └──────────────────────┬──────────────────┘ │
-                    └─────────────────────────┼────────────────────┘
-                                              │ (next eligible MP4 ready)
-                    ┌─────────────────────────▼────────────────────┐
-                    │         CHROME UPLOADER (Playwright)          │
-                    │   3 lanes/vertical, strict round-robin        │
-                    │   Plateau + metadata gates before upload      │
-                    └─────────────────────────┬────────────────────┘
-                                              │ (videoId + channelId)
-                    ┌─────────────────────────▼────────────────────┐
-                    │              48H METRICS WAIT                 │
-                    │   (YouTube Analytics lag, stable after 48h)   │
-                    └─────────────────────────┬────────────────────┘
-                                              │
-                    ┌─────────────────────────▼────────────────────┐
-                    │         METRICS FETCHER (Analytics API)       │
-                    │   AVD seconds, views, retention graph         │
-                    │   Store: SQLite video_metrics table           │
-                    └─────────────────────────┬────────────────────┘
-                                              │
-                    ┌─────────────────────────▼────────────────────┐
-                    │              ANALYZER & OPTIMIZER             │
-                    │   Key moments (dips/peaks), rank variants     │
-                    │   Update MAB rewards, adjust epsilon          │
-                    │   Extract patterns → inform next cycle        │
-                    └─────────────────────────┬────────────────────┘
-                                              │
-                                              └───► Loop to MAB (Cycle N+1)
-```
-
-| Layer | Path | Responsibility |
-|-------|------|----------------|
-| MAB Strategy | `src/optimization/` | Multi-Armed Bandit variant selection, epsilon decay, reward tracking |
-| Content Pipeline | `src/pipeline/` | Script gen → TTS → animation render → video assembly |
-| Chrome Uploader | `src/platforms/chrome-uploader.ts` | Playwright automation, logged-in profile upload |
-| Metrics Fetcher | `src/platforms/youtube-analytics.ts` | Fetch API AVD/views/retention after 48h; Shorts Feed share remains a Studio check |
-| Analyzer | `src/optimization/analyzer.ts` | Key moments detection, variant ranking, pattern extraction |
-| Data / Storage | `src/data/` | SQLite: video_metrics, mab_state, variant_performance |
-| CLI / Cron | `src/cli/` | Plateau eligibility, Channel Pool rotation and autonomous orchestration |
+Niche: Finance/money-making (English) as the primary/documented vertical, run in parallel with two additional, deliberately-chosen verticals — health/longevity (Vietnamese, Source Channel "Bác sĩ Hải") per ADR-0019, and AI education (English, professionals/knowledge workers) per ADR-0020 — multi-niche AB testing: more parallel data streams → faster overall learning.
 
 ## Current Implementation (as of 2026-07-10)
 
@@ -89,187 +20,33 @@ The real, working pipeline is manual/semi-manual Python + ffmpeg, run per projec
 | `data/mab_state.json`, `data/tracked_videos.csv`, `data/targets/`, `data/video_metrics.db` | Real stateful data — see Known Pitfalls, never delete |
 | `scripts/*.md` | Markdown video script drafts (content, not code) |
 
-`npm install`/`npm run ...` do not work yet — `package.json` has no dependencies or scripts. There is no Chrome uploader automation, no MAB engine, and no autonomous loop; videos are produced and uploaded manually per the current per-project Python scripts.
-
-## File Dependency Chain (Target — not yet built)
-
-```
-src/optimization/mab-strategy.ts     (variant selection — no deps)
-       ↑
-src/pipeline/script-gen.ts           (generates HEIT-structured scripts)
-       ↑
-src/pipeline/voice-tts.ts            (TTS audio from script)
-       ↑
-src/pipeline/animation-render.ts     (7 video types from script + audio)
-       ↑
-src/pipeline/video-assembly.ts       (compose: animation + overlays + music + CTA)
-       ↑
-src/platforms/chrome-uploader.ts     (Playwright upload, plateau-gated Channel Pool rotation)
-       ↑
-       [48h wait]
-       ↑
-src/platforms/youtube-analytics.ts   (fetch AVD, CTR, retention graph)
-       ↑
-src/optimization/analyzer.ts         (key moments, rank variants, update MAB)
-       ↑
-       [loop back to mab-strategy.ts for next cycle]
-```
-
-## Commands (Target — not yet built)
-
-None of these commands exist today; `package.json` has no scripts. Kept here as the target CLI surface for when the autonomous system is built.
-
-| Action | Command | Location |
-|--------|---------|----------|
-| Install deps | `npm install` | Root |
-| Setup Chrome profile | `npm run setup:chrome` | Root |
-| Run autonomous cycle | `npm run autonomous` | Root |
-| Run single cycle (dev) | `npm run cycle -- --dry-run` | Root |
-| Check MAB state | `npm run mab:status` | Root |
-| Fetch metrics manually | `npm run metrics:fetch` | Root |
-| Analyze retention graphs | `npm run analyze:retention` | Root |
-| Type check | `npx tsc --noEmit` | Root |
-| Test | `npm test` | Root |
-| Lint | `npm run lint` | Root |
-| Build | `npm run build` | Root |
-
 ## Key Conventions
 
-- **TypeScript everywhere** — no Python. User default for new projects; the target autonomous system should be built this way. The current working pipeline (`pipeline/`) is Python + ffmpeg, predating this convention — not a model to copy for new code.
-- **HEIT structure mandatory** — every script follows Hook(0-3s; promise/gap by 0-2s) → Explain → Illustrate → Teach. See CONTEXT.md.
 - **Copy, don't invent** — find proven viral formats → repackage. Never invent new formats from scratch. See ADR 0002.
 - **Autonomous optimization** — MAB selects variants, no human chooses experiments. System learns from AVD data. See ADR 0009.
 - **Plateau-Gated Cadence** — no fixed daily/weekly quota. Each vertical uses three phone-verified, ≥3-week-aged Destination Channels in strict round-robin order; the next lane must be eligible under ADR-0035.
 - **Video specs fixed** — 9:16 (1080x1920), 50-75s, MP4 H.264 with audio. No exceptions for new production (ADR-0034).
-- **English for the finance vertical, Vietnamese for the health vertical** — each niche's output stays in its own Source Channel's language (ADR 0004 for finance; ADR 0019 for the parallel health/Vietnamese vertical). Never mix languages within one video.
-- **Affiliate at end** — value first, pitch last. Never front-load affiliate mentions.
-- **Per-channel Chrome profile auth** — each Destination Channel keeps reusable logged-in browser identity for upload; Analytics authorization is scoped independently per channel. No OAuth flow is introduced for upload itself. See ADR-0009/0035.
+- **English for all channel**
 - **Download max quality** — always download source videos at highest available resolution (2160p/4K) using `yt-dlp -f "bestvideo[height>=2160]+bestaudio"`. Never accept default 720p.
 - **3-source combo for engagement** — every video combines: (1) original source footage, (2) animated overlays (kinetic text, data viz, whiteboard), (3) Pexels b-roll for visual variety. This maximizes retention by avoiding visual monotony.
 - **Standard workflow** — see `docs/WORKFLOW.md` for the mandatory per-video sequence, the blocking Hook Gate (Stage 0, no cutting/rendering before a strong 0-3s hook is chosen), and the required per-video Post-Production Retro.
 - **Guide-derived verification baseline** — every new Short must pass ADR-0034: early SFX, calibrated caption profile, Mid-Roll Triple CTA at t=38-42s, moving watermark, compact metadata, playlist/Related wiring and explicit Studio settings.
-- **Media-first verification; no renderer unit tests** — the current `pipeline/<project>/render_*.py` files are one-off video-production tools, not product code. Do not create, extend, or require `test_render_*.py` files and do not apply TDD to these renderers unless the user explicitly requests automated code tests. Verify the rendered MP4 itself with ffprobe/spec checks, full decode, final ASR, detector output, and manual frame/contact-sheet review. Existing renderer tests are legacy artifacts, not templates for future videos. Do not proactively revise a completed video; wait for the user to request a revision.
+- **Media-first verification; no renderer unit tests** — the current `pipeline/<project>/render_*.py` files are one-off video-production tools, not product code. Do not create, extend, or require `test_render_*.py` files and do not apply TDD to these renderers unless the user explicitly requests automated code tests.
 - **Final video filenames are date-prefixed** — every rendered file under `output/projects/<project>/final/` uses `yyyy-mm-dd-<name>.mp4` (the render date), e.g. `2026-07-11-hardknocks_v2_implied_comparison.mp4`, so the creation date is visible without checking file metadata. Applies going forward from 2026-07-11; older files are not being renamed retroactively.
 
-## How to Setup Autonomous System (Target — not yet built)
-
-The four "How to" sections below (through "How to Add a New Platform") describe procedures for the target TypeScript system and reference `src/` paths and `npm run` commands that don't exist yet. See **Current Implementation** above for what to actually run today.
-
-1. **Chrome profile setup** (repeat once per Destination Channel; nine total under ADR-0035):
-   ```bash
-   npm run setup:chrome
-   # Opens Chrome → user logs into the intended Destination Channel → save that lane's profile
-   # Every lane needs a distinct persisted browser identity/profile path.
-   ```
-
-2. **Verify profile works**:
-   ```bash
-   npm run cycle -- --dry-run
-   # Should open YouTube upload page with logged-in state
-   ```
-
-3. **Start autonomous loop**:
-   ```bash
-   npm run autonomous
-   # Runs forever: check next lane eligibility → upload → measure → analyze → repeat
-   # Check status: npm run mab:status
-   ```
-
-4. **Monitor progress**:
-   - Logs: `logs/autonomous-YYYY-MM-DD.log`
-   - MAB state: `data/mab_state.json`
-   - Metrics: `data/video_metrics.db` (SQLite)
-
-**Common gotcha**: Chrome profile expires after 30 days. Re-login with `npm run setup:chrome` if uploads fail with "not logged in" error.
-
-## How to Add a New Video Type
-
-1. Study proven viral format (manual TikTok/YouTube research, or use tools like wron.ai)
-2. Create renderer in `src/pipeline/renderers/<format>.ts` implementing the `VideoRenderer` interface
-3. Document format in `src/pipeline/renderers/README.md` with example output
-4. Register in `src/pipeline/renderers/index.ts`
-5. Add to MAB action space in `src/optimization/mab-strategy.ts`
-
-**Common gotcha**: new format must produce 9:16 output. Renderers that output wrong aspect ratio will fail at upload step silently (YouTube accepts but algorithm deprioritizes).
-
-## How to Adjust MAB Strategy
-
-1. **Change epsilon decay**:
-   ```typescript
-   // src/optimization/mab-strategy.ts
-   const EPSILON_START = 0.5;      // Initial explore rate
-   const EPSILON_END = 0.2;        // Final explore rate
-   const DECAY_AFTER_VIDEOS = 54;  // eligible measured Shorts, not calendar cycles
-   ```
-
-2. **Change publishing cadence**: fixed `VIDEOS_PER_DAY`/`CYCLE_DAYS` constants are superseded. The future scheduler must implement ADR-0035's Distribution Plateau, strict round-robin and No-Feed rules; no current `src/` implementation exists to edit.
-
-3. **Add new action dimension**:
-   ```typescript
-   // src/optimization/action-space.ts
-   type Variant = {
-     videoType: VideoType;   // existing
-     hookType: HookType;     // existing
-     valueAddType: ValueAddType; // existing
-     voiceGender?: "male" | "female"; // NEW dimension
-   };
-   ```
-
-**Common gotcha**: changing epsilon after system started = need to reset MAB state (`rm data/mab_state.json`) or old epsilon persists.
-
-## How to Add a New Platform
-
-1. Implement upload automation in `src/platforms/<platform>-uploader.ts` (e.g., TikTok, Instagram)
-2. Implement metrics fetcher in `src/platforms/<platform>-analytics.ts`
-3. Required methods:
-   - Uploader: `upload(video, metadata)` → videoId
-   - Analytics: `fetchMetrics(videoId, waitHours)` → { avd, ctr, views, retentionGraph }
-4. Register in `src/platforms/index.ts`
-5. Add platform credentials to `.env` (if using API) or Chrome profile (if using automation)
-
-**Common gotcha**: TikTok rate limits harsh (~6 uploads/hour unofficial). When adding TikTok, space uploads 10+ min apart or risk shadowban.
-
 ## Known Pitfalls
-
-### DO NOT hardcode video specs
-Every new Short MUST be 9:16 (1080x1920), 50-75s, MP4 H.264 with audio. Hardcoding different specs "just this once" breaks project comparability. The future `src/data/constants.ts` must become the single source when it exists; current Python renderers must validate the final artifact directly.
-
-### Chrome profile expires after 30 days
-YouTube session expires. If autonomous loop fails with "not logged in", run `npm run setup:chrome` to re-login. Check logs for "CHROME_AUTH_EXPIRED" error.
 
 ### Metrics lag is real — wait 48h minimum
 YouTube Analytics data unstable <48h. Fetching at 24h = noisy AVD numbers → bad MAB decisions. System enforces 48h wait, don't override.
 
-### MAB epsilon must decay gradually
-Starting at ε=0.2 (20% explore) too early = stuck in local maxima. Starting at ε=0.8 too long = waste quota on bad variants. Follow 50→20 after 54 videos.
-
 ### Don't reset MAB state mid-cycle
 Deleting `data/mab_state.json` while system running = lose all learned rewards → restart from scratch. Only reset when intentionally changing strategy.
-
-### The old ≤60s platform claim is obsolete; the project range is 50-75s
-YouTube's current official policy classifies eligible square/vertical uploads up to three minutes as Shorts. ADR-0034 intentionally chooses a stricter 50-75s internal range from the supplied retention guide. Do not reject 61-75s as long-form, and do not expand beyond 75s without a new decision.
-
-### Affiliate links in video description
-YouTube and TikTok strip or flag raw affiliate links. Always use a redirect domain (e.g., yourdomain.com/go/product). Never paste raw Amazon/ClickBank links.
-
-### Hook timing is non-negotiable
-HEIT framework: Hook must land in 0-2 seconds. Scripts that spend 5+ seconds on intro will tank AVD. The script-gen layer targets 15-25 words for hook section. If hook exceeds 25 words, it's too slow. A hook line should never be a single fully-resolved statement — it must open a gap/mystery (unclear object, withheld identity, a question left hanging) that only gets partially answered by t=5-8s. See CONTEXT.md → **Hook**.
-
-### Hook text must not name both the cause AND the specific effect (self-caught, bacsihai v5)
-Concrete failure mode, distinct from the abstract rule above: `render_bacsihai_v5.py`'s hook overlay ("LAO ĐỘNG CHÂN TAY ÍT BỊ ALZHEIMER HƠN?") named both the causal factor (manual labor) and the specific disease (Alzheimer) in the headline — technically a question, but it leaves almost no gap, since reading it alone already tells the viewer the entire claim being tested. Compare to v4's V1 hook ("NHỊN ĂN MÀ VẪN KHÔNG GIẢM CÂN?") which names a symptom but withholds the mechanism entirely. Checklist before finalizing any hook overlay: (1) does the headline alone already reveal the cause-and-effect pair, or just one side of it? If both, rewrite to withhold at least one. Also: a hook built on a qualitative claim (source gives no number, only "much lower/higher") is inherently weaker than a Money+Number or Contrarian-Reveal hook — flag this as a source-selection constraint, not something overlay wording alone can fix.
-
-### Hook-Window: frame 0 MUST show a human face (ADR-0017)
-The 0-2s hook window is not just about hook TEXT — it is about what the viewer SEES at frame 0. For Clip Curation Edit, the source segment's first frame MUST contain a human face (skin-tone ≥10% by pixel stats). Title cards, static text graphics, "numbered list" transitions, and B-roll establishing shots are FORBIDDEN as segment starts. The first Pexels/value-add overlay must land ≤t=2s. Verified root cause of bacsihai V1 (YQTWHqTS1e8, 8.6% stayed) vs Dangote (ChWLcE3OYpA, 50% stayed): bacsihai's segment started at 304.5s = a static pink/white "Sai lầm số 5" title card (85% near-white, 0% face, first face at t=5s). Dangote started on his face at t=0. Before upload, verify with `inspect_image.py` on hook0.jpg — reject if skin-tone <10%. This rule sits ABOVE the Contiguous VO constraint: keep contiguity, but select the contiguous range so frame 0 shows a person.
-
-### Full-screen Pexels/B-roll overlay must never replace the speaker's face anywhere in 0-10s, not just at t=0 (ADR-0017 addendum, Giannis V2)
-Distinct from the frame-0 pitfall above: frame 0 can pass the face check and the video can still fail the hook window if a LATER overlay blacks out the face. Root-caused `dF0Rr2C0Msc` (Giannis V2, "A Ferrari Costs $1.1M", 37.1% stayed — worst on record until this was diagnosed): `pipeline/giannis/render_giannis_v1.py` composited full-canvas (`scale=1080:1920` + `overlay=x=0:y=0`, not a corner insert) Pexels b-roll at t=1-3s, 5-7s, and 8-10s, replacing Giannis's face with a static stock clip (watch/art-easel/mansion) for 6 of the first 10 seconds across 3 separate blackouts. The retention curve confirms the mechanism exactly: relative retention holds near-peak through t≈4.5s then falls off a cliff across t=5-9s — precisely the 2nd/3rd blackouts. The existing rule ("first overlay must land ≤t=2s") was technically satisfied and did not catch this, because it implicitly assumed "overlay" means a small supplementary graphic layered over a still-visible speaker, not a full-canvas substitution. This exact pattern also existed in `render_bacsihai_v3.py`/`v4.py` (one instance at literally t=0) but is absent from every current script (`bacsihai_v5+`, all `hardknocks_v*`/`aiwork_v*`) — already abandoned in practice via ADR-0016's zoompan+corner-overlay approach, but never explicitly banned until now. Rule: within the entire 0-10s hook window, any Pexels/value-add overlay must be a partial/corner composite that keeps the face visible — never a full-canvas overlay that removes the face from view, however briefly. Does not apply past t≈10s, where the standing 3-source-combo Pexels b-roll convention still holds.
 
 ### Hook caption sync and cadence (ADR-0018)
 Benchmarked 6 independently viral Shorts (`docs/research/hook-benchmarks-2026-07/REPORT.md`) — all 6 shared two patterns not previously encoded as rules here:
 - **Caption sync**: burned-in caption must be visible by t=0.2s (not delayed for a "clean" shot), updating every ~1-2s in short 2-5 word bursts synced to speech, with one keyword per burst visually emphasized (color/weight distinct from the rest).
 - **Cadence**: at least one visual change (cut, zoom, new overlay, or continuous on-screen motion) every 1-2s within the hook window — tighter than the general 2-3s "2-Second Rule" (ADR-0016), specifically for the 0-5s hook region.
 - **Show, don't just tell**: pair any spoken claim (wealth, results, a number) with simultaneous visual evidence (prop, environment, action) rather than narration alone — in the benchmark set, the verbal claim and its visual proof landed in the same beat, not sequentially.
-Caveat: burst timing above was measured on English interview speech; Vietnamese TTS narration paces differently, so derive burst duration from actual TTS word-timing output per video, not a copy-pasted constant — verify legibility, not just retention theory, when tuning this for Bác sĩ Hải / Giảm Cân Healthy.
 
 ### Guide-derived craft verification is blocking (ADR-0034)
 - Early SFX must land within t=0-1s; add an arrow/pointer/animated annotation when the focal target is ambiguous.
@@ -280,12 +57,6 @@ Caveat: burst timing above was measured on English interview speech; Vietnamese 
 
 ### Clip Curation Edit must pass the Transformative Gate
 Video Type #7 (Clip Curation Edit) uses real footage from Source Channel — unlike the 6 animation types (zero-footage). Before upload, every Clip Curation Edit MUST pass all 3 Transformative Gate rules: (1) commentary track required, (2) min 2 value-adds from [fact-check callout, data viz, source citation, multi-source mashup, animated annotation, counter-argument], (3) cut ≤50% source duration + each clip <15s. Uploading a clip edit that fails the gate = copyright strike risk. Attribution is intentionally dropped per user decision.
-
-### ffmpeg drawtext silently drops text containing a literal "%" (aiwork v1)
-`drawtext`'s default `expansion=normal` parsing treats a bare `%` as a template-escape trigger (e.g. `%{pts}`) and silently drops the rest of the string when it isn't one - the filter still exits 0, with only a buried "Stray %" warning in stderr, so a caption can vanish from a render with no visible top-level error. Any caption/overlay text that may contain a real percentage (e.g. "25%") needs `expansion=none` added to its `drawtext` filter args. Doubling to `%%` did not reliably fix this in testing - use `expansion=none` instead. First hit in `pipeline/aiwork/render_aiwork_v1.py` (percentage-heavy captions); grepped `render_bacsihai_v5.py`/`render_hardknocks_v1.py` and confirmed neither has this problem today since their captions never contain a literal `%`.
-
-### System fonts used in this repo lack some Unicode glyphs (aiwork v1)
-`Helvetica.ttc`/`HelveticaNeue.ttc` (the only fonts used across this repo's render scripts) don't include every Unicode symbol - e.g. the arrow `→` renders as a missing-glyph "tofu" box. Stick to ASCII in `drawtext` caption content (e.g. `->` instead of `→`); verify visually via a rendered frame before assuming a symbol will show up.
 
 ### mlx_whisper word tokens already carry their own leading-space semantics (hardknocks v4)
 When reconstructing caption text from `mlx_whisper` `word_timestamps=True` output, do not rejoin words with `" ".join(w["word"].strip() for w in words)` — each word token already carries its own correct leading space (or lack of one), e.g. `' 10'`, `',000.'` (no leading space, meant to attach directly to the prior token), `' But'`. Stripping every token and rejoining with a space inserts a stray space before punctuation-attached continuations, rendering `"10 ,000. But if"` instead of `"10,000. But if"`. Fix: concatenate the raw word strings and strip once at the ends — `"".join(w["word"] for w in words).strip()`. First hit in `pipeline/hardknocks/render_hardknocks_v4.py`'s `auto_bursts()` helper (auto-split dialogue captions from word timestamps); caught by the mandatory Stage 4 frame-check, not by reading the code.
@@ -305,17 +76,11 @@ Per wiki research (1.2B views case study): "Put your ego down and stop trying to
 ### Don't conflate Value-Add Layer with Retention Techniques
 Value-Add Layer (fact-check, data viz, this_or_that — 9 types, see ADR 0008) is an AB variable: "có value-add vs không" is a valid experiment. Retention Techniques (sound design, zoom punch, pattern interrupt, pause-trimming + speed-up) is BASE QUALITY applied to every video automatically. NEVER AB test "có sound design vs không sound design" — the no-sound variant is low quality, unfair test.
 
-### Pause-trimming + speed-up is a Retention Technique, applies to every video (aiwork v2)
-Cut inter-sentence pauses/dead air out of the source (jump-cut style, hard cut - no crossfade needed) and apply a uniform speed-up (aiwork v2 used 1.1x, `setpts=PTS/1.1` + single `atempo=1.1` pass) to the final assembled timeline, after all cuts and overlays are burned in. This is base quality for every future video (Contiguous VO or Multi-Clip Mashup, ADR-0022), not an AB variable, same as sound design/zoom punch. The pause-cut threshold must be derived per-project from that project's own transcript's real inter-word gap distribution (look for the natural valley between "normal speech" and "real pause" gap lengths) - do not copy-paste 1.1x/0.35s as fixed constants across projects with different speakers/pacing.
-
 ### Value-Add Layer must be post-render compositing, not embedded in renderer
 The value-add overlay layer (ADR 0008) must be a separate compositing step AFTER the base video renders. Do NOT couple it into the main renderer (current render_clip.py couples overlay rendering into clip rendering at line 175-481). To support all 7 video types, extract overlay compositing into a shared step: base video → composite value-add overlay → output. This keeps value-adds reusable across all types.
 
 ### YouTube Analytics API can lag well past 48h for a specific video, even when Studio/public view count already show data (fetch-metrics v1)
 Confirmed against the real channel while first testing `src/platforms/youtube-analytics.ts` (ADR-0025): `dHDpDXSIAkA` (hardknocks_v1, uploaded 2026-07-10, public view count 1114 per `yt-dlp`, already past the 48h wait) returned zero for every metric — views, AVD, retention curve all empty — and doesn't appear at all in a channel-wide per-video breakdown that correctly returned real numbers for 8 *other*, older videos on the same channel (proving auth/query/channel-scoping were all correct, not a bug). The 48h rule (AGENTS.md's own "Metrics lag is real" pitfall, and ADR-0009's Analytics-lag research) describes when Studio-shown metrics stabilize — it does NOT guarantee the separate Analytics *reporting* API has finished indexing a brand-new, low-traffic-channel video by then. If `/fetch-metrics` returns an all-empty result for a video that's genuinely past 48h, treat it as "not indexed yet, retry in a day or two," not as "this video has zero engagement."
-
-### YouTube Analytics API has no impressions/CTR metric under that name (fetch-metrics v1)
-Confirmed via a real API call while building ADR-0025: `metrics=impressions` (and `impressionsClickThroughRate`) returns a hard `400 Unknown identifier (impressions) given in field parameters.metrics` — not a permissions/scope issue, the identifier itself doesn't exist in this API. Per-video CTR is not automatable via `youtube-analytics.ts`; the `EXPERIMENT-LOG.md` CTR figure (when present) stays a manual Studio-UI read.
 
 ### YouTube Analytics API's `averageViewPercentage`/`averageViewDuration` are NOT a reliable proxy for Studio's Shorts "Stayed to watch" — not a code bug, not a fixed bias (fetch-metrics v1, 3 confirmed cases, revised 2026-07-13)
 **Revises an earlier version of this entry** that claimed a "confirmed +5-6pp positive bias" after 2 data points — a 3rd real Studio screenshot disproved that. All 3 confirmed cross-checks: Dangote (`ChWLcE3OYpA`) API 57.6% vs Studio 51.6% (+6.0pp); `dHDpDXSIAkA` API 59.84% vs Studio 54.1% (+5.74pp); `Mw7jeR6R6iE` API 36.74% vs Studio 43.6% (**-6.86pp — opposite direction**). AVD gaps are similarly inconsistent (+7s, +1s, -3s). There is no fixed-magnitude, fixed-direction correction factor — don't estimate a "corrected" number from the API value, ever.
@@ -393,9 +158,6 @@ The commands below belong only to the future TypeScript autonomous system; they 
 |------|-------|--------|
 | Current `pipeline/<project>/render_*.py` | Render the actual MP4, then run ffprobe/spec validation, full decode, final ASR, black/freeze/silence/audio checks, and manual frame/contact-sheet review | Required media QC; no new renderer unit test unless explicitly requested |
 | Existing `test_render_*.py` files | Leave untouched unless the user asks to change/remove them | Legacy artifacts; do not copy them into the next video version and do not require them for handoff |
-| Future TypeScript unit tests | `npm test` | Applies when the autonomous TypeScript system actually exists |
-| Future TypeScript integration tests | `npm run test:integration` | Applies to the future script → render → output pipeline |
-| Future TypeScript spec validation | `npm run test:specs` | Applies to future automated output enforcement |
 
 For current video production, the deliverable is the verified media artifact, not test coverage. A renderer implementation is complete when the real output passes media QC and the production doc is complete.
 
@@ -411,3 +173,7 @@ For current video production, the deliverable is the verified media artifact, no
 - **MAB rewards are cumulative**: Each variant's reward = running average of AVD across all samples. More samples = more confident reward estimate.
 
 ## Ngôn ngữ khi trao đổi, giao tiếp: Tiếng Việt
+
+## Mục tiêu hôm nay ưu tiên cao nhất khi tạo video
+- Giảm tỉ lệ swiped away xuống dưới 20%
+- Thử nghiệm mọi loại hook (âm thanh, hình ảnh) có thể để đạt được mục tiêu này
