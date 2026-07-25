@@ -1,0 +1,161 @@
+{
+  "snapshot": "2026-07-25 10:45:53 +0700",
+  "scope_note": "Public YouTube metadata and bounded samples; no private Studio retention or exposure for source videos.",
+  "cross_channel_sample": [
+    {
+      "channel": "Zack D. Films",
+      "id": "4SST3VnvsZc",
+      "title": "Can You Turn A Baby Into A Square?",
+      "upload_date": "2026-07-17",
+      "views": 16125705,
+      "duration_seconds": 43.414,
+      "approx_wpm": 164.5,
+      "scene_030_events": 0,
+      "scene_010_events": 6,
+      "manual_hook_note": "Continuous CGI changes object, camera, and causal state despite no scene=0.30 detections."
+    },
+    {
+      "channel": "Zack D. Films",
+      "id": "ZGMXmYS-k2w",
+      "title": "Rabbit Teeth Can Grow Into Their Skull",
+      "upload_date": "2026-07-14",
+      "views": 15929351,
+      "duration_seconds": 32.114,
+      "approx_wpm": 162.5,
+      "scene_030_events": 0,
+      "scene_010_events": 9,
+      "manual_hook_note": "Continuous CGI reveals the tooth mechanism; hard-cut count is not a useful proxy for semantic progression."
+    },
+    {
+      "channel": "Cleo Abram",
+      "id": "ZyB1i6Y9_m4",
+      "title": "Why So Many Tornadoes Happen HERE",
+      "upload_date": "2026-05-31",
+      "views": 14541976,
+      "duration_seconds": 67.394,
+      "approx_wpm": 194.1,
+      "scene_030_events": 17,
+      "scene_010_events": 38,
+      "scene_030_hook_events_0_10": 6,
+      "scene_010_hook_events_0_10": 7
+    },
+    {
+      "channel": "Cleo Abram",
+      "id": "Y4dzIWxFqp8",
+      "title": "Why The World Cup Ball Looks Like That",
+      "upload_date": "2026-07-14",
+      "views": 12258493,
+      "duration_seconds": 61.974,
+      "approx_wpm": 218.8,
+      "scene_030_events": 23,
+      "scene_010_events": 30,
+      "scene_030_hook_events_0_10": 4,
+      "scene_010_hook_events_0_10": 6
+    },
+    {
+      "channel": "Sambucha",
+      "id": "XejKT5H8FFU",
+      "title": "Weird Things Found In People’s Bodies",
+      "upload_date": "2026-06-28",
+      "views": 8436607,
+      "duration_seconds": 57.354,
+      "approx_wpm": 258.4,
+      "scene_030_events": 10,
+      "scene_010_events": 24,
+      "scene_030_hook_events_0_10": 2,
+      "scene_010_hook_events_0_10": 5
+    },
+    {
+      "channel": "Sambucha",
+      "id": "y8KR3FulL_o",
+      "title": "I Tested Clickbait Shorts",
+      "upload_date": "2026-07-13",
+      "views": 5222405,
+      "duration_seconds": 59.954,
+      "approx_wpm": 285.2,
+      "scene_030_events": 33,
+      "scene_010_events": 155,
+      "scene_030_hook_events_0_10": 2,
+      "scene_010_hook_events_0_10": 31,
+      "detector_caveat": "Sensitive detections include strong motion and should not be called hard cuts."
+    }
+  ],
+  "bounded_top_comment_samples": [
+    {
+      "video_id": "4SST3VnvsZc",
+      "root_comments": 100,
+      "sampled_likes": 287342,
+      "top_comment_concentration": 0.393
+    },
+    {
+      "video_id": "ZyB1i6Y9_m4",
+      "root_comments": 100,
+      "sampled_likes": 77817,
+      "top_comment_concentration": 0.463
+    },
+    {
+      "video_id": "y8KR3FulL_o",
+      "root_comments": 100,
+      "sampled_likes": 17252,
+      "top_comment_concentration": 0.481
+    }
+  ],
+  "topic_scores": [
+    {
+      "topic": "Ronald Wayne / Apple",
+      "weighted_score_out_of_100": 97.0,
+      "decision": "pilot"
+    },
+    {
+      "topic": "Dong Nguyen / Flappy Bird",
+      "weighted_score_out_of_100": 87.0,
+      "decision": "episode_2_candidate"
+    },
+    {
+      "topic": "George Lucas / Disney",
+      "weighted_score_out_of_100": 83.0,
+      "decision": "later_copyright_heavy"
+    }
+  ],
+  "ronald_wayne_sources": [
+    {
+      "id": "bvWh8sh_wPY",
+      "channel": "BBC News",
+      "title": "Apple's Forgotten Founder: Ronald G Wayne",
+      "views": 56938,
+      "duration_seconds": 234,
+      "upload_date": "2016-04-01"
+    },
+    {
+      "id": "YAF2-U7InWE",
+      "channel": "NextShark",
+      "title": "Apple's Co-Founder Ronald Wayne | NextTalk",
+      "views": 23722,
+      "duration_seconds": 1647,
+      "upload_date": "2013-09-13"
+    },
+    {
+      "id": "M3R50CA9ok8",
+      "channel": "CBS Mornings",
+      "title": "Apple co-founder Ronald Wayne sold 10% of company for $800 in '70s",
+      "views": 17691,
+      "duration_seconds": 87,
+      "upload_date": "2018-08-03"
+    },
+    {
+      "id": "MAfw9Tw0JMo",
+      "channel": "CNBC Make It",
+      "title": "Meet The Little-Known Third Apple Founder Who Sold His 10% Stake For $800",
+      "views": 3276,
+      "duration_seconds": 76,
+      "upload_date": "2017-09-12"
+    }
+  ],
+  "recommended_formula": "Costly Verdict: Evidence Pendulum",
+  "recommended_topic": "Ronald Wayne sold 10% of Apple for $800, reframed through asymmetric liability and identity cost",
+  "draft_script_words": 159,
+  "estimated_duration_seconds": {
+    "at_175_wpm": 54.5,
+    "at_185_wpm": 51.6
+  }
+}
