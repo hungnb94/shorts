@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "id": "ronald_wayne_zack_style_qwen",
+  "status": "project_specific_experiment",
+  "assignment": {
+    "project": "ronaldwayne",
+    "language": "en",
+    "role": "synthetic_narrator",
+    "artifact_variant": "v2-qwen"
+  },
+  "identity": {
+    "description": "Low male documentary narrator with compressed, continuous delivery modeled from the user-selected Zack D. Films reference Short.",
+    "reference_text": "She refused to fart in front of her in-laws and held them in until she began to get sick.",
+    "reference_audio": "reference.wav",
+    "reference_sha256": "73550032e52f99f02230d2bd0ca656b8627d936d086889a6534d51dc9541ca09",
+    "reference_format": {
+      "codec": "pcm_s16le",
+      "sample_rate": 24000,
+      "channels": 1,
+      "duration_seconds": 6.28,
+      "integrated_lufs": -18.0,
+      "approx_true_peak_dbfs": -5.2
+    }
+  },
+  "source": {
+    "url": "https://www.youtube.com/shorts/LFdQAkLvhUc",
+    "video_id": "LFdQAkLvhUc",
+    "title": "The Folktale Of The Farting Daughter In Law 🤢",
+    "channel": "Zack D. Films",
+    "source_duration_seconds": 42.0,
+    "extraction_start_seconds": 0.0,
+    "extraction_end_seconds": 6.28,
+    "processing": [
+      "yt-dlp authenticated download using local Firefox cookies; credentials not retained",
+      "Demucs htdemucs two-stem vocal separation",
+      "high-pass 60 Hz and low-pass 11.5 kHz",
+      "10 ms fade-in and 80 ms fade-out",
+      "loudness normalization and +3 dB reference gain",
+      "resample to 24 kHz mono PCM_s16le"
+    ],
+    "reference_asr": "She refused to fart in front of her in-laws and held them in until she began to get sick.",
+    "reference_asr_model": "mlx-community/whisper-small.en-mlx"
+  },
+  "provenance": {
+    "type": "public_source_voice_clone_requested_by_user",
+    "authorization": "The user explicitly selected Qwen3-TTS BaseModel cloning from the supplied public reference. No creator authorization or endorsement is claimed.",
+    "disclosure": "Narration generated synthetically with Qwen3-TTS. Zack D. Films did not participate in or endorse the Ronald Wayne video.",
+    "model_license": "Apache-2.0",
+    "runtime_license": "MIT"
+  },
+  "models": {
+    "voice_clone": {
+      "repo_id": "mlx-community/Qwen3-TTS-12Hz-1.7B-Base-6bit",
+      "revision": "34ff5318365b59cba9c03ff729f2eee0814caf72",
+      "license": "Apache-2.0",
+      "weights": [
+        {
+          "path": "model.safetensors",
+          "sha256": "b043693cb63f38f4e0ae5fe39a5cfdb466ef199dc5a767991a4a46235ac27e67",
+          "size_bytes": 2033279427
+        },
+        {
+          "path": "speech_tokenizer/model.safetensors",
+          "sha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258",
+          "size_bytes": 682293092
+        }
+      ]
+    }
+  },
+  "runtime": {
+    "environments": {
+      "synthesis": {
+        "python": "3.12.9",
+        "lock_file": "requirements-mlx.txt",
+        "lock_sha256": "d0b6676427046ae502cad911a770e284c70e7445fa9fe958b5068266a02b237f"
+      }
+    },
+    "repeatability_fingerprints": {
+      "ffmpeg": {
+        "version_line": "ffmpeg version 7.1.1 Copyright (c) 2000-2025 the FFmpeg developers",
+        "version_output_sha256": "88b12a030360dd4610c0e3999e442dd5cfa63c6df2b7b8dc2f23f56a40399ff9"
+      },
+      "platform": {
+        "system": "Darwin",
+        "macos_version": "26.5.2",
+        "macos_build": "25F84",
+        "machine": "arm64"
+      }
+    }
+  },
+  "generation": {
+    "seed": 20260725,
+    "clone": {
+      "language": "English",
+      "temperature": 0.7,
+      "max_tokens": 768,
+      "top_k": 30,
+      "top_p": 0.9,
+      "repetition_penalty": 1.5,
+      "max_post_tempo": 1.12
+    }
+  }
+}
