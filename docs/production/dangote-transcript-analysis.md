@@ -60,88 +60,88 @@ Each Clip Curation Edit MUST pass ALL 3 gates:
 
 ---
 
-## 🎯 SCRIPT TEMPLATES (HEIT Framework)
+## 🎯 SCRIPT CONCEPTS
 
-Each Short follows **Hook (0-2s) → Explain (2-10s) → Illustrate (10-30s) → Teach (30-50s)**
+These legacy concepts use project-specific narrative beats rather than a mandatory universal structure.
 
 ### V1: "$30B Richest Black Man" - Authority Hook + Data Viz
 ```
 HOOK (0-2s): "Forbes says this man is worth $30 BILLION. Richest Black person on Earth."
-EXPLAIN (2-8s): "Aliko Dangote didn't inherit it. Started selling candy at school."
-ILLUSTRATE (8-35s): [CLIP: 0-4s hook] → [CLIP: 20-23s candy] → [ANIMATED TIMELINE: 1977 candy → 1981 trading → 2000 cement → 2024 $30B]
-TEACH (35-45s): "Wealth = solve big problems at scale. What problem are YOU solving?"
+CONTEXT (2-8s): "Aliko Dangote didn't inherit it. Started selling candy at school."
+EVIDENCE (8-35s): [CLIP: 0-4s hook] → [CLIP: 20-23s candy] → [ANIMATED TIMELINE: 1977 candy → 1981 trading → 2000 cement → 2024 $30B]
+PAYOFF (35-45s): "Wealth = solve big problems at scale. What problem are YOU solving?"
 CTA: "Follow for more billionaire blueprints"
 ```
 
 ### V2: "Candy to $30B" - Underdog Hook + Animated Journey Map
 ```
 HOOK (0-2s): "He sold CANDY to classmates. Now he's worth $30 BILLION."
-EXPLAIN (2-10s): "Age 10: buying sweets wholesale, selling retail. Margin = profit."
-ILLUSTRATE (10-40s): [CLIP: 10-23s origin] → [ANIMATED MAP: Kano → Lagos → Pan-Africa] → [DATA: $30B breakdown: Cement 85%, Sugar 10%, Flour 5%]
-TEACH (40-50s): "Start small. Reinvest. Scale vertically integrate. That's the Dangote formula."
+CONTEXT (2-10s): "Age 10: buying sweets wholesale, selling retail. Margin = profit."
+EVIDENCE (10-40s): [CLIP: 10-23s origin] → [ANIMATED MAP: Kano → Lagos → Pan-Africa] → [DATA: $30B breakdown: Cement 85%, Sugar 10%, Flour 5%]
+PAYOFF (40-50s): "Start small. Reinvest. Scale vertically integrate. That's the Dangote formula."
 CTA: "Comment 'START SMALL' if you're building"
 ```
 
 ### V3: "99% Success = Refuse No" - Counter-Intuitive + Fact Check
 ```
 HOOK (0-2s): "99% of success? REFUSING to take 'no' for an answer."
-EXPLAIN (2-8s): "Female PE founder, 29, pregnant, told 'wait for baby.' She said NO."
-ILLUSTRATE (8-30s): [CLIP: 177-187s quote] → [CLIP: 137-140s pregnant] → [FACT CHECK: "8 years to raise Fund I - average is 2.3 years" (Preqin 2023)]
-TEACH (30-40s): "Rejection isn't a stop sign. It's a filter. Most quit. You don't."
+CONTEXT (2-8s): "Female PE founder, 29, pregnant, told 'wait for baby.' She said NO."
+EVIDENCE (8-30s): [CLIP: 177-187s quote] → [CLIP: 137-140s pregnant] → [FACT CHECK: "8 years to raise Fund I - average is 2.3 years" (Preqin 2023)]
+PAYOFF (30-40s): "Rejection isn't a stop sign. It's a filter. Most quit. You don't."
 CTA: "Save this for when you hear 'no'"
 ```
 
 ### V4: "8 Years to Raise Fund" - Persistence + Counter-Argument
 ```
 HOOK (0-2s): "Took her 8 YEARS to raise her first fund. 8 YEARS of 'no.'"
-EXPLAIN (2-10s): "Young, Black, female in private equity. Every door closed."
-ILLUSTRATE (10-35s): [CLIP: 202-208s "8 years" + "create table"] → [COUNTER-ARGUMENT: "But isn't talent enough?" → "Talent gets you in room. Persistence keeps you there."]
-TEACH (35-45s): "If no one gives you a seat at the table, BUILD YOUR OWN TABLE."
+CONTEXT (2-10s): "Young, Black, female in private equity. Every door closed."
+EVIDENCE (10-35s): [CLIP: 202-208s "8 years" + "create table"] → [COUNTER-ARGUMENT: "But isn't talent enough?" → "Talent gets you in room. Persistence keeps you there."]
+PAYOFF (35-45s): "If no one gives you a seat at the table, BUILD YOUR OWN TABLE."
 CTA: "Tag someone building their table"
 ```
 
 ### V5: "No Seat? Build Table" - Empowerment + This-or-That
 ```
 HOOK (0-2s): "No seat at the table? BUILD YOUR OWN."
-EXPLAIN (2-8s): "She was 29, pregnant, Black, woman in PE. Zero seats offered."
-ILLUSTRATE (8-28s): [CLIP: 205-208s] → [THIS-OR-THAT: "Wait for invitation" ❌ vs "Create opportunity" ✅] → [RESULT: Largest female-run VC fund in Africa]
-TEACH (28-35s): "The table wasn't built for you. So build a better one."
+CONTEXT (2-8s): "She was 29, pregnant, Black, woman in PE. Zero seats offered."
+EVIDENCE (8-28s): [CLIP: 205-208s] → [THIS-OR-THAT: "Wait for invitation" ❌ vs "Create opportunity" ✅] → [RESULT: Largest female-run VC fund in Africa]
+PAYOFF (28-35s): "The table wasn't built for you. So build a better one."
 CTA: "What table are YOU building?"
 ```
 
 ### V6: "$1B Deal Negotiation Secret" - Secret + Source Citation
 ```
 HOOK (0-2s): "Closed a $1 BILLION deal. His negotiation secret? 3 words."
-EXPLAIN (2-8s): "Oil & gas billionaire. Silver Billing Dolls deal. $1B+ valuation."
-ILLUSTRATE (8-32s): [CLIP: 418-425s "Listen, agree or disagree"] → [SOURCE CITATION: "Deal: Silver Billing acquisition 2018, $1.2B" (Reuters)] → [ANIMATED: 3-step framework]
-TEACH (32-40s): "Listen → Agree/Disagree → Close. Most skip step 1. Don't."
+CONTEXT (2-8s): "Oil & gas billionaire. Silver Billing Dolls deal. $1B+ valuation."
+EVIDENCE (8-32s): [CLIP: 418-425s "Listen, agree or disagree"] → [SOURCE CITATION: "Deal: Silver Billing acquisition 2018, $1.2B" (Reuters)] → [ANIMATED: 3-step framework]
+PAYOFF (32-40s): "Listen → Agree/Disagree → Close. Most skip step 1. Don't."
 CTA: "Try this in your next negotiation"
 ```
 
 ### V7: "$150B Market, 2% to Women" - Market Gap + Data Viz
 ```
 HOOK (0-2s): "$150 BILLION opportunity. Only 2% goes to women."
-EXPLAIN (2-10s): "She saw the gap. Small businesses + women founders = ignored."
-ILLUSTRATE (10-35s): [CLIP: 159-165s "$150B, 2%"] → [DATA VIZ: Pie chart - 98% men, 2% women] → [CLIP: 165-172s "where no one looks = best returns"]
-TEACH (35-45s): "Mispriced assets = alpha. Where everyone ignores, you investigate."
+CONTEXT (2-10s): "She saw the gap. Small businesses + women founders = ignored."
+EVIDENCE (10-35s): [CLIP: 159-165s "$150B, 2%"] → [DATA VIZ: Pie chart - 98% men, 2% women] → [CLIP: 165-172s "where no one looks = best returns"]
+PAYOFF (35-45s): "Mispriced assets = alpha. Where everyone ignores, you investigate."
 CTA: "What overlooked market are you watching?"
 ```
 
 ### V8: "Pregnant at 29, Built Largest Fund" - Shock + Multi-Source Mashup
 ```
 HOOK (0-2s): "5 months PREGNANT. 29 years old. Started Africa's LARGEST female VC fund."
-EXPLAIN (2-10s): "Everyone said 'wait.' She said 'the gap won't wait.'"
-ILLUSTRATE (10-40s): [CLIP: 137-145s pregnant start] → [MASHUP: Jessica Matthews (Uncharted), Maya Horgan Famodu (Ingressive), Odunayo Eweniyi (PiggyVest)] → [CLIP: 121-126s "largest fund"]
-TEACH (40-50s): "Your 'disadvantage' is your unique lens. Use it."
+CONTEXT (2-10s): "Everyone said 'wait.' She said 'the gap won't wait.'"
+EVIDENCE (10-40s): [CLIP: 137-145s pregnant start] → [MASHUP: Jessica Matthews (Uncharted), Maya Horgan Famodu (Ingressive), Odunayo Eweniyi (PiggyVest)] → [CLIP: 121-126s "largest fund"]
+PAYOFF (40-50s): "Your 'disadvantage' is your unique lens. Use it."
 CTA: "Follow for more underestimated founders"
 ```
 
 ### V9: "Dangote: $40B, Humble, Industrialize Africa" - Wealth+Mission + Animation
 ```
 HOOK (0-2s): "Worth $40 BILLION. Drives a Toyota. Wants to INDUSTRIALIZE AFRICA."
-EXPLAIN (2-12s): "Forbes: $40B net worth. But ask him? 'I've been humbled all my life.'"
-ILLUSTRATE (12-45s): [CLIP: 960-962s $40B] → [CLIP: 974-985s humble] → [CLIP: 892-895s backward integration] → [ANIMATED MAP: Africa factories rising] → [CLIP: 1036-1038s industrialize]
-TEACH (45-55s): "Wealth isn't the scoreboard. IMPACT is. What are you industrializing?"
+CONTEXT (2-12s): "Forbes: $40B net worth. But ask him? 'I've been humbled all my life.'"
+EVIDENCE (12-45s): [CLIP: 960-962s $40B] → [CLIP: 974-985s humble] → [CLIP: 892-895s backward integration] → [ANIMATED MAP: Africa factories rising] → [CLIP: 1036-1038s industrialize]
+PAYOFF (45-55s): "Wealth isn't the scoreboard. IMPACT is. What are you industrializing?"
 CTA: "Comment 'IMPACT' if you're building legacy"
 ```
 

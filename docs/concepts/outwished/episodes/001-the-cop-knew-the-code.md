@@ -6,7 +6,7 @@ status: "detailed animated-series script draft; not production or upload authori
 target_duration: "74 seconds"
 spoken_language: "English"
 outcome: "Nico stops the robbery; Veyr reveals that he loves trolling people"
-narrative_model: "serialized animated short; explicitly not HEIT"
+narrative_model: "serialized animated short"
 ---
 
 # OUTWISHED 001 — The Cop Knew the Code
@@ -27,7 +27,7 @@ It must establish that:
 
 ## Narrative model
 
-This episode does **not** use HEIT. It is a serialized animated-film episode with this dramatic progression:
+This episode is a serialized animated-film story with this dramatic progression:
 
 ```text
 COLD OPEN
@@ -42,7 +42,7 @@ COLD OPEN
 → TROLL STINGER
 ```
 
-There is no educational `Teach` beat and no forced explanatory takeaway. Character decisions, visual clues, suspense, and payoff carry the story.
+Character decisions, visual clues, suspense, and payoff carry the story without a forced explanatory takeaway.
 
 ## Refined premise
 
@@ -440,4 +440,4 @@ Aladdin is used only as Nico's public-domain folklore ancestor. Do not depict a 
 
 ## Production status
 
-This is a narrative script draft for review. It does not authorize rendering, production spend, creation of a fourth vertical, or upload. It intentionally omits HEIT and does not force a mid-story educational beat into the serialized animation.
+This is a narrative script draft for review. It does not authorize rendering, production spend, creation of a fourth vertical, or upload. It does not force a mid-story educational beat into the serialized animation.

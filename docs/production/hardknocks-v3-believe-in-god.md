@@ -48,7 +48,7 @@ Is questioning part of belief, or the opposite of it? Let me know below.
 
 This is a same-channel, different-angle follow-up to `hardknocks_v2` (`docs/production/hardknocks-v2-implied-comparison.md`), reusing the proven **Implied Comparison** hook structure but on a source about faith rather than money. Unlike v2 (where "OTHERS" and "THIS ONE" were different people throughout), this video's PIVOT is a **callback to the same person** who gave the quick HOOK answer — the unnamed veteran-fund investor says "Of course" in under 2 seconds during the HOOK, then his own fuller answer (revealed ~4s later in the edited timeline) turns out to be a genuinely surprising, nuanced take: he says he continues to "wrestle with God," and that accepting everything without question is what would mean he *isn't* growing in his faith. This is closer to `hardknocks_v1`'s single-person reveal device than v2's multi-person device, applied inside a Multi-Clip Mashup rather than a Contiguous VO.
 
-The TEACH section reinforces the pattern with a 2nd, different billionaire (Clint, the healthcare-exit interviewee) also giving a fuller answer than his own HOOK "I sure do." when asked a natural follow-up ("How did you know God was real?") — confirming the "quick answer isn't the whole story" idea isn't a one-off, same reinforcement role as v2's John segment.
+The reinforcement section uses a 2nd, different billionaire (Clint, the healthcare-exit interviewee) also giving a fuller answer than his own HOOK "I sure do." when asked a natural follow-up ("How did you know God was real?") — confirming the "quick answer isn't the whole story" idea isn't a one-off, same reinforcement role as v2's John segment.
 
 Transcript-driven selection: all 8 pieces were chosen from the mlx_whisper word-timestamped transcript (`output/projects/hardknocks/source/npnyOvchXZs_transcript.json`), each cut to exact word boundaries — checked programmatically, max internal gap 0.3s across all 8 pieces (see Known Issues below).
 
@@ -82,7 +82,7 @@ Commentary track: the structure captions + stat cards + comparison card + closin
 (Recompute the exact 48h deadline once this video is actually uploaded — not yet uploaded as of this writing.)
 - AVD / Stayed % vs. `hardknocks_v2` (`d6HLNU4krEw`, same channel, same Implied Comparison hook pattern, different topic) — direct comparison point for whether the "same-person callback" pivot device (this video) outperforms or underperforms the "different-people" pivot device (v2).
 - Retention graph shape at the pivot point (~t=3.84s post-speed-up) — does retention hold through the cut from the 3rd quick "yes" into the investor's much longer answer?
-- Retention through the TEACH section (Clint's fuller answer, ~t=32-49s post-speed-up) — this is the 2nd-longest uninterrupted stretch; check whether it sustains or dilutes momentum from the PIVOT.
+- Retention through the reinforcement section (Clint's fuller answer, ~t=32-49s post-speed-up) — this is the 2nd-longest uninterrupted stretch; check whether it sustains or dilutes momentum from the PIVOT.
 - Comment themes — given the sensitive topic (religion), watch specifically for comments accusing the video of taking a side (would indicate the neutral-tone goal wasn't achieved in practice, despite the design intent) vs. genuine engagement with the "wrestling with God" idea itself.
 
 ## Post-Production Retro

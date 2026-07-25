@@ -169,9 +169,9 @@ Viewer feeling: "He won — and somehow lost worse."
 
 No public fixed rotation controls these outcomes. The winner must follow from the episode's declared rules and planted evidence, not an editorial quota.
 
-## 9. Narrative structure — serialized animation, not HEIT
+## 9. Narrative structure — serialized animation
 
-OUTWISHED is a serialized animated story, not an educational explainer. Episodes do not use Hook–Explain–Illustrate–Teach and do not force a `Teach` takeaway. They use dramatic causality, character conflict, planted visual evidence, and a closing story stinger.
+OUTWISHED uses dramatic causality, character conflict, planted visual evidence, and a closing story stinger rather than an educational-explainer structure or forced takeaway.
 
 Default episode range remains 50–75 seconds. A common shape is:
 
@@ -555,5 +555,5 @@ Known V4 limitations:
 
 ## 20. Episode drafts
 
-- `episodes/001-the-cop-knew-the-code.md` — current 74-second origin script; corrupt-officer betrayal, Lamp discovery in the basement, simple occupied-vault alarm, direct three-thief wish, and a human-tower ending that reveals Veyr loves trolling people. Serialized animation; no HEIT. Draft only; not production or upload authorization.
+- `episodes/001-the-cop-knew-the-code.md` — current 74-second origin script; corrupt-officer betrayal, Lamp discovery in the basement, simple occupied-vault alarm, direct three-thief wish, and a human-tower ending that reveals Veyr loves trolling people. Draft only; not production or upload authorization.
 - `episodes/001-higgsfield-shot-plan.md` — 12-shot Higgsfield segmentation for Episode 001, plus the generated SHOT-001 prompt experiment, QC score, and reusable prompt standard. Only SHOT-001 has been generated.

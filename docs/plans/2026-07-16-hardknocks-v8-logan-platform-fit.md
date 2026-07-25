@@ -51,7 +51,7 @@ All source times below are transcript-level candidates, not frame-locked edit bo
 | `ABOUT $30M` | 13:29–13:31 | Logan | Personal payoff | guest close | `$30M` data card; no decorative cash stock |
 | `WHAT ABOUT THE COMPANIES?` | 13:31–13:34 | Host | Escalation setup | host medium | reset scale |
 | `PRIME MADE $1.2B` | 13:34–13:38 | Logan | Company payoff | guest close on `$1.2B` | authentic Prime product/distribution footage |
-| `GREAT PARTNERS` | 13:38–13:46 | Host → Logan | Teach/reframe | host medium → guest medium; optional close on final `brand` | partner/distribution framework and source citation |
+| `GREAT PARTNERS` | 13:38–13:46 | Host → Logan | Closing reframe | host medium → guest medium; optional close on final `brand` | partner/distribution framework and source citation |
 
 Target final duration: 50–57 seconds after bounded speed-up. Every retained source excerpt must remain under 15 seconds, even when adjacent excerpts preserve one continuous Logan answer.
 

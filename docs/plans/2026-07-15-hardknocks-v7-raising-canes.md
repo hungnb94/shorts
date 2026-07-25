@@ -515,7 +515,7 @@ Include:
 - status and source URL/ID;
 - exact source windows and verbatim VO;
 - final storyboard;
-- HEIT mapping;
+- narrative-beat mapping;
 - WEALTHIAN formula mapping;
 - Transformative Gate evidence;
 - Pexels IDs/URLs/queries/offsets;

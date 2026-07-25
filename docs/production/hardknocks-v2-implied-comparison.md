@@ -58,7 +58,7 @@ Transcript-driven selection: all 12 pieces were chosen from the mlx_whisper word
 
 ## Value-Adds (Transformative Gate, ADR-0007 — min 2 required, must be distinct categories)
 1. **data_viz_overlay** — stat cards during the OTHERS montage and pivot: "$5B SOLD TO COCA-COLA" (Lance), "$1.5B EXIT (UK)" (John), "$1.6B NET WORTH" (PE investor), "$1B+ EXIT" (Scooter Braun).
-2. **counter_argument** — "COUNTER: NOT THE FULL STORY" overlay during the TEACH section (John's fuller elaboration), naming the reveal explicitly rather than leaving it implicit. (Shortened from "COUNTER: THE 'HAPPY' ANSWER ISN'T THE FULL STORY" to allow a larger fontsize — see Hook Formula Applied.)
+2. **counter_argument** — "COUNTER: NOT THE FULL STORY" overlay during the reinforcement section (John's fuller elaboration), naming the reveal explicitly rather than leaving it implicit. (Shortened from "COUNTER: THE 'HAPPY' ANSWER ISN'T THE FULL STORY" to allow a larger fontsize — see Hook Formula Applied.)
 
 The "OTHERS:.../THIS ONE SAID..." labels are the hook/structure device itself, not counted toward the 2 required value-adds (matches this plan's design decision, distinct from how the comparison label was scoped in bacsihai_v6).
 
@@ -73,7 +73,7 @@ Commentary track: the structure captions above + closing CTA ("REAL WEALTH = KNO
 - AVD / Stayed % vs. `hardknocks_lawnmower_v1` (`dHDpDXSIAkA`, same channel/vertical, Contiguous VO sub-format) and `bacsihai_v6` (`EpTPDrWONS0`, single-source Implied-Comparison-by-name) — this is the direct comparison point for whether genuine multi-source Implied Comparison outperforms both.
 - Retention graph shape at the pivot point (~7s raw / ~6.7s post-speed-up, the "THIS ONE SAID..." cut into Scooter Braun) — does retention hold or spike here, confirming the pivot itself is the strong beat the research report predicted?
 - Retention through the extended Scooter Braun payoff (~t=6.7-21.3s post-speed-up, now including `p3_scooter`) — does the added content sustain the pivot's momentum or dilute it?
-- Retention during the TEACH section (John's fuller answer, ~t=30-44s post-speed-up, shifted later by the `p3_scooter` insert) — this is the longest uninterrupted single-topic stretch; check whether it's where viewers drop off (would suggest the reinforcement beat runs too long) vs. holds (would validate the "second real example" design choice).
+- Retention during the reinforcement section (John's fuller answer, ~t=30-44s post-speed-up, shifted later by the `p3_scooter` insert) — this is the longest uninterrupted single-topic stretch; check whether it's where viewers drop off (would suggest the reinforcement beat runs too long) vs. holds (would validate the "second real example" design choice).
 - Comment themes — per the hook-benchmarks comment-psychology research, watch for "circular logic" mockery vs. genuine engagement with the "money isn't the full answer" reveal.
 
 ## Post-Production Retro

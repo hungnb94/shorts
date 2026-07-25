@@ -158,15 +158,9 @@ Examples:
 
 The numbers do not need to be practically meaningful. Their narrative role is to make progress discrete, visible, and auditable. The best reusable principle is not "invent random numbers" but **make each procedural claim visually falsifiable in the same beat**.
 
-### 4.3 Relation to HEIT
+### 4.3 Narrative model
 
-The Short does not contain a genuine Teach phase:
-
-- Hook roughly maps to Declare + early Assess.
-- Explain/Illustrate maps to the remainder of Assess + Isolate + Process.
-- Teach is replaced by Build + Reveal + series CTA.
-
-Forcing this format into mandatory HEIT would misdescribe its actual retention engine. A repository decision is needed: treat six-phase transformation as a specialized narrative template under a broader framework, or keep HEIT mandatory and reject this format as non-transferable.
+The Short uses a specialized six-phase transformation arc: Declare → Assess → Isolate → Process → Build → Reveal. Its retention engine is visible procedural progress and a final transformation, so it should be modeled directly rather than forced into a generic instructional template.
 
 ## 5. Visual cadence and camera grammar
 
@@ -390,17 +384,13 @@ Tool-specific caveat:
 - Higgsfield as a mandatory/best vendor. The video is sponsored.
 - Random fake precision with no simultaneous visual proof. Numbers alone become noise.
 - A fourth pet niche without an explicit project decision.
-- A blanket replacement of HEIT based on one transformation case.
+- A universal narrative conclusion based on one transformation case.
 
 ## 12. Repository/domain implications requiring a decision
 
-### 12.1 HEIT vs six-phase transformation
+### 12.1 Six-phase transformation scope
 
-Current policy says every script is HEIT. This Short has no Teach phase and is better modeled as a specialized transformation arc. Options include:
-
-- keep HEIT universal and use only cross-cutting techniques;
-- define six-phase transformation as a specialized narrative template under a broader script framework;
-- allow multiple top-level narrative templates selected by Video Type/Source Channel Pattern.
+This Short is best modeled as a specialized transformation arc. Narrative templates should be selected by Video Type and Source Channel Pattern rather than forcing every Short into one universal structure.
 
 ### 12.2 Caption emphasis wording
 

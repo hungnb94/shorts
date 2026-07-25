@@ -6,13 +6,12 @@ status: "superseded draft; do not produce"
 target_duration: "65 seconds"
 spoken_language: "English"
 outcome: "Veyr wins — deeper loophole"
-heit: "Hook 0–3s → Explain 3–23s → Illustrate 23–56s → Teach 56–65s"
 superseded_by: "001-the-cop-knew-the-code.md"
 ---
 
 # OUTWISHED 001 — The Second Lamp
 
-> Superseded after the user established that OUTWISHED is a serialized animated story and must not use HEIT. The current episode 1 script is `001-the-cop-knew-the-code.md`.
+> Superseded after the user established OUTWISHED as a serialized animated story. The current episode 1 script is `001-the-cop-knew-the-code.md`.
 
 ## Episode purpose
 
@@ -123,7 +122,7 @@ At `2.90s`, Nico's phone fills the frame. The glyphs reverse rapidly into a mode
 
 ---
 
-### 3.00–7.00 — EXPLAIN: the ordinary problem
+### 3.00–7.00 — SETUP: the ordinary problem
 
 **Visual and camera**
 
@@ -151,7 +150,7 @@ Nico brakes, pivots sharply, and races toward a self-storage building. Keep the 
 
 ---
 
-### 7.00–12.00 — EXPLAIN: the discovery and fair clue
+### 7.00–12.00 — DISCOVERY AND FAIR CLUE
 
 **Visual and camera**
 
@@ -197,7 +196,7 @@ The `51% confidence` indicator remains on screen for roughly `1.2s` at a size th
 
 ---
 
-### 12.00–17.00 — EXPLAIN: meet Veyr
+### 12.00–17.00 — VEYR INTRODUCTION
 
 **Visual and camera**
 
@@ -224,7 +223,7 @@ Veyr should sound proud rather than evil. Nico's response is curious, not fright
 
 ---
 
-### 17.00–23.00 — EXPLAIN: the game contract
+### 17.00–23.00 — GAME CONTRACT
 
 **Visual and camera**
 
@@ -261,7 +260,7 @@ Veyr presents the panels like a game-show host. Nico opens the inherited noteboo
 
 ---
 
-### 23.00–30.00 — ILLUSTRATE: Nico plants the bait wish
+### 23.00–30.00 — BAIT WISH
 
 **Visual and camera**
 
@@ -294,7 +293,7 @@ Nico allows a tiny half-smile when enabling auto-translate. The audience should 
 
 ---
 
-### 30.00–36.00 — ILLUSTRATE: Wish Lock and Veyr's exploit
+### 30.00–36.00 — WISH LOCK AND VEYR'S EXPLOIT
 
 **Visual and camera**
 
@@ -456,7 +455,7 @@ Veyr floats beside the moving chair, shrinking his ten million rule panels into 
 
 ---
 
-### 61.00–65.00 — TEACH, callback, and rivalry promise
+### 61.00–65.00 — CALLBACK AND RIVALRY PROMISE
 
 **Visual and camera**
 

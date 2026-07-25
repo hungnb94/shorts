@@ -73,14 +73,14 @@ Uncertainty is blocking copy: date size, peanut-butter packing/brand and chocola
 | Yield | Same batch, different piece count | 10 pieces ≈384; 16 pieces ≈240 | Portion is the decisive assumption |
 | Verdict | “Healthy” cannot be universalized | Better fiber does not mean lower energy | Claim guilty only for missing conditions |
 
-## HEIT script
+## Structured script
 
 Canonical structured script: `output/projects/foodtrial/scripts/date_bark_v2_script.json`
 
 - **Hook:** “healthier Snickers” hides a portion secret; courtroom opens immediately.
-- **Explain:** the exact Recipe Case and declared yield enter evidence.
-- **Illustrate:** calories → fiber → total sugar → sugar-source context → yield.
-- **Teach:** verdict is scoped to the claim; the sentence is a 16-piece cut plus a protein-rich companion.
+- **Case setup:** the exact Recipe Case and declared yield enter evidence.
+- **Evidence ladder:** calories → fiber → total sugar → sugar-source context → yield.
+- **Verdict and action:** verdict is scoped to the claim; the sentence is a 16-piece cut plus a protein-rich companion.
 
 ## Visual plan
 

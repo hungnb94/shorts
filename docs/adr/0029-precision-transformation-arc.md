@@ -11,7 +11,7 @@ It is a six-phase transformation:
 
 `DECLARE → ASSESS → ISOLATE → PROCESS → BUILD → REVEAL`
 
-The strongest reusable mechanics are a concrete before-state, an irrationally precise completion promise, a sequence of proof-coupled micro-tasks, a visible before/after payoff, and a final collection board that promises a series. The generated Short has no genuine Teach phase.
+The strongest reusable mechanics are a concrete before-state, an irrationally precise completion promise, a sequence of proof-coupled micro-tasks, a visible before/after payoff, and a final collection board that promises a series.
 
 Four scopes were considered during `/grill-with-docs`:
 
@@ -103,7 +103,7 @@ The hypothesis is weakened if:
 
 - viewers leave during Isolate/Process despite compliant cadence;
 - proof objects do not make sense without excessive explanation;
-- Teach feels bolted on after Reveal;
+- the portable rule feels bolted on after Reveal;
 - the narrative variant does not improve hook/overall retention over the existing niche baseline;
 - synthetic precision reduces trust or creates factual ambiguity.
 
@@ -127,7 +127,7 @@ The candidate fits the six phases as follows:
 - **Isolate:** split the answer into independently testable claims.
 - **Process:** retrieve and compare primary sources; record support, contradiction, and uncertainty.
 - **Build:** reconstruct the answer from supported claims only, with a visible claim ledger.
-- **Reveal/Teach:** compare before/after and teach the portable rule: do not let AI compose the final answer before its claims are independently verified.
+- **Reveal:** compare before/after and state the portable rule: do not let AI compose the final answer before its claims are independently verified.
 
 Guardrails:
 
