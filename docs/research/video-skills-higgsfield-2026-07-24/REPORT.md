@@ -158,7 +158,7 @@ What must be adapted:
 
 - It is a Python framework, not a reusable Hermes skill.
 - It is not Higgsfield-CLI-first.
-- It is general film/video infrastructure, not optimized for Shorts hook, HEIT, source-backed claims, captions, CTA, and this project's media gates.
+- It is general film/video infrastructure, not optimized for Shorts hooks, source-backed claims, captions, CTA, narrative selection, and this project's media gates.
 - Parallelization without an explicit dependency graph can still break continuity.
 - Its marketing claims should not substitute for local media QC.
 
@@ -288,7 +288,7 @@ It contains useful postmortems, but its main entry point is overgrown and stale:
 
 ## Core gaps
 
-1. **No general nonfiction scriptwriter** for finance, health, and AI education that combines research, HEIT, hook variants, visual proof, claim citations, caption/SFX plan, and 50–75 second timing.
+1. **No general nonfiction scriptwriter** for finance, health, and AI education that combines research, hook variants, narrative selection, visual proof, claim citations, caption/SFX plan, and 50–75 second timing.
 2. **No shared handoff contract** between hook, script, storyboard, Higgsfield generation, assembly, and QC.
 3. **No machine-readable continuity bible** for characters, wardrobe, props, locations, lighting, object-state progression, and reference assets.
 4. **No runtime prompt compiler** that maps a shot to the current model schema instead of copying static flags.
@@ -331,7 +331,7 @@ Outputs:
 - scored winner plus one alternate mechanism;
 - claim/evidence map;
 - timestamped three-track script: spoken/audio, visual proof/action, on-screen text/SFX;
-- HEIT or another explicitly selected narrative model;
+- one explicitly selected narrative model;
 - exact word count, duration math, and payoff audit.
 
 It should call existing `hook-design-for-shorts` rather than reimplement hook scoring.

@@ -45,7 +45,7 @@ The accepted revision uses Arthur Blank’s and the interviewer’s original voi
 
 Editorial transformation is supplied by clip selection, reordered proof, short synchronized captions, two small Pexels evidence inserts, zoom/cut cadence, music, and impact sound—not by interrupting the interview.
 
-## HEIT Structure
+## Narrative Structure
 
 ### Hook — 0.00–5.96s
 
@@ -59,14 +59,14 @@ Arthur recounts the escalating criticism:
 
 `THEY CALLED HIM` appears at final t=0.096s. The Home Depot identity remains withheld.
 
-### Explain — 5.96–16.35s
+### Reveal and origin — 5.96–16.35s
 
 - Home Depot reveal: “That’s how I got rich. That was my company.”
 - The interviewer supplies the missing origin: fired at 36.
 - The question “Did people doubt you or think you were crazy?” connects the opening criticism back to Blank’s answer.
 - Blank answers “Absolutely,” without a TTS interruption.
 
-### Illustrate — 16.35–41.73s
+### Proof and mechanism — 16.35–41.73s
 
 - Home Depot went public in September 1981.
 - Volumes and revenue from the first four stores were unbelievable.
@@ -74,7 +74,7 @@ Arthur recounts the escalating criticism:
 - He rejects debating customers or forcing arguments on them.
 - The section ends on humility: the people being served know better than the company does.
 
-### Teach — 41.73–57.42s
+### Payoff — 41.73–57.42s
 
 Blank’s own closing principle remains intact:
 

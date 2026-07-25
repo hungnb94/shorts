@@ -50,12 +50,12 @@ Excellent real-world machinery footage and a `$14,500/day` proof object, but the
 
 `familiar product` → `loaded rejection` → `founder authority` → `hidden focus bet` → `funding proof` → `scale proof` → `rebuild rule`
 
-### HEIT
+### Narrative beats
 
 - **Hook:** The professor gave the plan the worst grade because the concept would never work.
-- **Explain:** The alleged flaw was selling only chicken fingers while competitors added variety and healthier options.
-- **Illustrate:** Graves raised $50K, matched it with a $50K SBA loan, and rebuilt an old restaurant space.
-- **Teach:** If forced to rebuild, he would again choose a cravable product, focus on it, build a team around it, then scale.
+- **Mechanism reveal:** The alleged flaw was selling only chicken fingers while competitors added variety and healthier options.
+- **Proof:** Graves raised $50K, matched it with a $50K SBA loan, and rebuilt an old restaurant space.
+- **Payoff:** If forced to rebuild, he would again choose a cravable product, focus on it, build a team around it, then scale.
 
 ### Curiosity-gap policy
 

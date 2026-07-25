@@ -133,14 +133,7 @@ The reusable narrative sequence is:
 6. **Translate the number into a business lesson.**
 7. **Exit on the reframe, recommendation, or unresolved conversational beat.**
 
-Relation to HEIT:
-
-- **Hook:** loaded title + face + first anomaly;
-- **Explain:** hidden incentive/mechanism;
-- **Illustrate:** b-roll, prop, customer sequence, test, or comparison;
-- **Teach:** operational implication or changed decision.
-
-Unlike a generic educational script, Illustration is not one late example. It runs continuously under Explain.
+Visual proof is not one late example in this sequence. It runs continuously while the hidden incentive or mechanism is revealed.
 
 ## 3. Per-video breakdown
 

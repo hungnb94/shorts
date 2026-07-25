@@ -75,22 +75,22 @@ All source excerpts remain below 15 seconds. Frame-locked selected source total 
 
 ## Storyboard
 
-| Final time | HEIT | Source beat | Visual / editorial layer |
+| Final time | Narrative beat | Source beat | Visual / editorial layer |
 |---:|---|---|---|
 | 0–3s | Hook | Professor gave it the worst grade | Moving Todd face; yellow 1–3-word captions; no brand/outcome reveal |
-| 3–10s | Hook → Explain | Good plan, concept would never work | Todd stays visible; animated `GOOD PLAN / BAD CONCEPT?`; no full-screen proof |
-| 10.20–24.35s | Explain → Illustrate | Only chicken fingers; $50K equity + $50K SBA + old restaurant | Product proof after the protected face window; capital stack and team insert |
-| 24.35–33.82s | Illustrate | $400M best year + north of $20B | Escalating numbers followed by bottom-safe `SOURCE-REPORTED` label |
-| 33.82–47.34s | Teach | Stick to what you know; cravable product, focus, team, scale | Four-step framework; source citation; end on `scale it`, no CTA; 0.203s protected audio tail |
+| 3–10s | Rejection reveal | Good plan, concept would never work | Todd stays visible; animated `GOOD PLAN / BAD CONCEPT?`; no full-screen proof |
+| 10.20–24.35s | Mechanism and funding proof | Only chicken fingers; $50K equity + $50K SBA + old restaurant | Product proof after the protected face window; capital stack and team insert |
+| 24.35–33.82s | Scale proof | $400M best year + north of $20B | Escalating numbers followed by bottom-safe `SOURCE-REPORTED` label |
+| 33.82–47.34s | Operating-rule payoff | Stick to what you know; cravable product, focus, team, scale | Four-step framework; source citation; end on `scale it`, no CTA; 0.203s protected audio tail |
 
 The final retention speed is 1.02×. The selected speech was already approximately 266 WPM with a maximum selected inter-word gap of 0.36s, so no pause cut was warranted.
 
-## HEIT Mapping
+## Narrative Mapping
 
 - Hook: the worst grade and the withheld reason.
-- Explain: one-product focus contradicted menu-variety orthodoxy.
-- Illustrate: initial capital stack, first location, and source-reported scale.
-- Teach: cravable product → focus → team → scale.
+- Mechanism reveal: one-product focus contradicted menu-variety orthodoxy.
+- Proof: initial capital stack, first location, and source-reported scale.
+- Payoff: cravable product → focus → team → scale.
 
 ## WEALTHIAN Formula Mapping
 
