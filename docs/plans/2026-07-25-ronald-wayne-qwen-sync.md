@@ -1,6 +1,8 @@
 # Ronald Wayne Qwen Sync Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use subagent-driven-development (recommended) or executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+>
+> **Execution override (2026-07-25):** The user explicitly requested no unit tests. Do not execute the unit-test steps below. Verification was performed against the real ASR, rendered frames, MP4 streams, hashes, full decode, and artifact-level verifier instead.
 
 **Goal:** Produce a separate v3 MP4 whose captions and semantic visual states follow the actual Qwen word timestamps while preserving the v2 audio exactly and retaining forty 1.5-second visual beats.
 
