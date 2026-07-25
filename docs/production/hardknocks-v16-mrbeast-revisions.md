@@ -1,9 +1,21 @@
 # HardKnocks V16 — MrBeast-Editing Material Revisions
 
 Date: 2026-07-24  
-Status: local production complete; V16B uploaded private; V16A/V16C remain local  
+Status: local production complete; V16B public; V16A/V16C remain local
 Source interview: `output/projects/hardknocks/source/xv8qaYubDw4.mp4`  
 Strategy reference: https://www.youtube.com/watch?v=OASaa6MKyZQ
+
+## Public upload
+
+- V16B YouTube ID: `aK1AODnLohE`
+- Public title: `The Crash Wasn't the Idea 🏍️`
+- Public timestamp: 2026-07-24 18:45:35 +07
+- Public snapshot at 2026-07-25 09:42 +07: 318 views, 5 likes, 52s public duration
+- User-reported Studio leading indicator: rank `1 of 10` at the observed equal-elapsed-time checkpoint
+- Earliest stable metrics fetch: 2026-07-26 18:45:35 +07
+- Early-push diagnosis: `docs/research/hardknocks-v16-early-push-2026-07-25/REPORT.md`
+
+The `1 of 10` rank is a leading view outcome, not direct proof of greater Shorts Feed allocation. Keep `Shown in feed`, `Stayed to watch`, AVD/APV and the equal-window retention curve separate when the 48h data becomes available.
 
 ## Decision
 
@@ -192,16 +204,16 @@ Each description has exactly three visible hashtags. Studio tags are stored sepa
 |---|---|
 | YouTube Video ID | [`aK1AODnLohE`](https://youtube.com/shorts/aK1AODnLohE?feature=share) |
 | Uploaded variant | V16B — `hardknocks_v16b_crash_not_breakthrough` |
-| Visibility | Private — user-reported; live metadata cannot yet be independently verified |
-| Uploaded | 2026-07-24 — user-reported; exact upload time unknown |
+| Visibility | Public — independently verified via `yt-dlp` |
+| Uploaded | 2026-07-24 18:45:35 +07 |
 | Logged at | 2026-07-24 11:09:34 +07 |
-| Public release | Not yet public; exact timestamp unknown |
-| Destination lane eligibility | Not verified; must pass ADR-0035 before public release |
-| Metrics fetch after (48h rule) | N/A until public release; set to actual public timestamp +48h |
-| Metrics status | N/A while private — the 48h analytics clock has not started |
+| Public release | 2026-07-24 18:45:35 +07 |
+| Destination lane eligibility | Not verified before release; publication was only 19.43h after V15A and did not satisfy the documented plateau gate |
+| Metrics fetch after (48h rule) | 2026-07-26 18:45:35 +07 |
+| Metrics status | `IN FLIGHT`; public snapshot 2026-07-25 09:42 +07 was 318 views / 5 likes; user-reported Studio rank `1 of 10` |
 | Studio Analytics | https://studio.youtube.com/video/aK1AODnLohE/analytics/tab-overview/period-default |
 
-V16A and V16C remain local and not uploaded. No performance conclusion should be drawn from technical QC or private-upload status.
+V16A and V16C remain local and not uploaded. No mature performance conclusion should be drawn from technical QC or V16B's early-public status.
 
 ## Post-production retro
 

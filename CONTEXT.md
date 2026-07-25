@@ -90,6 +90,10 @@ Một dimension được thay đổi giữa A và B trong experiment. Chỉ 1 bi
 VD: video type, hook type, title pattern, video length, voice, CTA, thumbnail.
 _Avoid_: "parameter", "factor"
 
+**Experiment Status**:
+Nhãn vòng đời bằng chứng cho đúng một hypothesis/AB Variable, không phải nhãn cảm tính cho cả Short: `NOT TESTED`, `IN FLIGHT`, `PROMISING — EARLY`, `INCONCLUSIVE`, `UNDERPERFORMING SIGNAL`, `FALSIFIED IN SCOPE`, `VALIDATED`, hoặc `VALIDATED FOR BASE QUALITY`. Low views chỉ là Business Outcome của bundle; không đủ để falsify từng hook, narrative hoặc editing technique bên trong. `PROMISING — EARLY` yêu cầu leading indicator tốt hơn matched baseline nhưng vẫn phải chờ primary Studio metric và test falsification. Registry và promotion rules: `docs/experiments/FRAMEWORK-REGISTRY.md`.
+_Avoid_: "flop framework", "one upload proves it", "high initial push means validated"
+
 **Mid-Roll Triple CTA**:
 CTA bắt đầu trong cửa sổ t=38–42s và yêu cầu rõ cả ba hành động Like, Subscribe và Comment. Đây là beat bắt buộc bên trong Short, không phải end card chỉ xuất hiện sau payoff; wording vẫn phải gắn với nội dung cụ thể của Short thay vì dùng một câu generic có thể dán vào mọi video.
 _Avoid_: "end CTA", "like-and-subscribe only", "generic engagement line"
