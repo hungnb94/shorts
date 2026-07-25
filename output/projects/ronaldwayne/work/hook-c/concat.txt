@@ -1,0 +1,4 @@
+file '/Users/hungba/code/ai/shorts/output/projects/ronaldwayne/work/hook-c/beat-0.mp4'
+file '/Users/hungba/code/ai/shorts/output/projects/ronaldwayne/work/hook-c/beat-1.mp4'
+file '/Users/hungba/code/ai/shorts/output/projects/ronaldwayne/work/hook-c/beat-2.mp4'
+file '/Users/hungba/code/ai/shorts/output/projects/ronaldwayne/work/hook-c/beat-3.mp4'
