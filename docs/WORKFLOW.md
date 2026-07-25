@@ -29,7 +29,11 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
    target phải đọc được ngay hoặc có thể chỉ bằng arrow/pointer/annotation.
 6. Naive-viewer check: cho một người không tham gia edit xem rough hook 0-3s mà
    không giải thích trước; họ phải nói được open question/promise khiến họ muốn
-   xem tiếp. Nếu chỉ hiểu sau khi creator giải thích, hook fail.
+   xem tiếp. Nếu chỉ hiểu sau khi creator giải thích, hook fail. Production doc
+   phải lưu ngày check, rough-hook version và câu trả lời nguyên văn đã ẩn danh;
+   creator/agent tự xem không được tính là naive viewer. Không có evidence này
+   thì item 6 là `unverified` và Hook Gate vẫn block render/upload — không được
+   tự suy ra pass từ frame-check, caption timing hay cadence.
 7. Information Progression feasibility (ADR-0036): chuỗi Visual Changes dự kiến
    phải đẩy ít nhất một question, causal step, contrast, proof state hoặc payoff;
    không được dùng toàn flash/emoji/zoom trang trí chỉ để đủ cadence.
@@ -88,6 +92,15 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 ## Stage 5 — Document & Retro (`docs/production/<name>.md`)
 
 Điền theo template hiện có (Status, Video Specs, YouTube Title/Description, Source, Why This Segment, Hook Formula Applied, Value-Adds, Known Issues, What to Check at 48h) — xem `docs/production/bacsihai-v5-lao-dong-tay.md` làm mẫu.
+
+### Hook Gate Evidence (blocking)
+
+Production doc phải ghi riêng evidence của Stage 0 item 6: ngày check, định danh
+rough-hook version, câu hỏi đưa cho naive viewer (không được giải thích story) và
+câu trả lời nguyên văn đã ẩn danh về (a) họ thấy chuyện gì đang xảy ra, (b) open
+question/stakes là gì, (c) họ có tiếp tục xem không và vì sao. Dòng tự đánh giá
+kiểu "frame-0 pass" / "hook mạnh" không thay thế evidence này. Thiếu section này
+thì Status không được chuyển thành `Completed` và Short không được upload.
 
 ### Publishing Metadata & Studio Settings Gate (blocking)
 
