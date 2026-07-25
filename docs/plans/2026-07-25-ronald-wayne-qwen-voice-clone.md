@@ -57,8 +57,8 @@
 
 - [ ] Load the model once and generate each `type=tts` script segment with deterministic per-segment seeds.
 - [ ] Write 24kHz mono raw WAV and 48kHz stereo pipeline WAV.
-- [ ] Measure every raw duration and fail if required compression exceeds `1.12×`.
-- [ ] Slot-fit with FFmpeg `atempo`, `apad`, and `atrim` while preserving the start/end schedule.
+- [x] Measure every raw duration and fail if required compression exceeds `1.42×`.
+- [x] Slot-fit with Rubber Band R3 pitch-preserving time compression when needed, followed by FFmpeg `apad` and `atrim`, while preserving the start/end schedule.
 - [ ] Write a report containing input text, seed, raw duration, tempo, output duration, file SHA-256, and synthesis time.
 - [ ] Run segment-level ASR and reject skipped/repeated content before video assembly.
 

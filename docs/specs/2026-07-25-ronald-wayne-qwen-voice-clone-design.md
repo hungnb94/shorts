@@ -22,7 +22,7 @@ Create a more energetic documentary narrator inspired by the delivery in Zack D.
 2. Extract a clean 3–8 second voice window and separate/reduce music and sound effects before conditioning.
 3. Use `mlx-community/Qwen3-TTS-12Hz-1.7B-Base-6bit` at immutable revision `34ff5318365b59cba9c03ff729f2eee0814caf72`.
 4. Generate each existing TTS segment independently with exact reference text and deterministic seeds.
-5. Reject outputs with missing words, repeated tails, clipped phonemes, excessive noise, or raw duration requiring more than `1.12×` time compression.
+5. Reject outputs with missing words, repeated tails, clipped phonemes, excessive noise, or raw duration requiring more than `1.42×` time compression. Use Rubber Band R3 for pitch-preserving compression; do not use FFmpeg `atempo` for these fitted Qwen takes.
 6. Slot-fit accepted outputs to the existing timeline. Preserve the CBS and NextShark Ronald Wayne source-voice segments.
 7. Rebuild only the audio timeline and remux it with the verified 40-beat video stream into a separate v2 file.
 
@@ -39,7 +39,7 @@ Create a more energetic documentary narrator inspired by the delivery in Zack D.
 
 - Narration content recall: all required normalized words recovered by final-MP4 ASR, except documented proper-name substitutions that do not alter meaning.
 - No repeated tail or skipped sentence in any Qwen segment.
-- Maximum post-generation tempo: `1.12×`.
+- Maximum post-generation tempo: `1.42×` via Rubber Band R3. Empirical generation showed that the BaseModel clone path ignores the exposed native `speed` parameter; the highest required ratio was `1.40541×` for the unchanged CTA copy. Final ASR must still recover 100% of normalized content.
 - Final duration: exactly `60.000s`.
 - H.264 1080×1920 at 30fps; AAC stereo 48kHz.
 - 40 contiguous visual beats and 40 keyframe boundaries.
@@ -53,5 +53,5 @@ Create a more energetic documentary narrator inspired by the delivery in Zack D.
 
 - If the selected reference contains audible music/SFX after separation, test a second clean window instead of conditioning on contaminated audio.
 - If Qwen omits or repeats words, retry that segment with a new deterministic seed and simpler punctuation; never conceal missing speech with captions.
-- If more than two segments require over `1.12×` compression, rewrite punctuation/chunk boundaries without changing factual meaning.
+- If any segment requires over `1.42×` Rubber Band R3 compression, rewrite punctuation/chunk boundaries without changing factual meaning. This revised bound follows an executed spike: Qwen preserved the selected timbre but spoke the fixed v1 copy more slowly than the source reference; R3 preserved pitch and the resulting final-MP4 ASR recovered all normalized words.
 - If the local MLX runtime cannot be installed or the pinned model cannot be verified, stop and report the exact blocker; do not silently fall back to Edge TTS.

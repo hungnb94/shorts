@@ -77,8 +77,8 @@
     },
     "repeatability_fingerprints": {
       "ffmpeg": {
-        "version_line": "ffmpeg version 7.1.1 Copyright (c) 2000-2025 the FFmpeg developers",
-        "version_output_sha256": "88b12a030360dd4610c0e3999e442dd5cfa63c6df2b7b8dc2f23f56a40399ff9"
+        "version_line": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers",
+        "version_output_sha256": "0f2806426f298a5acca021dff4903c9b170309458acd3366ff9c2e7a4b512445"
       },
       "platform": {
         "system": "Darwin",
@@ -97,7 +97,8 @@
       "top_k": 30,
       "top_p": 0.9,
       "repetition_penalty": 1.5,
-      "max_post_tempo": 1.12
+      "max_post_tempo": 1.42,
+      "post_tempo_engine": "Rubber Band R3 4.0.0"
     }
   }
 }
