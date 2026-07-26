@@ -41,12 +41,6 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 
 **GATE RULE**: nếu bất kỳ item 1-7 trên MỌI candidate span trong source hiện tại, và không thể fix bằng cách chọn span khác trong cùng bản download, thì STOP. Quay lại Stage 1 — chọn span khác hoặc source video khác. Không được tiến sang Stage 2/3/4, và không được ship 1 hook đã biết là yếu với lý do "để retention data trả lời sau."
 
-**Internal-render override**: user có thể chỉ đạo rõ ràng tiếp tục tạo internal
-artifact khi naive-viewer evidence chưa có. Khi đó phải lưu một machine-readable
-override với `human_retell=NOT_MEASURED`, cho phép internal render nhưng giữ
-`publication_ready=false`. Override không được đổi tên thành Hook Gate pass và
-không cho phép upload. (Root cause: `one-red-paperclip-v1`.)
-
 ## Stage 1 — Source Research & Candidate Selection
 
 - Chọn Source Channel theo từng niche (ADR-0001/0004 finance, ADR-0019 health/VN, ADR-0020 AI-ed).

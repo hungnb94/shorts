@@ -305,7 +305,7 @@ Kyle MacDonald completed 14 trades in one year and ended with a house; this inte
 
 ### Workflow Delta
 
-The production exposed reusable gaps and they were added to `docs/WORKFLOW.md` and `video:shorts-render-patterns`:
+The production exposed reusable gaps and they were captured across `docs/WORKFLOW.md`, this production record, and `video:shorts-render-patterns`:
 
 1. separate distribution evidence from creative diagnosis;
 2. allow explicit internal-render override without converting it into publication approval;
