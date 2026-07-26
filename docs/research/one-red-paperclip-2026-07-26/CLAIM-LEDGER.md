@@ -18,6 +18,7 @@ Status values:
 | The completed chain contained fourteen trades | CONFIRMED | `Fourteen trades.` | Kyle official site; CBC | retain |
 | The process took approximately one year | CONFIRMED | `One year.` | Kyle official site; CBC | retain |
 | Kyle bought the house with cash generated from the paperclip | UNSUPPORTED | none | none | block |
+| The fourteen exchanges used barter rather than cash as their consideration | CONFIRMED WITH SCOPE | `The fourteen swaps used barter, not cash, as consideration.` | Kyle FAQ and offer records | do not extend this to travel, logistics or total project cost |
 | No money was involved anywhere in travel/logistics | UNSUPPORTED | none | none | block |
 | Every item had objectively higher market value than the prior item | UNSUPPORTED | none | none | block |
 | Each exchange depended on a specific counterparty's preference | ATTRIBUTED/EDITORIAL | `Kyle kept finding one person who wanted the next offer more.` | observable exchange chain; editorial synthesis | retain only as conclusion, not objective valuation |
@@ -40,8 +41,8 @@ Status values:
 | 10 | recording contract | one year's rent in Phoenix | CONFIRMED | official chain |
 | 11 | one year's rent | afternoon with Alice Cooper | CONFIRMED | CBC; official chain |
 | 12 | afternoon with Alice Cooper | KISS motorized snow globe | CONFIRMED | CBC; official chain |
-| 13 | KISS snow globe | role in a Corbin Bernsen movie | CONFIRMED | CBC; Bernsen's snow-globe interest explains the preference match |
-| 14 | movie-role asset | house in Kipling, Saskatchewan | CONFIRMED | CBC; Kyle official site |
+| 13 | KISS snow globe | transferable paid, credited speaking role in a Corbin Bernsen movie | CONFIRMED | Kyle official archive; CBC; Bernsen's snow-globe interest explains the preference match |
+| 14 | transferable movie-role asset | house package in Kipling, Saskatchewan | CONFIRMED | Town of Kipling; CBC; Kyle official site; the Short omits ancillary package details that do not serve the open loop |
 
 ## Date Caution
 
@@ -80,7 +81,17 @@ Anyone can repeat this result.
 
 ### Video source candidates
 
+- CBC News Saskatchewan: https://www.youtube.com/watch?v=s5Dr80SRDFA
 - TEDx Talks, Kyle MacDonald: https://www.youtube.com/watch?v=8s3bdVxuFBs
 - ABC 20/20 archive upload: https://www.youtube.com/watch?v=BE8b02EdZvw
 
-YouTube metadata for the video candidates exposes no declared reusable license. Public/commercial publication remains blocked pending publisher/rights review. Transformative treatment does not create permission automatically.
+CBC provides a concrete master/licence request route through CBC Archive Sales:
+https://distributionarchives.cbcrc.ca/en. YouTube metadata itself exposes no
+reusable licence.
+
+TED's public talk policy is non-commercial/no-derivatives unless a separate
+licence is granted:
+https://www.ted.com/about/our-organization/our-policies-terms/ted-talks-usage-policy.
+
+Public/commercial publication remains blocked pending publisher/rights review.
+Transformative treatment does not create permission automatically.

@@ -156,7 +156,11 @@ This is an editorial interpretation, not a claim that every trade had higher obj
 - **Positive third order:** a reusable trade-ladder renderer enables future barter/flip/challenge stories.
 - **Negative second order:** listing fourteen trades can become breathless; group them into objects, experiences and access.
 - **Negative third order:** success could tempt the channel into copying creators' original experiments; future videos must preserve transformation and rights review.
-- **Rights risk:** TEDx/ABC metadata exposes no declared reusable license. Internal production is allowed for review; public/commercial publication remains blocked pending review.
+- **Rights risk:** CBC's official-publisher clip has a clear clearance route
+  through CBC Archive Sales, but its YouTube metadata exposes no reusable
+  licence. TED's public policy is non-commercial/no-derivatives unless
+  separately licensed. Internal production is allowed for review;
+  public/commercial publication remains blocked pending review.
 
 ## Measurement Plan
 
@@ -176,6 +180,9 @@ After an eligible upload:
 - Kyle MacDonald's official site: https://oneredpaperclip.blogspot.com/
 - CBC, `From paper-clip to house in 14 trades`: https://www.cbc.ca/news/canada/from-paper-clip-to-house-in-14-trades-1.573973
 - Kyle MacDonald TEDxVienna: https://www.youtube.com/watch?v=8s3bdVxuFBs
+- CBC News Saskatchewan archive clip: https://www.youtube.com/watch?v=s5Dr80SRDFA
+- CBC Archive Sales: https://distributionarchives.cbcrc.ca/en
+- TED talks usage policy: https://www.ted.com/about/our-organization/our-policies-terms/ted-talks-usage-policy
 - MrBeast official Short: https://www.youtube.com/watch?v=XCGVurja73c
 - MrBeast 2: https://www.youtube.com/watch?v=T7M3PpjBZzw
 - Lex Fridman/MrBeast interview: https://lexfridman.com/mrbeast/
