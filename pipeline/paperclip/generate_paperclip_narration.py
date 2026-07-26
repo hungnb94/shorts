@@ -24,11 +24,12 @@ from mlx_audio.tts.utils import load_model
 ROOT = Path(__file__).resolve().parents[2]
 PROJECT = ROOT / "output" / "projects" / "paperclip"
 SCRIPT = PROJECT / "scripts" / "narration-v1.json"
-PROFILE_DIR = ROOT / "data" / "narrator-voices" / "natural_talker_male_qwen_blog"
-PROFILE_PATH = PROJECT / "tts-qwen" / "profile-runtime-v1.json"
-RAW = PROJECT / "tts-qwen" / "raw"
-FITTED = PROJECT / "tts-qwen" / "fitted"
-REPORT = PROJECT / "tts-qwen" / "generation-report.json"
+PROFILE_DIR = ROOT / "data" / "narrator-voices" / "ronald_wayne_zack_style_qwen"
+PROFILE_PATH = PROFILE_DIR / "profile.json"
+TTS_DIR = PROJECT / "tts-qwen-zack"
+RAW = TTS_DIR / "raw"
+FITTED = TTS_DIR / "fitted"
+REPORT = TTS_DIR / "generation-report.json"
 SPIKE = ROOT / "spikes" / "001-english-tts-engine-bakeoff"
 sys.path.insert(0, str(SPIKE / "scripts"))
 

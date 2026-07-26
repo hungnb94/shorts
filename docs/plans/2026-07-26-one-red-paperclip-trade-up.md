@@ -6,7 +6,7 @@
 
 **Architecture:** Keep evidence, narration, timeline, rendering and verification separate. The renderer consumes immutable JSON manifests and verified local media; a dedicated 0–3s hook prototype must pass the repository's human Hook Gate before the full renderer is allowed to run. The final edit combines short primary-source excerpts, licensable moving object footage and a persistent animated trade ladder.
 
-**Tech Stack:** Python 3.12, ffmpeg/ffprobe 8.x, Pillow, ASS/libass, MLX Whisper, Qwen3-TTS through `.venv-mlx`, yt-dlp, Pexels API.
+**Tech Stack:** Python 3.12, ffmpeg/ffprobe 8.x, ephemeral Pillow via `uv`, MLX Whisper, Qwen3-TTS through `.venv-mlx`, yt-dlp and Mixkit `videoFree` stock.
 
 **Execution note:** Do not create renderer unit tests. The user prefers verification against real media artifacts and runtime output. Use compile checks, full decode, ASR, waveform measurements, frame/contact-sheet inspection, hashes and human viewing/listening evidence.
 
@@ -321,7 +321,7 @@ def normalized_tokens(text: str) -> list[str]: ...
 def main() -> None: ...
 ```
 
-Call `pipeline/hardknocks/tts_qwen_narrator.py` inside `.venv-mlx`, incrementing the profile seed deterministically by manifest order. Generate at natural speed, normalize to 48kHz stereo, concatenate a narrator-only preview, transcribe it and write `duration-report.json` with raw/final duration, seed, ASR text and truncation state for every line.
+Use the user-selected `ronald_wayne_zack_style_qwen` profile inside `.venv-mlx`, incrementing the profile seed deterministically by manifest order. Preserve the earlier `natural_talker_male_qwen_blog` render as an immutable control. Generate the selected voice into `output/projects/paperclip/tts-qwen-zack/`, normalize to 48kHz stereo, transcribe fitted audio and write `generation-report.json` with raw/final duration, seed, tempo, hashes and truncation state for every line. Commercial publication remains blocked pending source-creator consent/licensing.
 
 - [ ] **Step 4: Run the spoken-TTS preflight**
 
@@ -332,8 +332,8 @@ Call `pipeline/hardknocks/tts_qwen_narrator.py` inside `.venv-mlx`, incrementing
 Expected:
 
 ```text
-9/9 narration lines generated
-9/9 intended line token sets recovered by ASR
+10/10 narration lines generated
+10/10 intended line token sets recovered by ASR
 truncated lines: 0
 ```
 

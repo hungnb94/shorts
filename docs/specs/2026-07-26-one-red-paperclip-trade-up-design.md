@@ -196,8 +196,10 @@ Rules:
 ### Voice strategy
 
 - Use Kyle's original voice for the strongest verified source excerpt(s) when the footage and rights path permit.
-- Use the canonical locally generated `natural_talker_male_qwen_blog` profile only for short hook, connective commentary, integrated CTA and closing interpretation.
-- Do not clone Kyle, MrBeast, Nas Daily, Ryan Trahan or any other identifiable creator.
+- **User-approved amendment — 2026-07-26:** use the existing `ronald_wayne_zack_style_qwen` profile from the previous day's Ronald Wayne artifact for hook, connective commentary, integrated CTA and closing interpretation.
+- Preserve the `natural_talker_male_qwen_blog` narration as an immutable internal control; do not overwrite it.
+- The selected profile is a public-source voice clone requested by the user. Commercial publication remains `BLOCKED` until source-creator consent/licensing is documented, and metadata must disclose that Zack D. Films did not participate in or endorse the video.
+- Do not clone Kyle, MrBeast, Nas Daily, Ryan Trahan or any additional identifiable creator.
 - Do not force every narration line into a fixed slot. Generate naturally, measure, shorten copy first and use bounded speed-up only when necessary.
 
 ### Sound design
