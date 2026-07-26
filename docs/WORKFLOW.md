@@ -41,16 +41,32 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 
 **GATE RULE**: nếu bất kỳ item 1-7 trên MỌI candidate span trong source hiện tại, và không thể fix bằng cách chọn span khác trong cùng bản download, thì STOP. Quay lại Stage 1 — chọn span khác hoặc source video khác. Không được tiến sang Stage 2/3/4, và không được ship 1 hook đã biết là yếu với lý do "để retention data trả lời sau."
 
+**Internal-render override**: user có thể chỉ đạo rõ ràng tiếp tục tạo internal
+artifact khi naive-viewer evidence chưa có. Khi đó phải lưu một machine-readable
+override với `human_retell=NOT_MEASURED`, cho phép internal render nhưng giữ
+`publication_ready=false`. Override không được đổi tên thành Hook Gate pass và
+không cho phép upload. (Root cause: `one-red-paperclip-v1`.)
+
 ## Stage 1 — Source Research & Candidate Selection
 
 - Chọn Source Channel theo từng niche (ADR-0001/0004 finance, ADR-0019 health/VN, ADR-0020 AI-ed).
 - Reverse-engineer outlier channels trước khi chốt treatment: copy narrative mechanics, pacing, hook/payoff và packaging đã chứng minh được demand; không copy topic execution, wording hay footage cụ thể của họ (ADR-0034).
+- **Idea-engine gate trước production polish**: ưu tiên concept có một mục tiêu
+  nhìn thấy được, một open loop, escalation state-by-state và một literal payoff.
+  Nếu cold viewer phải hiểu luật, lịch sử hoặc nhiều qualifier trước khi stakes
+  có nghĩa, score kỹ thuật cao không đủ để cứu idea. Internal topic score không
+  phải market validation. (Lesson: Ronald Wayne → One Red Paperclip.)
 - Check `data/source_videos.csv` (source-video dedup registry) theo video ID/kênh trước khi chọn — tránh chọn lại đúng video hoặc lặp kịch bản đã dùng.
 - Download max quality: `yt-dlp -f "bestvideo[height>=2160]+bestaudio"` (không bao giờ nhận default 720p — AGENTS.md).
 - Transcribe (mlx_whisper).
 - **Với nguồn dạng conference/talk dài (nhiều chục phút), trích 1 frame kiểm tra nhanh cho MỖI candidate window đã chọn từ transcript — không chỉ window của HOOK — trước khi chốt kế hoạch cắt**
 - **Với nguồn rất dài (~1 giờ trở lên), đừng đọc/xem tuyến tính toàn bộ transcript để tìm candidate — keyword-scan trước.** Quét toàn bộ transcript bằng các từ khóa liên quan tới insight tổng quát hóa được (ví dụ: "question", "clarify", "the reason", "the point", "why", "important because") để khoanh vùng ứng viên, sau đó mới đọc kỹ + frame-check từng vùng đã khoanh (Stage 0 item 1, và note ở trên). Đọc tuyến tính không khả thi ở độ dài này (aiwork_v6: nguồn 4480s/74.6 phút, 599 segments — quét từ khóa tìm ra đúng 1 câu tổng quát hóa được, nằm ở phút 53:41 của một buổi livestream lập trình gần như toàn bộ là screen-share/jargon).
 - Sau khi chốt source video dùng cho video mới, append 1 dòng vào `data/source_videos.csv`.
+- Lưu source-use ledger theo **actual final timeline**, gồm duration của reused
+  still frame; không cộng candidate windows chưa dùng và không bỏ qua still vì
+  nó không phát audio. Mỗi stock asset phải có page URL, direct-file hash và
+  provider-specific license marker. Chữ “free” trong page title không chứng minh
+  commercial license; asset `restricted` phải bị loại hoặc giữ publication block.
 
 ## Stage 2 — Cut Segment
 
@@ -84,6 +100,15 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 - **Loop-Payoff Closure check (ADR-0036)**: đọc lại hook và ending cạnh nhau; ending phải trả đúng open loop ban đầu và không mở một lesson thứ hai mà Short chưa giải thích.
 - **Spoken-TTS preflight bắt buộc trước full render**: synthesize toàn bộ line riêng, đo raw/fitted duration và lưu per-line report (`voice`, engine rate/pitch, post-tempo, target duration, truncation). Không dùng `atempo < 1.0` để kéo chậm giọng lấp visual slot — giữ tốc độ tự nhiên rồi pad silence ở đuôi; nếu line quá dài thì rút gọn copy hoặc tăng nhẹ engine rate, chỉ cho phép post speed-up có bound. Ghép narrator-only preview và transcribe để bắt lỗi nuốt chữ/phát âm trước khi mix nhạc/source audio. Với TTS qua `loudnorm`, fit duration ở sample domain sau resample; xem pitfall chi tiết trong skill `clip-curation-edit`. (Root cause `trademe_v1`: macOS TTS có 5/9 line bị kéo xuống 0.72x, pass codec/loudness nhưng nghe phẳng và thiếu sức sống.)
 - **Voice/TTS replacement sync gate**: khi thay voice hoặc TTS engine cho timeline đã dựng, slot-fit và tổng duration đúng KHÔNG chứng minh caption/visual sync. Render voice-control trước, transcribe audio của final MP4 bằng word timestamps, quantize `caption_at` lên frame kế tiếp, remap semantic visual theo clause thực sự được nói, và giữ caption layer tách khỏi static chrome. Với visual-only revision, mux lại accepted audio bằng stream copy và chứng minh audio-stream hash giống control. Bắt buộc có contact sheet toàn timeline + cặp BEFORE/AFTER quanh reveal; direct-source accurate seek phải reset PTS trước local caption gate. Xem `shorts-render-patterns/references/qwen-cloned-voice-word-sync-and-publishing.md` (root cause: Ronald Wayne v2 pass duration/ASR nhưng caption và proof visual chạy trước Qwen; v3 phát hiện thêm output-seek PTS bug ở direct quote).
+- **Semantic source-frame gate**: word-aligned source window vẫn có thể mở vào
+  người/phần chuyển cảnh thay vì object được caption. Với mỗi proof insert, trích
+  exact frame tại planned in-point và ít nhất một frame sau đó; sửa seek nếu
+  object không rõ. (Root cause: paperclip generator source `29.0s` → `30.8s`.)
+- **Low-level ASR tail gate**: không caption hoặc coi mọi Whisper tail token là
+  speech. Nếu tail nằm trên music bed, kiểm waveform và token repetition. Chỉ
+  classify hallucination khi bed ở mức thấp đã định, một token chiếm phần lớn
+  tail và deterministic narration mix không có speech trong window; tail words
+  đa dạng vẫn phải fail/listen. (Root cause: repeated `Chaewoo` on paperclip v1.)
 - **Checklist bắt buộc trước khi coi Stage 4 là xong** (mỗi mục dưới đây từng là 1 lỗi thật lọt qua `validate()`/decode pass — codec/spec pass KHÔNG có nghĩa là video sạch):
   - [ ] **Guide-derived craft gate (ADR-0034) pass trên artifact cuối**: early SFX nghe được trong t=0-1s; 0-3s có visual surprise + narrative promise; focal pointer có mặt nếu cần; caption đúng font/profile, 2-5 từ/burst, keyword animate/emphasize, đọc được ở mobile preview và không che face/proof; CTA bumper custom bắt đầu t=38-42s và nói đủ Like/Subscribe/Comment; moving watermark thật sự đổi vị trí; transition/image motion có matching SFX. Kiểm bằng waveform + frame/contact-sheet ở đúng timestamp, không chỉ đọc filter graph.
   - [ ] **Không có khoảng đen/dead space ở BẤT KỲ đoạn nào, không chỉ đoạn cuối.** Scan pixel dòng dưới cùng khung hình (`img[y].mean()` cho các y gần đáy) tại nhiều mốc thời gian rải suốt cả video — một dải đen cố định (ví dụ drawbox che caption gốc) có thể tồn tại xuyên suốt toàn video mà chỉ lộ rõ ở đoạn không có gì vẽ đè lên (thường là đoạn cuối). `blackdetect` chỉ bắt khung hình đen HOÀN TOÀN, không bắt một dải đen cục bộ trong khung hình còn lại có nội dung — phải tự scan pixel, không dựa `blackdetect` là đủ. Nếu có card/overlay che một phần khung hình, xác nhận có cần blackout hay không: chỉ blackout khi ĐÚNG là để che nội dung nguồn không kiểm soát được (caption gốc, logo…) — nếu không có gì vẽ đè lên sau đó, đừng vẽ đen, hãy crop bỏ + zoom lại (crop cả 2 chiều theo cùng hệ số, không riêng 1 chiều, để tránh méo hình).
@@ -160,6 +185,13 @@ Lần sản xuất này có gặp case mà các stage trong docs/WORKFLOW.md ch�
 
 ## Stage 7 — 48h Distribution & Plateau Verification
 
+0. Trước khi gọi một Short “creative flop”, tách distribution khỏi creative:
+   - public views thấp hoặc `Shown in feed` quá nhỏ → creative inconclusive;
+   - feed sample đủ + Stayed to watch thấp → 0-3s/hook hypothesis;
+   - Stayed ổn + AVD/APV thấp → body/escalation hypothesis;
+   - retention tốt + shares/comments yếu → payoff/identity hypothesis.
+   Map retention timestamps về exact visual EDL. Không suy ra retention failure
+   từ public view count hoặc thumbnail một mình.
 1. Chờ đủ 48h rồi mới fetch/check; không panic hoặc xóa sớm trong pickup window 24-48h.
 2. Record Shorts Feed traffic share:
    - `>=70%` → healthy;

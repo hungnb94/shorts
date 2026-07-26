@@ -180,7 +180,7 @@ If YouTube rejects the adaptive stream with bot/403 status, use the verified pro
   'https://www.youtube.com/watch?v=8s3bdVxuFBs'
 ```
 
-The 360p fallback may appear only as a framed source insert, never as an upscaled full-screen proof image. Use 1080p Pexels/action footage for full-frame visuals.
+The 360p fallback may appear only as a framed source insert, never as an upscaled full-screen proof image. Use verified licensable stock/action footage for full-frame visuals.
 
 - [ ] **Step 2: Probe, hash and fully decode**
 
@@ -503,7 +503,7 @@ Do not add the MP4 binary to Git.
 **Files:**
 - Create: `output/projects/paperclip/scripts/visual-edl-v1.json`
 - Create: `pipeline/paperclip/render_paperclip_v1.py`
-- Create: `output/projects/paperclip/final/2026-07-26-one-red-paperclip-v1.mp4`
+- Create: `output/projects/paperclip/2026-07-26-one-red-paperclip-v1-internal.mp4`
 
 - [ ] **Step 1: Generate the frame-based EDL**
 
@@ -675,7 +675,7 @@ paperclip v1 verification: PASS
 - [ ] **Step 7: Hash the final artifact**
 
 ```bash
-shasum -a 256 output/projects/paperclip/final/2026-07-26-one-red-paperclip-v1.mp4
+shasum -a 256 output/projects/paperclip/2026-07-26-one-red-paperclip-v1-internal.mp4
 ```
 
 Record the real hash and byte size in the verification summary and production document.
@@ -754,7 +754,7 @@ from pathlib import Path
 required=[
  Path('docs/production/one-red-paperclip-v1.md'),
  Path('output/projects/paperclip/checks-v1/verification-summary.json'),
- Path('output/projects/paperclip/final/2026-07-26-one-red-paperclip-v1.mp4'),
+ Path('output/projects/paperclip/2026-07-26-one-red-paperclip-v1-internal.mp4'),
 ]
 for p in required:
  assert p.is_file() and p.stat().st_size > 0, p
@@ -776,3 +776,13 @@ git commit -m "feat: produce one red paperclip short"
 ```
 
 Do not add generated MP4/source binaries. Do not upload or publish while the production record shows rights/publication blockers.
+
+## Execution outcome — 2026-07-26
+
+- Tasks 1–4: completed with real source, ASR, narration, stock and rough-hook artifacts.
+- Task 5: human naive-viewer evidence remains `NOT_MEASURED`; user explicitly authorized `USER_OVERRIDE_INTERNAL_RENDER`. The override did not pass the Hook Gate and did not authorize upload.
+- Tasks 6–8: completed for the internal artifact. Final MP4, final-MP4 ASR, 20-beat contact sheet, 11 caption reveal pairs, payoff evidence, production record, workflow delta and technical verifier were generated and exercised.
+- Final artifact: `output/projects/paperclip/2026-07-26-one-red-paperclip-v1-internal.mp4`.
+- Final SHA-256: `9afaea8ca3291857f7deedf6af713dd2aa67ec8caed597c07637e21e88956ba8`.
+- Technical verification: pass.
+- Publication-ready: false because human Hook Gate, cloned-voice consent and CBC/TEDx clearance remain blocked.

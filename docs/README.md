@@ -31,6 +31,7 @@ Per-video documentation with pipeline, effects, retention data.
 |-------|--------|-----------|------|
 | dHDpDXSIAkA (Lawnmower→2,600 Apartments) | Clip Curation Edit | pending (uploaded 2026-07-10) | [hardknocks-lawnmower-v1.md](production/hardknocks-lawnmower-v1.md) |
 | Ronald Wayne v3 (10% of Apple) | Qwen TTS + word-aligned 40-beat render | technical pass; upload blocked | [ronald-wayne-v3-qwen-synced.md](production/ronald-wayne-v3-qwen-synced.md) |
+| One Red Paperclip v1 | Visible trade-up challenge + Qwen/source payoff | technical pass; publication blocked | [one-red-paperclip-v1.md](production/one-red-paperclip-v1.md) |
 
 ## Research
 - [hook-benchmarks-2026-07/REPORT.md](research/hook-benchmarks-2026-07/REPORT.md) — Hook analysis of 6 viral finance Shorts (frames + transcript + comments), basis for ADR-0018
