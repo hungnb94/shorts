@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "record_type": "youtube_short_public_upload_snapshot",
+  "video_id": "LUeF5Z5hu04",
+  "canonical_url": "https://youtube.com/shorts/LUeF5Z5hu04",
+  "watch_url": "https://www.youtube.com/watch?v=LUeF5Z5hu04",
+  "studio_analytics_url": "https://studio.youtube.com/video/LUeF5Z5hu04/analytics/tab-overview/period-default",
+  "production_record": "docs/production/one-red-paperclip-v1.md",
+  "experiment_log": "docs/experiments/EXPERIMENT-LOG.md",
+  "artifact": {
+    "path": "output/projects/paperclip/2026-07-26-one-red-paperclip-v1-internal.mp4",
+    "sha256": "9afaea8ca3291857f7deedf6af713dd2aa67ec8caed597c07637e21e88956ba8",
+    "duration_seconds": 61.5
+  },
+  "public_metadata": {
+    "title": "Paperclip To A House? 📎🏠",
+    "description": "Paperclip To A House? 📎🏠\nKyle MacDonald completed 14 trades in one year and ended with a house; this internal candidate uses synthetic cloned narration and remains blocked pending voice/source clearance and a human Hook Gate.\n\n#shorts #Money #Business",
+    "channel": "Doog Radio",
+    "channel_id": "UCqCJeIrbppZXoDM4iQjJZrw",
+    "uploader_handle": "@DoogRadio",
+    "availability": "public",
+    "live_status": "not_live",
+    "upload_date": "2026-07-26",
+    "public_timestamp_utc": "2026-07-26T14:15:06+00:00",
+    "public_timestamp_local": "2026-07-26T21:15:06+07:00",
+    "duration_seconds_rounded": 62,
+    "category": "People & Blogs",
+    "public_tags": [],
+    "snapshot_view_count": 0,
+    "snapshot_like_count": null,
+    "snapshot_comment_count": null
+  },
+  "snapshot": {
+    "observed_at_local": "2026-07-26T21:17:30+07:00",
+    "evidence_source": "Live YouTube URL inspected with yt-dlp --dump-single-json --skip-download",
+    "source_url_supplied_by_user": "https://youtube.com/shorts/LUeF5Z5hu04?feature=share",
+    "metrics_fetch_after_local": "2026-07-28T21:15:06+07:00",
+    "lifecycle_status": "IN FLIGHT",
+    "interpretation": "Public snapshot was taken about two minutes after the public timestamp. It is upload-state evidence only and must not be used to diagnose distribution, hook or retention."
+  },
+  "observed_packaging_deviations": [
+    "Public description still calls the video an internal candidate and says publication is blocked.",
+    "Public category is People & Blogs while the draft upload package specified Education.",
+    "No public tags were exposed while the draft package specified three Studio tags."
+  ],
+  "unverified_studio_fields": [
+    "Audience / Made for kids",
+    "Video language",
+    "Recording location",
+    "Synthetic or altered content disclosure",
+    "Playlist",
+    "Related Video",
+    "Upload Details Template",
+    "Thumbnail/frame selection",
+    "ADR-0035 lane eligibility"
+  ],
+  "unresolved_publication_gates_at_snapshot": [
+    "Human naive-viewer Hook Gate not measured",
+    "Identifiable cloned-voice consent/licensing not documented",
+    "CBC source-footage clearance not documented",
+    "TEDx source-footage/audio clearance not documented"
+  ]
+}

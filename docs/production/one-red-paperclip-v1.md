@@ -1,10 +1,22 @@
-# One Red Paperclip v1 — Internal Technical Candidate
+# One Red Paperclip v1 — Uploaded Public Experiment
 
 ## Status
 
-**Internal technical candidate — technical pass, publication blocked.**
+**Uploaded/public — technical pass; publication deviations unresolved.**
 
-This artifact was completed after the user explicitly authorized full internal production without waiting for a human naive-viewer Hook Gate. That instruction allows an internal render; it does not constitute Hook Gate evidence and does not authorize publication.
+| Field | Observed value |
+|---|---|
+| YouTube Video ID | [`LUeF5Z5hu04`](https://youtube.com/shorts/LUeF5Z5hu04) |
+| Actual channel | Doog Radio (`UCqCJeIrbppZXoDM4iQjJZrw`) |
+| Public timestamp | `2026-07-26 21:15:06 +07` (`2026-07-26 14:15:06 UTC`) |
+| Public metadata verified | `2026-07-26 21:17:30 +07`, live YouTube URL via `yt-dlp` |
+| Availability | Public |
+| Lifecycle | `IN FLIGHT` |
+| Earliest metrics fetch | `2026-07-28 21:15:06 +07` under the 48-hour rule |
+| Studio Analytics | https://studio.youtube.com/video/LUeF5Z5hu04/analytics/tab-overview/period-default |
+| Machine-readable snapshot | `data/uploads/LUeF5Z5hu04.json` |
+
+This artifact began as an internal candidate after the user explicitly authorized production without a human naive-viewer Hook Gate. A public upload now exists. The upload does not retroactively constitute Hook Gate evidence or clear cloned-voice/CBC/TEDx rights. The public snapshot was taken about two minutes after the public timestamp; its `0` view count is upload-state evidence only, not performance evidence.
 
 ## Final Artifact
 
@@ -257,7 +269,22 @@ Change only the weakest diagnosed axis so the next version remains interpretable
 
 Repeat the visible-challenge engine across three distinct finance/business topics. Keep the format invariant—physical object, measurable goal, escalating proof, literal payoff—while changing topic. Compare ideas at equal production quality. One video cannot validate or invalidate the entire format.
 
-## Draft YouTube Upload Package — BLOCKED
+## Upload Package — Actual Public State vs Draft
+
+### Actual public metadata snapshot
+
+- Title: `Paperclip To A House? 📎🏠` — matches the selected title.
+- Description: matches the draft text, including the sentence saying this is an internal candidate and publication remains blocked.
+- Channel: Doog Radio (`UCqCJeIrbppZXoDM4iQjJZrw`).
+- Public duration: `62s` rounded.
+- Availability: public.
+- Public category: `People & Blogs`, not the planned `Education` category.
+- Publicly exposed tags: none; the three planned Studio tags were not exposed by public metadata.
+- Audience, language, location, synthetic-content disclosure, playlist, Related Video, template, thumbnail and ADR-0035 lane eligibility cannot be verified from public metadata.
+
+The packaging/rights differences above are recorded as deviations, not silently treated as approved changes. The pre-upload draft below is retained for audit history.
+
+### Pre-upload draft — historically blocked
 
 ### Scored title families
 
