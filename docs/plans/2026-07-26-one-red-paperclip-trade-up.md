@@ -355,12 +355,15 @@ git commit -m "feat: add paperclip narration and trade manifests"
 ### Task 4: Acquire and Verify Moving Object Footage
 
 **Files:**
-- Create: `output/projects/paperclip/source/pexels/pexels-ledger.json`
-- Create: selected Pexels MP4 assets under `output/projects/paperclip/source/pexels/`
+- Create: `output/projects/paperclip/source/stock/stock-ledger.json`
+- Create: selected licensable MP4 assets under `output/projects/paperclip/source/stock/`
 
-- [ ] **Step 1: Search the Pexels API without exposing the key**
+- [ ] **Step 1: Search a machine-verifiable stock catalog**
 
-Use `PEXELS_API_KEY` from the environment. Query portrait video for:
+Use the Pexels API when `PEXELS_API_KEY` is present. If it is absent, use Mixkit
+public catalog pages and retain only item pages whose machine-readable
+`data-license` equals `videoFree`. Do not retain `videoRestricted` items. Query
+for:
 
 ```text
 red paperclip hand macro
@@ -374,7 +377,9 @@ house keys handover
 house exterior vertical
 ```
 
-Store only response fields needed for provenance: Pexels ID, page URL, creator, dimensions, duration and selected file URL. Never print or persist the key.
+Store only fields needed for provenance: provider, item ID, page URL, title or
+creator, dimensions, duration, selected file URL, exposed license class and
+license URL. Never print or persist an API key.
 
 - [ ] **Step 2: Select footage by semantic action**
 
@@ -382,34 +387,41 @@ The frame-zero asset must contain visible hand/prop movement. Reject clips with 
 
 - [ ] **Step 3: Download the highest useful rendition**
 
-Prefer vertical files at or above 1080 pixels wide. If only landscape exists, require a clean portrait crop around the moving object.
+Prefer vertical files at or above 1080 pixels wide. If only landscape exists,
+require a clean portrait crop around the moving object. A 720p Mixkit
+`videoFree` item is acceptable for a partial/split-screen action layer, not for
+an archival-proof claim.
 
 - [ ] **Step 4: Fully decode and inspect every asset**
 
 For each selected file:
 
 ```bash
-for asset in output/projects/paperclip/source/pexels/*.mp4; do
+for asset in output/projects/paperclip/source/stock/*.mp4; do
   ffprobe -v error -show_streams -show_format -of json "$asset" \
     > "${asset%.mp4}.probe.json"
   ffmpeg -v error -i "$asset" -f null -
 done
 ```
 
-Extract start/mid/end frames, create a Pexels contact sheet and inspect brand/OCR contamination manually.
+Extract start/mid/end frames, create a stock contact sheet and inspect brand/OCR
+contamination manually.
 
-- [ ] **Step 5: Write the Pexels ledger**
+- [ ] **Step 5: Write the stock ledger**
 
 Each asset entry follows this schema:
 
 ```python
 from typing import Literal, TypedDict
 
-class PexelsAsset(TypedDict):
-    pexels_id: int
+class StockAsset(TypedDict):
+    provider: Literal["Pexels", "Mixkit"]
+    asset_id: str
     query: str
     page_url: str
-    creator: str
+    title_or_creator: str
+    license_name: str
+    license_url: str
     local_path: str
     classification: Literal["ILLUSTRATION"]
     approved_start: float
@@ -417,8 +429,8 @@ class PexelsAsset(TypedDict):
     manual_qc: Literal["PASS"]
 ```
 
-Reject an entry when the page URL, creator, local file, exact approved window or
-manual start/mid/end review evidence is missing.
+Reject an entry when the page URL, license class, license URL, local file, exact
+approved window or manual start/mid/end review evidence is missing.
 
 ---
 
@@ -431,7 +443,9 @@ manual start/mid/end review evidence is missing.
 
 - [ ] **Step 1: Implement the prototype renderer**
 
-The renderer must use the actual selected frame-zero Pexels asset, the generated hook WAV and final caption font/treatment. Output exactly 90 frames at 30fps, 1080×1920, H.264/yuv420p with AAC 48kHz stereo.
+The renderer must use the actual selected frame-zero licensable stock asset, the
+generated hook WAV and final caption font/treatment. Output exactly 90 frames at
+30fps, 1080×1920, H.264/yuv420p with AAC 48kHz stereo.
 
 Required timeline:
 
@@ -635,7 +649,10 @@ watermark position changes
 
 - [ ] **Step 4: Perform manual visual inspection**
 
-Inspect every generated sheet with the vision tool and manually review the MP4. Confirm frame-zero prop/action, readable trade state, object/face not obscured, Pexels labels, no source ownership confusion, no static-card interruption and a clear longer house payoff.
+Inspect every generated sheet with the vision tool and manually review the MP4.
+Confirm frame-zero prop/action, readable trade state, object/face not obscured,
+stock `ILLUSTRATION` labels, no source ownership confusion, no static-card
+interruption and a clear longer house payoff.
 
 - [ ] **Step 5: Perform manual listening pass**
 
@@ -680,7 +697,7 @@ Include:
 artifact path/hash/size/specs
 public demand evidence and confounds
 claim/source ledgers
-exact source and Pexels windows
+exact source and licensable-stock windows
 source-use percentages
 narration profile and generation report
 frame-based final timeline
