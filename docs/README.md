@@ -1,5 +1,10 @@
 # Shorts Docs
 
+## Operating Guides
+
+- [WORKFLOW.md](WORKFLOW.md) — blocking end-to-end production flow
+- [MrBeast-Informed Short-Form Production System](guides/mrbeast-short-form-production-system.md) — expectation-first, backward-planned system for promise, progression, signature moment, critical components, payoff, and learning
+
 ## ADR (Architecture Decision Records)
 Decisions that shaped the project.
 
@@ -23,6 +28,7 @@ Decisions that shaped the project.
 | 0018 | Hook caption sync and cadence |
 | 0019 | Multi-niche AB testing (finance/English + health/Vietnamese) |
 | 0020 | Third niche: AI education (English) |
+| 0037 | Expectation-payoff and critical-path production system |
 
 ## Production Traces
 Per-video documentation with pipeline, effects, retention data.
@@ -37,5 +43,5 @@ Per-video documentation with pipeline, effects, retention data.
 - [hook-benchmarks-2026-07/REPORT.md](research/hook-benchmarks-2026-07/REPORT.md) — Hook analysis of 6 viral finance Shorts (frames + transcript + comments), basis for ADR-0018
 
 ## Reference
-- [vision-model-setup.md](vision-model-setup.md) — GPT-4o vision for video analysis
+- [MrBeast production guide — original English MarkItDown extraction](references/mrbeast-production-guide-original-en.md) — user-supplied PDF converted to Markdown; source material, not project policy
 - [vision-glossary.md](vision-glossary.md) — Terminology for vision analysis

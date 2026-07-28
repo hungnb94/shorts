@@ -4,6 +4,55 @@ Living document. File này tiến hóa qua thực tế sử dụng: mỗi lần 
 
 Doc này sắp xếp thứ tự pipeline và định nghĩa các gate cứng. Không lặp lại nội dung rule đã có trong ADR hay `AGENTS.md` — chỉ cite theo số/tên để tránh lệch pha khi ADR thay đổi.
 
+**Execution order thực tế:** `Stage -1A package hypotheses → Stage 1 source +
+candidate discovery → Stage -1B payoff/critical lock → Stage 0 Hook Gate → Stage
+2-7`. Tên `Stage 0` được giữ để không phá references hiện có; đây là blocking gate
+chạy **sau khi đã có candidate span**, nhưng trước mọi cut/render/polish. Thứ tự
+trình bày theo số stage không phải thứ tự gọi.
+
+## Stage -1 — EXPECTATION & PAYOFF CONTRACT (chặn cứng)
+
+Áp dụng trước Hook Gate theo hệ thống chuyển thể từ
+[`guides/mrbeast-short-form-production-system.md`](guides/mrbeast-short-form-production-system.md):
+không thể dựng đúng opening nếu chưa biết viewer được hứa điều gì và ending sẽ
+trả bằng evidence nào (ADR-0037).
+
+Stage -1 chạy hai pass: **A** tạo package/payoff hypotheses nhẹ trước download;
+**B** chạy sau Stage 1 để thay mọi assumption bằng exact source/artifact, khóa
+critical components và mới áp dụng blocking gate. Không gọi hypothesis của pass A
+là verified proof.
+
+0. Trước download/polish, tạo 3 lightweight candidate packages; mỗi candidate chỉ
+   gồm working title/promise, frame-0 concept, progression engine, exact payoff và
+   source/proof feasibility. Loại candidate false/unverifiable/infeasible; MAB chọn
+   giữa các treatment đủ điều kiện, không để editor chọn tay theo sở thích.
+1. Viết một câu `Audience + visible objective/stakes + unresolved question` mà
+   cold viewer hiểu không cần title/description.
+2. Chốt **payoff cuối** và artifact/source beat chứng minh payoff đó. Payoff yếu,
+   không có quyền dùng, không verify được hoặc không trả đúng hook thì concept fail
+   trước production polish.
+3. Lập `Expectation Contract` gồm draft title promise, frame-0 promise, first
+   spoken/caption promise và lý do cả ba cùng dẫn đến một payoff. Đây là working
+   contract, chưa phải canonical metadata của Stage 5.
+4. Chọn một **progression engine** nhìn thấy được (challenge/bet, stair-step,
+   attempt ladder, claim → counter-evidence → verdict, trade/value ladder) với
+   3-5 state. Một chuỗi quote hay nhưng không cho thấy tiến gần payoff không pass.
+5. Chỉ ra một **Signature Moment** factual và khó thay thế: source-native reveal,
+   verified comparison, counter-evidence flip, causal data viz hoặc story-native
+   interaction. “Nhiều effect hơn” không phải signature moment.
+6. Predeclare layer đang test, các layer phải freeze, metric chính sau 48h và điều
+   kiện falsify. MAB/lane vẫn quyết định treatment được xuất bản; Stage -1 không
+   cho phép editor chọn tay biến thể thắng.
+
+Items 0-4 và payoff/expectation truthfulness là blocking. Signature Moment là craft
+hypothesis bắt buộc phải khai báo (`declared` hoặc `none found`), không phải lý do để
+bịa spectacle hay làm yếu một payoff vốn đã rõ. Exact timing/cut-rate vẫn là experiment
+hypothesis dưới ADR-0036, không được nâng thành luật chỉ từ tài liệu MrBeast.
+
+**GATE RULE (pass B):** thiếu exact payoff proof, critical component còn unverified,
+progression engine không có causal state, hoặc expectation contract không khớp thì
+STOP. Không được dùng hook cực đoan để bù cho một body/payoff chưa tồn tại.
+
 ## Stage 0 — 0–3s HOOK GATE (chặn cứng)
 
 Chạy bước này trên MỌI candidate segment trước khi cắt, render, hoặc làm overlay. Không bước nào dưới đây được bắt đầu trước khi có 1 candidate pass.
@@ -61,12 +110,35 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
   nó không phát audio. Mỗi stock asset phải có page URL, direct-file hash và
   provider-specific license marker. Chữ “free” trong page title không chứng minh
   commercial license; asset `restricted` phải bị loại hoặc giữ publication block.
+- Lập **Critical Component ledger** cho mọi thứ mà thiếu nó thì không còn video
+  trung thực: hook-capable moving shot, complete source-audio boundary, payoff/
+  proof asset, license record, narration capability nếu cần, naive-viewer access và
+  lane eligibility. Mỗi item ghi owner, evidence kiểm chứng, blocking state và
+  backup; ưu tiên giải quyết critical path trước caption/effect polish.
+- Ghi `Negatives / Failure modes` trước khi chốt source: rights mơ hồ, source quá
+  yếu, quote thiếu vế, proof không đúng object, paid dependency, không có backup.
+  “Tìm thấy asset” không đồng nghĩa asset usable; verify trực tiếp thay vì nhận
+  metadata/vendor claim theo mặt chữ.
 
 ## Stage 2 — Cut Segment
 
 - Extract candidate đã pass Stage 0. Chọn 1 trong 2 sub-format của Clip Curation Edit (ADR-0022):
+  - **Contiguous VO** (sibling pattern được ADR-0022 cite qua ADR-0013): giữ nguyên
+    trật tự/continuity của chosen source speech span trong khi visual crop, proof panel
+    hoặc silent illustrative layer có thể thay đổi; dùng khi một source window có thể
+    mang trọn hook → causal chain → payoff mà không phải đảo speech order.
   - **Multi-Clip Mashup** (ADR-0022, duration superseded by ADR-0034): nhiều đoạn rời rạc (mỗi đoạn <15s theo ADR-0007 item 3), nối bằng ffmpeg concat demuxer — dùng khi các moment mạnh nhất nằm rải rác quá xa nhau để gom vào 1 cửa sổ 50-75s duy nhất. Vẫn phải đạt tổng 50-75s sau khi ghép; audio joins vẫn phải pass Stage 4 fade/clarity gate.
 - Production doc phải nêu rõ đang dùng sub-format nào (ADR-0022) trong phần "Why This Segment".
+- Trước khi khóa EDL, map mỗi retained span vào một state của progression engine
+  đã chốt ở Stage -1. Mỗi state phải đổi knowledge, stakes, causal step, evidence
+  hoặc verdict; span chỉ lặp lại cùng ý phải rút ngắn hoặc bỏ.
+- Rough-cut riêng **hook → first execution/proof → payoff** trước khi trang trí body.
+  Sau khi mở loop, chuyển từ hype sang action/evidence sớm (thường khoảng 3-8s,
+  nhưng ưu tiên semantic timing hơn fixed timestamp). Nếu ba anchor này không tạo
+  cùng một causal chain, quay lại source/segment selection.
+- Đặt Signature Moment tại nơi investment có nguy cơ phẳng, không dồn vào outro
+  sau khi payoff đã xong. Ưu tiên creativity-first: authentic source/crop/timing →
+  local data viz/animation → honest stock → paid generation sau explicit approval.
 
 ## Stage 3 — Hook Text + Overlays
 
@@ -92,6 +164,18 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 - **Visual self-check bắt buộc**: trích xuất frame tại nhiều mốc trong cửa sổ hook (0-3s) và xem trực tiếp (không chỉ tin vào code) — xác nhận hook text overlay tự thêm hiển thị đúng thời điểm (~t=0.1-0.2s), đủ lớn/đủ nổi bật, không bị đè/che bởi caption gốc của nguồn; visual surprise + narrative promise đọc được; early SFX/focal annotation sync đúng beat. Nếu không đạt, sửa lại trước khi coi Stage 4 là xong — không lùi việc này sang Post-Production Retro.
 - **Cadence + Information Progression check (ADR-0036)**: xem fixed frames/contact sheet ở 0.5-1s cadence xuyên final 0-10s và targeted body spans. Final 0-5s target Visual Change mỗi 0.8-1.5s; final 5-10s không có unexplained gap >3s; sau 10s không có unexplained gap >6s. Scene detector chỉ là advisory. Manual review phải xác nhận mỗi narrative phase có question/causal/proof/payoff progression, không chỉ effect spam.
 - **Loop-Payoff Closure check (ADR-0036)**: đọc lại hook và ending cạnh nhau; ending phải trả đúng open loop ban đầu và không mở một lesson thứ hai mà Short chưa giải thích.
+- **Expectation Match check**: đọc draft title promise, frame 0, first spoken/
+  caption clause và final payoff cạnh nhau. Chúng phải mô tả cùng subject, stakes
+  và causal story; hook tốt nhưng hứa một video khác vẫn fail.
+- **No-Dull-Moment audit**: gán một job cho từng timeline interval: open/sharpen
+  question, causal progress, stake increase, proof, verdict flip, setup payoff,
+  payoff hoặc deliberate breathing room trước reveal. Interval không có job phải
+  cut/shorten/replace. Purposeful silence có thể pass; decorative motion đơn thuần
+  không pass dù cadence counter đạt. Bắt buộc xem toàn bộ exact-final artifact ở 1x,
+  không suy ra pass chỉ từ contact sheet hoặc targeted body spans.
+- **Abrupt-payoff safety**: kết thúc ngay sau payoff thay vì thêm outro/lesson mới,
+  nhưng phải giữ complete meaning, evidence readability, audio decay và measured
+  post-word margin. “Abrupt” không cho phép chặt phoneme hoặc final causal step.
 - **Spoken-TTS preflight bắt buộc trước full render**: synthesize toàn bộ line riêng, đo raw/fitted duration và lưu per-line report (`voice`, engine rate/pitch, post-tempo, target duration, truncation). Không dùng `atempo < 1.0` để kéo chậm giọng lấp visual slot — giữ tốc độ tự nhiên rồi pad silence ở đuôi; nếu line quá dài thì rút gọn copy hoặc tăng nhẹ engine rate, chỉ cho phép post speed-up có bound. Ghép narrator-only preview và transcribe để bắt lỗi nuốt chữ/phát âm trước khi mix nhạc/source audio. Với TTS qua `loudnorm`, fit duration ở sample domain sau resample; xem pitfall chi tiết trong skill `clip-curation-edit`. (Root cause `trademe_v1`: macOS TTS có 5/9 line bị kéo xuống 0.72x, pass codec/loudness nhưng nghe phẳng và thiếu sức sống.)
 - **Voice/TTS replacement sync gate**: khi thay voice hoặc TTS engine cho timeline đã dựng, slot-fit và tổng duration đúng KHÔNG chứng minh caption/visual sync. Render voice-control trước, transcribe audio của final MP4 bằng word timestamps, quantize `caption_at` lên frame kế tiếp, remap semantic visual theo clause thực sự được nói, và giữ caption layer tách khỏi static chrome. Với visual-only revision, mux lại accepted audio bằng stream copy và chứng minh audio-stream hash giống control. Bắt buộc có contact sheet toàn timeline + cặp BEFORE/AFTER quanh reveal; direct-source accurate seek phải reset PTS trước local caption gate. Xem `shorts-render-patterns/references/qwen-cloned-voice-word-sync-and-publishing.md` (root cause: Ronald Wayne v2 pass duration/ASR nhưng caption và proof visual chạy trước Qwen; v3 phát hiện thêm output-seek PTS bug ở direct quote).
 - **Semantic source-frame gate**: word-aligned source window vẫn có thể mở vào
@@ -165,9 +249,21 @@ Lần sản xuất này có gặp case mà các stage trong docs/WORKFLOW.md ch�
     1 dòng cite vào WORKFLOW.md.
   - Sự cố một lần, không phải rule chung -> thêm entry vào AGENTS.md Known
     Pitfalls thay vào đó.
+
+### MrBeast-System Retro (bắt buộc, mọi video)
+- Expectation: title/frame-0/first line/payoff có còn cùng một promise trên exact
+  final artifact không?
+- Progression: state nào yếu hoặc lặp lại; Signature Moment có thật sự khó thay thế
+  hay chỉ là effect?
+- Critical path: bottleneck/component nào được phát hiện quá muộn; backup có hoạt
+  động không?
+- Dullness: interval nào không có story job; nếu giữ lại, lý do semantic là gì?
+- Next test: nêu đúng một layer sẽ đổi, các layer freeze, metric thật sau 48h và
+  falsification condition. Không gọi toàn bộ “MrBeast formula” thắng/thua từ một
+  upload bundle.
 ```
 
-**Enforcement**: Status của production doc một video KHÔNG được đánh dấu done, và dòng của nó trong `docs/experiments/EXPERIMENT-LOG.md` KHÔNG được đánh dấu final, cho tới khi cả 2 subsection trên đã điền đầy đủ — dù chỉ là "none" / "none found".
+**Enforcement**: Status của production doc một video KHÔNG được đánh dấu done, và dòng của nó trong `docs/experiments/EXPERIMENT-LOG.md` KHÔNG được đánh dấu final, cho tới khi cả 3 subsection trên đã điền đầy đủ — dù chỉ là "none" / "none found".
 
 ## Stage 6 — Upload & Log
 
@@ -195,3 +291,15 @@ Lần sản xuất này có gặp case mà các stage trong docs/WORKFLOW.md ch�
 4. Ba No-Feed liên tiếp trên cùng lane → Channel Burn State; remove lane khỏi rotation trong lúc replacement được phone-verify và age ≥3 tuần. Một Short flop không đủ kết luận burn.
 5. Mỗi 24h record view increment. Distribution Plateau chỉ pass khi latest 24h increment `<=20%` preceding 24h increment ở hai checks liên tiếp và Short đã ≥48h. Video vẫn kéo view/ngày cao/ổn định không phải plateau.
 6. Khi plateau, inspect AVD và retention 0-3s; metric yếu nhất phải được ghi vào production brief của Short kế tiếp. Không dùng API AVD/APV để giả lập Studio Stayed to Watch.
+7. Map mọi retention rise/drop đáng kể về exact EDL timestamp **và story job đã
+   predeclare** ở Stage -1/4. Kết luận ở layer nhỏ nhất có evidence (expectation,
+   hook mechanism, proof timing, progression, signature moment, CTA, payoff),
+   không dùng nhãn chung “MrBeast editing fail”. Failure phải đi tiếp thành:
+   lesson → expert/case-study research → một strategy change → treatment kế tiếp
+   khi lane eligible.
+8. Mỗi `Post-Publish Retention Postmortem` phải ghi: distribution state; 0-3s và
+   0-10s response; ba rise/drop lớn nhất gắn exact EDL/caption/SFX; vùng CTA
+   t=38-42s; retention từ payoff onset tới EOF; expectation contract có được exact
+   artifact giao đúng không; và đúng một controlled change cho Short kế tiếp. So
+   sánh trong cùng lane/vertical ở mốc trưởng thành tương đương, không pool chín
+   channel như một cohort vì channel history là confounder.
