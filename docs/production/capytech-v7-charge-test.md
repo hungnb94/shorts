@@ -2,9 +2,9 @@
 
 ## Status
 
-**LOCAL EXACT-FINAL COMPLETE — MEDIA QC PASS — METADATA PASS — UPLOAD QUEUED.**
+**PUBLIC UPLOAD IDENTITY LOGGED — LOCAL QC PASS — PUBLIC DURATION PARITY FAILED — VISUAL/AUDIO PARITY PENDING.**
 
-This artifact removes the known structural failures in V6, but no creative can honestly guarantee one million views. The high-confidence claim is narrower: V7 is source-faithful to Capybluh's long repeated-test engine, passes the measured local gates, and is ready for an external cold-viewer check. Publication remains blocked by ADR-0035 lane eligibility and unresolved Studio wiring.
+This artifact removes the known structural failures in V6, but no creative can honestly guarantee one million views. The high-confidence claim is narrower: V7 is source-faithful to Capybluh's long repeated-test engine and passes the measured local gates. The user subsequently supplied the live Studio identity; pre-publication gate failures are preserved below as unresolved post-upload audit items rather than erased.
 
 | Field | Exact-final value |
 |---|---|
@@ -20,6 +20,28 @@ This artifact removes the known structural failures in V6, but no creative can h
 | Verifier | `pipeline/capytech/verify_capytech_v7_charge_test.py` |
 | Storyboard | `output/projects/capytech/scripts/capytech_v7_charge_test_storyboard.json` |
 | QC | `output/projects/capytech/analysis/v7_charge_test_qc/final_qc.json` |
+
+## Upload Identity
+
+| Field | Logged value |
+|---|---|
+| Video ID | `BGuFYzHslng` |
+| Public Short | `https://youtube.com/shorts/BGuFYzHslng` |
+| Watch URL | `https://www.youtube.com/watch?v=BGuFYzHslng` |
+| Studio edit URL supplied by user | `https://studio.youtube.com/video/BGuFYzHslng/edit` |
+| Studio analytics | `https://studio.youtube.com/video/BGuFYzHslng/analytics/tab-overview/period-default` |
+| Hermes resume command | `hermes --resume 20260729_171031_4ff696` |
+| Hermes session | `@session:default/20260729_171031_4ff696` |
+| Upload snapshot | `data/uploads/BGuFYzHslng.json` |
+| Public availability | `public` |
+| Actual channel | `ZapBara` / `@ZapBara` / `UCFMTbSy9rzBOenAD-U1hvhg` |
+| Observed public duration | `39.659683s` |
+| Local exact-final duration | `52.000000s` |
+| Snapshot | `1` public view at `2026-07-29T11:17:50Z`; upload-state evidence only |
+
+The public title and description match the canonical package. Public category is `People & Blogs`, not the planned `Science & Technology`, and no public tags were exposed. Studio redirected to Google sign-in, so Audience, language, location, synthetic-content disclosure, playlist, Related Video, upload template, thumbnail and trim decision remain unverified.
+
+The public duration fails the `≤0.10s` parity gate. The additional frame/audio parity command was not run, so this record does not claim which section was removed or whether public audio matches the master.
 
 ## Backward Strategy
 
@@ -196,16 +218,16 @@ The same phone and cable face four charging times—and one very bad idea.
 - Upload Details Template: `BLOCKED — approved template name/ID is not recorded`
 - Raw affiliate link: none
 
-## Publication Gate
+## Unresolved Post-Upload Audit
 
-Do not upload yet.
+The upload now exists. Preserve, do not delete or blindly re-upload it. The following pre-publication gates remain unresolved:
 
-1. Confirm the previous ZapBara Short `hkxEmwLKAOw` has reached Distribution Plateau under ADR-0035.
-2. Confirm ZapBara is the next eligible strict-round-robin lane.
-3. Record five external naive-viewer Hook Gate responses; require at least four to identify `phone + charging test + increasing time` from frame zero without the title.
-4. Configure the exact ZapBara master playlist ID.
-5. Resolve Related Video and Upload Details Template.
-6. Upload the exact SHA-256 artifact above; do not re-export it in another editor.
+1. Confirm whether `hkxEmwLKAOw` had reached Distribution Plateau and whether ZapBara was the next eligible strict-round-robin lane.
+2. Record five external naive-viewer Hook Gate responses; require at least four to identify `phone + charging test + increasing time` from frame zero without the title.
+3. Verify the exact ZapBara master playlist, Related Video and Upload Details Template in Studio.
+4. Confirm Audience, language, location, category and synthetic-content disclosure in Studio.
+5. Determine whether the `39.659683s` public duration was an intentional Studio trim or an upload-path defect.
+6. Map ZapBara's channel ID to its own Analytics alias before any metrics fetch; never borrow another vertical's token.
 
 ## Post-Upload Parity Gate
 

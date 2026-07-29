@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "record_type": "youtube_short_public_upload_snapshot",
+  "video_id": "BGuFYzHslng",
+  "canonical_url": "https://youtube.com/shorts/BGuFYzHslng",
+  "watch_url": "https://www.youtube.com/watch?v=BGuFYzHslng",
+  "studio_edit_url": "https://studio.youtube.com/video/BGuFYzHslng/edit",
+  "studio_analytics_url": "https://studio.youtube.com/video/BGuFYzHslng/analytics/tab-overview/period-default",
+  "production_record": "docs/production/capytech-v7-charge-test.md",
+  "experiment_log": "docs/experiments/EXPERIMENT-LOG.md",
+  "artifact": {
+    "path": "output/projects/capytech/final/2026-07-29-capytech_v7_charge_test.mp4",
+    "sha256": "5e2acf6ae4e23ea20be934d520e0fa6cf163bc97ce2925b38ef49dd66391e1b5",
+    "duration_seconds": 52.0
+  },
+  "public_metadata": {
+    "title": "Charge Test: 1s vs 1h 🔋😵",
+    "description": "Charge Test: 1s vs 1h 🔋😵\n\nThe same phone and cable face four charging times—and one very bad idea.\n\n#shorts #PhoneCharging #VisualComedy",
+    "channel": "ZapBara",
+    "channel_id": "UCFMTbSy9rzBOenAD-U1hvhg",
+    "channel_url": "https://www.youtube.com/channel/UCFMTbSy9rzBOenAD-U1hvhg",
+    "uploader_handle": "@ZapBara",
+    "uploader_url": "https://www.youtube.com/@ZapBara",
+    "availability": "public",
+    "live_status": "not_live",
+    "upload_date": "2026-07-29",
+    "public_timestamp_unix": 1785323714,
+    "public_timestamp_utc": null,
+    "public_timestamp_local": null,
+    "duration_seconds": 39.659683,
+    "width_reported_by_player": 1080,
+    "height_reported_by_player": 1920,
+    "category": "People & Blogs",
+    "public_tags": [],
+    "snapshot_view_count": 1,
+    "snapshot_like_count": null,
+    "snapshot_comment_count": null
+  },
+  "snapshot": {
+    "observed_at_utc": "2026-07-29T11:17:50Z",
+    "observed_at_local": null,
+    "evidence_source": "User-supplied Studio URL plus public YouTube counterpart inspected with yt-dlp",
+    "source_url_supplied_by_user": "https://studio.youtube.com/video/BGuFYzHslng/edit",
+    "metrics_fetch_after_local": null,
+    "lifecycle_status": "IN FLIGHT",
+    "interpretation": "The one-view snapshot is upload-state evidence only and is not a performance diagnosis. Analytics must not be fetched until at least 48 hours after publication."
+  },
+  "artifact_identity_check": {
+    "status": "DURATION PARITY FAILED; VISUAL/AUDIO PARITY NOT RUN",
+    "local_duration_seconds": 52.0,
+    "public_duration_seconds": 39.659683,
+    "sampled_timestamps_seconds": [],
+    "similarity_method": null,
+    "aggregate_similarity": null,
+    "duration_difference_seconds": null,
+    "audio_correlation": null,
+    "interpretation": "The public stream is materially shorter than the exact-final master. The parity analysis command was not run; no claim is made about which section was removed or whether the public audio matches."
+  },
+  "public_stream_probe": {
+    "video_codec": "av1",
+    "width": 1080,
+    "height": 1920,
+    "frame_rate": "30/1",
+    "audio_codec": "aac",
+    "audio_sample_rate": 44100,
+    "audio_channels": 2
+  },
+  "packaging_verification": {
+    "title_matches_canonical": true,
+    "description_matches_canonical": true,
+    "channel_name_matches_brand": true,
+    "handle_matches_preferred": true
+  },
+  "observed_packaging_deviations": [
+    "Public category is People & Blogs; the production package planned Science & Technology.",
+    "No public tags were exposed; this does not prove the Studio tags field is empty.",
+    "Public duration is 39.659683s while the local exact-final master is 52.000000s."
+  ],
+  "unverified_studio_fields": [
+    "Audience / Made for kids",
+    "Video language",
+    "Recording location",
+    "Synthetic or altered content disclosure",
+    "Playlist",
+    "Related Video",
+    "Upload Details Template",
+    "Thumbnail/frame selection",
+    "Exact trim/edit decision"
+  ],
+  "metrics_routing": {
+    "project": "capytech",
+    "actual_channel_id": "UCFMTbSy9rzBOenAD-U1hvhg",
+    "configured_channel_alias": null,
+    "status": "UNMAPPED"
+  },
+  "unresolved_gates_at_snapshot": [
+    "Exact public timestamp and 48-hour metrics deadline are not recorded in formatted form.",
+    "Public-versus-local visual and audio parity were not run.",
+    "Studio-only settings are unverified because Studio redirected to Google sign-in.",
+    "External five-person cold-viewer gate remains undocumented.",
+    "ZapBara Analytics alias/channel routing remains unmapped."
+  ]
+}
