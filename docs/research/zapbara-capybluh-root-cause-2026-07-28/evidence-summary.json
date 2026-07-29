@@ -1,0 +1,87 @@
+{
+  "as_of_utc": "2026-07-28T15:01:23.506024+00:00",
+  "target": {
+    "video_id": "hkxEmwLKAOw",
+    "url": "https://youtube.com/shorts/hkxEmwLKAOw",
+    "title": "Free Charge, Hidden Cost 🔋😵",
+    "channel": "ZapBara",
+    "channel_id": "UCFMTbSy9rzBOenAD-U1hvhg",
+    "channel_public_state": {
+      "videos": 1,
+      "subscribers_displayed": 0,
+      "views_displayed": 2,
+      "joined": "2026-02-01"
+    },
+    "upload_timestamp_utc": "2026-07-28T08:31:42+00:00",
+    "elapsed_hours_at_refresh": 6.494862784444444,
+    "public_view_count": 2,
+    "public_duration_seconds_ffprobe": 48.267,
+    "public_duration_seconds_upload_record": 48.301,
+    "local_master_duration_seconds": 50.5,
+    "public_tail_loss_seconds_range": [2.199, 2.233],
+    "public_sound_attribution": "Original Sound",
+    "local_vs_public": {
+      "visual_frame_correlation_mean": 0.9977,
+      "audio_best_aligned_correlation_first_12s": 0.2177,
+      "audio_best_lag_seconds": 0.0362,
+      "audio_residual_energy_after_aligned_regression_pct": 97.36,
+      "local_aac_roundtrip_correlation_control": 0.9989147614388694,
+      "public_integrated_lufs": -1.0,
+      "local_integrated_lufs": -15.9,
+      "public_true_peak_dbfs": 5.71,
+      "local_true_peak_dbfs": -1.54,
+      "public_samples_over_abs_0_99_pct_per_channel": [20.7, 20.71]
+    },
+    "structure": {
+      "first_era_starts_seconds": 5.5,
+      "standalone_hook_share_pct": 11.4,
+      "midroll_cta_window_seconds": [38.0, 42.4],
+      "midroll_cta_share_pct": 9.1,
+      "cut_count": 29,
+      "sfx_event_count": 60,
+      "generated_base_source_clips": 5,
+      "generated_base_source_seconds_total": 25.0,
+      "generated_base_source_seconds_as_pct_public_runtime": 51.8
+    },
+    "media_metrics": {
+      "edge_density_mean": 0.2129,
+      "frame_diff_mean": 4.967,
+      "integrated_lufs_public_download": -1.0
+    }
+  },
+  "source_channel": {
+    "name": "Capybluh",
+    "url": "https://www.youtube.com/@capybluh/shorts",
+    "channel_id": "UCu4tcJ6qYlpVSC2pDEmpZlA",
+    "subscribers_displayed": 2740000,
+    "channel_views_displayed": 2756411541,
+    "shorts_collected": 88,
+    "three_era_sample": {
+      "count": 16,
+      "duration_min_seconds": 14,
+      "duration_median_seconds": 18.0,
+      "duration_max_seconds": 29,
+      "view_count_median": 24167457.5
+    },
+    "long_49_to_60_second_examples": [
+      {"id": "t854ZvvEuPk", "title": "1s vs 1h", "duration_seconds": 50, "views": 163345291},
+      {"id": "iOxZ5Yi1u3c", "title": "1s vs 1m", "duration_seconds": 56, "views": 96270161},
+      {"id": "u3yS1GN9vj4", "title": "1s vs 1h", "duration_seconds": 57, "views": 61968010},
+      {"id": "xDnToe-5KYc", "title": "1s vs 1h", "duration_seconds": 56, "views": 4588970}
+    ]
+  },
+  "three_era_benchmarks": [
+    {"id": "NL4Hrvis-_8", "title": "Oreo 2000 vs 2026 vs 2050", "duration_seconds": 16, "views": 216949928, "likes": 1140275, "sound": "Original Sound"},
+    {"id": "z3t4DbsKkLs", "title": "Buldak 2000 vs 2026 vs 2050", "duration_seconds": 29, "views": 131853085, "likes": 1059107, "sound": "The Amazing Digital Circus Theme Song"},
+    {"id": "l8YoE0g8oqc", "title": "Donut 2000 vs 2026 vs 2050", "duration_seconds": 18, "views": 97446149, "likes": 630671},
+    {"id": "PzRfD1C3VjI", "title": "Phone 2000 vs 2026 vs 2050", "duration_seconds": 17, "views": 10144901, "likes": 110558},
+    {"id": "nSEG9A_uMco", "title": "Pringles 2000 vs 2026 vs 2050", "duration_seconds": 21, "views": 6298321, "likes": 80544}
+  ],
+  "measurement_notes": [
+    "Public counts are point-in-time observations and continue changing.",
+    "No private Studio metrics were available: Shown in feed, Viewed vs swiped away, AVD/APV and retention curve are unknown.",
+    "Up to roughly 300 comments per sampled comparison video were fetched; this is not a complete or globally top-ranked comment census.",
+    "Public audio measurements are from the downloaded YouTube stream. Player-side gain may lower playback level, but cannot restore information already removed by pre-normalization clipping or explain the low waveform correlation.",
+    "Visual correlation compares sampled frames at matching timestamps; it confirms the uploaded visuals closely track the local master through the public endpoint but does not imply bit identity."
+  ]
+}
