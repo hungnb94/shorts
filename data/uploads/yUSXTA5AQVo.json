@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "record_type": "youtube_short_public_upload_snapshot",
+  "video_id": "yUSXTA5AQVo",
+  "canonical_url": "https://youtube.com/shorts/yUSXTA5AQVo",
+  "watch_url": "https://www.youtube.com/watch?v=yUSXTA5AQVo",
+  "studio_analytics_url": "https://studio.youtube.com/video/yUSXTA5AQVo/analytics/tab-overview/period-default",
+  "production_record": "docs/production/hardknocks-v20-dana-dumbest-idea.md",
+  "experiment_log": "docs/experiments/EXPERIMENT-LOG.md",
+  "artifact": {
+    "path": "output/projects/hardknocks/final/2026-07-29-hardknocks_v20_dana_dumbest_idea.mp4",
+    "sha256": "1b9f4cb26763cf0fc32c18e6cf07dd4f44cbaa5e9693b4a233630329756b35e9",
+    "duration_seconds": 59.033333
+  },
+  "public_metadata": {
+    "title": "Dana White’s “Dumbest Idea” Became a $7.7B Deal",
+    "description": "Dana White called entering the fight business “probably the dumbest idea ever.”\nUFC was failing, boxing looked unbeatable—and then storylines plus rule-breaking changed the outcome. Independent reporting confirms the $2M-to-about-$4B progression, while TKO reports a $7.7B Paramount agreement. Would you have made the bet?`\n\n#DanaWhite #UFC #Business",
+    "channel": "MONEY BLINDSPOT",
+    "channel_id": "UCG_yrDQF5Sj6iMTZB0KSBAA",
+    "channel_url": "https://www.youtube.com/channel/UCG_yrDQF5Sj6iMTZB0KSBAA",
+    "uploader_handle": "@MONEYBLINDSPOT",
+    "uploader_url": "https://www.youtube.com/@MONEYBLINDSPOT",
+    "availability": "public",
+    "live_status": "not_live",
+    "upload_date": "2026-07-29",
+    "public_timestamp_utc": "2026-07-29T13:13:32+00:00",
+    "public_timestamp_local": "2026-07-29T20:13:32+07:00",
+    "duration_seconds_rounded": 59,
+    "width_reported_by_player": 1080,
+    "height_reported_by_player": 1920,
+    "fps_reported_by_player": 30,
+    "category": "Education",
+    "public_tags": [],
+    "snapshot_view_count": 0,
+    "snapshot_like_count": null,
+    "snapshot_comment_count": null
+  },
+  "snapshot": {
+    "observed_at_local": "2026-07-29T20:14:22+07:00",
+    "evidence_source": "Live YouTube URL inspected with yt-dlp --dump-single-json --skip-download",
+    "source_url_supplied_by_user": "https://youtube.com/shorts/yUSXTA5AQVo?feature=share",
+    "metrics_fetch_after_local": "2026-07-31T20:13:32+07:00",
+    "lifecycle_status": "IN FLIGHT",
+    "interpretation": "Public snapshot was taken 50 seconds after the public timestamp. The observed zero-view count is upload-state evidence only and must not be used to diagnose distribution, hook or retention."
+  },
+  "artifact_identity_check": {
+    "sampled_timestamps_seconds": [],
+    "similarity_method": "Public-player metadata and duration comparison; public transcode download not triggered because the rounded duration differs from the local exact duration by only 0.033333 seconds.",
+    "aggregate_similarity": null,
+    "duration_difference_seconds_public_minus_local": -0.033333,
+    "interpretation": "Public metadata reports the intended 1080x1920, 30fps, 59-second Short. The duration agrees with the 59.033333-second local master to player rounding precision; visual/audio byte identity was not claimed."
+  },
+  "packaging_verification": {
+    "title_matches_canonical": true,
+    "description_matches_canonical": false,
+    "visible_hashtags_match_canonical": true,
+    "channel_name_matches_brand": true,
+    "channel_id_matches_finance_alias": true,
+    "handle_matches_preferred": null
+  },
+  "observed_packaging_deviations": [
+    "The public description ends the question with a stray backtick character.",
+    "The public description omits the two specific CNBC and TKO source links recorded in the production package.",
+    "No public tags were exposed; this does not prove the Studio tags field is empty."
+  ],
+  "unverified_studio_fields": [
+    "Audience / Made for kids",
+    "Video language",
+    "Recording location",
+    "Synthetic or altered content disclosure",
+    "Playlist",
+    "Related Video",
+    "Upload Details Template",
+    "Thumbnail/frame selection",
+    "ADR-0035 lane eligibility"
+  ],
+  "metrics_routing": {
+    "project": "hardknocks",
+    "actual_channel_id": "UCG_yrDQF5Sj6iMTZB0KSBAA",
+    "configured_channel_alias": "finance",
+    "status": "MAPPED"
+  },
+  "unresolved_gates_at_snapshot": [
+    "School of Hard Knocks footage permission or licensed replacement is not documented.",
+    "ADR-0035 lane eligibility and Related Video wiring are not publicly verifiable.",
+    "Swiped Away under 20% cannot be evaluated before stable post-publication metrics exist."
+  ]
+}
