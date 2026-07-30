@@ -60,3 +60,7 @@ output/projects/**/*.gif
 docs/concepts/**/*.png
 docs/research/**/*.png
 output/projects/**/*.blend
+.hermes/plans/
+output/projects/**/*.mkv
+output/projects/**/*.blend1
+output/projects/**/*.nut
