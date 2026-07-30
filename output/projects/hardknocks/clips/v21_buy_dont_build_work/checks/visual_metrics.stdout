@@ -1,0 +1,90 @@
+{
+  "contact_sheets": {
+    "hook": "output/projects/hardknocks/clips/v21_buy_dont_build_work/checks/hook_contact.jpg",
+    "full": "output/projects/hardknocks/clips/v21_buy_dont_build_work/checks/full_contact.jpg",
+    "transitions": "output/projects/hardknocks/clips/v21_buy_dont_build_work/checks/transitions_contact.jpg"
+  },
+  "hook_motion": {
+    "median_mean_abs_delta": 10.027040004730225,
+    "minimum_mean_abs_delta": 5.096047401428223,
+    "max_consecutive_below_1": 0,
+    "deltas": [
+      6.248871326446533,
+      8.441296577453613,
+      9.537419319152832,
+      9.835190773010254,
+      7.267580986022949,
+      6.18324089050293,
+      5.096047401428223,
+      7.421012878417969,
+      9.69108772277832,
+      63.28814697265625,
+      12.449073791503906,
+      14.991585731506348,
+      14.620196342468262,
+      13.69365119934082,
+      13.629826545715332,
+      10.079363822937012,
+      10.564780235290527,
+      10.164490699768066,
+      61.77281951904297,
+      9.740625381469727,
+      10.22218132019043,
+      10.113807678222656,
+      60.35104751586914,
+      9.974716186523438,
+      8.463900566101074,
+      7.726105213165283,
+      7.906353950500488,
+      22.14982032775879,
+      9.879074096679688,
+      10.436285018920898
+    ]
+  },
+  "cta_coverage": [
+    {
+      "time": 38.25,
+      "changed_ratio_gt25": 0.05514756944444445
+    },
+    {
+      "time": 39.25,
+      "changed_ratio_gt25": 0.057734375
+    },
+    {
+      "time": 40.25,
+      "changed_ratio_gt25": 0.0555078125
+    },
+    {
+      "time": 41.25,
+      "changed_ratio_gt25": 0.04146267361111111
+    }
+  ],
+  "mid_unique_colors": 46552,
+  "footer_samples": [
+    {
+      "time": 1.0,
+      "footer_mean": 84.17648315429688,
+      "near_black_ratio": 0.00044444444444444447
+    },
+    {
+      "time": 10.0,
+      "footer_mean": 126.53182983398438,
+      "near_black_ratio": 0.0
+    },
+    {
+      "time": 30.0,
+      "footer_mean": 73.36763000488281,
+      "near_black_ratio": 0.04744444444444444
+    },
+    {
+      "time": 50.0,
+      "footer_mean": 29.29166603088379,
+      "near_black_ratio": 0.33411111111111114
+    },
+    {
+      "time": 68.0,
+      "footer_mean": 30.65251922607422,
+      "near_black_ratio": 0.28888888888888886
+    }
+  ]
+}
