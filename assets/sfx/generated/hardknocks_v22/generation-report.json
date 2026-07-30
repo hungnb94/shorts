@@ -1,0 +1,59 @@
+{
+  "generator": "pipeline/hardknocks/generate_hardknocks_v22_audio.py",
+  "assets": [
+    {
+      "path": "assets/sfx/generated/hardknocks_v22/hook_origin_hit.wav",
+      "duration_s": 0.42,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "peak": 0.42,
+      "sha256": "e5114cbcd498cffb3631bea19cce0bb1bb115147f10f88967b88590fa4e56a56",
+      "seed": 20260730
+    },
+    {
+      "path": "assets/sfx/generated/hardknocks_v22/jet_motion_whoosh.wav",
+      "duration_s": 0.92,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "peak": 0.38,
+      "sha256": "342e3fa015d702402d8a92a0c606baa6c4438a276b4883119b4fa7c8925b45c0",
+      "seed": 20260731
+    },
+    {
+      "path": "assets/sfx/generated/hardknocks_v22/proof_tick.wav",
+      "duration_s": 0.34,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "peak": 0.34,
+      "sha256": "60487236de78823d0e782a4f349d8d3ed638bea3cbcefb153b41b5a4e4292f51",
+      "seed": 20260732
+    },
+    {
+      "path": "assets/sfx/generated/hardknocks_v22/cta_click.wav",
+      "duration_s": 0.18,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "peak": 0.3,
+      "sha256": "3fc9e52d7709339b8b620cf57aad3f589112cbd8a7e48af975413bf622413b3e",
+      "seed": 20260733
+    },
+    {
+      "path": "assets/sfx/generated/hardknocks_v22/payoff_warm_hit.wav",
+      "duration_s": 1.1,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "peak": 0.4,
+      "sha256": "948aa5c1a5a54fe16fb70288b7b67582e738653b4055ad2701ed76614ce6eb20",
+      "seed": 20260734
+    },
+    {
+      "path": "assets/sfx/generated/hardknocks_v22/restrained_finance_bed.wav",
+      "duration_s": 70.0,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "peak": 0.11,
+      "sha256": "f2bdd30f0252ecf5bb4be9118b58393c600c68f796058503b40ba28d5b698337",
+      "seed": 20260735
+    }
+  ]
+}

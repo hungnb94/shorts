@@ -158,6 +158,18 @@ _Avoid_: "annotation", "widget"
 Base quality layer áp dụng TỰ ĐỘNG cho mọi Short, KHÔNG phải AB Variable: sound design, zoom punch, pattern interrupt, cut rhythm, Information Progression và Loop-Payoff Closure. Exact cadence có thể là hypothesis giữa hai treatment đều đạt baseline; không được tạo arm cố ý thiếu sound/motion để làm đối chứng.
 _Avoid_: "effects", "polish"
 
+**Sonic Intent** (ADR-0038):
+Pre-search contract khóa vertical/audience, tone, emotional states, default sonic palette, excluded sound families và các sound job quan trọng của hook/discovery/payoff. Sonic Intent ngăn editor chọn sound theo độ viral hoặc filename trước khi biết video cần tạo cảm giác gì.
+_Avoid_: "pick some trending sounds", "add SFX later"
+
+**SFX Event Ledger** (ADR-0038):
+Bảng cue-level được tạo từ exact EDL trước asset search: timestamp/pre-lap, visible/implied trigger, story job, family/role, desired attributes, functional search query, asset ID, gain, rights và full-mix verdict. Ledger là cầu nối giữa story event, thư viện sound và retention postmortem; không phải quota số effect.
+_Avoid_: "SFX list", "effect every N seconds", "marker without semantic job"
+
+**SFX Asset Manifest** (ADR-0038):
+Registry dùng chung cho asset production, lưu stable ID, role/family, origin, exact source/license or generation recipe, attribution, checksum, technical metadata, human approval và rights status. MyInstants/unknown user-upload sound mặc định `reference_only`; downloadable hoặc popular không đồng nghĩa commercially cleared.
+_Avoid_: "download folder", "royalty-free because the button plays", "existing renderer used it so it is approved"
+
 **Visual Change**:
 Một thay đổi nhìn thấy được có thể reset chú ý: cut, reframe/zoom, overlay xuất hiện/biến mất, đổi layout/source hoặc continuous motion. Visual Change là đơn vị cadence; bản thân nó không khẳng định viewer đã học thêm thông tin.
 _Avoid_: "hard cut" (quá hẹp), "new evidence" (khái niệm khác)

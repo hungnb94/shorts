@@ -31,6 +31,7 @@ The real, working pipeline is manual/semi-manual Python + ffmpeg, run per projec
 - **3-source combo for engagement** — every video combines: (1) original source footage, (2) animated overlays (kinetic text, data viz, whiteboard), (3) Pexels b-roll for visual variety. This maximizes retention by avoiding visual monotony.
 - **Standard workflow** — see `docs/WORKFLOW.md` for the mandatory per-video sequence, the blocking Hook Gate (Stage 0, no cutting/rendering before a strong 0-3s hook is chosen), and the required per-video Post-Production Retro.
 - **Guide-derived verification baseline** — every new Short must pass ADR-0034: early SFX, calibrated caption profile, Mid-Roll Triple CTA at t=38-42s, moving watermark, compact metadata, playlist/Related wiring and explicit Studio settings.
+- **Event-ledger SFX system** — before asset search, lock Sonic Intent and mark purpose-bound audio events from the real EDL; every production cue resolves to the shared rights manifest and passes exact-final full-mix review (ADR-0038). MyInstants is discovery/reference only unless independent commercial rights are documented.
 - **Media-first verification; no renderer unit tests** — the current `pipeline/<project>/render_*.py` files are one-off video-production tools, not product code. Do not create, extend, or require `test_render_*.py` files and do not apply TDD to these renderers unless the user explicitly requests automated code tests.
 - **Final video filenames are date-prefixed** — every rendered file under `output/projects/<project>/final/` uses `yyyy-mm-dd-<name>.mp4` (the render date), e.g. `2026-07-11-hardknocks_v2_implied_comparison.mp4`, so the creation date is visible without checking file metadata. Applies going forward from 2026-07-11; older files are not being renamed retroactively.
 
@@ -124,6 +125,7 @@ Under Plateau-Gated Cadence there is no honest fixed calendar convergence estima
 - Copy proven viral formats, repackage with variations
 - Wait 48h before fetching YouTube Analytics (stable data)
 - Apply Retention Techniques and ADR-0036's Information Progression, event-bound SFX and Loop-Payoff Closure to EVERY Short — they are base quality, not optional
+- Build the ADR-0038 Sonic Intent + SFX Event Ledger before searching for sounds; resolve every retained cue to a rights-cleared manifest asset and verify it in the exact-final full mix
 - Let MAB select variants autonomously — don't override its choices manually
 - Verify video specs before upload (9:16, 50-75s, MP4 H.264 + audio)
 - Verify the full ADR-0034 craft/metadata package and ADR-0035 lane eligibility before upload

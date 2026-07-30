@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.shorts/assets/sfx/manifest.schema.json",
+  "title": "Shorts SFX asset manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "policy", "assets"],
+  "properties": {
+    "$schema": {"type": "string", "minLength": 1},
+    "schema_version": {"const": 1},
+    "policy": {"type": "string", "minLength": 1},
+    "assets": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/asset"}
+    }
+  },
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "family",
+        "role",
+        "origin",
+        "source_url",
+        "license_name",
+        "license_url",
+        "generation_recipe",
+        "attribution",
+        "sha256",
+        "duration_s",
+        "sample_rate_hz",
+        "channels",
+        "approval_status",
+        "rights_status",
+        "audition_notes"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
+        "path": {"type": "string", "minLength": 1},
+        "family": {
+          "enum": [
+            "diegetic_foley",
+            "motion_transition",
+            "state_emphasis",
+            "tension_context",
+            "meme_voice_reference"
+          ]
+        },
+        "role": {"type": "string", "minLength": 1},
+        "origin": {
+          "enum": [
+            "recorded",
+            "generated",
+            "youtube_audio_library",
+            "freesound_cc0",
+            "freesound_cc_by",
+            "licensed_third_party",
+            "reference_only"
+          ]
+        },
+        "source_url": {"type": "string"},
+        "license_name": {"type": "string"},
+        "license_url": {"type": "string"},
+        "generation_recipe": {"type": "string"},
+        "attribution": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "duration_s": {"type": "number", "exclusiveMinimum": 0},
+        "sample_rate_hz": {"type": "integer", "minimum": 8000},
+        "channels": {"type": "integer", "minimum": 1, "maximum": 8},
+        "approval_status": {"enum": ["candidate", "approved", "retired"]},
+        "rights_status": {
+          "enum": ["cleared", "attribution_required", "reference_only", "blocked"]
+        },
+        "audition_notes": {"type": "string"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"origin": {"const": "generated"}}},
+          "then": {"properties": {"generation_recipe": {"minLength": 1}}},
+          "else": {
+            "properties": {
+              "source_url": {"format": "uri", "minLength": 1},
+              "license_name": {"minLength": 1},
+              "license_url": {"format": "uri", "minLength": 1}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"approval_status": {"const": "approved"}}},
+          "then": {
+            "required": ["path"],
+            "properties": {
+              "rights_status": {"enum": ["cleared", "attribution_required"]}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"rights_status": {"const": "attribution_required"}}},
+          "then": {"properties": {"attribution": {"minLength": 1}}}
+        },
+        {
+          "if": {"properties": {"origin": {"const": "reference_only"}}},
+          "then": {
+            "properties": {
+              "approval_status": {"not": {"const": "approved"}},
+              "rights_status": {"enum": ["reference_only", "blocked"]}
+            }
+          }
+        }
+      ]
+    }
+  }
+}

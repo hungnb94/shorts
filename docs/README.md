@@ -29,6 +29,7 @@ Decisions that shaped the project.
 | 0019 | Multi-niche AB testing (finance/English + health/Vietnamese) |
 | 0020 | Third niche: AI education (English) |
 | 0037 | Expectation-payoff and critical-path production system |
+| 0038 | Event-ledger SFX library and rights gate |
 
 ## Production Traces
 Per-video documentation with pipeline, effects, retention data.
@@ -41,7 +42,9 @@ Per-video documentation with pipeline, effects, retention data.
 
 ## Research
 - [hook-benchmarks-2026-07/REPORT.md](research/hook-benchmarks-2026-07/REPORT.md) — Hook analysis of 6 viral finance Shorts (frames + transcript + comments), basis for ADR-0018
+- [sfx-system-2026-07-30/REPORT.md](research/sfx-system-2026-07-30/REPORT.md) — single-video SFX method analysis, MyInstants rights boundary, repository gap audit and rollout strategy
 
 ## Reference
 - [MrBeast production guide — original English MarkItDown extraction](references/mrbeast-production-guide-original-en.md) — user-supplied PDF converted to Markdown; source material, not project policy
 - [vision-glossary.md](vision-glossary.md) — Terminology for vision analysis
+- [SFX Event Ledger template](templates/sfx-event-ledger.md) — per-video Sonic Intent, cue ledger and exact-final audio QC
