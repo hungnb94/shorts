@@ -50,8 +50,10 @@
     "same_timestamp_0_to_15_mean_correlation": 0.999499,
     "aligned_25_to_55_mean_correlation": 0.939795,
     "duration_difference_public_minus_local_seconds": -1.66839,
-    "interpretation": "The public upload and local exact-final master are the same visual lineage, with near-identical same-time frames through 15 seconds. Later public frames align best to local frames approximately 1.5-2.0 seconds later, so the public 56.331610-second timeline is not the exact 58.000000-second local master timeline. This establishes a timing/edit difference, not its cause. Byte identity, audio identity, and a specific trim operation are not claimed.",
-    "warning": "Use 56.331610 seconds as the public experiment duration. Do not treat exact-final local QC as proof of the public timeline after 15 seconds without a Studio-side upload check."
+    "publication_cut_status": "USER_CONFIRMED_INTENTIONAL_REVISION",
+    "user_reported_similarity": "Approximately 90% matches the local exact-final master; a few weaker sections were intentionally revised before publication.",
+    "interpretation": "The public upload and local exact-final master are the same visual lineage, with near-identical same-time frames through 15 seconds. Later public frames align best to local frames approximately 1.5-2.0 seconds later. The user confirmed that the public 56.331610-second version is an intentional publication revision that remains approximately 90% the same as the local master. The exact edit list, byte identity, and audio identity were not independently audited.",
+    "warning": "Use 56.331610 seconds and the public publication cut as the authoritative experiment identity. The local 58.000000-second artifact remains provenance and exact-final QC evidence for its own timeline, not proof that every public frame/audio event passed the same gates."
   },
   "packaging_verification": {
     "title_matches_canonical": true,
@@ -60,7 +62,7 @@
     "handle_matches_preferred": true
   },
   "observed_packaging_deviations": [
-    "The public timeline is 1.668390 seconds shorter than the local exact-final master and diverges after 15 seconds before realigning later with an approximately 1.5-2.0-second offset.",
+    "The public timeline is an intentional user-edited publication cut: 1.668390 seconds shorter than the local exact-final master and user-reported as approximately 90% the same.",
     "No public tags were exposed; this does not prove that the separate Studio tags field is empty."
   ],
   "unverified_studio_fields": [
@@ -85,6 +87,6 @@
     "Independent human cold-viewer review remains UNVERIFIED; existing visual review is machine proxy only.",
     "Audience / Made for kids remains unverified while the rendered CTA asks viewers to comment.",
     "ADR-0035 lane eligibility is not recorded.",
-    "Public timeline differs from the exact-final local master; verify the intended uploaded file/timeline in Studio."
+    "The exact edit list and public audio identity were not independently audited; local 97/97 QC applies to the 58-second local master, not automatically to the modified public timeline."
   ]
 }

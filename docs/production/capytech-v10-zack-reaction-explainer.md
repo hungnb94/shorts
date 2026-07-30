@@ -279,8 +279,11 @@ Studio tags, entered separately without `#`:
 - Public-master identity: same visual lineage. Frames through 15s match at the
   same timestamps (`0.999499` mean grayscale correlation); from 25-55s, public
   frames align best to local frames about 1.5-2.0s later (`0.939795` aligned
-  mean). Therefore the public upload is not the exact local 58s timeline. The
-  cause and audio identity remain unverified; use public duration for metrics.
+  mean). The user confirmed that the 56.331610s public version intentionally
+  revises a few weaker sections and remains approximately 90% the same as the
+  local master. The exact edit list and audio identity were not independently
+  audited. Use the public cut and duration as the experiment identity; retain
+  the 58s local artifact only as provenance/QC evidence for its own timeline.
 - Metrics lifecycle: `IN FLIGHT`; keep Stayed/AVD/Swiped fields `pending` and do
   not fetch or diagnose performance before `2026-08-01 21:47:06 +07`.
 - Analytics routing: ZapBara/capytech remains `UNMAPPED`; do not use finance,
@@ -309,4 +312,6 @@ available after the required reporting delay.
 - Public-master verification found that matching title, dimensions and opening
   frames do not establish exact timeline identity. The upload snapshot therefore
   preserves public duration and timing-offset evidence separately from local
-  exact-final provenance; no causal explanation for the difference is claimed.
+  exact-final provenance. The user later confirmed the difference was caused by
+  intentional edits to a few weaker sections; the public cut is authoritative
+  for analytics while local 97/97 QC remains scoped to the local 58s timeline.
