@@ -1,6 +1,6 @@
 # HardKnocks V23 — GTA, Belief, and the Control Boundary
 
-**Status:** FULL LOCAL RENDER COMPLETE — USER STOPPED FURTHER EDITORIAL OPTIMIZATION  
+**Status:** PUBLIC UPLOAD VERIFIED — PUBLIC ASSET DIFFERS FROM LOCAL EXACT-FINAL
 **Source:** `HeuqoqyRQdk` — *Asking Rich People If They Believe In God!*  
 **Format:** Clip Curation Edit, 9:16, 74.933 seconds  
 **Primary goal:** reduce Shorts Feed Swiped Away by transferring the verified opening architecture of V18 and V21, not by copying either topic  
@@ -373,4 +373,50 @@ Exact-final checks:
 
 Codex round 1 reviewed the same artifact hash and scored `84/100`, with no blocking media defect. Its main recommendation was a material story reorder to pay the control thesis earlier. The user explicitly stopped further optimization and requested the render, so no additional editorial rerender was performed. The score remains recorded honestly; it is not upgraded or presented as a virality guarantee.
 
-Publication remains blocked by source-footage rights and narrator-conditioning consent/licensing. Lane eligibility and upload are separate gates.
+Source-footage rights, narrator-conditioning consent/licensing and lane eligibility
+were unresolved before publication and remain visible as post-upload audit items.
+
+## Public Upload Snapshot
+
+| Field | Observed value |
+|---|---|
+| User-supplied URL | `https://youtube.com/shorts/knAPeKpTpoA` |
+| Video ID | `knAPeKpTpoA` |
+| Canonical Shorts URL | `https://youtube.com/shorts/knAPeKpTpoA` |
+| Studio Analytics | `https://studio.youtube.com/video/knAPeKpTpoA/analytics/tab-overview/period-default` |
+| Availability | Public |
+| Public timestamp | `2026-07-31T21:18:42+07:00` |
+| Channel | MONEY BLINDSPOT (`UCG_yrDQF5Sj6iMTZB0KSBAA`) |
+| Channel routing | `finance` alias — mapped |
+| Public duration | `67.661s` exact downloaded transcode; extractor reports `68s` |
+| Local exact-final duration | `74.933333s` |
+| Public minus local | `-7.272333s` |
+| Metrics fetch after | `2026-08-02T21:18:42+07:00` |
+| Upload snapshot | `data/uploads/knAPeKpTpoA.json` |
+
+The live title, description and three visible hashtags match the canonical
+package exactly. The public extractor exposed an empty tags array, which does
+not prove that YouTube Studio's private tags field is empty.
+
+### Public-master identity finding
+
+The public upload is not the byte/timeline equivalent of the recorded local
+exact-final. Same-time sampled-frame correlation is approximately `0.998`
+through `38.0s`. At public `38.4s`, the best local match jumps to `45.8s`; the
+rest of the public body continues to align about `7.4s` later in the local file,
+with mean aligned correlation `0.9874`.
+
+Public ASR independently confirms that the public asset omits the local
+`38.267–45.567s` counter-argument and Triple CTA interval, then rejoins the
+colleagues section. This is a mid-timeline content difference, not a simple tail
+truncation. The same visual lineage is verified, but the reason for the
+difference is unverified; identifying whether a different export or upload
+timeline was selected requires Studio-side evidence.
+
+### 48-hour hold
+
+Do not fetch or judge metrics before `2026-08-02T21:18:42+07:00`. The snapshot
+view count of `0` was observed about 74 seconds after publication and is upload
+state only, not evidence about hook quality or distribution. At the deadline,
+record Studio Swiped Away, Audience Retention Stayed to Watch and AVD in seconds
+against the actual public duration of `67.661s`, not the local master duration.

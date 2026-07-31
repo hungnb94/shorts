@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "record_type": "youtube_short_public_upload_snapshot",
+  "video_id": "knAPeKpTpoA",
+  "canonical_url": "https://youtube.com/shorts/knAPeKpTpoA",
+  "watch_url": "https://www.youtube.com/watch?v=knAPeKpTpoA",
+  "studio_analytics_url": "https://studio.youtube.com/video/knAPeKpTpoA/analytics/tab-overview/period-default",
+  "production_record": "docs/production/hardknocks-v23-gta-belief.md",
+  "experiment_log": "docs/experiments/EXPERIMENT-LOG.md",
+  "artifact": {
+    "path": "output/projects/hardknocks/final/2026-07-31-hardknocks_v23_gta_belief_control.mp4",
+    "sha256": "6892f4a422c719491769e70364e66463ec6b16a55663199e80d948dba4993a2b",
+    "duration_seconds": 74.933333,
+    "mapping_status": "SAME_VISUAL_LINEAGE_NOT_EXACT_TIMELINE",
+    "mapping_basis": "Public and local frames match through approximately 38.0s. From public 38.4s onward, public frames align to local frames about 7.4s later, and public ASR omits the local counter-argument and Triple CTA interval."
+  },
+  "public_metadata": {
+    "title": "What GTA Boss Can't Control 🎮🤔",
+    "description": "What GTA Boss Can't Control 🎮🤔\n\nTake-Two CEO Strauss Zelnick says GTA V sold 230 million copies, then explains why he can control his actions and plans—but not outcomes.\n\n#GTA #Business #shorts",
+    "channel": "MONEY BLINDSPOT",
+    "channel_id": "UCG_yrDQF5Sj6iMTZB0KSBAA",
+    "channel_url": "https://www.youtube.com/channel/UCG_yrDQF5Sj6iMTZB0KSBAA",
+    "uploader_handle": "@MONEYBLINDSPOT",
+    "uploader_url": "https://www.youtube.com/@MONEYBLINDSPOT",
+    "availability": "public",
+    "live_status": "not_live",
+    "upload_date": "2026-07-31",
+    "public_timestamp_utc": "2026-07-31T14:18:42+00:00",
+    "public_timestamp_local": "2026-07-31T21:18:42+07:00",
+    "duration_seconds_extractor_rounded": 68,
+    "duration_seconds_public_transcode": 67.661,
+    "width_reported_by_player": 1080,
+    "height_reported_by_player": 1920,
+    "fps_reported_by_player": 30,
+    "category": null,
+    "public_tags": [],
+    "snapshot_view_count": 0,
+    "snapshot_like_count": null,
+    "snapshot_comment_count": null
+  },
+  "snapshot": {
+    "observed_at_local": "2026-07-31T21:19:56+07:00",
+    "evidence_source": "User-supplied public URL inspected with yt-dlp; a temporary public transcode was probed, frame-aligned and transcribed.",
+    "source_url_supplied_by_user": "https://youtube.com/shorts/knAPeKpTpoA",
+    "metrics_fetch_after_utc": "2026-08-02T14:18:42+00:00",
+    "metrics_fetch_after_local": "2026-08-02T21:18:42+07:00",
+    "metrics_deadline_basis": "Exact public timestamp plus 48 hours.",
+    "lifecycle_status": "IN FLIGHT / PUBLIC MASTER DIFFERS FROM LOCAL EXACT-FINAL",
+    "interpretation": "The zero-view snapshot was observed about 74 seconds after publication. It is upload-state evidence only and is not a performance diagnosis."
+  },
+  "artifact_identity_check": {
+    "sampled_timestamps_seconds": [0.2, 1.0, 3.0, 5.0, 10.0, 15.0, 20.0, 30.0, 35.0, 38.0, 38.4, 40.0, 45.0, 50.0, 55.0, 60.0, 65.0, 67.0],
+    "similarity_method": "Pearson correlation of normalized 135x240 grayscale frames decoded from the public transcode and local master; same-timestamp comparison followed by a bounded ±8.0s local-time search at 0.1s increments.",
+    "same_timestamp_aggregate_similarity": 0.7631,
+    "same_timestamp_opening_mean_similarity": 0.9979,
+    "aligned_body_mean_similarity": 0.9874,
+    "alignment_samples": [
+      {"public_timestamp_seconds": 35.0, "best_local_timestamp_seconds": 35.0, "offset_seconds": 0.0, "correlation": 0.9990},
+      {"public_timestamp_seconds": 38.0, "best_local_timestamp_seconds": 38.0, "offset_seconds": 0.0, "correlation": 0.9989},
+      {"public_timestamp_seconds": 38.4, "best_local_timestamp_seconds": 45.8, "offset_seconds": 7.4, "correlation": 0.9978},
+      {"public_timestamp_seconds": 40.0, "best_local_timestamp_seconds": 47.4, "offset_seconds": 7.4, "correlation": 0.9945},
+      {"public_timestamp_seconds": 45.0, "best_local_timestamp_seconds": 52.4, "offset_seconds": 7.4, "correlation": 0.9908},
+      {"public_timestamp_seconds": 50.0, "best_local_timestamp_seconds": 57.4, "offset_seconds": 7.4, "correlation": 0.9908},
+      {"public_timestamp_seconds": 55.0, "best_local_timestamp_seconds": 62.4, "offset_seconds": 7.4, "correlation": 0.9892},
+      {"public_timestamp_seconds": 60.0, "best_local_timestamp_seconds": 67.4, "offset_seconds": 7.4, "correlation": 0.9541},
+      {"public_timestamp_seconds": 65.0, "best_local_timestamp_seconds": 72.4, "offset_seconds": 7.4, "correlation": 0.9877},
+      {"public_timestamp_seconds": 67.0, "best_local_timestamp_seconds": 74.4, "offset_seconds": 7.4, "correlation": 0.9946}
+    ],
+    "duration_difference_public_minus_local_seconds": -7.272333,
+    "visual_lineage": "confirmed by sampled high-correlation frame matches",
+    "exact_timeline_parity": "failed",
+    "audio_identity": "failed at timeline/content level; public ASR omits the local counter-argument and Triple CTA interval",
+    "public_asr_path": "output/projects/hardknocks/clips/v23_gta_belief_work/upload_verification/knAPeKpTpoA-public-asr.txt",
+    "cause": "unverified",
+    "interpretation": "The opening and timeline match the local master through about 38.0s. Beginning near public 38.4s, the public asset aligns to local content about 7.4s later. This is consistent with the public asset omitting the local 38.267-45.567 counter-argument and Triple CTA interval; it is not a simple tail truncation. The evidence establishes the same visual lineage but not exact local-master identity."
+  },
+  "packaging_verification": {
+    "canonical_planned_title": "What GTA Boss Can't Control 🎮🤔",
+    "title_matches_canonical": true,
+    "description_matches_canonical": true,
+    "visible_hashtags_match_canonical": true,
+    "channel_name_matches_brand": true,
+    "channel_id_matches_finance_alias": true,
+    "handle_matches_preferred": true
+  },
+  "observed_packaging_deviations": [],
+  "unverified_studio_fields": [
+    "Audience / Made for kids",
+    "Video language",
+    "Recording location",
+    "Synthetic or altered content disclosure",
+    "Playlist",
+    "Related Video",
+    "Upload Details Template",
+    "Thumbnail/frame selection",
+    "Studio tags (empty public tags are not proof the Studio field is empty)",
+    "ADR-0035 lane eligibility"
+  ],
+  "metrics_routing": {
+    "project": "hardknocks",
+    "actual_channel_id": "UCG_yrDQF5Sj6iMTZB0KSBAA",
+    "configured_channel_alias": "finance",
+    "status": "MAPPED"
+  },
+  "unresolved_gates_at_snapshot": [
+    "The public asset differs materially from the recorded local exact-final by a missing mid-timeline interval; Studio upload-file/timeline evidence has not identified the cause.",
+    "School of Hard Knocks footage permission or licensed replacement is not documented.",
+    "Explicit narrator consent/licensing for the public-person conditioning reference is not documented, although the public ASR indicates the synthetic narrator authority bridge remains while the counter bridge and Triple CTA are absent.",
+    "Audience, language, location, synthetic disclosure, playlist, Related Video, Upload Details Template, thumbnail and Studio tags are not publicly verifiable.",
+    "ADR-0035 lane eligibility remains unverified."
+  ]
+}
