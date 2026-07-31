@@ -1,6 +1,6 @@
 # HardKnocks V22 — The $78 Tail Number
 
-Status: V22R1 INTERNAL FINAL; EXACT-FINAL MEDIA QC PASS; CODEX EDITORIAL SCORE 98; COMMERCIAL UPLOAD RIGHTS-BLOCKED
+Status: V22R1 USER-REPORTED UPLOAD; PUBLIC METADATA/MASTER IDENTITY UNVERIFIED; PRE-UPLOAD RIGHTS GATES REMAIN UNRESOLVED
 Date: 2026-07-30
 Vertical: Finance / English
 Video type: Clip Curation Edit
@@ -17,6 +17,19 @@ The Short will not become luxury-flex motivation. Backward planning starts from 
 > The jet is the reward; the business was a boring home-sleep-testing problem, differentiated through service and scaled by paying the team before himself.
 
 The production innovation is the first full use of ADR-0038: exact EDL → Sonic Intent → event ledger → generated rights-clear assets → exact-final full-mix QC.
+
+## Upload identity snapshot
+
+- User-supplied URL: `https://youtube.com/shorts/V1JQexeiJ5A?feature=share`
+- Video ID: `V1JQexeiJ5A`
+- Canonical Shorts URL: `https://youtube.com/shorts/V1JQexeiJ5A`
+- Studio analytics: `https://studio.youtube.com/video/V1JQexeiJ5A/analytics/tab-overview/period-default`
+- Logged at: `2026-07-31T07:24:11+07:00`
+- Provisional metrics-not-before: `2026-08-02T07:24:11+07:00` (48 hours after logging time; replace with public timestamp +48h when verified)
+- Snapshot: `data/uploads/V1JQexeiJ5A.json`
+- Mapping: provisional to the V22R1 local master because the URL was supplied immediately after this video's handoff. Direct public metadata inspection was denied, so title, description, availability, channel, exact public timestamp, public duration and public/local visual identity remain unverified.
+
+The reported upload does not retroactively clear the unresolved School of Hard Knocks footage rights or public-person narrator-conditioning consent/licensing gates. Preserve the upload; do not delete it merely to reset distribution.
 
 ## Source lock and candidate funnel
 
@@ -284,7 +297,7 @@ Vick Tipnes says $78 became his tail-number promise—his real scale came from h
 
 ## What To Check At 48 Hours
 
-This clock starts only after rights clearance and an actual upload. Do not fetch metrics early.
+The upload is user-reported but its exact public timestamp is unavailable. Do not fetch metrics before the provisional `2026-08-02T07:24:11+07:00` deadline; once the public timestamp is verified, replace this deadline with public timestamp +48 hours.
 
 - Studio `Swiped Away`, with the project target below 20%.
 - Studio Audience Retention `Stayed to Watch`; do not substitute Analytics API average-view percentage.
@@ -326,7 +339,7 @@ Second- and third-order protection:
 
 - The title-worthy luxury object is treated as a receipt, not the causal mechanism, preventing the Short from accidentally teaching survivorship-bias flexing.
 - The `largest provider`, patient count and jet cost remain speaker-attributed; the conflicting `650 employees` claim is omitted.
-- Publication remains rights-blocked despite media QC passing. Local production success does not override source-footage clearance.
+- The upload is now user-reported, but publication does not retroactively clear source-footage or narrator-consent gates; both remain unresolved post-upload audit items.
 
 Final artifact:
 

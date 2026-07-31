@@ -1,0 +1,18 @@
+Review the exact V23 Short as an independent editorial critic. Do not edit files.
+
+Follow `/Users/hung/code/ai/shorts/docs/templates/codex-media-review-prompt.md` and return JSON matching `/Users/hung/code/ai/shorts/docs/templates/codex-media-review.schema.json`.
+
+Exact inputs:
+- MP4: `/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v23_gta_belief_work/candidate_v1_gta_belief_control.mp4`
+- Required artifact SHA-256: `6892f4a422c719491769e70364e66463ec6b16a55663199e80d948dba4993a2b`
+- Hook sheet: `/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v23_gta_belief_work/qc_v2_watermark/hook_sheet_0_10.jpg`
+- Full contact sheet: `/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v23_gta_belief_work/qc_v2_watermark/full_contact_sheet.jpg`
+- CTA frame: `/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v23_gta_belief_work/qc_v2_watermark/frames/041_97.jpg`
+- Tail frame: `/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v23_gta_belief_work/qc_v2_watermark/frames/074_70.jpg`
+- Full ASR: `/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v23_gta_belief_work/qc_v1_final/asr/full.txt`
+- Timeline: `/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v23_gta_belief_work/timeline_v1.json`
+- Verification: `/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v23_gta_belief_work/qc_v2_watermark/media-verification.json`
+- Production contract: `/Users/hung/code/ai/shorts/docs/production/hardknocks-v23-gta-belief.md`
+- Project rules: `/Users/hung/code/ai/shorts/AGENTS.md`, `/Users/hung/code/ai/shorts/docs/WORKFLOW.md`, `/Users/hung/code/ai/shorts/docs/adr/0040-bounded-codex-media-review-loop.md`
+
+The source promise is: a GTA publisher CEO who leads a large company says he can control desires/actions/goals/plans but not outcomes. The hook uses a source-native GTA ownership reveal, escalates to 230 million copies and a source-stated $40B market cap, then opens the larger control question. Do not deduct publication-rights blockers from editorial execution; list them under limitations. Do not infer mature retention or virality from this internal review.

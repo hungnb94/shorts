@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "record_type": "youtube_short_public_upload_snapshot",
+  "video_id": "V1JQexeiJ5A",
+  "canonical_url": "https://youtube.com/shorts/V1JQexeiJ5A",
+  "watch_url": "https://www.youtube.com/watch?v=V1JQexeiJ5A",
+  "studio_analytics_url": "https://studio.youtube.com/video/V1JQexeiJ5A/analytics/tab-overview/period-default",
+  "production_record": "docs/production/hardknocks-v22-seventy-eight-tail.md",
+  "experiment_log": "docs/experiments/EXPERIMENT-LOG.md",
+  "artifact": {
+    "path": "output/projects/hardknocks/final/2026-07-30-hardknocks_v22r1_seventy_eight_tail.mp4",
+    "sha256": "2b34e0de514dddb7c8c0d2e505a64ed0a44248c185e76788e4e2d4808c89a097",
+    "duration_seconds": 61.066667,
+    "mapping_status": "PROVISIONAL_USER_CONTEXT",
+    "mapping_basis": "The URL was supplied immediately after the HardKnocks V22R1 handoff; public-master identity has not been verified."
+  },
+  "public_metadata": {
+    "title": null,
+    "description": null,
+    "channel": null,
+    "channel_id": null,
+    "channel_url": null,
+    "uploader_handle": null,
+    "uploader_url": null,
+    "availability": "unverified",
+    "live_status": "unverified",
+    "upload_date": null,
+    "public_timestamp_utc": null,
+    "public_timestamp_local": null,
+    "duration_seconds_rounded": null,
+    "width_reported_by_player": null,
+    "height_reported_by_player": null,
+    "fps_reported_by_player": null,
+    "category": null,
+    "public_tags": null,
+    "snapshot_view_count": null,
+    "snapshot_like_count": null,
+    "snapshot_comment_count": null
+  },
+  "snapshot": {
+    "observed_at_local": "2026-07-31T07:24:11+07:00",
+    "evidence_source": "User-supplied YouTube Shorts URL only; direct public metadata inspection was denied and not retried.",
+    "source_url_supplied_by_user": "https://youtube.com/shorts/V1JQexeiJ5A?feature=share",
+    "metrics_fetch_after_local": "2026-08-02T07:24:11+07:00",
+    "metrics_deadline_basis": "PROVISIONAL: 48 hours after logging time because the exact public timestamp is unavailable.",
+    "lifecycle_status": "USER-REPORTED UPLOAD / PUBLIC METADATA UNVERIFIED",
+    "interpretation": "This records upload identity only. It is not evidence of public availability, packaging, channel routing, performance or artifact identity."
+  },
+  "artifact_identity_check": {
+    "sampled_timestamps_seconds": [],
+    "similarity_method": null,
+    "same_timestamp_aggregate_similarity": null,
+    "same_timestamp_opening_mean_similarity": null,
+    "aligned_body_mean_similarity": null,
+    "alignment_samples": [],
+    "duration_difference_public_minus_local_seconds": null,
+    "visual_lineage": "unverified",
+    "exact_timeline_parity": "unverified",
+    "audio_identity": "unverified",
+    "cause": "unverified",
+    "interpretation": "The uploaded Short has not been compared against the local V22R1 master."
+  },
+  "packaging_verification": {
+    "canonical_planned_title": "Why His Jet Says 78 ✈️🤔",
+    "title_matches_canonical": null,
+    "description_matches_canonical": null,
+    "visible_hashtags_match_canonical": null,
+    "channel_name_matches_brand": null,
+    "channel_id_matches_finance_alias": null,
+    "handle_matches_preferred": null
+  },
+  "observed_packaging_deviations": [
+    "Public title, description, hashtags, tags, category and channel could not be inspected; no match is claimed."
+  ],
+  "unverified_studio_fields": [
+    "Audience / Made for kids",
+    "Video language",
+    "Recording location",
+    "Synthetic or altered content disclosure",
+    "Playlist",
+    "Related Video",
+    "Upload Details Template",
+    "Thumbnail/frame selection",
+    "ADR-0035 lane eligibility"
+  ],
+  "metrics_routing": {
+    "project": "hardknocks",
+    "actual_channel_id": null,
+    "configured_channel_alias": null,
+    "status": "UNMAPPED_UNTIL_PUBLIC_CHANNEL_VERIFIED"
+  },
+  "unresolved_gates_at_snapshot": [
+    "School of Hard Knocks footage permission or licensed replacement is not documented.",
+    "Explicit narrator consent/licensing for the public-person conditioning reference is not documented.",
+    "Public-master identity, title, description, timestamp, availability and channel routing are unverified.",
+    "ADR-0035 lane eligibility and Studio wiring are not publicly verifiable.",
+    "The 48-hour metrics deadline is provisional and must be replaced with public timestamp plus 48 hours when available."
+  ]
+}
