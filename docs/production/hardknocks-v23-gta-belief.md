@@ -297,17 +297,57 @@ Every material TTS generation must use `ronald_wayne_zack_style_qwen` through `d
 
 No unresolved cue may survive into the final render. Every retained cue must be added to the rights manifest and checked in the exact-final full mix.
 
-## Packaging Draft
+## Canonical YouTube Upload Package
 
-**Canonical title candidate:** `GTA Boss Can't Control This 🎮`
+Title ideation and scoring are recorded separately in
+`output/projects/hardknocks/clips/v23_gta_belief_work/title-scorecard.md`.
+Only the selected package below is paste-ready.
 
-**Description draft:**
+### Title
 
-> Take-Two CEO Strauss Zelnick explains the boundary between effort and outcomes after discussing GTA V's scale. This edit adds source checks, context and a counter-argument; it does not claim spirituality caused business success.
->
-> #GTA #Business #Mindset
+`What GTA Boss Can't Control 🎮🤔`
 
-Exactly three visible hashtags are reserved for the description. Studio tags remain separate and will be finalized only after the full media pass.
+The title is exactly 30 visible characters, uses two relevant emoji, preserves
+the familiar GTA anchor and opens the exact control/outcomes question paid off
+by the final source quote.
+
+### Description
+
+What GTA Boss Can't Control 🎮🤔
+
+Take-Two CEO Strauss Zelnick says GTA V sold 230 million copies, then explains why he can control his actions and plans—but not outcomes.
+
+#GTA #Business #shorts
+
+### Hashtags
+
+`#GTA #Business #shorts`
+
+Visible hashtag count: **exactly 3**.
+
+### YouTube Studio Tags
+
+`Strauss Zelnick, Take-Two Interactive, business mindset`
+
+Studio tag count: **exactly 3**.
+
+### Studio Settings
+
+| Field | Canonical value |
+|---|---|
+| Audience | Not made for kids |
+| Video Language | English |
+| Location | United States (country-level only; exact filming location unverified) |
+| Category | Education |
+| Synthetic-content disclosure | Narration is synthetic; source interview audio is authentic |
+| Comments | Enabled; required by the rendered Comment CTA |
+| Playlist | **BLOCKED** — no exact approved finance master-playlist name/ID exists in the repository |
+| Related Video | **BLOCKED** — resolve the measured winner and destination lane at upload time |
+| Upload Details Template | **BLOCKED** — no approved template name/ID exists in the repository |
+
+Publication remains blocked by source-footage rights, narrator-conditioning
+consent/licensing and ADR-0035 lane eligibility. No upload is authorized by this
+metadata package.
 
 ## Final Local Artifact and Verification
 
