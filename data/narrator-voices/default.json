@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "profile_id": "ronald_wayne_zack_style_qwen",
+  "profile_path": "data/narrator-voices/ronald_wayne_zack_style_qwen/profile.json",
+  "scope": "all_new_video_projects",
+  "language": "en",
+  "mode": "internal_only",
+  "fallback_profile": null,
+  "final_quality_edge_tts_allowed": false,
+  "public_release_gate": "explicit narrator consent or commercial voice licence required before publication",
+  "decision": "ADR-0039"
+}

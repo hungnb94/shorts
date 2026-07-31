@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact-final automated media verification for HardKnocks V22."""
+"""Exact-final automated media verification for HardKnocks V22R1."""
 
 from __future__ import annotations
 
@@ -12,8 +12,8 @@ from PIL import Image, ImageStat
 
 ROOT = Path(__file__).resolve().parents[2]
 PROJECT = ROOT / "output" / "projects" / "hardknocks"
-FINAL = PROJECT / "final" / "2026-07-30-hardknocks_v22_seventy_eight_tail.mp4"
-WORK = PROJECT / "clips" / "v22_seventy_eight_work"
+FINAL = PROJECT / "final" / "2026-07-30-hardknocks_v22r1_seventy_eight_tail.mp4"
+WORK = PROJECT / "clips" / "v22r1_seventy_eight_work"
 TIMELINE = WORK / "timeline.json"
 CHECKS = WORK / "checks"
 FRAMES = CHECKS / "sampled_frames"
@@ -88,12 +88,20 @@ def main() -> None:
         "ffmpeg", "-y", "-v", "error", "-ss", f"{max(0.0, duration - 0.05):.3f}",
         "-i", FINAL, "-frames:v", "1", CHECKS / "final-frame.jpg",
     ])
+    timeline_report = json.loads(TIMELINE.read_text(encoding="utf-8"))
+    timeline = timeline_report["timeline"]
+    by_name = {item["name"]: item for item in timeline}
+    cta = by_name["story_cta"]
+    payoff = by_name["payoff"]
     for name, start, length in (
-        ("hook", 0.0, 10.0), ("cta", 37.3, 6.6), ("payoff", 53.8, duration - 53.8),
+        ("hook", 0.0, min(10.0, duration)),
+        ("cta", max(0.0, cta["final_start"] - 0.15), cta["final_end"] - cta["final_start"] + 0.30),
+        ("payoff", max(0.0, payoff["final_start"] - 0.15), duration - payoff["final_start"] + 0.30),
     ):
         cmd([
-            "ffmpeg", "-y", "-v", "error", "-ss", f"{start:.3f}", "-i", FINAL,
-            "-t", f"{length:.3f}", "-c", "copy", CHECKS / f"{name}.mp4",
+            "ffmpeg", "-y", "-v", "error", "-i", FINAL, "-ss", f"{start:.3f}",
+            "-t", f"{length:.3f}", "-c:v", "libx264", "-preset", "ultrafast", "-crf", "28",
+            "-c:a", "aac", CHECKS / f"{name}.mp4",
         ])
 
     for old in FRAMES.glob("*.jpg"):
@@ -113,8 +121,6 @@ def main() -> None:
         bottom_ratios.append(bottom_mean / middle_mean)
     black_footer_frames = sum(value < 0.08 for value in bottom_ratios)
 
-    timeline_report = json.loads(TIMELINE.read_text(encoding="utf-8"))
-    timeline = timeline_report["timeline"]
     contiguous = all(
         item["end_frame"] == next_item["start_frame"]
         for item, next_item in zip(timeline[:-1], timeline[1:])

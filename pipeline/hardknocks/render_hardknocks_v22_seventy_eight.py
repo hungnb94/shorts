@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Render HardKnocks V22: The $78 Tail Number.
 
-Backward-planned causal story: $78 origin -> tail-number promise -> boring
+Backward-planned causal story: $5M jet cost -> $78 origin -> tail-number promise -> boring
 sleep-testing business -> service/team mechanism -> jet-as-reward payoff.
 This one-off renderer consumes only the exact source EDL, two labeled Pexels
 illustrations, canonical Qwen narration, and manifest-bound generated SFX.
@@ -24,19 +24,19 @@ ROOT = Path(__file__).resolve().parents[2]
 PROJECT = ROOT / "output" / "projects" / "hardknocks"
 SOURCE = PROJECT / "source" / "4fOaAGCuuJU.webm"
 SOURCE_DURATION = 1358.668
-WORK = PROJECT / "clips" / "v22_seventy_eight_work"
+WORK = PROJECT / "clips" / "v22r1_seventy_eight_work"
 SEGMENT_DIR = WORK / "segments"
 PANELS = WORK / "panels"
 CHECKS = WORK / "checks"
 AUDIO_DIR = WORK / "audio"
 HOOK_DIR = WORK / "hook_gate"
-FINAL = PROJECT / "final" / "2026-07-30-hardknocks_v22_seventy_eight_tail.mp4"
-ROUGH_HOOK = HOOK_DIR / "rough_hook_v5.mp4"
+FINAL = PROJECT / "final" / "2026-07-30-hardknocks_v22r1_seventy_eight_tail.mp4"
+ROUGH_HOOK = HOOK_DIR / "rough_hook_v6_cost_contrast.mp4"
 
 PEXELS_SLEEP = ROOT / "output" / "shared" / "pexels" / "sleepy_man_7131825.mp4"
 PEXELS_TEAM = ROOT / "output" / "shared" / "pexels" / "team_meeting_7643614.mp4"
 
-HOOK_QUESTION = AUDIO_DIR / "hook_question.wav"
+HOOK_OPEN_LOOP = AUDIO_DIR / "hook_open_loop.wav"
 RECEIPT_BRIDGE = AUDIO_DIR / "receipt_bridge.wav"
 SLEEP_BRIDGE = AUDIO_DIR / "sleep_bridge.wav"
 CTA_AUDIO = AUDIO_DIR / "cta.wav"
@@ -94,14 +94,19 @@ class Segment:
 
 SEGMENTS = (
     Segment(
+        "jet_cost", "source", 43.60, 46.879,
+        ((0.00, 0.66), (0.95, 0.42), (2.20, 0.42)),
+        1.08, "stakes",
+    ),
+    Segment(
         "origin_78", "source", 32.32, 34.40,
         ((0.00, 0.42), (0.82, 0.39), (1.56, 0.42)),
         1.08, "origin",
     ),
     Segment(
-        "hook_question", "narration_source", 190.00, 193.80,
-        ((0.00, 0.50), (0.90, 0.34), (2.10, 0.50), (3.05, 0.34)),
-        1.05, "object_mystery", HOOK_QUESTION,
+        "hook_open_loop", "narration_source", 60.00, 63.20,
+        ((0.00, 0.54), (0.90, 0.34), (1.75, 0.54), (2.55, 0.34)),
+        1.06, "causal_open_loop", HOOK_OPEN_LOOP,
     ),
     Segment(
         "tail_promise", "source", 193.519, 200.20,
@@ -137,17 +142,17 @@ SEGMENTS = (
         ((0.00, 0.34), (0.76, 0.31)), 1.10, "proof_hold",
     ),
     Segment(
-        "story_cta", "narration_pexels", 4.20, 9.20,
+        "story_cta", "narration_pexels", 4.20, 8.20,
         (), 1.00, "cta", CTA_AUDIO, PEXELS_TEAM,
     ),
     Segment(
-        "service_moat", "source", 493.60, 507.28,
-        ((0.00, 0.34), (2.80, 0.31), (5.80, 0.34), (8.80, 0.32)),
+        "service_moat", "source", 503.48, 507.28,
+        ((0.00, 0.34), (1.90, 0.31)),
         1.07, "service_moat", fade_out=0.08,
     ),
     Segment(
-        "team_scale", "source", 550.399, 557.12,
-        ((0.00, 0.34), (2.10, 0.31), (4.30, 0.34), (6.30, 0.32)),
+        "team_scale", "source", 549.92, 557.12,
+        ((0.00, 0.34), (2.20, 0.31), (4.50, 0.34), (6.50, 0.32)),
         1.07, "team_scale", fade_out=0.08,
     ),
     Segment(
@@ -159,14 +164,19 @@ SEGMENTS = (
 
 
 CAPTIONS: dict[str, tuple[tuple[float, float, str, str], ...]] = {
+    "jet_cost": (
+        (0.00, 1.04, "HOW MUCH DID IT COST?", "HOW MUCH"),
+        (1.04, 2.20, "OVER $5 MILLION", "$5 MILLION"),
+        (2.20, 3.279, "FOR THIS JET", "JET"),
+    ),
     "origin_78": (
         (0.00, 0.98, "JAN 2015: $78", "$78"),
         (0.98, 2.08, "TO MY NAME", "MY"),
     ),
-    "hook_question": (
-        (0.00, 1.12, "SO WHY PUT", "WHY"),
-        (1.12, 2.18, "SEVENTY-EIGHT", "SEVENTY-EIGHT"),
-        (2.18, 3.80, "ON A $5M JET?", "$5M"),
+    "hook_open_loop": (
+        (0.00, 1.00, "SO WHAT TURNED", "WHAT"),
+        (1.00, 2.00, "$78 INTO", "$78"),
+        (2.00, 3.20, "THIS JET?", "JET"),
     ),
     "tail_promise": (
         (0.00, 1.28, "ONE DAY", "ONE DAY"),
@@ -201,25 +211,22 @@ CAPTIONS: dict[str, tuple[tuple[float, float, str, str], ...]] = {
         (5.62, 8.18, "OVER ONE MILLION", "ONE MILLION"),
     ),
     "story_cta": (
-        (0.00, 1.06, "LIKE AND SUBSCRIBE", "LIKE"),
-        (1.06, 2.06, "THEN COMMENT", "COMMENT"),
-        (2.06, 3.54, "WHAT BORING BUSINESS", "BORING"),
-        (3.54, 5.00, "WOULD YOU BUILD?", "YOU"),
+        (0.00, 0.85, "LIKE AND SUBSCRIBE", "LIKE"),
+        (0.85, 1.65, "THEN COMMENT", "COMMENT"),
+        (1.65, 2.82, "WHAT BORING-BUSINESS MOAT", "MOAT"),
+        (2.82, 4.00, "WOULD YOU BUILD?", "YOU"),
     ),
     "service_moat": (
-        (0.00, 2.30, "OTHER PRODUCTS EXIST", "OTHER"),
-        (2.30, 4.10, "WHAT SEPARATES US", "SEPARATES"),
-        (4.10, 6.20, "IS EVERYTHING AROUND", "EVERYTHING"),
-        (6.20, 8.50, "THE PRODUCT", "PRODUCT"),
-        (8.50, 10.80, "THE SERVICE LEVEL", "SERVICE"),
-        (10.80, 13.68, "IS WHAT'S IMPORTANT", "IMPORTANT"),
+        (0.00, 1.90, "THE SERVICE LEVEL", "SERVICE"),
+        (1.90, 3.80, "IS WHAT MATTERS", "MATTERS"),
     ),
     "team_scale": (
-        (0.00, 1.90, "MY STAFF MADE MORE", "MORE"),
-        (1.90, 3.00, "MONEY THAN ME", "ME"),
-        (3.00, 4.20, "I WAS WILLING", "WILLING"),
-        (4.20, 5.65, "TO INVEST IN MY TEAM", "TEAM"),
-        (5.65, 6.721, "THAT HELPS YOU SCALE", "SCALE"),
+        (0.00, 1.65, "THERE WAS A PERIOD", "PERIOD"),
+        (1.65, 3.20, "MY STAFF MADE MORE", "MORE"),
+        (3.20, 4.05, "MONEY THAN ME", "ME"),
+        (4.05, 5.20, "I WAS WILLING", "WILLING"),
+        (5.20, 6.35, "TO INVEST IN MY TEAM", "TEAM"),
+        (6.35, 7.20, "THAT HELPS YOU SCALE", "SCALE"),
     ),
     "payoff": (
         (0.00, 1.42, "THE JET WAS THE REWARD", "REWARD"),
@@ -423,7 +430,7 @@ def new_card(width: int, height: int) -> tuple[Image.Image, ImageDraw.ImageDraw]
 def make_cards() -> list[Path]:
     PANELS.mkdir(parents=True, exist_ok=True)
     specs = (
-        ("THE ORIGIN", (("$78", YELLOW), ("JAN 2015", GRAY))),
+        ("THE CONTRAST", (("$5M JET", BLUE), ("$78 LEFT", YELLOW))),
         ("THE PROMISE", (("OWN PLANE", BLUE), ("TAIL: 78", YELLOW))),
         ("THE SCALE", (("~200 / MONTH", BLUE), ("1,000,000+", GREEN), ("SOURCE CLAIM", GRAY))),
         ("THE MOAT", (("PRODUCT", BLUE), ("+ SERVICE", GREEN))),
@@ -498,7 +505,7 @@ def write_ass(timeline: list[dict[str, Any]], total_duration: float, suffix: str
             lines.append(f"Dialogue: 8,{ass_time(base + rel_start)},{ass_time(min(base + rel_end, total_duration))},Caption,,0,0,0,,{body}")
 
     states = (
-        (0.00, starts.get("tail_promise", total_duration), "$78  →  WHY 78?", YELLOW),
+        (0.00, starts.get("tail_promise", total_duration), "$5M  →  $78  →  HOW?", YELLOW),
         (starts.get("tail_promise", total_duration), starts.get("company_identity", total_duration), "PROMISE  →  RECEIPT", BLUE),
         (starts.get("company_identity", total_duration), starts.get("patient_scale", total_duration), "BORING PROBLEM", YELLOW),
         (starts.get("patient_scale", total_duration), ends.get("story_cta", total_duration), "KITCHEN  →  1,000,000+", GREEN),
@@ -515,9 +522,9 @@ def write_ass(timeline: list[dict[str, Any]], total_duration: float, suffix: str
     if "story_cta" in starts:
         cta = starts["story_cta"]
         controls = (
-            (0.00, 1.06, "LIKE • BACK BORING BUSINESS", GREEN),
-            (1.06, 2.06, "SUBSCRIBE • LEARN THE MOAT", BLUE),
-            (2.06, 5.00, "COMMENT • WHAT WOULD YOU BUILD?", YELLOW),
+            (0.00, 0.85, "LIKE • BACK BORING BUSINESS", GREEN),
+            (0.85, 1.65, "SUBSCRIBE • LEARN THE MOAT", BLUE),
+            (1.65, 4.00, "COMMENT • WHAT WOULD YOUR MOAT BE?", YELLOW),
         )
         for start, end, text, color in controls:
             lines.append(
@@ -578,17 +585,19 @@ def make_positioned_track(source: Path, start: float, total: float, output: Path
 
 def build_timed_audio(total: float, starts: dict[str, float], hook_only: bool = False) -> Path:
     definitions: list[tuple[str, Path, float, float]] = [
-        ("hook_origin", HOOK_HIT, 0.06, math.pow(10, -11 / 20)),
-        ("jet_question", JET_WHOOSH, 1.94, math.pow(10, -14 / 20)),
+        ("hook_cost", HOOK_HIT, 0.06, math.pow(10, -11 / 20)),
+        ("cost_answer", PROOF_TICK, 1.04, math.pow(10, -14 / 20)),
     ]
     if not hook_only:
         definitions.extend([
+            ("origin_cut", JET_WHOOSH, starts["origin_78"], math.pow(10, -14 / 20)),
+            ("open_loop", PROOF_TICK, starts["hook_open_loop"], math.pow(10, -16 / 20)),
             ("promise", JET_WHOOSH, starts["tail_promise"], math.pow(10, -17 / 20)),
             ("company", PROOF_TICK, starts["company_identity"], math.pow(10, -16 / 20)),
             ("scale", PROOF_TICK, starts["patient_scale"], math.pow(10, -14 / 20)),
             ("cta_like", CTA_CLICK, starts["story_cta"] + 0.20, math.pow(10, -18 / 20)),
-            ("cta_sub", CTA_CLICK, starts["story_cta"] + 1.45, math.pow(10, -18 / 20)),
-            ("cta_comment", CTA_CLICK, starts["story_cta"] + 2.70, math.pow(10, -18 / 20)),
+            ("cta_sub", CTA_CLICK, starts["story_cta"] + 1.05, math.pow(10, -18 / 20)),
+            ("cta_comment", CTA_CLICK, starts["story_cta"] + 2.05, math.pow(10, -18 / 20)),
             ("service", PROOF_TICK, starts["service_moat"], math.pow(10, -17 / 20)),
             ("payoff", PAYOFF_HIT, starts["payoff"], math.pow(10, -16 / 20)),
         ])
@@ -636,16 +645,16 @@ def composite(
 
     if hook_only:
         windows = (
-            (0.08, min(ends["origin_78"] - 0.05, total - 0.05), 650, 310, 0),
-            (starts["hook_question"], total - 0.05, 650, 310, 1),
+            (0.08, total - 0.05, 650, 310, 0),
         )
     else:
         windows = (
             (0.08, ends["origin_78"] - 0.05, 650, 310, 0),
-            (starts["hook_question"], ends["receipt_bridge"] - 0.05, 40, 310, 1),
+            (starts["hook_open_loop"], ends["receipt_bridge"] - 0.05, 40, 310, 1),
             (starts["patient_scale"], ends["scale_hold"] - 0.02, 650, 310, 2),
             (starts["service_moat"], ends["service_moat"] - 0.05, 40, 310, 3),
             (starts["team_scale"], ends["team_scale"] - 0.05, 650, 310, 4),
+            (starts["payoff"] + 0.15, total - 0.10, 650, 310, 1),
         )
 
     graph: list[str] = []
@@ -726,9 +735,9 @@ def validate_final(timeline: list[dict[str, Any]]) -> dict[str, Any]:
         "all_source_clips_under_15s": all(item["source_duration"] < 15.0 for item in source_segments),
         "total_source_under_50pct": total_source < SOURCE_DURATION / 2,
         "three_source_mix": SOURCE.exists() and PEXELS_SLEEP.exists() and PEXELS_TEAM.exists() and len(list(PANELS.glob("*.png"))) >= 5,
-        "commentary_track": all(path.exists() for path in (HOOK_QUESTION, RECEIPT_BRIDGE, SLEEP_BRIDGE, CTA_AUDIO, PAYOFF_AUDIO)),
+        "commentary_track": all(path.exists() for path in (HOOK_OPEN_LOOP, RECEIPT_BRIDGE, SLEEP_BRIDGE, CTA_AUDIO, PAYOFF_AUDIO)),
         "cta_window": 38.0 <= cta_start <= 42.0,
-        "caption_at_frame_zero": CAPTIONS["origin_78"][0][0] <= 0.2,
+        "caption_at_frame_zero": CAPTIONS["jet_cost"][0][0] <= 0.2,
     }
     if not all(checks.values()):
         raise RuntimeError(f"Final validation failed: {checks}")
@@ -746,13 +755,19 @@ def validate_final(timeline: list[dict[str, Any]]) -> dict[str, Any]:
     return report
 
 
-def require_inputs() -> None:
-    required = (
-        SOURCE, PEXELS_SLEEP, PEXELS_TEAM, HOOK_QUESTION, RECEIPT_BRIDGE,
-        SLEEP_BRIDGE, CTA_AUDIO, PAYOFF_AUDIO, HOOK_HIT, JET_WHOOSH,
-        PROOF_TICK, CTA_CLICK, PAYOFF_HIT, MUSIC_BED, SFX_MANIFEST,
-        FONT_KOMIKA, FONT_BOLD, FONT_BLACK,
-    )
+def require_inputs(hook_only: bool = False) -> None:
+    if hook_only:
+        required = (
+            SOURCE, HOOK_HIT, PROOF_TICK, MUSIC_BED, SFX_MANIFEST,
+            FONT_KOMIKA, FONT_BOLD, FONT_BLACK,
+        )
+    else:
+        required = (
+            SOURCE, PEXELS_SLEEP, PEXELS_TEAM, HOOK_OPEN_LOOP, RECEIPT_BRIDGE,
+            SLEEP_BRIDGE, CTA_AUDIO, PAYOFF_AUDIO, HOOK_HIT, JET_WHOOSH,
+            PROOF_TICK, CTA_CLICK, PAYOFF_HIT, MUSIC_BED, SFX_MANIFEST,
+            FONT_KOMIKA, FONT_BOLD, FONT_BLACK,
+        )
     missing = [str(path) for path in required if not path.exists()]
     if missing:
         raise FileNotFoundError("Missing required inputs:\n" + "\n".join(missing))
@@ -766,12 +781,12 @@ def require_inputs() -> None:
 
 def main() -> None:
     args = parse_args()
-    require_inputs()
+    require_inputs(args.hook_only)
     for directory in (WORK, SEGMENT_DIR, PANELS, CHECKS, AUDIO_DIR, HOOK_DIR):
         directory.mkdir(parents=True, exist_ok=True)
     cards = make_cards()
     if args.hook_only:
-        base, timeline, total_frames = build_base(SEGMENTS[:2], "_hook")
+        base, timeline, total_frames = build_base(SEGMENTS[:1], "_hook")
         ass_file = write_ass(timeline, total_frames / FPS, "_hook")
         composite(base, timeline, total_frames, cards, ass_file, ROUGH_HOOK, hook_only=True)
         print(json.dumps({"rough_hook": str(ROUGH_HOOK), "duration": 3.2}, indent=2))

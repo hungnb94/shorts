@@ -119,12 +119,16 @@ Spoken audio được tạo bằng TTS, với phạm vi phụ thuộc Video Type
 _Avoid_: "AI voice" (quá chung), "voiceover" (không phân biệt synthetic với source voice), "TTS-only format"
 
 **Narrator Voice Profile**:
-Voice identity ổn định của Synthetic Narration, được gán cho đúng một Destination Channel và được khóa bằng description/config cùng Canonical Narrator Voice Artifact khi engine dùng designed voice. Finance và AI-education có Narrator Voice Profile riêng phù hợp brand tone; không tự đổi voice theo từng Short hoặc Video Type. Voice chỉ được thay đổi khi chính voice là AB Variable của một Experiment đã khai báo, để tránh tạo biến nhiễu khi đánh giá các variant khác.
-_Avoid_: "random voice", "voice per video", "global narrator" (gộp nhiều Destination Channel)
+Voice identity ổn định của Synthetic Narration, được khóa bằng description/config cùng Canonical Narrator Voice Artifact. Theo ADR-0039, mọi video English mới dùng `ronald_wayne_zack_style_qwen` làm global internal default; không tự đổi voice theo từng Short hoặc Video Type. Profile này không được hiểu là commercially publishable cho tới khi reference có consent/license rõ ràng.
+_Avoid_: "random voice", "voice per video", "public reference means licensed"
 
 **Authorized Voice Source**:
 Nguồn voice hợp lệ để tạo Narrator Voice Profile: stock voice được phân phối hợp pháp cùng TTS model; artifact hoàn toàn synthetic do model có license phù hợp tạo từ text description; hoặc giọng của chính chủ/narrator có consent và license rõ ràng cho voice cloning. Không dùng giọng clone của người nổi tiếng, speaker trong Source Channel hoặc bất kỳ người nào chưa cấp quyền. Audio demo công khai chỉ là listening evidence, không tự trở thành Authorized Voice Source để conditioning hay đóng gói lại.
 _Avoid_: "celebrity voice", "source-speaker clone", "public voice means free to clone"
+
+**Internal-Only Narrator Profile**:
+Narrator Voice Profile được phép dùng cho draft/private evaluation nhưng bị chặn commercial publishing do reference chưa qua Authorized Voice Source gate. Editorial score, ASR pass hoặc user preference không tự gỡ rights block. `ronald_wayne_zack_style_qwen` là profile loại này theo ADR-0039.
+_Avoid_: "approved voice means publishable", "quality score clears rights"
 
 **Canonical Narrator Voice Artifact**:
 Audio reference duy nhất, được version và hash, dùng để khóa identity của một designed Narrator Voice Profile khi sinh lời thoại mới. Đây là domain asset không thể thay bằng audition/output tạm: regenerate từ cùng description vẫn có thể drift khi model/runtime thay đổi. Raw generation, normalized copy, audition, repeatability run và upstream demo đều không phải Canonical Narrator Voice Artifact.
@@ -135,7 +139,7 @@ Cơ chế kỹ thuật gọi TTS engine để hiện thực hóa một Narrator 
 _Avoid_: "selected voice means already integrated", "current adapter is the canonical voice"
 
 **TTS Selection Gate** (ADR-0032):
-Một English open-source engine/voice chỉ trở thành production default sau khi code, weights và exact voice đều qua commercial-use gate, chạy được trên Apple Silicon 16 GB không cần paid API, và được người dùng trực tiếp đánh giá ngang hoặc tốt hơn Edge baseline trên cùng audition corpus. Automated QC chỉ loại artifact invalid/silent/truncated hoặc cảnh báo pronunciation; AI/metric không chọn winner. Nếu không local candidate nào đạt listening bar, tiếp tục dùng `edge-tts`; chỉ benchmark Python API so với batch CLI trên open-source winner đã được chọn.
+Gate lịch sử dùng để chọn engine/voice bằng direct user listening comparison, không bằng AI score. ADR-0039 supersedes phần assignment/fallback: `data/narrator-voices/default.json` hiện resolve `ronald_wayne_zack_style_qwen` cho mọi English internal production; generation failure phải stop thay vì silently fallback sang Edge TTS. Commercial publication vẫn cần Authorized Voice Source/consent gate riêng.
 _Avoid_: "open source means automatic default", "AI-scored voice winner", "integration-first bake-off"
 
 **Hard-Crop Convention** (ADR-0024):

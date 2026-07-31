@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Generate HardKnocks V22 narration with the canonical Finance Qwen voice.
+"""Generate HardKnocks V22R1 narration with the canonical Zack-style Qwen profile.
 
 The model is loaded once, every passage is cached by text/model/reference hash,
 and Rubber Band is used only when a generated line exceeds its locked slot.
-No Edge TTS or human/public-person voice conditioning is used.
+The selected public-person conditioning reference is internal-only; commercial
+publication remains blocked until explicit narrator consent/licensing exists.
 """
 
 from __future__ import annotations
@@ -21,13 +22,15 @@ import soundfile as sf
 from mlx_audio.tts.utils import load_model
 
 ROOT = Path(__file__).resolve().parents[2]
-WORK = ROOT / "output" / "projects" / "hardknocks" / "clips" / "v22_seventy_eight_work"
+WORK = ROOT / "output" / "projects" / "hardknocks" / "clips" / "v22r1_seventy_eight_work"
 AUDIO = WORK / "audio"
-PROFILE_DIR = ROOT / "data" / "narrator-voices" / "natural_talker_male_qwen_blog"
-PROFILE_PATH = PROFILE_DIR / "profile.json"
+DEFAULT_PROFILE_PATH = ROOT / "data" / "narrator-voices" / "default.json"
+DEFAULT_PROFILE = json.loads(DEFAULT_PROFILE_PATH.read_text(encoding="utf-8"))
+PROFILE_PATH = ROOT / DEFAULT_PROFILE["profile_path"]
+PROFILE_DIR = PROFILE_PATH.parent
 REFERENCE = PROFILE_DIR / "reference.wav"
-RAW = AUDIO / "qwen" / "raw"
-REPORT = AUDIO / "qwen" / "generation-report.json"
+RAW = AUDIO / "qwen-zack" / "raw"
+REPORT = AUDIO / "qwen-zack" / "generation-report.json"
 SPIKE = ROOT / "spikes" / "001-english-tts-engine-bakeoff"
 sys.path.insert(0, str(SPIKE / "scripts"))
 
@@ -40,10 +43,10 @@ from runtime_provenance import (  # noqa: E402
 
 SEGMENTS = (
     {
-        "id": "hook_question",
-        "text": "So why did he put seventy-eight on a five-million-dollar jet?",
-        "slot": 3.80,
-        "output": AUDIO / "hook_question.wav",
+        "id": "hook_open_loop",
+        "text": "So what turned seventy-eight dollars into this jet?",
+        "slot": 3.20,
+        "output": AUDIO / "hook_open_loop.wav",
     },
     {
         "id": "receipt_bridge",
@@ -59,8 +62,8 @@ SEGMENTS = (
     },
     {
         "id": "cta",
-        "text": "Like, subscribe, and comment: what boring business would you build?",
-        "slot": 5.00,
+        "text": "Like, subscribe, then comment: what's your moat?",
+        "slot": 4.00,
         "output": AUDIO / "cta.wav",
     },
     {
@@ -70,7 +73,7 @@ SEGMENTS = (
         "output": AUDIO / "payoff.wav",
     },
 )
-MAX_POST_TEMPO = 1.22
+MAX_POST_TEMPO = 1.42
 
 
 def run(command: list[str | Path]) -> None:
@@ -121,10 +124,15 @@ def synthesize(model, text: str, seed: int, profile: dict) -> tuple[np.ndarray, 
 
 def main() -> None:
     profile = json.loads(PROFILE_PATH.read_text(encoding="utf-8"))
-    if profile["id"] != "natural_talker_male_qwen_blog" or profile["status"] != "canonical":
-        raise RuntimeError("Wrong or non-canonical Finance narrator profile")
+    if (
+        DEFAULT_PROFILE["profile_id"] != "ronald_wayne_zack_style_qwen"
+        or DEFAULT_PROFILE["mode"] != "internal_only"
+        or profile["id"] != DEFAULT_PROFILE["profile_id"]
+        or profile["status"] != "canonical_internal_only"
+    ):
+        raise RuntimeError("Wrong or non-canonical Zack-style narrator profile")
     if sha256(REFERENCE) != profile["identity"]["reference_sha256"]:
-        raise RuntimeError("Canonical narrator reference SHA-256 mismatch")
+        raise RuntimeError("Canonical Zack-style narrator reference SHA-256 mismatch")
 
     environment = verify_environment(profile, SPIKE, "synthesis")
     fingerprints = verify_system_fingerprints(profile)

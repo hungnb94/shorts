@@ -3,6 +3,8 @@
 **Date:** 2026-07-18
 **Status:** Accepted
 
+**2026-07-30 supersession note:** ADR-0039 supersedes this ADR's channel-scoped narrator assignment and retires `natural_talker_male_qwen_blog` from new production. Engine/model provenance, direct-listening and commercial-rights requirements remain active; the new Zack-style default is explicitly internal-only until consent/licensing clears its public-person reference.
+
 ## Context
 
 The repository currently synthesizes some English narration with `edge-tts`, while many Clip Curation Edits deliberately preserve original source voices. Synthetic speech is not one uniform treatment: depending on the Video Type, it may carry an entire Short or only a Hook, CTA, or short Editorial Bridge. Finance and AI-education also need different brand tones.

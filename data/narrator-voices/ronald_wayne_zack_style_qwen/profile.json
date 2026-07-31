@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "id": "ronald_wayne_zack_style_qwen",
-  "status": "project_specific_experiment",
+  "status": "canonical_internal_only",
   "assignment": {
-    "project": "ronaldwayne",
+    "scope": "all_video_projects",
     "language": "en",
     "role": "synthetic_narrator",
-    "artifact_variant": "v2-qwen"
+    "publication_rights": "blocked_without_explicit narrator consent_or_license"
   },
   "identity": {
     "description": "Low male documentary narrator with compressed, continuous delivery modeled from the user-selected Zack D. Films reference Short.",
@@ -77,8 +77,8 @@
     },
     "repeatability_fingerprints": {
       "ffmpeg": {
-        "version_line": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers",
-        "version_output_sha256": "0f2806426f298a5acca021dff4903c9b170309458acd3366ff9c2e7a4b512445"
+        "version_line": "ffmpeg version 7.1.1 Copyright (c) 2000-2025 the FFmpeg developers",
+        "version_output_sha256": "88b12a030360dd4614c0e3999e442dd5cfa63c6df2b7b8dc2f23f56a40399ff9"
       },
       "platform": {
         "system": "Darwin",
@@ -86,6 +86,10 @@
         "macos_build": "25F84",
         "machine": "arm64"
       }
+    },
+    "fingerprint_history": {
+      "previous_ffmpeg_8_1_sha256": "0f2806426f298a5acca021dff4903c9b170309458acd3366ff9c2e7a4b512445",
+      "change_reason": "Active Homebrew ffmpeg resolved to 7.1.1 on 2026-07-30; reference/model hashes are unchanged."
     }
   },
   "generation": {

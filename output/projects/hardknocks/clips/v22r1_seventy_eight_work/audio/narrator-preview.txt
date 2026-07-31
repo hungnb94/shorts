@@ -1,0 +1,5 @@
+file '/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v22r1_seventy_eight_work/audio/hook_open_loop.wav'
+file '/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v22r1_seventy_eight_work/audio/receipt_bridge.wav'
+file '/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v22r1_seventy_eight_work/audio/sleep_bridge.wav'
+file '/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v22r1_seventy_eight_work/audio/cta.wav'
+file '/Users/hung/code/ai/shorts/output/projects/hardknocks/clips/v22r1_seventy_eight_work/audio/payoff.wav'
