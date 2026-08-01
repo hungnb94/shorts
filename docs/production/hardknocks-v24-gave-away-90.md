@@ -1,6 +1,6 @@
 # HardKnocks V24 - He Gave Away 90%
 
-**Status:** EXACT-FINAL COMPLETE - CODEX EDITORIAL TARGET MET AT 99/100 - PUBLICATION RIGHTS BLOCKED  
+**Status:** PUBLIC UPLOAD VERIFIED - METRICS HOLD UNTIL 2026-08-03 09:30:35 +07
 **Source:** `HeuqoqyRQdk` - *Asking Rich People If They Believe In God!*  
 **Subject:** Michael Wystrach, Freshly co-founder and former CEO  
 **Format:** Clip Curation Edit with Active-Speaker Reframing  
@@ -207,10 +207,63 @@ Round 2 reviewed the new artifact hash and scored `99/100`:
 
 Verdict: `editorial_target_met`. The remaining one-point note is optional future polish using attributable Freshly-specific fulfillment footage instead of generic meal B-roll.
 
+## Canonical YouTube Upload Package
+
+Title ideation and scoring are recorded in:
+
+`output/projects/hardknocks/clips/v24_gave_away_90_work/title-scorecard.md`
+
+### Title
+
+`Why He Sold 90% 📉🤔`
+
+The title has 18 visible characters, uses exactly two relevant emoji, stays under the 30-character limit and opens the same ownership question paid off by the final team-and-scale explanation.
+
+### Description
+
+Why He Sold 90% 📉🤔
+
+Freshly co-founder Michael Wystrach explains why he accepted dilution from 100% ownership to 10%; Nestlé valued Freshly at $950M plus up to $550M in contingent earnouts.
+
+#entrepreneurship #startups #shorts
+
+### Hashtags
+
+`#entrepreneurship #startups #shorts`
+
+Visible hashtag count: exactly 3.
+
+### YouTube Studio Tags
+
+`startup equity, founder dilution, Freshly`
+
+Studio tag count: exactly 3.
+
 ## Publication Boundaries
 
 - The exact final is complete and has met the internal editorial target.
 - A real naive-viewer Hook Gate remains unavailable and is recorded honestly as a limitation.
-- The source metadata exposes no declared reusable license. Public upload remains rights-blocked unless the footage is cleared or the owner accepts the publication risk.
-- The canonical narrator profile is internal-only until its conditioning reference is licensed or consented. Generated commentary is cleared only for internal review.
-- YouTube upload, metadata wiring and channel scheduling are outside the current authorized action.
+- The source metadata exposes no declared reusable license. The public upload does not resolve the outstanding footage-rights risk.
+- The canonical narrator profile was internal-only pending licensing or consent when the video was produced. The public upload does not resolve that outstanding narrator-conditioning issue.
+- The user completed the YouTube upload manually. Studio-only playlist, Related video and other wiring remain unverified.
+
+## Status
+
+| Field | Observed value |
+|---|---|
+| User-supplied URL | `https://youtube.com/shorts/0iTFT0r2u98?feature=share` |
+| Video ID | `0iTFT0r2u98` |
+| Canonical Shorts URL | `https://youtube.com/shorts/0iTFT0r2u98` |
+| Studio Analytics | `https://studio.youtube.com/video/0iTFT0r2u98/analytics/tab-overview/period-default` |
+| Availability | Public |
+| Public timestamp | `2026-08-01T09:30:35+07:00` |
+| Channel | Hardnocks (`UCPqbLih-bEtafyEG93AosdA`) |
+| Public title | `Why He Sold 90% 📉🤔` |
+| Public duration | `66s` reported by `yt-dlp` |
+| Local exact-final duration | `70.4s` |
+| Metrics fetch after | `2026-08-03T09:30:35+07:00` |
+| Metrics status | Not fetched - 48-hour hold |
+
+Live metadata verification confirmed the canonical title, description, three visible hashtags, public availability, 1080x1920 resolution and 30 fps. The extractor-reported public duration is 4.4 seconds shorter than the recorded local exact-final. This log confirms the production lineage from the matching title and package, but does not claim exact public/local timeline parity without a direct public-master comparison.
+
+Do not fetch or judge retention metrics before `2026-08-03T09:30:35+07:00`. After that point, use YouTube Studio as ground truth for Swiped Away, Audience Retention Stayed to Watch and AVD.
