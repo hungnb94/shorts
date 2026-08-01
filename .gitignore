@@ -60,3 +60,4 @@ output/projects/**/*.gif
 docs/concepts/**/*.png
 docs/research/**/*.png
 assets/sfx/**/*.wav
+.kilo/plans/

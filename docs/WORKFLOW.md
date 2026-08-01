@@ -76,19 +76,14 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 5. Guide-derived promise check (ADR-0034): trong 0-3s phải có cả visual surprise
    lẫn narrative promise rõ ràng; early SFX phải có slot trong t=0-1s và focal
    target phải đọc được ngay hoặc có thể chỉ bằng arrow/pointer/annotation.
-6. Naive-viewer check: cho một người không tham gia edit xem rough hook 0-3s mà
-   không giải thích trước; họ phải nói được open question/promise khiến họ muốn
-   xem tiếp. Nếu chỉ hiểu sau khi creator giải thích, hook fail. Production doc
-   phải lưu ngày check, rough-hook version và câu trả lời nguyên văn đã ẩn danh;
-   creator/agent tự xem không được tính là naive viewer. Không có evidence này
-   thì item 6 là `unverified` và Hook Gate vẫn block render/upload — không được
-   tự suy ra pass từ frame-check, caption timing hay cadence.
+6. Naive-viewer check (strengthened): cho một người không tham gia edit xem rough hook 0-3s mà không giải thích trước; họ phải nói được (a) exact object/person/action nhìn thấy mà không cần title/description, (b) open question/promise khiến họ muốn xem tiếp, và (c) họ kỳ vọng video sẽ chứng minh điều gì đến cuối. Nếu chỉ hiểu sau khi creator giải thích, hoặc chỉ hiểu sau khi đọc title/description, hoặc nếu object promised không visible trong final crop, hook fail. Production doc phải lưu ngày check, rough-hook version và câu trả lời nguyên văn đã ẩn danh cho cả ba câu hỏi; creator/agent tự xem không được tính là naive viewer. Không có evidence này thì item 6 là `unverified` và Hook Gate vẫn block render/upload — không được tự suy ra pass từ frame-check, caption timing hay cadence. Overlay-parroting (lặp lại headline bằng caption mà không có visible evidence cho object đã hứa) không pass item này.
 7. Information Progression feasibility (ADR-0036): chuỗi Visual Changes dự kiến
    phải đẩy ít nhất một question, causal step, contrast, proof state hoặc payoff;
    không được dùng toàn flash/emoji/zoom trang trí chỉ để đủ cadence.
+8. Title/description/creator opacity check (knAPeKpTpoA): frame 0 plus first spoken clause independently expose promised object/stakes or direct visual proof; caption alone cannot make vague pronouns (that/it/this) recognizable; if object not visible in final crop, change shot/span or proof-native opening.
 ```
 
-**GATE RULE**: nếu bất kỳ item 1-7 trên MỌI candidate span trong source hiện tại, và không thể fix bằng cách chọn span khác trong cùng bản download, thì STOP. Quay lại Stage 1 — chọn span khác hoặc source video khác. Không được tiến sang Stage 2/3/4, và không được ship 1 hook đã biết là yếu với lý do "để retention data trả lời sau."
+**GATE RULE**: nếu bất kỳ item 1-8 trên MỌI candidate span trong source hiện tại, và không thể fix bằng cách chọn span khác trong cùng bản download, thì STOP. Quay lại Stage 1, chạy lại Stage -1B (payoff/critical lock) trước khi quay lại Stage 0. Không được tiến sang Stage 2/3/4, và không được ship 1 hook đã biết là yếu với lý do "để retention data trả lời sau."
 
 ## Stage 1 — Source Research & Candidate Selection
 
@@ -117,9 +112,25 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
   lane eligibility. Mỗi item ghi owner, evidence kiểm chứng, blocking state và
   backup; ưu tiên giải quyết critical path trước caption/effect polish.
 - Ghi `Negatives / Failure modes` trước khi chốt source: rights mơ hồ, source quá
-  yếu, quote thiếu vế, proof không đúng object, paid dependency, không có backup.
-  “Tìm thấy asset” không đồng nghĩa asset usable; verify trực tiếp thay vì nhận
-  metadata/vendor claim theo mặt chữ.
+   yếu, quote thiếu vế, proof không đúng object, paid dependency, không có backup.
+   "Tìm thấy asset" không đồng nghĩa asset usable; verify trực tiếp thay vì nhận
+   metadata/vendor claim theo mặt chữ.
+
+### Candidate Binary Prechecks (knAPeKpTpoA)
+
+Trước mọi weighted scoring, chạy 5 binary prechecks trên mỗi candidate. Bất kỳ failure nào loại candidate ngay, không kể điểm weighted:
+
+1. **Object visible in final vertical crop**: promised object/person/action phải nhìn thấy được trong crop 9:16 (1080x1920) mà không cần title/description.
+2. **Stakes consequential to cold viewer**: stakes phải có ý nghĩa với người xem lạnh, không chỉ với người đã biết context.
+3. **First payoff opens title larger loop**: payoff đầu tiên phải tạo ra một vòng lặp lớn hơn mà title hứa hẹn trả lời.
+4. **Exact final payoff can begin partial resolution 3-8s**: payoff cuối phải bắt đầu partial resolution trong khoảng t=3-8s của final video.
+5. **Naive-viewer access commitment**: candidate must commit to obtaining
+   naive-viewer access for testing as a critical component before weighted
+   scoring. The actual evidence collection and pass/fail determination occurs
+   in Stage 0 item 6; Stage 1 precheck gates only whether that commitment is
+   feasible. (knAPeKpTpoA)
+
+Nếu bất kỳ precheck nào fail, candidate bị loại. Không được dùng weighted score để bù cho một precheck fail.
 
 ## Stage 2 — Cut Segment
 
@@ -202,9 +213,10 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 Sau khi toàn bộ exact-final QC ở trên pass, chạy ADR-0040:
 
 1. Tạo review packet mới từ đúng final MP4: 0-10s/full contact sheets, final ASR, timeline, loudness/spec/detector report, production contract và prior-round findings.
-2. Gọi Codex ở read-only mode với `codex -a never exec --ephemeral -s read-only --output-schema docs/templates/codex-media-review.schema.json ...` và prompt từ `docs/templates/codex-media-review-prompt.md`. Lưu ý `-a never` là global option nên phải đứng trước `exec` trên Codex CLI hiện tại. Review phải cite timestamp/evidence và tối đa ba actionable changes; không chấp nhận feedback chung chung như “thêm effect”.
-3. Nếu `editorial_score < 98`, chỉ apply finding có evidence, regenerate/rerender, chạy lại toàn bộ media QC, rebuild packet và xin review mới. Không rescore artifact cũ.
-4. Dừng khi score `>=98` hoặc `blocked_external`; tối đa năm full rerender rounds. Round 5 vẫn dưới 98 mà không có external blocker thì ghi lesson, web-research case study/expert tương tự và tạo material revision mới với đúng một strategy change.
+2. Gọi Codex ở read-only mode với `codex -a never exec --ephemeral -s read-only --output-schema docs/templates/codex-media-review.schema.json ...` và prompt từ `docs/templates/codex-media-review-prompt.md`. Lưu ý `-a never` là global option nên phải đứng trước `exec` trên Codex CLI hiện tại. Review phải cite timestamp/evidence và tối đa three actionable changes; không chấp nhận feedback chung chung như "thêm effect".
+3. Nếu `editorial_score < 98`, chỉ apply finding có evidence, regenerate/rerender, chạy lại toàn bộ media QC, rebuild packet và xin review mới. Không rescore artifact cũ. Block editorial pass chỉ khi `blocked_external` đã được ghi nhận; một blocking media defect (missing SFX, black band, audio gap, caption mis-sync, v.v.) không phải editorial pass — phải fix trước khi xin review lại.
+4. Dừng khi score `>=98` hoặc `blocked_external`; tối đa năm full rerender rounds. Round 5 vẫn dưới 98 mà không có external blocker thì ghi lesson, web-research case study/expert tương tự và tạo material revision mới với đúng một strategy change. Yêu cầu "stop optimizing" mà không có external blocker = STOPPED BELOW GATE, không phải completed.
+5. Handoff chỉ là draft; không upload. Mọi upload dưới gate (editorial_score <98 mà không có blocked_external) phải liệt kê rõ từng failed gate và exact artifact hash (SHA-256) làm exception. Required below-gate discipline: do not attribute body/CTA/payoff to local final without passing exact-public-master verification. (knAPeKpTpoA)
 
 `98` là internal editorial target, không phải dự báo hoặc bảo đảm triệu view. Score không override Hook/Transformative/rights/lane gates hoặc 48-hour metrics rule.
 
@@ -223,7 +235,7 @@ thì Status không được chuyển thành `Completed` và Short không đượ
 
 ### Publishing Metadata & Studio Settings Gate (blocking)
 
-Trước khi đặt Status của production doc thành `Completed`, chạy packaging workflow rồi lưu đúng một canonical upload package:
+Trước khi chuyển production doc sang trạng thái sẵn sàng upload (pre-upload), chạy packaging workflow rồi lưu đúng một canonical upload package:
 
 1. Trích `central decision/object`, stakes, open loop, known audience anchor và factual constraints từ final script/artifact.
 2. Tạo ít nhất 5 title thuộc các family money/number, decision, contradiction, authority và question; chấm từng title theo cold-viewer clarity, stakes, open loop, factual accuracy và mobile-length compliance. Với cold audience, ưu tiên object/entity đã biết hơn proper name ít người biết. Claim đang tranh cãi phải ở dạng question hoặc attribution, không được biến thành fact.
@@ -278,10 +290,27 @@ Lần sản xuất này có gặp case mà các stage trong docs/WORKFLOW.md ch�
   upload bundle.
 ```
 
-**Enforcement**: Status của production doc một video KHÔNG được đánh dấu done, và dòng của nó trong `docs/experiments/EXPERIMENT-LOG.md` KHÔNG được đánh dấu final, cho tới khi cả 3 subsection trên đã điền đầy đủ — dù chỉ là "none" / "none found".
+### Post-Publish Retention Postmortem (blocking, mọi mature upload)
+
+Mỗi upload đã mature (≥48h, đã có dữ liệu distribution) phải ghi đầy đủ các mục sau vào production doc trước khi Status được đánh dấu `Completed`:
+
+1. `distribution_state`: Shorts Feed traffic share (≥70% / 60-<70% / <60%) và No-Feed State nếu applicable.
+2. `public_master_identity`: exact file path, SHA-256, duration của artifact đã upload — phải khớp với exact-public-master gate đã ghi ở Stage 6.
+3. `0-3s_result`: retention/response trong cửa sổ hook 0-3s.
+4. `0-10s_result`: retention/response trong cửa sổ 0-10s.
+5. `expectation_match`: title/frame-0/first-clause/payoff expectation có khớp nhau trên exact public artifact không.
+6. `three_largest_retention_changes`: ba thay đổi retention lớn nhất, mỗi cái mapped về exact public EDL timestamp và story job đã predeclare.
+7. `controlled_revision`: đúng một controlled change cho Short kế tiếp (falsification condition đi kèm).
+
+Packaging workflow này kiểm soát chuyển sang trạng thái pre-upload (sẵn sàng upload); trạng thái `Completed` cuối cùng vẫn bị chặn cho tới khi đầy đủ yêu cầu post-production và post-publish retro.
+
+**Enforcement**: Status KHÔNG được đánh dấu `Completed` cho tới khi mục này đã điền đầy đủ. Thiếu bất kỳ mục con nào => block completion và upload tiếp theo.
+
+**Enforcement**: Status của production doc một video KHÔNG được đánh dấu done, và dòng của nó trong `docs/experiments/EXPERIMENT-LOG.md` KHÔNG được đánh dấu final, cho tới khi cả 3 subsection Post-Production Retro trên đã điền đầy đủ — dù chỉ là "none" / "none found" — VÀ mục Post-Publish Retention Postmortem đã điền đầy đủ.
 
 ## Stage 6 — Upload & Log
 
+- **Exact-public-master gate (knAPeKpTpoA)**: trước khi chạy lane eligibility gate, record accepted file path, SHA-256, và duration của local final artifact. Sau khi upload, verify same file (matching SHA-256) được chọn trong Studio picker; preserve selection evidence. Sau publication download/probe public transcode, so sánh duration/opening ASR/timeline landmarks với local final; material mismatch => INVALID ARTIFACT MAPPING, stop và ghi nhận. Không attribute body/CTA/payoff cho local final trước khi exact public EDL mapping đã pass.
 - **Lane eligibility gate (ADR-0035)**: xác nhận Destination Channel hiện tại đúng strict round-robin order và Short trước trên lane đó đã đạt Distribution Plateau. Nếu chưa, STOP/queue; không skip lane. Ngoại lệ duy nhất: Short đầu tiên trên channel vẫn viral thì Short thứ hai có thể lên sau khoảng bảy ngày.
 - Upload thủ công. Không paste raw affiliate link trong description (dùng redirect domain). Set `Not made for kids`, language, location, category và master playlist.
 - Sau upload, set/verify Related Video wiring: winner hiện tại → Short mới; first-upload bootstrap được miễn.
@@ -307,11 +336,13 @@ Lần sản xuất này có gặp case mà các stage trong docs/WORKFLOW.md ch�
 5. Mỗi 24h record view increment. Distribution Plateau chỉ pass khi latest 24h increment `<=20%` preceding 24h increment ở hai checks liên tiếp và Short đã ≥48h. Video vẫn kéo view/ngày cao/ổn định không phải plateau.
 6. Khi plateau, inspect AVD và retention 0-3s; metric yếu nhất phải được ghi vào production brief của Short kế tiếp. Không dùng API AVD/APV để giả lập Studio Stayed to Watch.
 7. Map mọi retention rise/drop đáng kể về exact EDL timestamp **và story job đã
-   predeclare** ở Stage -1/4. Kết luận ở layer nhỏ nhất có evidence (expectation,
-   hook mechanism, proof timing, progression, signature moment, CTA, payoff),
-   không dùng nhãn chung “MrBeast editing fail”. Failure phải đi tiếp thành:
-   lesson → expert/case-study research → một strategy change → treatment kế tiếp
-   khi lane eligible.
+    predeclare** ở Stage -1/4. Kết luận ở layer nhỏ nhất có evidence (expectation,
+    hook mechanism, proof timing, progression, signature moment, CTA, payoff),
+    không dùng nhãn chung "MrBeast editing fail". Public mismatch blocks causal
+    body/CTA/payoff conclusions; high Swiped Away diagnoses opening only when
+    opening parity holds; not narrator/CTA/body/sound/payoff by default. Failure
+    phải đi tiếp thành: lesson → expert/case-study research → một strategy change
+    → treatment kế tiếp khi lane eligible.
 8. Mỗi `Post-Publish Retention Postmortem` phải ghi: distribution state; 0-3s và
    0-10s response; ba rise/drop lớn nhất gắn exact EDL/caption/SFX; vùng CTA
    t=38-42s; retention từ payoff onset tới EOF; expectation contract có được exact
