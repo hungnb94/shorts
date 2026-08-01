@@ -33,8 +33,8 @@ docs/research/**/frames/
 docs/research/**/frames-*/
 docs/research/**/contact-sheets/
 docs/research/**/targeted-frames/
-docs/research/**/clip.mp4
-docs/research/**/source.mp4
+docs/research/**/*.mp4
+docs/research/**/*.mp4
 docs/research/**/meta.info.json
 
 # Render scratch (regenerated on each pipeline run)
@@ -51,7 +51,7 @@ data/backups/
 pipeline/tools/*.wav
 
 # Auto-generated subtitle file (not a source transcript, unlike tracked .en.vtt files)
-output/projects/bacsihai/source/8vM7rPWzTlI_autosub.vi.vtt
+output/projects/**/*.vtt
 
 # Cleanup staging (manually reviewed and purged, not auto-deleted)
 _trash/
@@ -61,3 +61,6 @@ docs/concepts/**/*.png
 docs/research/**/*.png
 assets/sfx/**/*.wav
 .kilo/plans/
+output/projects/**/*.json3
+data/*.db-wal
+data/*.db-shm

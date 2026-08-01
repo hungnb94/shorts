@@ -1,0 +1,21 @@
+HardKnocks V26 — Codex exact-final review, round 2
+
+Verdict: PASS
+Overall Editorial: 98/100
+Hook: 99/100
+Visual Craft: 98/100
+Clarity/Truthfulness: 99/100
+Mobile Readability: 98/100
+
+Blocking defects: none.
+
+Verified:
+- active-speaker crops safe;
+- hook progression clear;
+- cards and captions use separate zones;
+- no visible source-caption leakage;
+- enlarged CTA and AWS labels readable;
+- truth framing distinguishes speaker-reported valuation from audited fact;
+- final distribution payoff complete.
+
+A later compliance check found six one-word caption tails. They were merged to satisfy the 2–5-word baseline, then reviewed in round 3.

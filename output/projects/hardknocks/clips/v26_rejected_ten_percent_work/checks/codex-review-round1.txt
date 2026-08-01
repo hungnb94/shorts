@@ -1,0 +1,20 @@
+HardKnocks V26 — Codex exact-final review, round 1
+
+Verdict: NOT PASS
+Overall Editorial: 97/100
+Hook: 98/100
+Visual Craft: 96/100
+Clarity/Truthfulness: 99/100
+Mobile Readability: 96/100
+
+Blocking defects: none.
+
+Timestamp-supported refinements:
+- ~10–30s: visually repetitive interview base.
+- ~20–25s: mobile-gaming Pexels shot is semantically generic.
+- ~28–36s: valuation sequence is dense.
+- ~38.7–42s: CTA option text near mobile legibility floor.
+- ~48–56s: AWS secondary labels too small.
+- ~58–62.2s: sampled ending did not hold the complete closing thought.
+
+Applied fixes: enlarged CTA and AWS labels; held complete ONE SUPPLIER → THOUSANDS OF STOREFRONTS payoff.

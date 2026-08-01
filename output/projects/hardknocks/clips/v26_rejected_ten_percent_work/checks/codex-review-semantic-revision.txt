@@ -1,0 +1,28 @@
+HardKnocks V26 — semantic revision exact-final review
+
+Reason for revision
+- Late asynchronous semantic gate rejected `server_racks_16971219.mp4`.
+- The clip was warehouse/forklift footage, not servers or digital infrastructure.
+- It was removed from the renderer and final timeline.
+
+Replacement
+- Local cloud/server/data-flow animation.
+- Exact disclosure: `LOCAL ANIMATION • ILLUSTRATION`.
+- Audio stream remained byte-identical to the previously approved final: `df0f2aeb0e710998edb71b7c174fe180`.
+
+Review round 1
+- Candidate semantic gate: PASS; no warehouse imagery remained.
+- First exact-final score: 97/100.
+- Sole blocker at 56.45s: moving watermark overlapped the stale Pexels illustration label.
+
+Review round 2 fix
+- Replaced stale label with `LOCAL ANIMATION • ILLUSTRATION`.
+- Parked watermark at top-right during 49.4–56.6s.
+- Final exact-final SHA-256: `35275b048e61084dc6d0663df1dc8174b91d59e221604251ce61af5957c4d0ba`.
+- Overall Editorial: 99/100.
+- Disclosure truthfulness: 100/100.
+- Disclosure readability: 99/100.
+- Watermark/disclosure separation: 100/100.
+- Overlay/caption collisions: 100/100.
+- Framing/crop integrity: 100/100.
+- Verdict: PASS, no blocker and no non-blocking note.

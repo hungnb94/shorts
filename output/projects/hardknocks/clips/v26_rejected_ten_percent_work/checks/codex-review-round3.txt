@@ -1,0 +1,19 @@
+HardKnocks V26 — Codex exact-final review, round 3
+
+Initial inspection after merging six one-word caption tails:
+- FAIL, 97/100.
+- Blocker: two long merged captions overflowed at the horizontal edges.
+
+Fix inside the same final round:
+- deterministic two-line wrapping for long 4–5-word captions;
+- every line hard-limited to 500px on the 540px overlay canvas;
+- renderer aborts on any width violation.
+
+Final exact-final verification:
+- PASS.
+- Hook: 99/100
+- Visual Craft: 99/100
+- Clarity/Truthfulness: 98/100
+- Mobile Readability: 100/100
+- Overall Editorial: 99/100
+- Previous overflow blocker fixed; no line overlap; no remaining blocker or non-blocking note.
