@@ -1,11 +1,12 @@
 # Shorts Project Context
 
-Animated short video factory: sản xuất Shorts 9:16, 50-75s và phát hành qua ba Channel Pool theo Plateau-Gated Cadence để AB test viral content formulas trên YouTube + TikTok.
+Evidence-led media system: chọn market/idea có demand trước, xây authority asset, rồi dùng Shorts 9:16 làm discovery/experiment layer qua ba Channel Pool theo Plateau-Gated Cadence. Render/QC là manufacturing quality, không phải bằng chứng product-market fit hoặc virality.
 
 Niche: 3 verticals song song (ADR-0019, ADR-0020) — Finance/money-making (crypto, side hustle, investing, tiếng Anh, niche gốc), Health/longevity, AI education (tiếng Anh, professionals/knowledge workers).
 Ngôn ngữ: Tiếng Anh cho niche finance + AI education (global audience, RPM cao) + Health/longevity.
-Content strategy: Curate + Repackage — lấy topic/facts/hooks từ kênh finance viral, render lại 100% bằng animation gốc. Zero footage từ nguồn.
-Automation: Phased — Phase 1 semi-auto (AI generate, human review) → Phase 2 fully autonomous cron pipeline.
+Content strategy: Market-first + Copy Proven Mechanics — mỗi candidate phải pass `docs/WORKFLOW.md` Stage -2 bằng current demand, evergreen question, proven-format evidence, blue-ocean wedge và destination fit trước deep production. Với MONEY BLINDSPOT, long-form evidence-led là authority asset; Shorts chỉ là derivative discovery sau khi flagship được publish và phải wire Related Video.
+Operating loop: ít nhất 10 lightweight ideas → top 3 package hypotheses → 1 deep production candidate → cold-viewer Hook Gate → media QC → plateau-gated publish → Studio learning sau ≥48h. Internal scores không thay thế market evidence; blocker `missing/unverified/unresolved/failed` luôn STOP.
+Automation: pipeline hiện tại vẫn manual/semi-manual; không gọi một rule là automated/enforced nếu nó mới tồn tại trong tài liệu.
 
 ## Language
 

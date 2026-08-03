@@ -4,11 +4,78 @@ Living document. File này tiến hóa qua thực tế sử dụng: mỗi lần 
 
 Doc này sắp xếp thứ tự pipeline và định nghĩa các gate cứng. Không lặp lại nội dung rule đã có trong ADR hay `AGENTS.md` — chỉ cite theo số/tên để tránh lệch pha khi ADR thay đổi.
 
-**Execution order thực tế:** `Stage -1A package hypotheses → Stage 1 source +
-candidate discovery → Stage -1B payoff/critical lock → Stage 0 Hook Gate → Stage
-2-7`. Tên `Stage 0` được giữ để không phá references hiện có; đây là blocking gate
+**Execution order thực tế:** `Stage -2 strategy/market selection → Stage -1A package
+hypotheses → Stage 1 source + candidate discovery → Stage -1B payoff/critical lock
+→ Stage 0 Hook Gate → Stage 2-7`. Tên `Stage 0` được giữ để không phá references hiện có; đây là blocking gate
 chạy **sau khi đã có candidate span**, nhưng trước mọi cut/render/polish. Thứ tự
 trình bày theo số stage không phải thứ tự gọi.
+
+## Stage -2 — STRATEGY & MARKET SELECTION GATE (chặn cứng)
+
+Mục đích của Stage -2 là trả lời **“có nên sản xuất video này không?”** trước khi
+tối ưu câu hỏi “sản xuất nó đẹp thế nào?”. Đây là gate cấp hệ thống và luôn chạy
+trước package, source download, TTS, asset search, EDL, renderer và QC.
+
+### Pass 1 — Strategy role
+
+1. Đọc active strategy của destination channel và ghi rõ asset role:
+   `flagship`, `derivative_short`, `material_revision` hoặc `diagnostic_test`.
+2. Với MONEY BLINDSPOT, active strategy là
+   `docs/strategy/money-blindspot-longform-strategy-2026-07-28.md`: long-form là
+   authority asset; Short mới phải là derivative của một flagship **đã publish**,
+   có exact destination URL/Video ID và kế hoạch Related Video. Nếu flagship còn
+   local-only hoặc Short không có destination, STOP.
+3. Một task cục bộ như “làm video tiếp theo”, một source hấp dẫn hoặc một renderer
+   có sẵn không được tự động override active strategy. Strategy change cần quyết
+   định rõ của user; không được xảy ra ngầm trong production.
+
+### Pass 2 — Idea portfolio, không phải một idea duy nhất
+
+1. Tạo tối thiểu 10 lightweight ideas trước khi chọn source sâu. Mỗi idea chỉ cần:
+   audience, familiar object/stakes, one-sentence gap, literal payoff, current
+   attention wave, evergreen question và production feasibility sơ bộ.
+2. Loại ngay idea yêu cầu cold viewer phải biết biography, company, luật chơi hoặc
+   nhiều qualifier trước khi stakes có nghĩa. Unknown subject/company chỉ đủ điều
+   kiện nếu opening gắn nó với một familiar anchor hoặc physical consequence nhìn
+   thấy ngay; caption/UI không được thay thế object thật.
+3. Chọn top 3 để tạo package hypotheses nhẹ. Chỉ 1 concept được đi tiếp vào Stage
+   -1A/deep research. Mục tiêu là tăng số idea được falsify với chi phí thấp, không
+   tăng số full render.
+
+### Pass 3 — External demand proof
+
+Mỗi concept muốn đi tiếp phải có evidence packet, không chỉ weighted score:
+
+1. **Current-attention pool:** ít nhất 2 tín hiệu độc lập và có link/snapshot cụ thể
+   cho thấy chủ đề đang có người quan tâm; source long-form có nhiều view không tự
+   động chứng minh demand của một segment nằm sâu trong video đó.
+2. **Evergreen human/business question:** một câu hỏi có giá trị kể cả khi current
+   wave biến mất. MONEY BLINDSPOT dùng Topic Gate `>=75/100`, nhưng điểm này chỉ là
+   prioritization floor, không phải market validation.
+3. **Proven format mechanics:** tối thiểu 3 public winners đạt `>=1M` views, thuộc
+   ít nhất 2 channel độc lập, chứng minh narrative/packaging mechanism có thể scale.
+   Không cần copy exact topic; phải copy được causal engine như challenge, visible
+   transformation, evidence pendulum, attempt ladder hoặc quantified comparison.
+4. **Blue-ocean wedge:** viết một câu `competitors usually X; we create Y` trong đó
+   Y tăng utility cho viewer, không chỉ thêm effect, caption, SFX hoặc production
+   complexity.
+5. **Destination fit:** giải thích vì sao đúng audience/channel này muốn xem và
+   hành động tiếp theo sau Short là gì. “Có thể viral” không phải destination fit.
+
+### Resource rule trước khi Stage -2 pass
+
+- Được phép: web/YouTube research, transcript sampling, vài frame/source sample,
+  title/frame-0 sketches và rough-hook cực nhẹ để kiểm tra feasibility.
+- Không được phép: full source download nếu chỉ để khám phá mù, TTS final, Pexels
+  sourcing, full EDL, SFX ledger, renderer, full MP4, Codex score loop hoặc upload.
+- Internal hook score, editorial score, QC pass và creator/agent confidence không
+  thể bù cho một market-evidence item còn thiếu.
+
+**GATE RULE:** thiếu strategy fit, published destination (khi strategy yêu cầu),
+idea tournament, current + evergreen demand, proven-format evidence hoặc blue-ocean
+wedge thì STOP. Candidate quay lại idea portfolio; không được “cho production thử
+rồi để analytics trả lời”. Analytics dùng để học từ một hypothesis đủ điều kiện,
+không dùng để trả tiền cho lỗi selection có thể phát hiện trước production.
 
 ## Stage -1 — EXPECTATION & PAYOFF CONTRACT (chặn cứng)
 
@@ -89,11 +156,9 @@ Chạy bước này trên MỌI candidate segment trước khi cắt, render, ho
 
 - Chọn Source Channel theo từng niche (ADR-0001/0004 finance, ADR-0019 health/VN, ADR-0020 AI-ed).
 - Reverse-engineer outlier channels trước khi chốt treatment: copy narrative mechanics, pacing, hook/payoff và packaging đã chứng minh được demand; không copy topic execution, wording hay footage cụ thể của họ (ADR-0034).
-- **Idea-engine gate trước production polish**: ưu tiên concept có một mục tiêu
-  nhìn thấy được, một open loop, escalation state-by-state và một literal payoff.
-  Nếu cold viewer phải hiểu luật, lịch sử hoặc nhiều qualifier trước khi stakes
-  có nghĩa, score kỹ thuật cao không đủ để cứu idea. Internal topic score không
-  phải market validation. (Lesson: Ronald Wayne → One Red Paperclip.)
+- Stage 1 chỉ chạy cho concept đã pass Stage -2. Tại đây verify exact source span,
+  visual object, escalation và literal payoff; không mở lại một concept đã bị
+  Stage -2 loại chỉ vì tìm thấy quote hay hoặc source footage đẹp.
 - Check `data/source_videos.csv` (source-video dedup registry) theo video ID/kênh trước khi chọn — tránh chọn lại đúng video hoặc lặp kịch bản đã dùng.
 - Download max quality: `yt-dlp -f "bestvideo[height>=2160]+bestaudio"` (không bao giờ nhận default 720p — AGENTS.md).
 - Transcribe (mlx_whisper).

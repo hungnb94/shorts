@@ -1,8 +1,17 @@
 # Shorts
 
-Animated short video factory — sản xuất Shorts 9:16, 50-75s và phát hành qua Channel Pool theo Plateau-Gated Cadence để AB test viral content formulas trên YouTube + TikTok.
+Evidence-led media system — chọn thị trường và ý tưởng có demand trước, xây authority asset, rồi dùng Shorts 9:16 làm discovery/experiment layer qua Channel Pool theo Plateau-Gated Cadence. Render/QC là manufacturing quality, không phải bằng chứng product-market fit hay khả năng đạt triệu view.
 
 Niche: Finance/money-making (English) as the primary/documented vertical, run in parallel with two additional, deliberately-chosen verticals — health/longevity (Vietnamese, Source Channel "Bác sĩ Hải") per ADR-0019, and AI education (English, professionals/knowledge workers) per ADR-0020 — multi-niche AB testing: more parallel data streams → faster overall learning.
+
+## Active Strategic Operating Model — Highest Priority
+
+- **Market selection precedes production.** Mọi video bắt đầu ở `docs/WORKFLOW.md` Stage -2 Strategy & Market Selection Gate. Không được bắt đầu source download, TTS, full EDL, asset search, renderer hoặc media polish để “xem idea có ổn không”.
+- **MONEY BLINDSPOT is flagship-first.** Theo `docs/strategy/money-blindspot-longform-strategy-2026-07-28.md`, evidence-led long-form là authority asset; Short mới chỉ được làm như derivative discovery của một flagship đã publish và phải có Related Video destination. Unrelated standalone Short bị dừng ở Stage -2 trừ khi user chủ động đổi strategy.
+- **Demand evidence outranks internal scoring.** Codex/editorial score, hook rubric, technical QC và creator/agent self-review chỉ chứng minh artifact đạt quality floor. Chúng không thay thế comparable public winners, current-demand evidence hoặc phản hồi cold viewer.
+- **Idea portfolio before production portfolio.** Mỗi production cycle mở bằng ít nhất 10 lightweight ideas, chọn 3 package hypotheses và chỉ đưa 1 concept qua deep production. Tối ưu số lần thử idea rẻ, không tối ưu số lần rerender đắt.
+- **Fail closed, not document-and-proceed.** Bất kỳ blocking gate nào ghi `missing`, `unverified`, `unresolved` hoặc `failed` đều có nghĩa STOP. Không được upload rồi biến pre-upload blocker thành post-upload audit item.
+- Nếu một production brief, renderer hoặc task cục bộ mâu thuẫn với section này hoặc active strategy, section này và active strategy thắng; dừng để giải quyết conflict trước khi tiếp tục.
 
 ## Current Implementation (as of 2026-07-10)
 
@@ -22,6 +31,7 @@ The real, working pipeline is manual/semi-manual Python + ffmpeg, run per projec
 
 ## Key Conventions
 
+- **Prove demand before craft** — copy một narrative/format mechanism đã có public winners và gắn nó với topic có current-attention pool + evergreen question; không dùng source-video views hoặc internal score làm proxy cho demand của một segment.
 - **Copy, don't invent** — find proven viral formats → repackage. Never invent new formats from scratch. See ADR 0002.
 - **Autonomous optimization** — MAB selects variants, no human chooses experiments. System learns from AVD data. See ADR 0009.
 - **Plateau-Gated Cadence** — no fixed daily/weekly quota. Each vertical uses three phone-verified, ≥3-week-aged Destination Channels in strict round-robin order; the next lane must be eligible under ADR-0035.
@@ -128,6 +138,9 @@ Under Plateau-Gated Cadence there is no honest fixed calendar convergence estima
 ## Boundaries
 
 ### Always
+- Pass Stage -2 Strategy & Market Selection Gate before downloading or producing a candidate
+- For MONEY BLINDSPOT, publish the authority flagship first and wire every new Short to it as a derivative
+- Treat market evidence and cold-viewer comprehension as selection evidence; treat QC scores only as manufacturing evidence
 - Copy proven viral formats, repackage with variations
 - Wait 48h before fetching YouTube Analytics (stable data)
 - Apply Retention Techniques and ADR-0036's Information Progression, event-bound SFX and Loop-Payoff Closure to EVERY Short — they are base quality, not optional
@@ -145,6 +158,10 @@ Under Plateau-Gated Cadence there is no honest fixed calendar convergence estima
 - Adding a new platform (TikTok, Instagram)
 
 ### Never
+- Start deep production for an idea that has not passed Stage -2, even if its hook rubric or source video scores highly
+- Produce an unrelated standalone MONEY BLINDSPOT Short while the active flagship-first strategy remains in force
+- Use an internal editorial/QC score as evidence that a topic, segment or package has market demand
+- Proceed past a blocking gate recorded as `missing`, `unverified`, `unresolved` or `failed`
 - Post a new Short shorter than 50s or longer than 75s
 - Publish to a Destination Channel before its previous Short reaches Distribution Plateau, except ADR-0035's first-viral seven-day exception
 - Delete a No-Feed original merely to reset distribution; retain it and create a Material Revision for the next eligible lane
