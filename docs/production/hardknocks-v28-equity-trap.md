@@ -1,6 +1,6 @@
 # HardKnocks V28 — The 20% Equity Trap
 
-Status: INTERNAL ARTIFACT COMPLETE; EDITORIAL TARGET MET (99/100); PUBLICATION BLOCKED
+Status: PUBLIC / IN FLIGHT; EDITORIAL TARGET MET (99/100); PRE-UPLOAD GATES REMAIN UNRESOLVED POST-UPLOAD
 Date: 2026-08-03
 Vertical: Finance / English
 Video type: Clip Curation Edit
@@ -8,6 +8,26 @@ Asset role: Diagnostic Short for the HardKnocks production lane
 Final runtime: 57.8667s
 Final output: 1080×1920, 30 fps, H.264/AAC MP4
 Primary target: Swiped away <20%
+
+## Upload Identity
+
+| Field | Verified value |
+|---|---|
+| Upload status | Uploaded/public |
+| YouTube Video ID | `NCoohVMyE24` |
+| YouTube Short | https://youtube.com/shorts/NCoohVMyE24 |
+| Studio Analytics | https://studio.youtube.com/video/NCoohVMyE24/analytics/tab-overview/period-default |
+| Public timestamp | `2026-08-03 23:01:12 +07` |
+| Logged/verified at | `2026-08-03 23:02:40 +07` |
+| Actual channel | MONEY BLINDSPOT (`UCG_yrDQF5Sj6iMTZB0KSBAA`), mapped to `finance` |
+| Public duration | `57.908s` exact downloaded transcode; player metadata rounds to `58s` |
+| Local duration | `57.866667s`; public minus local = `+0.041333s` |
+| Metrics status | `pending`; do not fetch or judge before `2026-08-05 23:01:12 +07` |
+| Snapshot | `data/uploads/NCoohVMyE24.json` |
+
+Live metadata from the user-supplied URL confirms the canonical title, description, exactly three visible hashtags, public availability, 1080×1920 at 30 fps, category `Education`, and the MONEY BLINDSPOT channel. The zero-view snapshot was observed only 88 seconds after publication and is upload-state evidence, not a performance signal.
+
+The downloaded AV1/Opus public transcode matches the speaker-corrected local master at all 11 sampled timestamps from `0.2s` through `57.5s`: same-timestamp normalized visual correlation averages `0.9996177621`, and every best alignment offset is zero frames. Sampled visual lineage/timeline parity is verified; byte identity and audio identity are not claimed. Evidence: `output/projects/hardknocks/clips/v28_equity_trap_work/checks/public-upload/parity-report.json`.
 
 ## Executive decision
 
@@ -26,7 +46,7 @@ The active MONEY BLINDSPOT strategy normally blocks unrelated standalone Shorts 
 Consequences:
 
 - Internal research, rendering and QC are authorized.
-- Commercial upload is not authorized.
+- Commercial upload was not authorized by this production gate; the public upload is now logged without retroactively clearing that failed gate.
 - No claim will be made that this Short has a valid Related Video destination.
 - Future production returns to flagship-first unless the user explicitly changes the strategy again.
 
@@ -461,9 +481,9 @@ Studio settings if release gates are later cleared:
 - Canonical narrator public-person conditioning rights: internal-only.
 - Related Video destination: missing under flagship-first strategy.
 - Cold naive-viewer Hook Gate evidence: unrecorded.
-- Destination lane eligibility: not evaluated because upload is not authorized.
+- Destination lane eligibility: was not evaluated before publication and remains unverified.
 
-Therefore the artifact is complete for internal review, but it must not be uploaded. A 99/100 editorial score does not override release, strategy, lane or audience-evidence gates.
+The video is already public. These items remain unresolved post-upload audit findings; publication does not retroactively clear source rights, narrator rights, Related Video, lane or audience-evidence gates. A 99/100 editorial score does not override them.
 
 ## Research sources
 
