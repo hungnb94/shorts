@@ -36,6 +36,7 @@ docs/research/**/targeted-frames/
 docs/research/**/*.mp4
 docs/research/**/*.mp4
 docs/research/**/meta.info.json
+output/**/*.mkv
 
 # Render scratch (regenerated on each pipeline run)
 output/**/temp/

@@ -1,10 +1,30 @@
 # HardKnocks V27 — Two-Second Decision Lock
 
-**Status:** exact-final rendered; automated media QC passed; independent editorial score 99/100; publication remains externally blocked  
+**Status:** uploaded/public; exact-final rendered; automated media QC passed; independent editorial score 99/100; pre-upload gates remain unresolved post-upload audit items
 **Primary experiment objective:** reach 80% real YouTube Studio Stayed to Watch; this is a target, not a forecast  
 **Experiment layer:** opening visual-information strategy from `0.00–7.70s` only  
 **Control:** HardKnocks V26, with source, encoded audio, body, captions, proof order, CTA, payoff, title and description frozen  
 **Format:** Transformative Clip Curation Edit, English, general audience
+
+## Upload Identity
+
+| Field | Verified value |
+|---|---|
+| Upload status | Uploaded/public |
+| YouTube Video ID | `xmAXy2FiOaQ` |
+| YouTube Short | https://youtube.com/shorts/xmAXy2FiOaQ |
+| Studio Analytics | https://studio.youtube.com/video/xmAXy2FiOaQ/analytics/tab-overview/period-default |
+| Public timestamp | `2026-08-02 09:00:29 +07` |
+| Logged/verified at | `2026-08-02 09:15:17 +07` |
+| Actual channel | MONEY BLINDSPOT (`UCG_yrDQF5Sj6iMTZB0KSBAA`), mapped to `finance` |
+| Public duration | `62.228s` exact downloaded transcode; player metadata rounds to `62s` |
+| Local duration | `62.200s`; public minus local = `+0.028s` |
+| Metrics status | `pending`; do not fetch or judge before `2026-08-04 09:00:29 +07` |
+| Snapshot | `data/uploads/xmAXy2FiOaQ.json` |
+
+Live metadata was inspected from the user-supplied URL with `yt-dlp`. The public title is an exact match. The description has the same text and exactly three visible hashtags, but YouTube stores one extra blank line before the hashtag line. Empty publicly exposed tags do not prove the Studio tags field is empty.
+
+The downloaded AV1/Opus public transcode passed full decode. Eleven same-timestamp visual samples from `0.2s` through `61.5s` averaged `0.9996004592` normalized correlation with the local master, and every best alignment offset was zero frames. Visual lineage and the sampled visual timeline are verified. Speech, loudness and audio-content lineage are also preserved; the public Opus extraction showed small piecewise timestamp offsets up to `214.625ms`, so exact audio packet/timeline parity is not claimed. Evidence: `output/projects/hardknocks/clips/v27_decision_lock_work/checks/public-upload/parity-report.json`.
 
 ## Backward Plan
 
@@ -162,17 +182,17 @@ Metadata validation:
 - Related Video: wire to the most relevant published HardKnocks business-model story after confirming lane ownership.
 - No raw affiliate links.
 
-## Publication Blockers
+## Post-Upload Unresolved Audit Items
 
 - Source footage has no reusable license declared in the source metadata.
 - The narrator profile remains internal-only pending explicit consent/license for its conditioning reference.
 - No real naive-viewer response has been recorded for the materially changed V27 rough hook; Stage 0 item 6 remains unverified.
 - ADR-0035 lane eligibility has not been established for this artifact.
-- Therefore this is a verified local experiment artifact, not an uploaded or publicly tested Short.
+- The upload occurred despite these unresolved pre-upload gates. Preserve the public upload; do not delete or repost merely to reset distribution.
 
 ## Measurement and Failure Loop
 
-- Do not fetch or interpret analytics before 48 hours.
+- Do not fetch or interpret analytics before `2026-08-04 09:00:29 +07` (48 hours after the verified public timestamp).
 - Primary metric: real YouTube Studio Stayed to Watch after sufficient Shorts Feed exposure.
 - Target: `80%`; no local QC score can guarantee it.
 - Secondary signals: Swiped Away, AVD in seconds, 0–3s and 0–10s retention, CTA-region retention and payoff-to-EOF retention.

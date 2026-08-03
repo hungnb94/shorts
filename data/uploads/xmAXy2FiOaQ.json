@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "record_type": "youtube_short_public_upload_snapshot",
+  "video_id": "xmAXy2FiOaQ",
+  "canonical_url": "https://youtube.com/shorts/xmAXy2FiOaQ",
+  "watch_url": "https://www.youtube.com/watch?v=xmAXy2FiOaQ",
+  "studio_analytics_url": "https://studio.youtube.com/video/xmAXy2FiOaQ/analytics/tab-overview/period-default",
+  "production_record": "docs/production/hardknocks-v27-decision-lock.md",
+  "experiment_log": "docs/experiments/EXPERIMENT-LOG.md",
+  "artifact": {
+    "path": "output/projects/hardknocks/final/2026-08-02-hardknocks_v27_decision_lock.mp4",
+    "sha256": "557b304cc9b38965d1567beedda7aab76abce61cfb83872b5b8c8ab8283c49d1",
+    "duration_seconds": 62.2
+  },
+  "public_metadata": {
+    "title": "10% For $100K—Would You? 💸🤔",
+    "description": "10% For $100K—Would You? 💸🤔\nA rejected $100K pitch became a distribution lesson, with every valuation labeled as source-reported.\n\n#shorts #business #startups",
+    "channel": "MONEY BLINDSPOT",
+    "channel_id": "UCG_yrDQF5Sj6iMTZB0KSBAA",
+    "channel_url": "https://www.youtube.com/channel/UCG_yrDQF5Sj6iMTZB0KSBAA",
+    "uploader_handle": "@MONEYBLINDSPOT",
+    "uploader_url": "https://www.youtube.com/@MONEYBLINDSPOT",
+    "availability": "public",
+    "live_status": "not_live",
+    "upload_date": "2026-08-02",
+    "public_timestamp_utc": "2026-08-02T02:00:29+00:00",
+    "public_timestamp_local": "2026-08-02T09:00:29+07:00",
+    "duration_seconds_rounded": 62,
+    "duration_seconds_public_transcode": 62.228,
+    "width_reported_by_player": 1080,
+    "height_reported_by_player": 1920,
+    "fps_reported_by_player": 30,
+    "video_codec_public_transcode": "av1",
+    "audio_codec_public_transcode": "opus",
+    "category": "Education",
+    "public_tags": [],
+    "snapshot_view_count": 0,
+    "snapshot_like_count": null,
+    "snapshot_comment_count": null
+  },
+  "snapshot": {
+    "observed_at_local": "2026-08-02T09:15:17+07:00",
+    "evidence_source": "Public YouTube URL inspected with yt-dlp; public transcode downloaded for lineage verification",
+    "source_url_supplied_by_user": "https://youtube.com/shorts/xmAXy2FiOaQ",
+    "metrics_fetch_after_local": "2026-08-04T09:00:29+07:00",
+    "lifecycle_status": "IN FLIGHT",
+    "interpretation": "The snapshot was taken 888 seconds after publication. The observed zero-view count is upload-state evidence only and is not a performance diagnosis."
+  },
+  "artifact_identity_check": {
+    "evidence_path": "output/projects/hardknocks/clips/v27_decision_lock_work/checks/public-upload/parity-report.json",
+    "sampled_timestamps_seconds": [0.2, 1.0, 2.0, 5.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 61.5],
+    "similarity_method": "Same-frame grayscale normalized correlation at 270x480 plus a plus-or-minus-three-frame alignment search",
+    "same_timestamp_aggregate_similarity": 0.9996004592,
+    "same_timestamp_opening_mean_similarity": 0.9995560645,
+    "aligned_body_mean_similarity": 0.9996188204,
+    "alignment_samples": [
+      {"time_seconds": 0.2, "best_offset_frames": 0},
+      {"time_seconds": 1.0, "best_offset_frames": 0},
+      {"time_seconds": 2.0, "best_offset_frames": 0},
+      {"time_seconds": 5.0, "best_offset_frames": 0},
+      {"time_seconds": 10.0, "best_offset_frames": 0},
+      {"time_seconds": 20.0, "best_offset_frames": 0},
+      {"time_seconds": 30.0, "best_offset_frames": 0},
+      {"time_seconds": 40.0, "best_offset_frames": 0},
+      {"time_seconds": 50.0, "best_offset_frames": 0},
+      {"time_seconds": 60.0, "best_offset_frames": 0},
+      {"time_seconds": 61.5, "best_offset_frames": 0}
+    ],
+    "duration_difference_public_minus_local_seconds": 0.028,
+    "visual_lineage": "verified",
+    "exact_timeline_parity": "sampled visual timeline verified; exact audio packet/timeline parity unverified",
+    "audio_identity": "speech, loudness and content lineage verified; piecewise offsets up to 214.625ms observed in the downloaded Opus timeline",
+    "cause": "unverified",
+    "interpretation": "The public AV1/Opus transcode is visually the intended V27 master and preserves its audio content. YouTube transcode bytes necessarily differ from the local H.264/AAC master."
+  },
+  "packaging_verification": {
+    "title_matches_canonical": true,
+    "description_matches_canonical_byte_for_byte": false,
+    "description_content_matches_canonical": true,
+    "visible_hashtags_match_canonical": true,
+    "channel_name_matches_brand": true,
+    "channel_id_matches_finance_alias": true,
+    "handle_matches_preferred": null
+  },
+  "observed_packaging_deviations": [
+    "The public description inserts one extra blank line before the three visible hashtags; its text content otherwise matches the canonical package.",
+    "No public tags were exposed; this does not prove that the Studio tags field is empty."
+  ],
+  "unverified_studio_fields": [
+    "Audience / Made for kids",
+    "Video language",
+    "Recording location",
+    "Synthetic or altered content disclosure",
+    "Playlist",
+    "Related Video",
+    "Upload Details Template",
+    "Thumbnail/frame selection",
+    "ADR-0035 lane eligibility"
+  ],
+  "metrics_routing": {
+    "project": "hardknocks",
+    "actual_channel_id": "UCG_yrDQF5Sj6iMTZB0KSBAA",
+    "configured_channel_alias": "finance",
+    "status": "MAPPED"
+  },
+  "unresolved_gates_at_snapshot": [
+    "School of Hard Knocks source-footage permission or reusable license is not documented.",
+    "Narrator conditioning-reference consent or license is not documented.",
+    "A real naive-viewer Hook Gate response for V27 is not documented.",
+    "ADR-0035 lane eligibility, playlist, Related Video and upload-template settings remain unverified.",
+    "The 80% Stayed to Watch target cannot be evaluated before stable Studio metrics exist."
+  ]
+}
