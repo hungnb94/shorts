@@ -5,7 +5,7 @@ description: Log a just-uploaded YouTube Short into this repo's tracking system 
 
 Implements Stage 6 ("Upload & Log") of `docs/WORKFLOW.md` for a video that was just manually
 uploaded. This is a **post-upload identity log**, not a metrics fetch — retention/AVD data
-isn't stable until 48h after upload (AGENTS.md Known Pitfalls), so this command never invents
+isn't stable until 48h after upload (root `AGENTS.md` → Durable Data and Publishing), so this command never invents
 or guesses those numbers. It only records what/when, and computes the exact date to come back
 and fill in metrics.
 

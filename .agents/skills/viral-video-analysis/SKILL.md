@@ -52,7 +52,7 @@ file naming so both studies stay comparable.
 ### 3. Visual/cut extraction
 
 ```bash
-python3 .Codex/skills/viral-video-analysis/scripts/extract_keyframes.py \
+python3 .agents/skills/viral-video-analysis/scripts/extract_keyframes.py \
   docs/research/<slug>/<id>/source.mp4 \
   --out-dir docs/research/<slug>/<id>/frames --max-frames 8 --hook-window-sec 10 -v
 ```
@@ -61,7 +61,7 @@ Produces `frames/manifest.json` with `scene_keyframes` (whole-video scene change
 `hook_window_frames` (fixed 1s-interval frames across 0-10s, for cadence measurement
 independent of whether scene-detect fires there).
 
-### 4. Codex visual analysis
+### 4. Agent visual analysis
 
 Read every frame in the manifest directly via the Read tool — do not skip this by trying to
 infer content from filenames/timestamps alone. For each: describe the scene, transcribe any
@@ -73,7 +73,7 @@ quantitative backup (skin-tone %, near-white %) — see that file's `--help`.
 ### 5. Audio analysis
 
 ```bash
-python3 .Codex/skills/viral-video-analysis/scripts/analyze_audio.py \
+python3 .agents/skills/viral-video-analysis/scripts/analyze_audio.py \
   docs/research/<slug>/<id>/source.mp4 \
   --cut-timestamps "<comma-separated scene_keyframes timestamps from step 3>" \
   -o docs/research/<slug>/<id>/audio_analysis.json -v
@@ -103,8 +103,8 @@ end with a concrete, falsifiable proposal, not just observations.
   `docs/adr/` for the highest existing `NNNN-*.md`.
 - **`docs/WORKFLOW.md`**: if a finding generalizes into a new checkable rule, add one line to
   the relevant Stage 5 subsection (Hook Retro / Workflow Delta), citing this analysis.
-- **`AGENTS.md` Known Pitfalls**: if it's a one-off insight that doesn't generalize, log it
-  there instead.
+- **`docs/agent/*-pitfalls.md`**: if it's a reusable implementation/research failure, log it
+  in the relevant on-demand pitfall file instead of expanding root context.
 - **If this run is a Stage 5 Retro for a specific production doc**: directly write the answers
   into that doc's `## Post-Production Retro` → `### Hook Retro` (Verbal/Visual) and
   `### Workflow Delta` subsections, per the exact format already defined in `docs/WORKFLOW.md`
@@ -113,7 +113,7 @@ end with a concrete, falsifiable proposal, not just observations.
 ## Bundled scripts
 
 - `scripts/extract_keyframes.py` — ffprobe + ffmpeg scene-detect, writes frames + manifest.json.
-  No vision API call; Codex reads frames directly (see ADR-0023 for why this replaced the
+  No vision API call; the active agent reads frames directly (see ADR-0023 for why this replaced the
   GPT-4o-based `video-analyzer` Hermes skill this was ported from).
 - `scripts/analyze_audio.py` — ffmpeg + librosa onset/beat/energy detection. Requires `librosa`
   (already installed in this repo's `.venv`; if working in a fresh environment run
