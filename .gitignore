@@ -65,3 +65,4 @@ assets/sfx/**/*.wav
 output/projects/**/*.json3
 data/*.db-wal
 data/*.db-shm
+.claude/skills

@@ -1,50 +1,33 @@
-# Shorts Docs
+# Shorts Documentation
 
-## Operating Guides
+Use this page as a router. Do not read every document in a category.
 
-- [WORKFLOW.md](WORKFLOW.md) — blocking end-to-end production flow
-- [MrBeast-Informed Short-Form Production System](guides/mrbeast-short-form-production-system.md) — expectation-first, backward-planned system for promise, progression, signature moment, critical components, payoff, and learning
+| Need | Start here | Then load |
+|---|---|---|
+| Select market or next idea | [`WORKFLOW.md`](WORKFLOW.md) Stage -2 | One active file in [`strategy/`](strategy/) and only relevant research |
+| Produce or revise a video | [`WORKFLOW.md`](WORKFLOW.md) | Matching entry in [`production/README.md`](production/README.md) and relevant ADR |
+| Understand a durable decision | [`adr/README.md`](adr/README.md) | One ADR by number/topic |
+| Find external evidence | [`research/README.md`](research/README.md) | Study `REPORT.md`; raw evidence only if needed |
+| Review experiment results | [`experiments/FRAMEWORK-REGISTRY.md`](experiments/FRAMEWORK-REGISTRY.md) | [`experiments/EXPERIMENT-LOG.md`](experiments/EXPERIMENT-LOG.md) |
+| Run media QC | [`agent/media-pitfalls.md`](agent/media-pitfalls.md) | [`verification/`](verification/) and matching production verifier |
+| Analyze metrics/publishing | [`agent/strategy-analytics-pitfalls.md`](agent/strategy-analytics-pitfalls.md) | Relevant ADR/experiment row |
+| Reuse a document shape | [`templates/`](templates/) | One relevant template |
+| Look up vision terminology | [`vision-glossary.md`](vision-glossary.md) | Only the relevant term |
 
-## ADR (Architecture Decision Records)
-Decisions that shaped the project.
+## Categories
 
-| ADR | Topic |
-|-----|-------|
-| 0001 | Niche: finance/money-making |
-| 0002 | Animation style: Kitty Explain |
-| 0003 | AB test one variable at a time |
-| 0004 | Language: English only |
-| 0005 | Content strategy: curate & repackage |
-| 0007 | Clip Curation Edit (Type #7) |
-| 0008 | Value-Added Editing — all 9 types |
-| 0009 | Autonomous Optimization System |
-| 0010 | Video quality degradation fix |
-| 0011 | Success formula strategic layer |
-| 0012 | AI video generation pipeline |
-| 0013 | Contiguous VO Pipeline (architectural pattern) |
-| 0014 | Dedicated vision model for video analysis |
-| 0016 | Frequent editing (every 3s) |
-| 0017 | Hook-Window: frame 0 must show a human face |
-| 0018 | Hook caption sync and cadence |
-| 0019 | Multi-niche AB testing (finance/English + health/Vietnamese) |
-| 0020 | Third niche: AI education (English) |
-| 0037 | Expectation-payoff and critical-path production system |
-| 0038 | Event-ledger SFX library and rights gate |
+- `strategy/`: active market, authority-asset, and channel direction.
+- `production/`: per-video contracts, retrospectives, metadata, QC, and upload evidence.
+- `research/`: evidence packages; each study should be entered through `REPORT.md`.
+- `adr/`: accepted and historical architecture/strategy decisions.
+- `experiments/`: framework lifecycle and observed performance.
+- `plans/`: historical execution plans; not policy.
+- `specs/`: historical design specifications; not policy.
+- `concepts/`: unapproved concepts; never authorize production by themselves.
+- `script-drafts/`: historical Markdown script drafts; content, not executable code.
+- `guides/`: reusable operating guidance.
+- `references/`: source material, not project policy.
+- `verification/`: calibration and verification artifacts.
+- `agent/`: detailed on-demand context removed from the always-loaded root instructions.
 
-## Production Traces
-Per-video documentation with pipeline, effects, retention data.
-
-| Video | Format | Retention | File |
-|-------|--------|-----------|------|
-| dHDpDXSIAkA (Lawnmower→2,600 Apartments) | Clip Curation Edit | pending (uploaded 2026-07-10) | [hardknocks-lawnmower-v1.md](production/hardknocks-lawnmower-v1.md) |
-| Ronald Wayne v3 (10% of Apple) | Qwen TTS + word-aligned 40-beat render | technical pass; upload blocked | [ronald-wayne-v3-qwen-synced.md](production/ronald-wayne-v3-qwen-synced.md) |
-| One Red Paperclip v1 | Visible trade-up challenge + Qwen/source payoff | uploaded/public; experiment in flight; publication deviations logged | [one-red-paperclip-v1.md](production/one-red-paperclip-v1.md) |
-
-## Research
-- [hook-benchmarks-2026-07/REPORT.md](research/hook-benchmarks-2026-07/REPORT.md) — Hook analysis of 6 viral finance Shorts (frames + transcript + comments), basis for ADR-0018
-- [sfx-system-2026-07-30/REPORT.md](research/sfx-system-2026-07-30/REPORT.md) — single-video SFX method analysis, MyInstants rights boundary, repository gap audit and rollout strategy
-
-## Reference
-- [MrBeast production guide — original English MarkItDown extraction](references/mrbeast-production-guide-original-en.md) — user-supplied PDF converted to Markdown; source material, not project policy
-- [vision-glossary.md](vision-glossary.md) — Terminology for vision analysis
-- [SFX Event Ledger template](templates/sfx-event-ledger.md) — per-video Sonic Intent, cue ledger and exact-final audio QC
+Precedence: root `AGENTS.md` → accepted newer ADR/active strategy → `WORKFLOW.md` → current production contract → historical plans/specs/research.

@@ -1,0 +1,56 @@
+# Production Records
+
+One contract/audit trail per produced or proposed video. These are historical evidence and never override current root policy. Search by project/version before opening a file.
+
+- [`ackman-ascii.md`](ackman-ascii.md) — ACKMAN ASCII — Production Trace
+- [`ackman-clip-analysis.md`](ackman-clip-analysis.md) — 🎬 Clip Analysis: "Asking Billionaires What To Invest In!"
+- [`aiwork-v1-capability-curve.md`](aiwork-v1-capability-curve.md) — aiwork_v1_capability_curve, "AI Coding Jumped From 62% to 88% in ONE Year"
+- [`aiwork-v2-capability-curve.md`](aiwork-v2-capability-curve.md) — aiwork_v2_capability_curve, "AI Coding Jumped From 62% to 88% in ONE Year" (Multi-Clip Mashup rebuild)
+- [`aiwork-v3-prompt-bloat.md`](aiwork-v3-prompt-bloat.md) — aiwork_v3_prompt_bloat, "Why Adding More Instructions Makes Your AI Worse" (Multi-Clip Mashup)
+- [`aiwork-v4-prompt-bloat.md`](aiwork-v4-prompt-bloat.md) — aiwork_v4_prompt_bloat, "Why Adding More Instructions Makes Your AI Worse" (Multi-Clip Mashup)
+- [`aiwork-v5-prompt-bloat.md`](aiwork-v5-prompt-bloat.md) — aiwork_v5_prompt_bloat, "Why Adding More Instructions Makes Your AI Worse" (Multi-Clip Mashup)
+- [`aiwork-v6-ai-misalignment.md`](aiwork-v6-ai-misalignment.md) — aiwork_v6 — "Why Your AI Keeps Getting It Wrong" (Multi-Clip Mashup)
+- [`bacsihai-v5-lao-dong-tay.md`](bacsihai-v5-lao-dong-tay.md) — bacsihai_v5_lao_dong_tay — "Vì Sao Người Lao Động Chân Tay Ít Bị Alzheimer Hơn?"
+- [`bacsihai-v6-vitamin-d-hormone.md`](bacsihai-v6-vitamin-d-hormone.md) — bacsihai_v6_vitamin_d_hormone — "Vitamin D Không Phải Là 'Vitamin'?"
+- [`bacsihai-v7-cholesterol-not-the-enemy.md`](bacsihai-v7-cholesterol-not-the-enemy.md) — bacsihai_v7 — "Cholesterol Không Phải Là Kẻ Thù"
+- [`billionaire-improvements.md`](billionaire-improvements.md) — V1 vs V2 — Clip Selection & Rendering Improvements
+- [`dangote-transcript-analysis.md`](dangote-transcript-analysis.md) — Dangote Interview - Viral Shorts Analysis
+- [`dangote-v9.md`](dangote-v9.md) — V9_vision — "$40B, Humble, Industrialize Africa"
+- [`foodtrial-v2-date-bark-qc.md`](foodtrial-v2-date-bark-qc.md) — FoodTrial v2 — Date Bark — QC Report
+- [`foodtrial-v2-date-bark.md`](foodtrial-v2-date-bark.md) — FoodTrial v2 — Date Bark vs. SNICKERS
+- [`hardknocks-b1-ruiz-billionaire-check.md`](hardknocks-b1-ruiz-billionaire-check.md) — HardKnocks "Is He Still a Billionaire?" (John Ruiz, Blindspot v3)
+- [`hardknocks-lawnmower-v1.md`](hardknocks-lawnmower-v1.md) — hardknocks_lawnmower_v1 — "From a Lawnmower to a Real Estate Empire"
+- [`hardknocks-v10-100m-get-rich-slow.md`](hardknocks-v10-100m-get-rich-slow.md) — HardKnocks V10 — $100M at 30, Get Rich Slow
+- [`hardknocks-v10r-live-approach-original-voice.md`](hardknocks-v10r-live-approach-original-voice.md) — HardKnocks V10R — Live Approach, Original Voice
+- [`hardknocks-v11-blindspot-ben-pogue.md`](hardknocks-v11-blindspot-ben-pogue.md) — HardKnocks V11 — "3 Things Every Man Wants" (Blindspot Verification)
+- [`hardknocks-v13-atlanta-billionaire-hunt.md`](hardknocks-v13-atlanta-billionaire-hunt.md) — HardKnocks V13 — Atlanta Billionaire Hunt
+- [`hardknocks-v14-theragun-dual-hook.md`](hardknocks-v14-theragun-dual-hook.md) — HardKnocks V14 — Theragun Dual Hook (Ed Mylett / Jason Wersland)
+- [`hardknocks-v15-theragun-remake.md`](hardknocks-v15-theragun-remake.md) — HardKnocks V15 — Theragun Clarity Remake
+- [`hardknocks-v16-mrbeast-revisions.md`](hardknocks-v16-mrbeast-revisions.md) — HardKnocks V16 — MrBeast-Editing Material Revisions
+- [`hardknocks-v17-zero-salary-bet-r2-active-speaker.md`](hardknocks-v17-zero-salary-bet-r2-active-speaker.md) — HardKnocks V17 — The $0 Salary Bet (R2 Active-Speaker)
+- [`hardknocks-v17-zero-salary-bet.md`](hardknocks-v17-zero-salary-bet.md) — HardKnocks V17 — The $0 Salary Bet
+- [`hardknocks-v18-linkedin-contrarian-test.md`](hardknocks-v18-linkedin-contrarian-test.md) — HardKnocks V18 — LinkedIn Contrarian Test
+- [`hardknocks-v19-barbara-rejection-ladder.md`](hardknocks-v19-barbara-rejection-ladder.md) — HardKnocks V19 — Barbara Corcoran Rejection Ladder
+- [`hardknocks-v2-implied-comparison.md`](hardknocks-v2-implied-comparison.md) — hardknocks_v2 — "3 Billionaires Say Money = Happiness... This One Didn't Agree"
+- [`hardknocks-v20-dana-dumbest-idea.md`](hardknocks-v20-dana-dumbest-idea.md) — HardKnocks V20 — Dana White “Dumbest Idea”
+- [`hardknocks-v21-buy-dont-build.md`](hardknocks-v21-buy-dont-build.md) — HardKnocks V21 — Buy, Don't Build
+- [`hardknocks-v22-seventy-eight-tail.md`](hardknocks-v22-seventy-eight-tail.md) — HardKnocks V22 — The $78 Tail Number
+- [`hardknocks-v23-gta-belief.md`](hardknocks-v23-gta-belief.md) — HardKnocks V23 — GTA, Belief, and the Control Boundary
+- [`hardknocks-v24-gave-away-90.md`](hardknocks-v24-gave-away-90.md) — HardKnocks V24 - He Gave Away 90%
+- [`hardknocks-v25-searchable-story-moat.md`](hardknocks-v25-searchable-story-moat.md) — HardKnocks V25 — Searchable Story Moat
+- [`hardknocks-v26-rejected-ten-percent.md`](hardknocks-v26-rejected-ten-percent.md) — HardKnocks V26 — The Rejected 10%
+- [`hardknocks-v27-decision-lock.md`](hardknocks-v27-decision-lock.md) — HardKnocks V27 — Two-Second Decision Lock
+- [`hardknocks-v28-equity-trap.md`](hardknocks-v28-equity-trap.md) — HardKnocks V28 — The 20% Equity Trap
+- [`hardknocks-v3-believe-in-god.md`](hardknocks-v3-believe-in-god.md) — hardknocks_v3 — "3 Billionaires Say 'Yes' To God In 1 Second... This One Kept Talking For 30"
+- [`hardknocks-v4-wall-street-legend.md`](hardknocks-v4-wall-street-legend.md) — hardknocks_v4 — "He Trades $1 Billion A Day On Wall Street... But This Is What Actually Kept Him Going"
+- [`hardknocks-v5-bridge-developer.md`](hardknocks-v5-bridge-developer.md) — hardknocks_v5 — "He Makes $50 Million A Year... But He Used To Sleep Under A Bridge"
+- [`hardknocks-v6-customer-friction-moat.md`](hardknocks-v6-customer-friction-moat.md) — hardknocks_v6 — “They Said His Store Would Go Broke. It Became Home Depot.”
+- [`hardknocks-v7-raising-canes-focus-bet.md`](hardknocks-v7-raising-canes-focus-bet.md) — HardKnocks V7 — Raising Cane's Focus Bet
+- [`hardknocks-v8-logan-platform-fit.md`](hardknocks-v8-logan-platform-fit.md) — HardKnocks V8 — Logan Paul Platform Fit
+- [`hardknocks-v9-live-approach-200m.md`](hardknocks-v9-live-approach-200m.md) — HardKnocks V9 — Live Approach to the $100M/$10K Gap
+- [`hardknocks-v9r-original-voice.md`](hardknocks-v9r-original-voice.md) — HardKnocks V9R — Original-Voice Revision
+- [`laundromat-v1-decision-lock.md`](laundromat-v1-decision-lock.md) — Laundromat V1 — Decision-Lock Production Record
+- [`money-blindspot-ai-power-bottleneck-longform-v1.md`](money-blindspot-ai-power-bottleneck-longform-v1.md) — Money Blindspot Long-Form Pilot V1 — AI Power Bottleneck
+- [`one-red-paperclip-v1.md`](one-red-paperclip-v1.md) — One Red Paperclip v1 — Uploaded Public Experiment
+- [`ronald-wayne-v3-qwen-synced.md`](ronald-wayne-v3-qwen-synced.md) — Ronald Wayne v3 — Qwen Caption/Visual Synchronization Record
+- [`trademe-v1-worst-trade-house.md`](trademe-v1-worst-trade-house.md) — trademe_v1 — "Her Followers Called This Her Worst Trade... Then She Got A House"
