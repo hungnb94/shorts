@@ -1,0 +1,11 @@
+**PASS - có điều kiện.**
+
+Video thể hiện rõ nhiều pumpjack đang khai thác dầu, phù hợp làm hình minh họa chung cho **upstream crude extraction / nguồn cung dầu thô**.
+
+Ranh giới sử dụng chính xác:
+
+- Được dùng dưới lời dẫn mang tính khái quát như “crude must first be extracted”, “upstream supply”, hoặc “limited access to crude feedstock”.
+- Không được dùng như bằng chứng trực tiếp về bottleneck, thiếu hụt, gián đoạn sản xuất, Nigeria, Dangote, hay một mỏ dầu cụ thể. Các frame không cho thấy sự cố hoặc công suất bị hạn chế.
+- Cảnh quan khô cằn gợi mạnh mỏ dầu onshore kiểu Mỹ, nhưng không có địa danh hoặc nhận diện vị trí rõ ràng. Tránh ngụ ý đây là Nigeria.
+- Không thấy branding đọc được. Có nhãn nhỏ trên pumpjack nhưng không đủ rõ để nhận diện.
+- Nguồn 16:9 cần crop chủ động sang 9:16: center crop mặc định có thể cắt pumpjack tiền cảnh ở đầu clip; giữa clip giữ chủ thể tốt hơn; cuối clip pumpjack quá nhỏ nên chỉ phù hợp làm establishing shot. Không giữ quá lâu sau khi chủ thể chính rời xa.

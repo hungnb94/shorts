@@ -1,0 +1,18 @@
+SOURCE INTERVIEW: PASS
+
+562.5s: white interviewer, centered.
+565.5s: Dangote, centered/slightly right.
+568.5s: Dangote, centered/slightly right.
+606.8s: Dangote, centered.
+609.8s: white interviewer, centered.
+612.2s: Dangote, centered/slightly right.
+
+Portrait hard crop: PASS. A 9:16 center crop can retain each active speaker’s head and torso. Wide hand gestures may be clipped, especially at 568.5s, 606.8s, and 609.8s.
+
+Burned-in captions/logos: none visible. Only unobtrusive lapel microphones.
+
+PEXELS 12891229 REFINERY: PASS - relevant illustration for refinery capacity or fuel processing. Generic industrial pipework, not evidence of crude exports, imports, or upstream production. Semantic risk: may depict a gas, chemical, or utility facility rather than an oil refinery. No visible branding.
+
+PEXELS 19621044 TANKER: REJECT - row 2 is blank, so the asset, cargo type, branding, and shot quality cannot be verified. Do not imply crude or refined-fuel transport without visible confirmation.
+
+PEXELS 30243437 INDUSTRIAL PIPELINES: REJECT - row 3 is blank and visually unverifiable. Even if restored, generic pipelines would only be illustrative and could misleadingly imply refinery or upstream infrastructure. Branding cannot be checked.

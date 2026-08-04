@@ -1,8 +1,30 @@
-# HardKnocks Next-Video Strategy — Flagship First, Supply-Chain Moat
+# HardKnocks Next-Video Strategy — Short-First Supplier Lesson
 
 Date: 2026-08-03
-Status: CONDITIONAL STRATEGY PASS; RESEARCH ONLY; DEEP PRODUCTION BLOCKED
+Status: V30 MATERIAL REVISION ACTIVE; LONG-FORM DEFERRED
 Destination: MONEY BLINDSPOT / HardKnocks finance lane
+
+## 2026-08-04 explicit Short-first override
+
+The user explicitly chose to continue with short-form and defer long-form
+production. For the current cycle this supersedes the flagship-first production
+block below. It does not manufacture a Related Video destination or guarantee
+Shorts Feed distribution.
+
+Authorized next asset after direct V29 comprehension feedback:
+
+- Format: 50–75 second diagnostic Short.
+- Selected concept: one beginner-friendly supplier-risk lesson using Dangote as
+  the example.
+- Package: `ONE SUPPLIER CAN SHUT DOWN YOUR BUSINESS` within 0–3s → one case →
+  one proof → `own it, contract it, or build a backup`.
+- V29 is retained as the failed-comprehension control. Its 100/100 artifact score
+  did not prove cold-viewer clarity and must not be used to justify its narrative.
+- Destination: MONEY BLINDSPOT / HardKnocks finance lane.
+- Publication truth: source and narrator rights remain separate release gates.
+
+The historical flagship analysis remains below as deferred research. Do not use
+its long-form package-comprehension gate to block V30 production.
 
 ## Forced-choice decision
 
@@ -207,7 +229,19 @@ This closes the promise without turning the case into generic billionaire worshi
 | `$55B revenue` | Management projection | Attribute and label as projected |
 | `Backward integration caused his wealth` | It is one operating strategy in a multi-decade conglomerate build | Avoid single-cause biography |
 
-The 650K-versus-700K current-capacity conflict is blocking. Resolve it before script lock.
+The former 650K-versus-700K conflict is resolved as a classification boundary, not
+as one interchangeable capacity claim:
+
+- `650,000 b/d` is the refinery's nameplate capacity and the safest default for
+  operating-scale comparisons.
+- `700,000 b/d` was independently verified by process licensors during a June
+  2026 performance test; Ecofin explicitly says this does not yet prove sustained
+  commercial production.
+- Reuters later used 700,000 b/d as capacity in July 2026 reporting, but the
+  script must still label the test context when the distinction matters.
+
+Do not narrate `700,000 b/d of sustained output`. The bounded formulation is:
+`a 650,000 b/d nameplate refinery that demonstrated 700,000 b/d in a performance test`.
 
 ## Rights-safe production design
 
@@ -275,11 +309,34 @@ Cadence is state-based, not calendar-based. Do not invent a weekly deadline.
 - Three mechanism winners above 1M across at least two channels: PASS.
 - Current attention from two independent source classes: PASS, with issuer-bias label.
 - Direct subject demand: WEAK; broad packaging required.
-- Capacity conflict: BLOCKED.
-- Commercial narrator: BLOCKED.
+- Capacity classification: PASS on 2026-08-04; 650K nameplate and 700K test capability must remain distinct.
+- Commercial narrator: CONDITIONALLY AVAILABLE through the separately generated
+  `natural_talker_male_qwen_blog` finance profile, but the global default pointer
+  still selects an internal-only public-person-conditioned profile. Resolve this
+  policy/pointer conflict before synthesis; do not silently switch profiles.
 - Rights-safe visual inventory: MISSING.
-- Three title/thumbnail variants: drafted, not tested.
+- Three title/thumbnail variants: rendered to
+  `output/projects/dangote-supply-chain/package-test/`, not human-tested.
 - Naive-viewer package comprehension: MISSING.
+
+### 2026-08-04 source and package update
+
+Primary research/interview candidate:
+
+- `jVs4NBoHZic` — `Aliko Dangote: Building Africa's industrial future from the ground up`
+- Publisher: Norges Bank Investment Management
+- Uploaded: 2026-05-13
+- Snapshot: 752,192 views, 19,119 likes, 1,400 comments, 49:24 runtime
+- Candidate quality: public 3840×2160 player rendition, English captions, direct
+  subject explanation of backward integration at approximately 6:22–6:39 and
+  the refinery decision at approximately 9:20–10:10
+- Rights boundary: no reusable public license is exposed. Treat the interview as
+  a research source; do not use its audio/video in the flagship without permission.
+
+Package A is the internal lead because its mobile proxy preserves the primary
+headline `HE BUILT EVERY STEP` and its original pictogram chain communicates raw
+input → factory → logistics → product. This is not a human comprehension pass.
+The five-person cold package test remains blocking under the conditions below.
 
 ### Package test
 

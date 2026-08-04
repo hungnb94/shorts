@@ -1,0 +1,12 @@
+Kết luận: **REJECT cả hai asset**. Chúng không đủ specificity để minh họa chính xác các claim về Dangote/Nigeria và dễ bị hiểu như bằng chứng trực tiếp.
+
+| Asset | Xuất khẩu dầu thô | Nhập khẩu nhiên liệu tinh chế | Công suất lọc dầu | Nút thắt nguồn cung dầu thô | Branding / ambiguity | Quyết định |
+|---|---|---|---|---|---|---|
+| **Pexels 19621044 - tanker** | **Decoration** - tàu có thể chở sản phẩm dầu, nhưng không xác định hàng hóa | **Relevant illustration** ở mức generic cho vận tải nhiên liệu đường biển, không phải bằng chứng nhập khẩu | **Misleading** - không thể hiện nhà máy hay công suất lọc dầu | **Decoration** - chỉ gợi logistics, không thể hiện thiếu dầu thô hoặc bottleneck | Thấy rõ **NS PRIDE**, **SCF**, “Safety Comes First”; loại hàng, tuyến đường và địa điểm không xác định. Có tugboat và cảnh cảng nhưng không có dấu hiệu Nigeria/Dangote | **REJECT** |
+| **Pexels 30243437 - industrial pipeline** | **Misleading** - không thể hiện xuất khẩu hoặc vận tải dầu thô | **Misleading** - không liên quan trực quan đến nhập khẩu nhiên liệu | **Decoration** ở mức generic cho “industrial infrastructure”; không chứng minh refinery hay capacity | **Misleading** - không thể hiện upstream, giếng dầu, gathering system hoặc hạn chế nguồn cung | Không có branding rõ ràng, nhưng semantic ambiguity rất cao: thiết bị có thể thuộc hệ thống khí, điện công nghiệp, nước hoặc quy trình khác; hình đen trắng càng làm mất tín hiệu nhận diện | **REJECT** |
+
+Ghi chú sử dụng:
+
+- **19621044** chỉ có thể dùng như B-roll generic cho câu rất rộng kiểu “fuel moves by sea”, với overlay hoặc narration làm rõ đây là footage minh họa. Không dùng đồng thời với con số hay claim cụ thể về crude exports/imports.
+- **30243437** không nên dùng cho video này. Hình ảnh không cho phép người xem xác định đây là refinery hoặc crude-supply infrastructure.
+- Ba frame của mỗi asset nhất quán về nội dung; frame giữa/cuối không cung cấp thêm bằng chứng giúp giải quyết ambiguity.
